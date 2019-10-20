@@ -176,9 +176,7 @@ class JediMakerXtream_Playlist(Screen):
 				self.playlist_data = {}
 				
 				#declare defaults
-				self.protocol = 'http://'
 				self.domain = ''
-				self.port = 80
 				self.username = ''
 				self.password = ''
 				self.type = 'm3u'
@@ -187,37 +185,39 @@ class JediMakerXtream_Playlist(Screen):
 				player_api = ''
 				output_format = ''
 				filename = ''
+			
+				urlsplit1 = line.split("/")
+				urlsplit2 = line.split("?")
 				
-				if line.startswith('http://'):
-					self.protocol = 'http://'
-				elif line.startswith('https://'):
-					self.protocol = 'https://'
-				else:
+				self.protocol = urlsplit1[0] + "//"
+				
+				print self.protocol
+				if not (self.protocol == "http://" or self.protocol == "https://"):
 					continue
-					
-				if re.search('(?<=http:\/\/)[^:|^\/]+', line) is not None:
-					self.domain = re.search('(?<=http:\/\/)[^:|^\/]+', line).group()
-					
-				if re.search('(?<=https:\/\/)[^:|^\/]+', line) is not None:
-					self.domain = re.search('(?<=https:\/\/)[^:|^\/]+', line).group()
-					
-				if re.search('(?<=:)(\d+)(?=\/)', line) is not None:
-					self.port = int(re.search('(?<=:)(\d+)(?=\/)', line).group())
-					
-				if re.search('(?<=username=)[^&]+', line) is not None:
-					self.username = re.search('(?<=username=)[^&]+', line).group()
-					
-				if re.search('(?<=password=)[^&]+', line) is not None:
-					self.password = re.search('(?<=password=)[^&]+', line).group()
-					
-				if re.search('(?<=type=)\w+', line) is not None:
-					self.type = re.search('(?<=type=)\w+', line).group()  
-					
-				if re.search('(?<=output=)\w+', line) is not None:
-					self.output = re.search('(?<=output=)\w+', line).group()
 				
-				host =  str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'
+				self.domain = urlsplit1[2].split(':')[0]
+				if len(urlsplit1[2].split(':')) > 1:
+					self.port = urlsplit1[2].split(':')[1]
+				else:
+					self.port = 80
+				host =  str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'	
+				
+				for param in urlsplit2[1].split("&"):
+					if param.startswith("username"):
+						self.username = param.split('=')[1]
+					if param.startswith("password"):
+						self.password = param.split('=')[1]
+					if param.startswith("type"):
+						self.type = param.split('=')[1]
+					if param.startswith("output"):
+						self.output = param.split('=')[1]
+					
+		
 				player_api = str(host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
+				panel_api = str(host) + 'panel_api.php?username=' + str(self.username) + '&password=' + str(self.password)
+				full_url = line
+				
+				
 				player_req = urllib2.Request(player_api, headers=hdr)
 				
 				if 'get.php' in line and self.domain != '' and self.username != '' and self.password != '':

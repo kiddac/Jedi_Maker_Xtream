@@ -170,6 +170,16 @@ class JediMakerXtream_Playlist(Screen):
 			self.index = 0
 			
 			for line in lines:
+				
+				response = ""
+				
+				player = False
+				panel = False
+				extinf = False
+				
+				playervalid = False
+				panelvalid = False
+				
 				valid = False
 				address = ''
 				playlisttype = ''
@@ -181,7 +191,7 @@ class JediMakerXtream_Playlist(Screen):
 				self.password = ''
 				self.type = 'm3u'
 				self.output = 'ts'
-				host = ''
+				self.host = ''
 				player_api = ''
 				output_format = ''
 				filename = ''
@@ -190,8 +200,7 @@ class JediMakerXtream_Playlist(Screen):
 				urlsplit2 = line.split("?")
 				
 				self.protocol = urlsplit1[0] + "//"
-				
-				print self.protocol
+			
 				if not (self.protocol == "http://" or self.protocol == "https://"):
 					continue
 				
@@ -200,7 +209,7 @@ class JediMakerXtream_Playlist(Screen):
 					self.port = urlsplit1[2].split(':')[1]
 				else:
 					self.port = 80
-				host =  str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'	
+				self.host =  str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'	
 				
 				for param in urlsplit2[1].split("&"):
 					if param.startswith("username"):
@@ -213,118 +222,80 @@ class JediMakerXtream_Playlist(Screen):
 						self.output = param.split('=')[1]
 					
 		
-				player_api = str(host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
-				panel_api = str(host) + 'panel_api.php?username=' + str(self.username) + '&password=' + str(self.password)
+				player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
+				panel_api = str(self.host) + 'panel_api.php?username=' + str(self.username) + '&password=' + str(self.password)
 				full_url = line
 				
-				
 				player_req = urllib2.Request(player_api, headers=hdr)
+				panel_req = urllib2.Request(panel_api, headers=hdr)
 				
+				# check if iptv playlist 
 				if 'get.php' in line and self.domain != '' and self.username != '' and self.password != '':
 					try:
 						response = urllib2.urlopen(player_req, timeout=cfg.timeout.value+2)
-						valid = True
+						player = True
+						valid = self.checkPanel(response)
 
-					except urllib2.URLError as e:
+					except Exception as e:
 						print(e)
 						pass
-						
-					except socket.timeout as e:
-						print(e)
-						pass
-						
-					except socket.error as e:
-						print(e)
-						pass
-						
+	
 					except:
 						pass
-					
-					if valid == True:    
-						try:
-							self.playlist_data = json.load(response, object_pairs_hook=OrderedDict)
 
-							if 'message' in self.playlist_data['user_info']:
-								del self.playlist_data['user_info']['message']  
-								
-							if 'https_port' in self.playlist_data['server_info']:
-								del self.playlist_data['server_info']['https_port']  
-								
-							if 'rtmp_port' in self.playlist_data['server_info']:
-								del self.playlist_data['server_info']['rtmp_port']  
-								
-							if 'timestamp_now' in self.playlist_data['server_info']:
-								del self.playlist_data['server_info']['timestamp_now']  
-								
-							#if user entered output type not valid, get output type from provider.     
-							if self.output not in self.playlist_data['user_info']['allowed_output_formats']:
-								self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0]) 
-								
+							
+					if not valid or response == "":
+						try:
+							response = urllib2.urlopen(panel_req, timeout=cfg.timeout.value+5)
+							panel = True
+							valid = self.checkPanel(response)
+
+						except Exception as e:
+							print(e)
+							pass
+		
 						except:
 							pass
-
-					self.playlist_data['playlist_info'] = OrderedDict([
-					  ("index", self.index),
-					  ("protocol", self.protocol),
-					  ("domain", self.domain),
-					  ("port", self.port),
-					  ("username", self.username),
-					  ("password", self.password),
-					  ("type", self.type),
-					  ("output", self.output),
-					  ("address", line),
-					  ("valid", valid),
-					  ("playlisttype", 'xtream'),
-					])
-				   
-				
-				# Check if external m3u playlist
-				elif 'http' in line:
-					try:
-						req = urllib2.Request(line, headers=hdr)
-						response = urllib2.urlopen(req, None, cfg.timeout.value)
-						if 'EXTINF' in response.read():
-							valid = True
 					
-					except urllib2.URLError as e:
-						print(e)
-						pass
+					if not valid or response == "":
+						try:
+							req = urllib2.Request(line, headers=hdr)
+							response = urllib2.urlopen(req, None, cfg.timeout.value+5)
+							if 'EXTINF' in response.read():
+								extinf = True
+								valid = True
+			
+						except Exception as e:
+							print(e)
+							pass
+		
+						except:
+							pass
 						
-					except socket.timeout as e:
-						print(e)
-						pass 
-						
-					except socket.error as e:
-						print(e)
-						pass
-						
-					except:
-						pass
-						
-				
-					self.playlist_data['playlist_info'] = OrderedDict([
-					  ("index", self.index),
-					  ("protocol", self.protocol),
-					  ("domain", self.domain),
-					  ("port", self.port),
-					  ("address", line),
-					  ("valid", valid),
-					  ("playlisttype", 'external'),
-					])
-				
-				if self.playlists_all != []:
-					for playlist in self.playlists_all:
-						if playlist != {}:
-							if self.playlist_data['playlist_info']['address'] == playlist['playlist_info']['address']:
-								if 'bouquet_info' in playlist:
-									self.playlist_data['bouquet_info'] = playlist['bouquet_info']
-								break
+							
+				else:	
+					if 'http' in line:
+						try:
+							req = urllib2.Request(line, headers=hdr)
+							response = urllib2.urlopen(req, None, cfg.timeout.value+5)
+							if 'EXTINF' in response.read():
+								extinf = True
+								valid = True
 								
-				self.playlists_all_new.append(self.playlist_data)
+						except Exception as e:
+							print(e)
+							pass
+		
+						except:
+							pass
 						
-				self.index += 1
-				
-	   
+				if player and valid:
+					self.buildPlaylist(line, True, "xtream")
+				elif panel and valid:
+					self.buildPlaylist(line, True, "panel")
+				else:
+					self.buildPlaylist(line, True, "extinf")
+					
 		# add local M3Us
 		for filename in os.listdir(cfg.m3ulocation.value):
 
@@ -346,8 +317,106 @@ class JediMakerXtream_Playlist(Screen):
 		#output to file for testing
 		with open(playlist_file, 'w') as f:
 			json.dump(self.playlists_all, f)
-		
 		jglob.firstrun = 1
+	
+	
+	def checkPanel(self,response):
+		try:
+			self.playlist_data = json.load(response, object_pairs_hook=OrderedDict)
+			
+			if 'username' in self.playlist_data['user_info'] and \
+			'password' in self.playlist_data['user_info'] and \
+			'auth' in self.playlist_data['user_info'] and \
+			'status' in self.playlist_data['user_info'] and \
+			'active_cons' in self.playlist_data['user_info'] and \
+			'max_connections' in self.playlist_data['user_info'] and \
+			'allowed_output_formats' in self.playlist_data['user_info'] and	\
+			'url' in self.playlist_data['server_info'] and \
+			'port' in self.playlist_data['server_info'] and \
+			'server_protocol' in self.playlist_data['server_info']:
+				return True
+			else:
+				return False
+		except:
+			return False
+			pass
+		
+	
+	def buildPlaylist(self, line, valid, paneltype):
+		if 'user_info' in self.playlist_data:
+			if 'message' in self.playlist_data['user_info']:
+				del self.playlist_data['user_info']['message']  
+						
+			if 'https_port' in self.playlist_data['server_info']:
+				del self.playlist_data['server_info']['https_port']  
+				
+			if 'rtmp_port' in self.playlist_data['server_info']:
+				del self.playlist_data['server_info']['rtmp_port']  
+				
+			if 'timestamp_now' in self.playlist_data['server_info']:
+				del self.playlist_data['server_info']['timestamp_now']  
+				
+			#if user entered output type not valid, get output type from provider.     
+			if self.output not in self.playlist_data['user_info']['allowed_output_formats']:
+				self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0]) 
+		else:
+			print "no user info %s %s %s" % (line, valid, paneltype)
+		
+		
+		if paneltype == "xtream":
+			self.playlist_data['playlist_info'] = OrderedDict([
+			  ("index", self.index),
+			  ("protocol", self.protocol),
+			  ("domain", self.domain),
+			  ("port", self.port),
+			  ("username", self.username),
+			  ("password", self.password),
+			  ("type", self.type),
+			  ("output", self.output),
+			  ("address", line),
+			  ("valid", valid),
+			  ("playlisttype", "xtream"),
+			])
+			
+		
+		if paneltype == "panel":
+			self.playlist_data['playlist_info'] = OrderedDict([
+			  ("index", self.index),
+			  ("protocol", self.protocol),
+			  ("domain", self.domain),
+			  ("port", self.port),
+			  ("username", self.username),
+			  ("password", self.password),
+			  ("type", self.type),
+			  ("output", self.output),
+			  ("address", line),
+			  ("valid", valid),
+			  ("playlisttype", "panel"),
+			])
+			
+		if paneltype == "extinf":
+			self.playlist_data['playlist_info'] = OrderedDict([
+			  ("index", self.index),
+			  ("protocol", self.protocol),
+			  ("domain", self.domain),
+			  ("port", self.port),
+			  ("address", line),
+			  ("valid", valid),
+			  ("playlisttype", 'external'),
+			])
+			
+		
+		if self.playlists_all != []:
+			for playlist in self.playlists_all:
+				if playlist != {}:
+					if self.playlist_data['playlist_info']['address'] == playlist['playlist_info']['address']:
+						if 'bouquet_info' in playlist:
+							self.playlist_data['bouquet_info'] = playlist['bouquet_info']
+						break	
+			
+		self.playlists_all_new.append(self.playlist_data)
+		self.index += 1
+					
 
 	def createSetup(self):
 		self['playlists'].setIndex(0)
@@ -373,11 +442,11 @@ class JediMakerXtream_Playlist(Screen):
 							validstate = 'Active'
 							playlisttext = _('Active: ') + str(playlist['user_info']['active_cons']) + _('  Max: ') + str(playlist['user_info']['max_connections'])
 						elif playlist['user_info']['status'] == 'Banned':
-							validstate = 'Invalid'
 							playlisttext = _('Banned')
 						elif playlist['user_info']['status'] == 'Disabled':
-							validstate = 'Invalid'
-							playlisttext = _('Disabled')   
+							playlisttext = _('Disabled')  
+						elif playlist['user_info']['status'] == 'Expired':
+							playlisttext = _('Expired')    
 				else: 
 					if playlist['playlist_info']['playlisttype'] == 'external' and playlist['playlist_info']['valid'] == True and playlist['playlist_info']['domain'] != '':
 						validstate = 'ValidExternal'

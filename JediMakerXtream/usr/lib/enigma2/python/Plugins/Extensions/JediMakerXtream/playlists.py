@@ -245,7 +245,9 @@ class JediMakerXtream_Playlist(Screen):
 
 							
 					if not valid or response == "":
+						player = False
 						try:
+							
 							response = urllib2.urlopen(panel_req, timeout=cfg.timeout.value+5)
 							panel = True
 							valid = self.checkPanel(response)

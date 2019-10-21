@@ -42,7 +42,7 @@ def downloadlivecategories(url):
 	if response == None:
 		response = checkGZIP(url)
 		
-	if response != None:
+	if response != None and 'category_id' in response:
 		jglob.haslive = True
 		try:
 			jglob.livecategories = json.loads(response)
@@ -74,7 +74,7 @@ def downloadvodcategories(url):
 	if response == None:
 		response = checkGZIP(url)
 		
-	if response != None:
+	if response != None and 'category_id' in response:
 		jglob.hasvod = True
 		try:
 			jglob.vodcategories = json.loads(response)
@@ -106,7 +106,8 @@ def downloadseriescategories(url):
 	if response == None:
 		response = checkGZIP(url)
 		
-	if response != None:
+	if response != None and 'category_id' in response:
+		
 		jglob.hasseries = True
 		try:
 			jglob.seriescategories = json.loads(response)
@@ -139,7 +140,7 @@ def downloadlivestreams(url):
 	if response == None:
 		response = checkGZIP(url)
 	
-	if response != None:
+	if response != None and 'category_id' in response:
 		jglob.haslive = True
 		
 		try:
@@ -169,7 +170,7 @@ def downloadvodstreams(url):
 	if response == None:
 		response = checkGZIP(url)
 	
-	if response != None:
+	if response != None and 'category_id' in response:
 		jglob.hasvod = True
 		
 		try:
@@ -199,7 +200,7 @@ def downloadseriesstreams(url):
 	if response == None:
 		response = checkGZIP(url)
 	
-	if response != None:
+	if response != None and 'category_id' in response:
 		jglob.hasseries = True
 		
 		try:

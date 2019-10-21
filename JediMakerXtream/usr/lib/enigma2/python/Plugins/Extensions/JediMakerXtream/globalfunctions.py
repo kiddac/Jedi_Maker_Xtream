@@ -519,21 +519,21 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			
 			stream_id = streamvaluesgroup[i]['stream_id']
 			catchup = streamvaluesgroup[i]['tv_archive']
-			
 			calc_remainder = int(stream_id) / 65535
-			bouquet_id_sid = jglob.bouquet_id + calc_remainder
-			
-			stream_id_sid = stream_id - (calc_remainder * 65535)
-			
+			bouquet_id_sid = jglob.bouquet_id + calc_remainder	
+			stream_id_sid = int(stream_id) - (calc_remainder * 65535)
 			added = streamvaluesgroup[i]['added']
-
-			if re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
-				custom_sid = streamvaluesgroup[i]['custom_sid']
-			elif re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
-				custom_sid = str(streamvaluesgroup[i]['custom_sid']) + str('0:')
+			
+			
+			if 'custom_sid' in streamvaluesgroup[i]:
+				if re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
+					custom_sid = streamvaluesgroup[i]['custom_sid']
+				elif re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
+					custom_sid = str(streamvaluesgroup[i]['custom_sid']) + str('0:')
+				else:
+					custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:0:'
 			else:
-				custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:0:'
-				
+				custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:0:'	
 			if epgid:       
 				custom_sid = serviceref 
 				
@@ -585,9 +585,6 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			output = str(streamvaluesgroup[i]['container_extension'])
 			
 			source_epg = '1' + str(custom_sid) + str(protocol) + str(domain) + '%3a' + str(port) + '/' + str(stream_type) + '/' + str(username) + '/' + str(password) + '/' + str(stream_id) + '.' + str(output)
-			
-			#streamvaluesgroup[i]['name'] = streamvaluesgroup[i]['name'].replace(":", "")
-			#streamvaluesgroup[i]['name'] = streamvaluesgroup[i]['name'].replace('"', "")
 			
 			name = streamvaluesgroup[i]['name']
 			

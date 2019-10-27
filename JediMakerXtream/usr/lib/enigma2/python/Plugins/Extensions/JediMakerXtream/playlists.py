@@ -185,7 +185,9 @@ class JediMakerXtream_Playlist(Screen):
 				self.playlist_data = {}
 				
 				#declare defaults
+				self.protocol = 'http://'
 				self.domain = ''
+				self.port = 80
 				self.username = ''
 				self.password = ''
 				self.type = 'm3u'
@@ -203,22 +205,23 @@ class JediMakerXtream_Playlist(Screen):
 				if not (self.protocol == "http://" or self.protocol == "https://"):
 					continue
 				
-				self.domain = urlsplit1[2].split(':')[0]
-				if len(urlsplit1[2].split(':')) > 1:
-					self.port = urlsplit1[2].split(':')[1]
-				else:
-					self.port = 80
+				if len(urlsplit1) > 2:
+					self.domain = urlsplit1[2].split(':')[0]
+					if len(urlsplit1[2].split(':')) > 1:
+						self.port = urlsplit1[2].split(':')[1]
+				
 				self.host =  str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'	
 				
-				for param in urlsplit2[1].split("&"):
-					if param.startswith("username"):
-						self.username = param.split('=')[1]
-					if param.startswith("password"):
-						self.password = param.split('=')[1]
-					if param.startswith("type"):
-						self.type = param.split('=')[1]
-					if param.startswith("output"):
-						self.output = param.split('=')[1]
+				if len(urlsplit2) > 1:
+					for param in urlsplit2[1].split("&"):
+						if param.startswith("username"):
+							self.username = param.split('=')[1]
+						if param.startswith("password"):
+							self.password = param.split('=')[1]
+						if param.startswith("type"):
+							self.type = param.split('=')[1]
+						if param.startswith("output"):
+							self.output = param.split('=')[1]
 					
 		
 				player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)

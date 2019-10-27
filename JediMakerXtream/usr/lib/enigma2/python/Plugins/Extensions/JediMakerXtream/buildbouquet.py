@@ -39,7 +39,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 		self.bouquet = jglob.current_playlist
 		self.categories = jglob.selectedcategories
 		
-		if self.bouquet['playlist_info']['playlisttype'] != 'xtream':
+		if self.bouquet['playlist_info']['playlisttype'] != 'xtream' and self.bouquet['playlist_info']['playlisttype'] != 'panel':
 			self.categories = []
 
 		self['action'] = Label(_('Building Bouquets...'))
@@ -67,7 +67,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 		if jglob.series:
 			self.progresscount += 1
 			
-		if self.bouquet['playlist_info']['playlisttype'] != 'xtream':
+		if self.bouquet['playlist_info']['playlisttype'] != 'xtream' and self.bouquet['playlist_info']['playlisttype'] != 'panel':
 			#1 delete bouquets, 2 bouquetType, 3 build m3u bouquet file, 4 refresh bouquets
 			self.progresscount = 4
 
@@ -99,7 +99,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 		
 
 	def start(self):
-		if self.bouquet['playlist_info']['playlisttype'] == 'xtream':
+		if self.bouquet['playlist_info']['playlisttype'] == 'xtream' or self.bouquet['playlist_info']['playlisttype'] == 'panel' :
 			
 			self.protocol = self.bouquet['playlist_info']['protocol']
 			self.domain = self.bouquet['playlist_info']['domain']
@@ -127,7 +127,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 		
 		
 	def startcreate(self):
-		if self.bouquet['playlist_info']['playlisttype'] == 'xtream':
+		if self.bouquet['playlist_info']['playlisttype'] == 'xtream' or self.bouquet['playlist_info']['playlisttype'] == 'panel':
 
 			if len(self.categories) > 0:
 				if jglob.series:
@@ -158,7 +158,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 
 
 	def bouquetType(self):
-		if self.bouquet['playlist_info']['playlisttype'] == 'xtream':
+		if self.bouquet['playlist_info']['playlisttype'] == 'xtream' or self.bouquet['playlist_info']['playlisttype'] == 'panel':
 			self.nextjob(_('Building Bouquets...'),self.buildBouquets)	
 		else:
 			self.nextjob(_('Building M3U Bouquets...'),self.buildM3uBouquets)	

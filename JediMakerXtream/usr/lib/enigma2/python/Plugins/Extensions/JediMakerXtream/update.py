@@ -186,7 +186,17 @@ class JediMakerXtream_Update(Screen):
 			self.LiveStreamsUrl = self.player_api + '&action=get_live_streams'
 			self.VodStreamsUrl = self.player_api + '&action=get_vod_streams'
 			self.SeriesUrl = self.player_api + '&action=get_series'
-		
+			
+		elif self.playlisttype == 'panel':
+			self.username = jglob.current_playlist['playlist_info']['username']
+			self.password = jglob.current_playlist['playlist_info']['password']
+			self.type = jglob.current_playlist['playlist_info']['type']
+			self.output = jglob.current_playlist['playlist_info']['output']
+			
+			self.panel_api = str(self.host) + 'panel_api.php?username=' + str(self.username) + '&password=' + str(self.password)
+			self.get_api = str(self.host) + 'get.php?username=' + str(self.username) + '&password=' + str(self.password) + '&type=m3u_plus&output=' + str(self.output)
+			jglob.xmltv_address = str(self.host) + 'xmltv.php?username=' + str(self.username) + '&password=' + str(self.password) 
+
 		self.nextjob(_('%s - Deleting existing bouquets...') % str(jglob.name),self.deleteBouquets)
 		
 		
@@ -195,6 +205,8 @@ class JediMakerXtream_Update(Screen):
 		jfunc.deleteBouquets()
 		if self.playlisttype == 'xtream':
 			self.nextjob(_('%s - Checking URL still active...') % str(jglob.name),self.checkactive)
+		elif self.playlisttype == 'panel':
+			self.nextjob(_('%s - Checking URL still active...') % str(jglob.name),self.checkpanelactive)
 		else:
 			self.nextjob(_('%s - Download M3U Data...') % str(jglob.name),self.getM3uCategories)
 			
@@ -230,14 +242,101 @@ class JediMakerXtream_Update(Screen):
 			self.valid = False
 			pass
 			
-		# gets jglob.live from jfunc.readbouquetdata()
 		if self.valid:
+			
 			if jglob.live:
-				self.nextjob(_('%s - Downloading Live data...') % str(jglob.name),self.downloadLive)
-			elif jglob.vod:
-				self.nextjob(_('%s - Downloading VOD data...') % str(jglob.name),self.downloadVod)
-			elif jglob.series:
-				self.nextjob(_('%s - Downloading Series data...') % str(jglob.name),self.downloadSeries)
+				self['action'].setText('Downloading Live data')
+				
+				self.timer1 = eTimer()
+				self.timer1.start(self.pause, 1)
+				try: 
+					self.timer1_conn = self.timer1.timeout.connect(self.downloadLive)
+				except:
+					self.timer1.callback.append(self.downloadLive)
+					
+			if jglob.vod:
+				self['action'].setText('Downloading VOD data')
+				
+				self.timer2 = eTimer()
+				self.timer2.start(self.pause, 1)
+				try: 
+					self.timer2_conn = self.timer2.timeout.connect(self.downloadVod)
+				except:
+					self.timer2.callback.append(self.downloadVod)
+					
+			if jglob.series:
+				self['action'].setText('Downloading Series data')
+				
+				self.timer3 = eTimer()
+				self.timer3.start(self.pause, 1)
+				try:
+					self.timer3_conn = self.timer3.timeout.connect(self.downloadSeries)
+				except:
+					self.timer3.callback.append(self.downloadSeries)
+				
+	def checkpanelactive(self):
+		response = None
+		self.valid = False
+		req = urllib2.Request(self.panel_api, headers=hdr)
+		
+		try:
+			response = urllib2.urlopen(req)
+			self.Valid = True
+		except urllib2.URLError as e:
+			print e
+			pass
+		except socket.timeout as e:
+			print e
+			pass
+		except:
+			pass
+		
+		try:
+			self.active = json.load(response)
+			if 'user_info' in self.active:
+				if self.active['user_info']['auth'] == 1:
+					self.valid = True
+				else:
+					self.valid = False
+		except ValueError as e:
+			self.valid = False
+			print e
+		except:
+			self.valid = False
+			pass
+			
+		if self.valid:
+			self.getPanelData()
+			if jglob.live:
+			
+				self['action'].setText('Building Live data')
+				self.timer4 = eTimer()
+				self.timer4.start(self.pause, 1)
+				try: 
+					self.timer4_conn = self.timer4.timeout.connect(self.getLive)
+				except:
+					self.timer4.callback.append(self.getLive)
+				
+			if jglob.vod:
+			
+				self['action'].setText('Building VOD data')
+				self.timer5 = eTimer()
+				self.timer5.start(self.pause, 1)
+				try: 
+					self.timer5_conn = self.timer5.timeout.connect(self.getVod)
+				except:
+					self.timer5.callback.append(self.getVod)
+					
+			if jglob.series:
+			
+				self['action'].setText('Building Series data')
+				self.timer6 = eTimer()
+				self.timer6.start(self.pause, 1)
+				try:
+					self.timer6_conn = self.timer6.timeout.connect(self.getSeries)
+				except:
+					self.timer6.callback.append(self.getSeries)
+				
 
 		   
 	def downloadLive(self):	
@@ -264,6 +363,108 @@ class JediMakerXtream_Update(Screen):
 		downloads.downloadseriescategories(self.SeriesCategoriesUrl)
 		downloads.downloadseriesstreams(self.SeriesUrl)
 		self.nextjob(_('%s - Check empty categories...') % str(jglob.name),self.checkcategories)
+		
+		
+		
+		
+	def getPanelData(self):
+		jglob.livecategories = []
+		jglob.vodcategories = []
+		jglob.seriescategories = []
+		
+		valid = False
+		
+		if 'categories' in self.active:
+			if 'live' in self.active['categories']:
+				jglob.haslive = True
+				try:
+					jglob.livecategories = self.active['categories']['live']
+					valid = True
+				except:
+					print("\n ***** download live category error *****")
+					jglob.haslive = False
+				
+		
+				if valid:	
+					
+					if jglob.livecategories == [] or 'user_info' in jglob.livecategories or 'category_id' not in jglob.livecategories[0]:
+						jglob.haslive = False
+						jglob.livecategories == []
+						
+					if jglob.livecategories != []:
+						jglob.livecategories.append({'category_id':'0','category_name':'Live Not Categorised','parent_id':0})
+					
+					if not jglob.haslive or jglob.livecategories == []:
+						jglob.live = False
+						
+			
+			if 'movie' in self.active['categories']:
+				
+				print("***** panel has categories / movies *******")
+				jglob.hasvod = True
+				try:
+					jglob.vodcategories = self.active['categories']['movie']
+					valid = True
+				except:
+					print("\n ***** download vod category error *****")
+					jglob.hasvod = False
+				
+				if valid:			
+					if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
+						jglob.hasvod = False
+						jglob.vodcategories == []
+						
+					if jglob.vodcategories != []:
+						jglob.vodcategories.append({'category_id':'0','category_name':'VOD Not Categorised','parent_id':0})
+					
+					if not jglob.hasvod or jglob.vodcategories == []:
+						jglob.vod = False
+			
+			
+			if 'series' in self.active['categories']:
+				
+				print("***** panel has categories / series *******")
+				jglob.hasseries = True
+				try:
+					jglob.seriescategories = self.active['categories']['series']
+					valid = True
+				except:
+					print("\n ***** download series category error *****")
+					jglob.hasseries = False
+				
+				if valid:	
+					if jglob.seriescategories == [] or 'user_info' in jglob.seriescategories or 'category_id' not in jglob.seriescategories[0]:
+						jglob.hasseries = False
+						jglob.seriescategories == []
+						
+					if jglob.seriescategories != []:
+						jglob.seriescategories.append({'category_id':'0','category_name':'Series Not Categorised','parent_id':0})
+					
+					if not jglob.hasseries or jglob.seriescategories == []:
+						jglob.series = False	
+	
+	def getLive(self):	
+		downloads.getlivestreams(self.active)
+		if jglob.vod:
+			self.nextjob(_('%s - Building VOD data...') % str(jglob.name),self.getVod)
+		elif jglob.series:
+			self.nextjob(_('%s - Building Series data...') % str(jglob.name),self.getSeries)
+		else:
+			self.nextjob(_('%s - Check empty categories...') % str(jglob.name),self.checkcategories)
+				
+
+	def getVod(self):
+		downloads.getvodstreams(self.active)
+		if jglob.series:
+			self.nextjob(_('%s - Downloading Series data...') % str(jglob.name),self.getSeries)
+		else:
+			self.nextjob(_('%s - Check empty categories...') % str(jglob.name),self.checkcategories)
+				
+				
+	def getSeries(self):
+		downloads.getseriesstreams(self.active)
+		self.nextjob(_('%s - Check empty categories...') % str(jglob.name),self.checkcategories)	
+		
 		   
 
 	def getM3uCategories(self):
@@ -285,7 +486,7 @@ class JediMakerXtream_Update(Screen):
 
 	def getSelected(self):
 		#get selected categories from bouquet file
-		if self.playlisttype == 'xtream':
+		if self.playlisttype == 'xtream' or self.playlisttype == 'panel':
 			
 			jglob.selectedcategories = []
 			jglob.ignoredcategories = []
@@ -298,15 +499,15 @@ class JediMakerXtream_Update(Screen):
 				
 			self.categories = jglob.selectedcategories
 		
-		if jglob.current_playlist['playlist_info']['playlisttype'] != 'xtream':
+		if jglob.current_playlist['playlist_info']['playlisttype'] != 'xtream' and jglob.current_playlist['playlist_info']['playlisttype'] != 'panel':
 			self.categories = []
 			
 			
-		if self.playlisttype == 'xtream' and jglob.series:
+		if (self.playlisttype == 'xtream' or self.playlisttype == 'panel') and jglob.series:
 			self.nextjob(_('%s - Downloading Data...') % str(jglob.name),self.downloadgetfile)
 				
 		
-		elif self.playlisttype == 'xtream':
+		elif self.playlisttype == 'xtream' or self.playlisttype == 'panel':
 			self.nextjob(_('%s - Building bouquets...') % str(jglob.name),self.buildBouquets)
 				
 		else:

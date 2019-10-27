@@ -606,8 +606,6 @@ def process_category(category_name, category_type, category_id, domain, port, us
 		stream_type = 'series'
 		custom_sid = ':0:1:0:0:0:0:0:0:0:'
 		
-		print ("m3uValues %s" % m3uValues)
-	
 		for i in range(len(streamvaluesgroup)):
 			
 			name = streamvaluesgroup[i]['name']

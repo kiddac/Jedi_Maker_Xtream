@@ -10,7 +10,6 @@ from Components.Label import Label
 from Components.Sources.List import List
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
-#from Components.Sources.StaticText import StaticText
 from enigma import getDesktop, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eTimer
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -235,15 +234,14 @@ class JediMakerXtream_Playlist(Screen):
 						response = urllib2.urlopen(player_req, timeout=cfg.timeout.value+2)
 						player = True
 						valid = self.checkPanel(response)
-
+						
 					except Exception as e:
 						print(e)
 						pass
 	
 					except:
 						pass
-
-							
+		
 					if not valid or response == "":
 						player = False
 						try:
@@ -273,7 +271,6 @@ class JediMakerXtream_Playlist(Screen):
 		
 						except:
 							pass
-						
 							
 				else:	
 					if 'http' in line:
@@ -291,12 +288,14 @@ class JediMakerXtream_Playlist(Screen):
 						except:
 							pass
 						
-				if player and valid:
-					self.buildPlaylist(line, True, "xtream")
-				elif panel and valid:
-					self.buildPlaylist(line, True, "panel")
+				if player:
+					self.buildPlaylist(line, valid, "xtream")
+				elif panel:
+					self.buildPlaylist(line, valid, "panel")
 				else:
-					self.buildPlaylist(line, True, "extinf")
+					self.buildPlaylist(line, valid, "extinf")
+				
+				
 					
 		# add local M3Us
 		for filename in os.listdir(cfg.m3ulocation.value):
@@ -361,8 +360,6 @@ class JediMakerXtream_Playlist(Screen):
 			#if user entered output type not valid, get output type from provider.     
 			if self.output not in self.playlist_data['user_info']['allowed_output_formats']:
 				self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0]) 
-		else:
-			print "no user info %s %s %s" % (line, valid, paneltype)
 		
 		
 		if paneltype == "xtream":
@@ -381,7 +378,7 @@ class JediMakerXtream_Playlist(Screen):
 			])
 			
 		
-		if paneltype == "panel":
+		elif paneltype == "panel":
 			self.playlist_data['playlist_info'] = OrderedDict([
 			  ("index", self.index),
 			  ("protocol", self.protocol),
@@ -396,7 +393,7 @@ class JediMakerXtream_Playlist(Screen):
 			  ("playlisttype", "panel"),
 			])
 			
-		if paneltype == "extinf":
+		else:
 			self.playlist_data['playlist_info'] = OrderedDict([
 			  ("index", self.index),
 			  ("protocol", self.protocol),
@@ -430,7 +427,7 @@ class JediMakerXtream_Playlist(Screen):
 			validstate = 'Invalid'
 			
 			if playlist != {}:
-				if playlist['playlist_info']['playlisttype'] == 'xtream':
+				if playlist['playlist_info']['playlisttype'] == 'xtream' or playlist['playlist_info']['playlisttype'] == 'panel':
 					if 'bouquet_info' in playlist and 'name' in playlist['bouquet_info']:
 						alias = playlist['bouquet_info']['name']
 					else:
@@ -439,16 +436,18 @@ class JediMakerXtream_Playlist(Screen):
 					alias = playlist['playlist_info']['address']
 					
 				if 'user_info' in playlist:
-					if playlist['user_info']['auth'] == 1:
-						if playlist['user_info']['status'] == 'Active':
-							validstate = 'Active'
-							playlisttext = _('Active: ') + str(playlist['user_info']['active_cons']) + _('  Max: ') + str(playlist['user_info']['max_connections'])
-						elif playlist['user_info']['status'] == 'Banned':
-							playlisttext = _('Banned')
-						elif playlist['user_info']['status'] == 'Disabled':
-							playlisttext = _('Disabled')  
-						elif playlist['user_info']['status'] == 'Expired':
-							playlisttext = _('Expired')    
+					if 'auth' in playlist['user_info']:
+						if playlist['user_info']['auth'] == 1:
+							if 'status' in playlist['user_info']:
+								if playlist['user_info']['status'] == 'Active':
+									validstate = 'Active'
+									playlisttext = _('Active: ') + str(playlist['user_info']['active_cons']) + _('  Max: ') + str(playlist['user_info']['max_connections'])
+								elif playlist['user_info']['status'] == 'Banned':
+									playlisttext = _('Banned')
+								elif playlist['user_info']['status'] == 'Disabled':
+									playlisttext = _('Disabled')  
+								elif playlist['user_info']['status'] == 'Expired':
+									playlisttext = _('Expired')    
 				else: 
 					if playlist['playlist_info']['playlisttype'] == 'external' and playlist['playlist_info']['valid'] == True and playlist['playlist_info']['domain'] != '':
 						validstate = 'ValidExternal'
@@ -499,12 +498,13 @@ class JediMakerXtream_Playlist(Screen):
 
 	def openUserInfo(self):
 		if 'user_info' in jglob.current_playlist:
-			if jglob.current_playlist['user_info']['auth'] == 1:
-				self.session.open(info.JediMakerXtream_UserInfo)
-			else:
-				self.session.open(MessageBox, _('Server down or user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
+			if 'auth' in jglob.current_playlist['user_info']:
+				if jglob.current_playlist['user_info']['auth'] == 1:
+					self.session.open(info.JediMakerXtream_UserInfo)
+				else:
+					self.session.open(MessageBox, _('Server down or user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
 		else:
-			if jglob.current_playlist['playlist_info']['playlisttype'] == 'xtream' and jglob.current_playlist['playlist_info']['valid'] == False:
+			if (jglob.current_playlist['playlist_info']['playlisttype'] == 'xtream' or jglob.current_playlist['playlist_info']['playlisttype'] == 'panel') and jglob.current_playlist['playlist_info']['valid'] == False:
 				self.session.open(MessageBox, _('Url is invalid or playlist/user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)    
 				
 			if jglob.current_playlist['playlist_info']['playlisttype'] == 'external':   
@@ -578,14 +578,16 @@ class JediMakerXtream_Playlist(Screen):
 	def createBouquet(self):
 		jglob.finished = False
 		if 'user_info' in jglob.current_playlist:
-			if jglob.current_playlist['user_info']['auth'] == 1:
-				if jglob.current_playlist['user_info']['status'] == 'Active':
-						   
-					self.session.openWithCallback(self.refresh, setupbouquet.JediMakerXtream_Bouquets)
+			if 'auth' in jglob.current_playlist['user_info']:
+				if jglob.current_playlist['user_info']['auth'] == 1:
+					if 'status' in jglob.current_playlist['user_info']:
+						if jglob.current_playlist['user_info']['status'] == 'Active':
+								   
+							self.session.openWithCallback(self.refresh, setupbouquet.JediMakerXtream_Bouquets)
+						else:
+							self.session.open(MessageBox, _('Playlist is ') + str(jglob.current_playlist['user_info']['status']), MessageBox.TYPE_ERROR, timeout=10)
 				else:
-					self.session.open(MessageBox, _('Playlist is ') + str(jglob.current_playlist['user_info']['status']), MessageBox.TYPE_ERROR, timeout=10)
-			else:
-				self.session.open(MessageBox, _('Server down or user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
+					self.session.open(MessageBox, _('Server down or user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
 				
 		elif 'playlist_info' in jglob.current_playlist:
 			if jglob.current_playlist['playlist_info']['valid'] == True:    

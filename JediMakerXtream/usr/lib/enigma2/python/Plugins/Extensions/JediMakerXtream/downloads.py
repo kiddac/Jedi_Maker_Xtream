@@ -130,7 +130,6 @@ def downloadseriescategories(url):
 				jglob.series = False
 		
 
-
 def downloadlivestreams(url):
 	jglob.livestreams = []
 	valid = False
@@ -157,7 +156,7 @@ def downloadlivestreams(url):
 			jglob.haslive = False
 			jglob.livestreams = []
 
-		if not jglob.haslive:
+		if jglob.haslive == False:
 			jglob.live = False
 		
 
@@ -187,10 +186,10 @@ def downloadvodstreams(url):
 			jglob.hasvod = False
 			jglob.vodstreams = []
 
-		if not jglob.hasvod:
+		if jglob.hasvod == False:
 			jglob.vod = False
 
-			
+
 def downloadseriesstreams(url):
 	jglob.seriesstreams = []
 	valid = False
@@ -216,10 +215,95 @@ def downloadseriesstreams(url):
 			jglob.hasseries = False
 			jglob.seriersstreams = []
 
-		if not jglob.hasseries:
+		if jglob.hasseries == False:
 			jglob.series = False
 
-						
+	
+def getlivestreams(playlist):
+	jglob.livestreams = []
+	temp_channels1 = []
+	valid = False
+	
+	if 'available_channels' in playlist:
+		for channel in playlist['available_channels']:
+			if 'stream_type' in playlist['available_channels'][channel]:
+				if playlist['available_channels'][channel]['stream_type'] == "live":
+					temp_channels1.append(playlist['available_channels'][channel])
+			
+		try:
+			jglob.livestreams = temp_channels1
+			valid = True			
+		except:
+			print("\n ***** get live streams error *****")
+			jglob.haslive = False
+			pass
+
+	if valid:
+		if jglob.livestreams == [] or 'user_info' in jglob.livestreams or 'category_id' not in jglob.livestreams[0]:
+			jglob.haslive = False
+			jglob.livestreams = []
+
+		if jglob.haslive == False:
+			jglob.live = False
+	
+
+def getvodstreams(playlist):
+	jglob.vodstreams = []
+	temp_channels2 = []
+	valid = False
+	
+	if 'available_channels' in playlist:
+		for channel in playlist['available_channels']:
+			if 'stream_type' in playlist['available_channels'][channel]:
+				if playlist['available_channels'][channel]['stream_type'] == "movie":
+					temp_channels2.append(playlist['available_channels'][channel])
+			
+		try:
+			jglob.vodstreams = temp_channels2
+			valid = True			
+		except:
+			print("\n ***** get vod streams error *****")
+			jglob.hasvod = False
+			pass
+		
+	if valid:
+		if jglob.vodstreams == [] or 'user_info' in jglob.vodstreams or 'category_id' not in jglob.vodstreams[0]:
+			jglob.hasvod = False
+			jglob.vodstreams = []
+
+		if jglob.hasvod == False:
+			jglob.vod = False
+			
+	
+
+def getseriesstreams(playlist):
+	jglob.seriesstreams = []
+	temp_channels3 = []
+	valid = False
+	
+	if 'available_channels' in playlist:
+		for channel in playlist['available_channels']:
+			if 'stream_type' in playlist['available_channels'][channel]:
+				if playlist['available_channels'][channel]['stream_type'] == "series":
+					temp_channels3.append(playlist['available_channels'][channel])
+			
+		try:
+			jglob.seriesstreams = temp_channels3
+			valid = True			
+		except:
+			print("\n ***** get series streams error *****")
+			jglob.hasseries = False
+			pass
+			
+	if valid:
+		if jglob.seriesstreams == [] or 'user_info' in jglob.seriesstreams or 'category_id' not in jglob.seriesstreams[0]:
+			jglob.hasseries = False
+			jglob.seriersstreams = []
+
+		if not jglob.hasseries:
+			jglob.series = False
+					
+													
 def getM3uCategories(live,vod):
 	
 	lines = []
@@ -253,7 +337,6 @@ def getM3uCategories(live,vod):
 		with open(cfg.m3ulocation.value + address) as f:
 			lines = f.readlines()
 			
-
 	channelnum = 0
 	jglob.getm3ustreams = []
 	group_title = 'Uncategorised'
@@ -308,7 +391,6 @@ def getM3uCategories(live,vod):
 					jglob.getm3ustreams.append([group_title, epg_name, name, source, 'vod'])
 
 		
-
 def downloadrytec():
 		
 	haslzma = False
@@ -412,11 +494,8 @@ def downloadrytec():
 
 		
 def downloadgetfile(url):
-	
 	valid = False
-	
 	response = checkGZIP(url)
-		
 	channelnum = 0
 	m3uValues = {}
 	series_group_title = 'Uncategorised'

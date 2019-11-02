@@ -350,19 +350,22 @@ class JediMakerXtream_Playlist(Screen):
 		if 'user_info' in self.playlist_data:
 			if 'message' in self.playlist_data['user_info']:
 				del self.playlist_data['user_info']['message']  
-						
-			if 'https_port' in self.playlist_data['server_info']:
-				del self.playlist_data['server_info']['https_port']  
-				
-			if 'rtmp_port' in self.playlist_data['server_info']:
-				del self.playlist_data['server_info']['rtmp_port']  
-				
-			if 'timestamp_now' in self.playlist_data['server_info']:
-				del self.playlist_data['server_info']['timestamp_now']  
+			
+			if 'server_info' in self.playlist_data:		
+				if 'https_port' in self.playlist_data['server_info']:
+					del self.playlist_data['server_info']['https_port']  
+					
+				if 'rtmp_port' in self.playlist_data['server_info']:
+					del self.playlist_data['server_info']['rtmp_port']  
+					
+				if 'timestamp_now' in self.playlist_data['server_info']:
+					del self.playlist_data['server_info']['timestamp_now']  
 				
 			#if user entered output type not valid, get output type from provider.     
-			if self.output not in self.playlist_data['user_info']['allowed_output_formats']:
-				self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0]) 
+			
+			if 'allowed_output_formats' in self.playlist_data['user_info']:
+				if self.output not in self.playlist_data['user_info']['allowed_output_formats']:
+					self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0]) 
 		
 		
 		if paneltype == "xtream":

@@ -56,6 +56,7 @@ cfg.timeout = ConfigNumber(default=3)
 cfg.catchup = ConfigEnableDisable(default=False)
 cfg.catchupprefix = ConfigSelection(default='~', choices=[('~', '~'), ('!', '!'), ('#', '#'), ('-', '-'), ('<', '<'), ('^', '^')])
 cfg.groups = ConfigYesNo(default=False)
+cfg.placement = ConfigSelection(default="bottom", choices=[("bottom", _("Bottom")), ("top", _("Top"))])
 
 skin_path = skin_directory + cfg.skin.value + '/'
 playlist_path = cfg.location.text + 'playlists.txt'

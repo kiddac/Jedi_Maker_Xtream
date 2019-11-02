@@ -42,6 +42,7 @@ def bouquetsTvXml(streamtype, bouquetTitle):
 	cleanTitle = re.sub(r' ', '_', cleanTitle)
 	cleanTitle = re.sub(r'_+', '_', cleanTitle)
 	
+	
 
 	if cfg.groups.value == True:
 		
@@ -51,11 +52,11 @@ def bouquetsTvXml(streamtype, bouquetTitle):
 	
 		groupname = 'userbouquet.jmx_' + str(cleanGroup) + '.tv'
 		
-
-		with open('/etc/enigma2/bouquets.tv', 'a+') as f:
-			bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) +  '" ORDER BY bouquet\n'
-			if bouquetTvString not in f:
-				f.write(bouquetTvString)
+		if cfg.placement.value == "bottom":
+			with open('/etc/enigma2/bouquets.tv', 'a+') as f:
+				bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) +  '" ORDER BY bouquet\n'
+				if bouquetTvString not in f:
+					f.write(bouquetTvString)
 	
 		
 		filename = '/etc/enigma2/' + str(groupname)
@@ -71,12 +72,12 @@ def bouquetsTvXml(streamtype, bouquetTitle):
 				f.write(bouquetTvString)
 			
 	else:
-		
-		filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
-		with open('/etc/enigma2/bouquets.tv', 'a+') as f:
-			bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
-			if bouquetTvString not in f:
-				f.write(bouquetTvString)	
+		if cfg.placement.value == "bottom":
+			filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
+			with open('/etc/enigma2/bouquets.tv', 'a+') as f:
+				bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
+				if bouquetTvString not in f:
+					f.write(bouquetTvString)	
 
 
 def buildXMLTVChannelFile(epg_name_list):

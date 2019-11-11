@@ -433,13 +433,14 @@ class JediMakerXtream_Playlist(Screen):
 			validstate = 'Invalid'
 			
 			if playlist != {}:
-				if playlist['playlist_info']['playlisttype'] == 'xtream' or playlist['playlist_info']['playlisttype'] == 'panel':
+				if playlist['playlist_info']['playlisttype'] == 'xtream' or playlist['playlist_info']['playlisttype'] == 'panel' or 'get.php' in playlist['playlist_info']['address'] :
 					if 'bouquet_info' in playlist and 'name' in playlist['bouquet_info']:
 						alias = playlist['bouquet_info']['name']
 					else:
 						alias = playlist['playlist_info']['domain']
 				else:
 					alias = playlist['playlist_info']['address']
+					
 					
 				if 'user_info' in playlist:
 					if 'auth' in playlist['user_info']:

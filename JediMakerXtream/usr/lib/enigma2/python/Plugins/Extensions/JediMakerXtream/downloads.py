@@ -441,13 +441,40 @@ def downloadrytec():
 	
 	if os.path.isfile(rytec_file) and os.stat(rytec_file).st_size > 0 and haslzma:
 		with lzma.open(rytec_file, 'rb') as fd:
+
 			with open(sat28_file, 'w') as outfile:
 				for line in fd:
+					
+					if "<!-- 28.2E -->" in line and "0000FFFF" not in line:
+						 jglob.rytecnames.append(line)
 					# get all 28.2e but ignore bad epg importer refs 
 					if '28.2E' in line \
 					and '1:0:1:C7A7:817:2:11A0000:0:0:0:' not in line \
 					and '1:0:1:2EEF:7EF:2:11A0000:0:0:0:' not in line :
-						outfile.write(line)
+						outfile.write(line)		
+						
+		###################################################################################################
+		# process all rytec refs
+		
+		rytec_allrefs = {}
+		
+		for line in jglob.rytecnames:
+			serviceref = ''
+			epg_channel_id = ''
+			channelname = ''
+		
+			if re.search('(?<=<\/channel><!-- ).*(?= --)', line) is not None:
+				channelname = re.search('(?<=<\/channel><!-- ).*(?= --)', line).group()
+				
+			if re.search('(?<=\">1).*(?=<\/)', line) is not None:
+				serviceref = re.search('(?<=\">1).*(?=<\/)', line).group()
+				
+			if re.search('(?<=id=\")[a-zA-Z0-9\.]+', line) is not None:
+				epg_channel_id = re.search('(?<=id=\")[a-zA-Z0-9\.]+', line).group() 
+
+			rytec_allrefs[channelname.lower()] = [serviceref, epg_channel_id, channelname]
+		
+				
 							
 		###################################################################################################
 		# read rytec 28.2e file
@@ -489,7 +516,7 @@ def downloadrytec():
 				 
 		###################################################################################################
 		
-		return rytec_ref, epg_alias_names
+		return rytec_ref, epg_alias_names, rytec_allrefs
 		
 
 		

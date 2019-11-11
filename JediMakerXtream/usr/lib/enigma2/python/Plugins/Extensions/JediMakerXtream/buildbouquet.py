@@ -77,6 +77,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 		self.m3uValues = []
 		
 		self.rytec_ref = {}
+		
 		self.epg_alias_names = []
 		
 		self.firstrun = True
@@ -112,15 +113,14 @@ class JediMakerXtream_BuildBouquets(Screen):
 			
 		self['progress'].setValue(self.progresscurrent)
 		
-		if jglob.epg_rytec_uk:
-			self.nextjob(_('Downloading Rytec UK EPG data...'),self.downloadrytec)
+
+		self.nextjob(_('Downloading Rytec UK EPG data...'),self.downloadrytec)
 				
-		else:
-			self.nextjob(_('Starting...'),self.startcreate)
-			
+
 			
 	def downloadrytec(self):
-		self.rytec_ref, self.epg_alias_names  = downloads.downloadrytec()
+		self.rytec_ref, self.epg_alias_names, self.rytec_allrefs  = downloads.downloadrytec()
+		
 		self.progresscurrent += 1
 		self['progress'].setValue(self.progresscurrent)
 		self.nextjob(_('Starting...'),self.startcreate)
@@ -201,7 +201,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 		category_id = self.categories[self.category_num][2]
 		self.protocol = self.protocol.replace(':', '%3a')
 		
-		self.epg_name_list = jfunc.process_category(category_name, category_type, category_id, self.domain, self.port, self.username, self.password, self.protocol, self.output, self.bouquet, self.epg_alias_names, self.epg_name_list, self.rytec_ref, self.m3uValues)
+		self.epg_name_list = jfunc.process_category(category_name, category_type, category_id, self.domain, self.port, self.username, self.password, self.protocol, self.output, self.bouquet, self.epg_alias_names, self.epg_name_list, self.rytec_ref, self.m3uValues, self.rytec_allrefs)
 
 		self.job_current = self.category_num
 		self.job_type = category_type

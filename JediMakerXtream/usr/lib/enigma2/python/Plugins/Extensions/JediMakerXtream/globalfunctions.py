@@ -163,6 +163,9 @@ def readbouquetdata():
 	jglob.epg_swap_names =                                 jglob.current_playlist['bouquet_info']['epg_swap_names']
 	jglob.epg_force_rytec_uk =                             jglob.current_playlist['bouquet_info']['epg_force_rytec_uk']
 	jglob.prefix_name =                                    jglob.current_playlist['bouquet_info']['prefix_name']
+	jglob.livebuffer =                                     jglob.current_playlist['bouquet_info']['buffer_live']
+	jglob.vodbuffer =                                      jglob.current_playlist['bouquet_info']['buffer_vod']
+	
 	
 	if jglob.selected_live_categories != []:
 		 jglob.live = True
@@ -228,8 +231,7 @@ def deleteBouquets():
 	refreshBouquets()
 
 
-def process_category(category_name, category_type, category_id, domain, port, username, password, protocol, output, bouquet, epg_alias_names, epg_name_list, rytec_ref, m3uValues):
-	
+def process_category(category_name, category_type, category_id, domain, port, username, password, protocol, output, bouquet, epg_alias_names, epg_name_list, rytec_ref, m3uValues, rytec_allrefs):
 	streamvaluesgroup = []
 	streamvalues = []
 	
@@ -286,6 +288,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 		# get all the values for this live category
 		streamvalues = [stream for stream in jglob.livestreams if str(category_id) == str(stream['category_id'])]
 		streamvaluesgroup += streamvalues
+		
 		stream_type = 'live'
 		
 		for i in range(len(streamvaluesgroup)):
@@ -294,11 +297,28 @@ def process_category(category_name, category_type, category_id, domain, port, us
 
 			##################################### new code #####################################################
 			
+			"""
+			if 'epg_channel_id' in streamvaluesgroup[i]:
+				for ref in rytec_allrefs:
+					hasref = False
+					
+					if streamvaluesgroup[i]['epg_channel_id'] in rytec_allrefs[ref]:
+						hasref = True
+						custom_sid = rytec_allrefs[ref][0][:-2] + str(jglob.livebuffer) + str(':')
+						#print streamvaluesgroup[i]['epg_channel_id']
+						#print custom_sid
+						"""
+
+						
+						
+			
 			if bouquet['bouquet_info']['epg_force_rytec_uk'] == True \
 			or any (s in category_name.lower() for s in ('uk', 'u.k', 'united kingdon', 'gb', 'bt sport', 'sky sports', 'manchester', 'mufc', 'mutv')) \
 			or any (s in streamvaluesgroup[i]['name'].strip().lower() for s in ('uk', 'u.k', 'gb', 'bt sport', 'sky sports', 'manchester', 'mufc', 'mutv')):
 
 				if bouquet['bouquet_info']['epg_rytec_uk'] == True:
+					
+					
 					
 					swapname = str(streamvaluesgroup[i]['name']).strip().lower() # make lowercase
 					
@@ -478,41 +498,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 					if bouquet['bouquet_info']['epg_swap_names'] == True:
 						streamvaluesgroup[i]['name'] = str(swapname).upper()
 			
-						
-					
-							
-					# change name to that of the lamedb file        
-					"""
-					if os.path.isfile('/etc/enigma2/lamedb5') and os.stat('/etc/enigma2/lamedb5').st_size > 0:
-						with open('/etc/enigma2/lamedb5') as f:
-							lines = f.readlines()
-							f.seek(0)
-							
-							serviceref_split = serviceref.split(':')
-							serviceref_split[3] = format(int(serviceref_split[3], 16), '04x')
-							serviceref_split[6] = format(int(serviceref_split[6], 16), '08x')
-							serviceref_split[4] = format(int(serviceref_split[4], 16), '04x')
-							serviceref_split[5] = format(int(serviceref_split[5], 16), '04x')
-							
-							serviceref_switch = serviceref_split[3] + ':' + serviceref_split[6] + ':' + serviceref_split[4] + ':' + serviceref_split[5]
-							
-							lame_exists = False
-							for line in lines:
 
-								if re.search('"(.*?)"', line) is not None:
-									lame_name = re.search('"(.*?)"', line).group(1)
-									
-								if serviceref_switch in line:
-									streamvaluesgroup[i]['name'] = str(lame_name)
-									lame_exists = True
-									break
-									
-							if lame_exists == False:
-								streamvaluesgroup[i]['name'] = str(reference).upper()
-
-					else:
-						streamvaluesgroup[i]['name'] = str(reference).upper()
-						"""
 						
 			streamvaluesgroup[i]['name'] = streamvaluesgroup[i]['name'].replace(":", "")
 			streamvaluesgroup[i]['name'] = streamvaluesgroup[i]['name'].replace('"', "")
@@ -525,17 +511,18 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			added = streamvaluesgroup[i]['added']
 			
 			
+			#if hasref == False:
 			if 'custom_sid' in streamvaluesgroup[i]:
 				if re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
-					custom_sid = streamvaluesgroup[i]['custom_sid']
+					custom_sid = streamvaluesgroup[i]['custom_sid'][:-2] + str(jglob.livebuffer) + str(':')
 				elif re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
-					custom_sid = str(streamvaluesgroup[i]['custom_sid']) + str('0:')
+					custom_sid = str(streamvaluesgroup[i]['custom_sid']) + str(jglob.livebuffer) + str(':')
 				else:
-					custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:0:'
+					custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:' + str(jglob.livebuffer) + str(':')
 			else:
-				custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:0:'	
+				custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:' + str(jglob.livebuffer) + str(':')
 			if epgid:       
-				custom_sid = serviceref 
+				custom_sid = serviceref[:-2] + str(jglob.livebuffer) + str(':') 
 				
 		   
 			source_epg = '1' + str(custom_sid) + 'http%3a//example.m3u8' 
@@ -551,9 +538,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			if cfg.catchup.value == True and catchup == 1:
 				name = str(cfg.catchupprefix.value) + str(name) 
 		   
-			
 
-			
 			bouquetString += '#SERVICE ' + str(jglob.live_type) + str(custom_sid) + str(protocol) + str(domain) + '%3a' + str(port) + '/' \
 			+ str(stream_type) + '/' + str(username) + '/' + str(password) + '/' + str(stream_id) + '.' + str(output) + ':' + str(name) + '\n'
 			
@@ -577,7 +562,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			
 		streamvaluesgroup += streamvalues
 		stream_type = 'movie'
-		custom_sid = ':0:1:0:0:0:0:0:0:0:'
+		custom_sid = ':0:1:0:0:0:0:0:0:' + str(jglob.vodbuffer) + str(':')
 		
 		for i in range(len(streamvaluesgroup)):
 			
@@ -604,7 +589,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 		streamvaluesgroup += streamvalues
 		
 		stream_type = 'series'
-		custom_sid = ':0:1:0:0:0:0:0:0:0:'
+		custom_sid = ':0:1:0:0:0:0:0:0:' + str(jglob.vodbuffer) + str(':')
 		
 		for i in range(len(streamvaluesgroup)):
 			
@@ -657,7 +642,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
 			source = m3u[3]
 			source = source.replace(':', '%3a')
 			
-			custom_sid = ':0:' + str(service_type) + ':' +  str(format(333, '04x')) + ':' + str(format(unique_ref, '04x')) + ':0:0:0:0:0:'
+			custom_sid = ':0:' + str(service_type) + ':' +  str(format(333, '04x')) + ':' + str(format(unique_ref, '04x')) + ':0:0:0:0:' + str(jglob.livebuffer) + str(':')
 			
 			unique_ref += 1
 			if unique_ref > 65535:
@@ -681,7 +666,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
 		# get all the values for this VOD category
 		streamvalues = [ stream for stream in jglob.getm3ustreams if str(category_name) == str(stream[0]) and str(category_type) == str(stream[4]) ]
 		streamvaluesgroup += streamvalues
-		custom_sid = ':0:1:0:0:0:0:0:0:0:'
+		custom_sid = ':0:1:0:0:0:0:0:0:' + str(jglob.vodbuffer) + str(':')
 		
 		for m3u in streamvaluesgroup:
 			

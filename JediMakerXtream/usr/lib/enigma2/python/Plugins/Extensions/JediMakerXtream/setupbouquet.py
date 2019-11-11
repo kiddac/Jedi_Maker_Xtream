@@ -127,6 +127,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
 		jglob.old_name = jglob.name
 		jglob.categories = []
+
 		
 
 		if 'bouquet_info' in jglob.current_playlist and jglob.current_playlist['bouquet_info'] != {}:
@@ -296,7 +297,17 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 		else:
 			self.LiveTypeCfg = NoSave(ConfigSelection(default=jglob.live_type, choices=[('1', _('DVB(1)')), ('4097', _('IPTV(4097)'))]))
 			self.VodTypeCfg = NoSave(ConfigSelection(default=jglob.vod_type, choices=[('1', _('DVB(1)')), ('4097', _('IPTV(4097)'))]))
+			
+		self.bufferoption = '0'
+		
+		if jglob.livebuffer != '0':
+			self.bufferoption = jglob.livebuffer
+			
+		if jglob.vodbuffer != '0':
+			self.bufferoption = jglob.vodbuffer
+		
 
+		self.BufferCfg = NoSave(ConfigSelection(default=self.bufferoption, choices=[('0', _('No Buffering(0)')), ('1', _('Buffering Enabled(1)')), ('3', _('Progressive Buffering(3)'))]))
 
 	def createSetup(self):
 		self.list = []
@@ -323,6 +334,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 			   
 			if self.VodCategoriesCfg.value == True:
 				self.list.append(getConfigListEntry(_('VOD bouquet order'), self.VodOrderCfg))
+				
+			if (self.LiveCategoriesCfg.value == True and self.LiveTypeCfg.value != "1") or (self.VodCategoriesCfg.value == True and self.VodTypeCfg.value != "1"):
+				self.list.append(getConfigListEntry(_('Buffer streams'), self.BufferCfg))
 		 
 			if self.LiveCategoriesCfg.value == True and jglob.has_epg_importer: 
 				self.list.append(getConfigListEntry(_('Use your provider EPG'), self.EpgProviderCfg))
@@ -350,6 +364,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
 			if self.VodCategoriesCfg.value == True or self.SeriesCategoriesCfg.value == True:
 				self.list.append(getConfigListEntry(_('Stream type for VOD/Series'), self.VodTypeCfg))
+				
+			if (self.LiveCategoriesCfg.value == True and self.LiveTypeCfg.value != "1") or (self.VodCategoriesCfg.value == True and self.VodTypeCfg.value != "1"):
+				self.list.append(getConfigListEntry(_('Buffer streams'), self.BufferCfg))
 			   
 			
 			if self.LiveCategoriesCfg.value == True and jglob.has_epg_importer:
@@ -420,6 +437,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 		if entry == _('UK only: Force UK name swap'):
 			self['information'].setText(_("Use for UK providers that do not specify UK in the category title or channel title.\nMay cause non UK channels to have the wrong epg.\nTrying creating bouquets without this option turned off first."))
 
+		if entry == _('Buffer Streams'):
+			self['information'].setText(_("\nSet stream buffer (Experimental)."))
+			return
 
 	def handleInputHelpers(self):
 		if self['config'].getCurrent() is not None:
@@ -500,6 +520,12 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 		jglob.epg_rytec_uk = self.EpgRytecUKCfg.value
 		jglob.epg_swap_names = self.EpgSwapNamesCfg.value
 		jglob.epg_force_rytec_uk = self.ForceRytecUKCfg.value
+		
+		if self.LiveTypeCfg.value != "1":
+			jglob.livebuffer = self.BufferCfg.value
+		
+		if self.VodTypeCfg.value != "1":
+			jglob.vodbuffer = self.BufferCfg.value
 		
 		jglob.xmltv_address = self.XmltvCfg.value
 		
@@ -933,6 +959,8 @@ class JediMakerXtream_ChooseBouquets(Screen):
 		('epg_swap_names', jglob.epg_swap_names),
 		('epg_force_rytec_uk', jglob.epg_force_rytec_uk),
 		('prefix_name', jglob.prefix_name),
+		('buffer_live', jglob.livebuffer),
+		('buffer_vod', jglob.vodbuffer)
 		 ])
 
 		if jglob.live:

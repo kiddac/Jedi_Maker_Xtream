@@ -60,7 +60,10 @@ epg_provider = False
 if has_epg_importer:
 	epg_provider = True
 	
-prefix_name = True    
+prefix_name = True  
+
+livebuffer = "0"
+vodbuffer = "0" 
 
 # catchup globals
 
@@ -74,7 +77,7 @@ password = ""
 domain = ""
 refstreamnum = ""
 
-
+rytecnames = []
 
 
 

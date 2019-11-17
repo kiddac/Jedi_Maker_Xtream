@@ -61,7 +61,7 @@ cfg.placement = ConfigSelection(default="bottom", choices=[("bottom", _("Bottom"
 skin_path = skin_directory + cfg.skin.value + '/'
 playlist_path = cfg.location.text + 'playlists.txt'
 
-playlist_file = '/etc/enigma2/jediplaylists/playlist_all2.json'
+playlist_file = '/etc/enigma2/jediplaylists/playlist_all3.json'
 rytec_file = '/etc/enigma2/jediplaylists/rytec.channels.xml.xz'
 rytec_url = 'http://www.xmltvepg.nl/rytec.channels.xml.xz'
 alias_file = '/etc/enigma2/jediplaylists/alias.txt'

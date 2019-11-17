@@ -79,6 +79,8 @@ refstreamnum = ""
 
 rytecnames = []
 
+fixepg = False
+
 
 
 

@@ -133,6 +133,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 		if 'bouquet_info' in jglob.current_playlist and jglob.current_playlist['bouquet_info'] != {}:
 			jfunc.readbouquetdata()
 		else:
+			#reset globals
 			jglob.live_type = '4097'
 			jglob.vod_type = '4097'
 			jglob.vod_order = 'original'
@@ -145,6 +146,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 			jglob.vod = False
 			jglob.series = False
 			jglob.prefix_name = True
+			jglob.fixepg = False
 			
 		if self.playlisttype == 'xtream':  
 			self.timer = eTimer()
@@ -299,15 +301,12 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 			self.VodTypeCfg = NoSave(ConfigSelection(default=jglob.vod_type, choices=[('1', _('DVB(1)')), ('4097', _('IPTV(4097)'))]))
 			
 		self.bufferoption = '0'
-		
 		if jglob.livebuffer != '0':
 			self.bufferoption = jglob.livebuffer
-			
 		if jglob.vodbuffer != '0':
 			self.bufferoption = jglob.vodbuffer
-		
-
 		self.BufferCfg = NoSave(ConfigSelection(default=self.bufferoption, choices=[('0', _('No Buffering(0)')), ('1', _('Buffering Enabled(1)')), ('3', _('Progressive Buffering(3)'))]))
+		self.FixEPGCfg = NoSave(ConfigEnableDisable(default=jglob.fixepg))
 
 	def createSetup(self):
 		self.list = []
@@ -351,6 +350,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 				
 			if self.EpgProviderCfg.value == True and jglob.has_epg_importer:
 				self.list.append(getConfigListEntry(_('EPG url'), self.XmltvCfg))
+				
+			if self.EpgProviderCfg.value == True and jglob.has_epg_importer:
+				self.list.append(getConfigListEntry(_('Rebuild XMLTV EPG data'), self.FixEPGCfg))
 
 		else:
 			self.list.append(getConfigListEntry(_('Live categories'), self.LiveCategoriesCfg))
@@ -374,6 +376,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 		
 			if self.EpgProviderCfg.value == True and jglob.has_epg_importer:  
 				self.list.append(getConfigListEntry(_('EPG url'), self.XmltvCfg))
+				
+			if self.EpgProviderCfg.value == True and jglob.has_epg_importer:
+				self.list.append(getConfigListEntry(_('Rebuild XMLTV EPG data'), self.FixEPGCfg))
 				
 		self['config'].list = self.list
 		self['config'].l.setList(self.list)
@@ -439,6 +444,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
 		if entry == _('Buffer Streams'):
 			self['information'].setText(_("\nSet stream buffer (Experimental)."))
+			
+		if entry == _('Rebuild XMLTV EPG data'):
+			self['information'].setText(_("\n(Optional) Download and attempt to rebuild XMLTV EPG data to UTF-8 encoding (Slower).\nOnly required if you think you have corrupt external EPG."))
 			return
 
 	def handleInputHelpers(self):
@@ -528,6 +536,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 			jglob.vodbuffer = self.BufferCfg.value
 		
 		jglob.xmltv_address = self.XmltvCfg.value
+		
+		jglob.fixepg = self.FixEPGCfg.value
 		
 		self.session.openWithCallback(self.finishedCheck, JediMakerXtream_ChooseBouquets)
 
@@ -645,6 +655,8 @@ class JediMakerXtream_ChooseBouquets(Screen):
 					
 			else:
 				self.close()
+				
+			
 				
 		elif self.playlisttype == 'panel':
 			protocol = jglob.current_playlist['playlist_info']['protocol']
@@ -960,7 +972,8 @@ class JediMakerXtream_ChooseBouquets(Screen):
 		('epg_force_rytec_uk', jglob.epg_force_rytec_uk),
 		('prefix_name', jglob.prefix_name),
 		('buffer_live', jglob.livebuffer),
-		('buffer_vod', jglob.vodbuffer)
+		('buffer_vod', jglob.vodbuffer),
+		('fixepg', jglob.fixepg)
 		 ])
 
 		if jglob.live:

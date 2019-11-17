@@ -180,6 +180,8 @@ class JediMakerXtream_BuildBouquets(Screen):
 			
 		else:
 			if jglob.live and jglob.has_epg_importer and jglob.epg_provider and jglob.xmltv_address != '':
+				if jglob.fixepg:
+					bx.downloadXMLTV()
 				bx.buildXMLTVChannelFile(self.epg_name_list)
 				bx.buildXMLTVSourceFile()
 				

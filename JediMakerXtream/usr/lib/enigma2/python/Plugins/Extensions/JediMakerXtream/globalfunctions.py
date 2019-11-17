@@ -165,6 +165,7 @@ def readbouquetdata():
 	jglob.prefix_name =                                    jglob.current_playlist['bouquet_info']['prefix_name']
 	jglob.livebuffer =                                     jglob.current_playlist['bouquet_info']['buffer_live']
 	jglob.vodbuffer =                                      jglob.current_playlist['bouquet_info']['buffer_vod']
+	jglob.fixepg = 										   jglob.current_playlist['bouquet_info']['fixepg']
 	
 	
 	if jglob.selected_live_categories != []:
@@ -305,13 +306,10 @@ def process_category(category_name, category_type, category_id, domain, port, us
 					if streamvaluesgroup[i]['epg_channel_id'] in rytec_allrefs[ref]:
 						hasref = True
 						custom_sid = rytec_allrefs[ref][0][:-2] + str(jglob.livebuffer) + str(':')
-						#print streamvaluesgroup[i]['epg_channel_id']
-						#print custom_sid
+						#print(streamvaluesgroup[i]['epg_channel_id'])
+						#print(custom_sid)
 						"""
 
-						
-						
-			
 			if bouquet['bouquet_info']['epg_force_rytec_uk'] == True \
 			or any (s in category_name.lower() for s in ('uk', 'u.k', 'united kingdon', 'gb', 'bt sport', 'sky sports', 'manchester', 'mufc', 'mutv')) \
 			or any (s in streamvaluesgroup[i]['name'].strip().lower() for s in ('uk', 'u.k', 'gb', 'bt sport', 'sky sports', 'manchester', 'mufc', 'mutv')):

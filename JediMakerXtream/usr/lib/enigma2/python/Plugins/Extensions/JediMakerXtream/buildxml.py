@@ -10,9 +10,10 @@ import jediglobals as jglob
 import globalfunctions as jfunc
 import sys
 from plugin import cfg
+import urllib2
+import downloads
 
 sys.setrecursionlimit(2000)
-
 
 def categoryBouquetXml(streamtype, bouquetTitle, bouquetString):
 	cleanTitle = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', bouquetTitle)
@@ -42,8 +43,6 @@ def bouquetsTvXml(streamtype, bouquetTitle):
 	cleanTitle = re.sub(r' ', '_', cleanTitle)
 	cleanTitle = re.sub(r'_+', '_', cleanTitle)
 	
-	
-
 	if cfg.groups.value == True:
 		
 		cleanGroup = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', jglob.name)
@@ -58,19 +57,17 @@ def bouquetsTvXml(streamtype, bouquetTitle):
 				if bouquetTvString not in f:
 					f.write(bouquetTvString)
 	
-		
 		filename = '/etc/enigma2/' + str(groupname)
 		with open(filename, 'a+') as f:
 			nameString = "#NAME " + str(jglob.name) + "\n"
 			if nameString not in f:
 				f.write(nameString)
 			
-		
 			filename = 'subbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
 			bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
 			if bouquetTvString not in f:
 				f.write(bouquetTvString)
-			
+	
 	else:
 		if cfg.placement.value == "bottom":
 			filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
@@ -90,14 +87,13 @@ def buildXMLTVChannelFile(epg_name_list):
 	cleanNameOld = re.sub(r' ', '_', cleanNameOld)
 	cleanNameOld = re.sub(r'_+', '_', cleanNameOld)
 	
-
 	# remove old files
 	jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.channels.xml')
 	jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanNameOld) + '.channels.xml')
 
 	jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.sources.xml')
 	jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanNameOld) + '.sources.xml')
-
+	
 	filepath = '/etc/epgimport/'
 	epgfilename = 'jmx.' + str(cleanName) + '.channels.xml'
 	channelpath = filepath + epgfilename
@@ -160,8 +156,44 @@ def buildXMLTVSourceFile():
 		xml_str += '<sourcecat sourcecatname="IPTV ' + str(cleanName) + '">\n'
 		xml_str += '<source type="gen_xmltv" nocheck="1" channels="' + channelpath + '">\n'
 		xml_str += '<description>' + str(cleanName) + '</description>\n'
-		xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + ']]></url>\n'
+		if jglob.fixepg:
+			xml_str += '<url><![CDATA[' + str(filepath + 'jmx.' + str(cleanName) + '.xmltv2.xml') + ']]></url>\n'
+		else:
+			xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + ']]></url>\n'
+			
 		xml_str += '</source>\n'
 		xml_str += '</sourcecat>\n'
 		xml_str += '</sources>\n'
 		f.write(xml_str)
+		
+def downloadXMLTV():
+	
+	cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(jglob.name))
+	cleanName = re.sub(r' ', '_', cleanName)
+	cleanName = re.sub(r'_+', '_', cleanName)
+	
+	cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', '_', str(jglob.old_name))
+	cleanNameOld = re.sub(r' ', '_', cleanNameOld)
+	cleanNameOld = re.sub(r'_+', '_', cleanNameOld)
+	
+	jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.xmltv.xml')
+	jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanNameOld) + '.xmltv.xml')
+	jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.xmltv2.xml')
+	jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanNameOld) + '.xmltv2.xml')
+	
+	filepath = '/etc/epgimport/'
+	epgfilename = 'jmx.' + str(cleanName) + '.xmltv.xml'
+	epgpath = filepath + epgfilename
+	response = downloads.checkGZIP(jglob.xmltv_address)
+	
+	if response != None:
+		
+		with open(epgpath, 'w') as f:
+			f.write(response)
+	
+		with open(epgpath, 'r') as f:
+			#tree = ET.parse(f)
+			tree = ET.parse(f, parser=ET.XMLParser(encoding='utf-8'))
+			root = tree.getroot()
+
+		tree.write('/etc/epgimport/' + 'jmx.' + str(cleanName) + '.xmltv2.xml', encoding='utf-8', xml_declaration=True)

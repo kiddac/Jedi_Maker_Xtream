@@ -404,11 +404,11 @@ def downloadrytec():
 		
 		try:
 			from backports import lzma
-			print('\nbackports lzma success')
+			print("\nbackports lzma success")
 			haslzma = True
 			
 		except ImportError:
-			print('\nlzma failed')
+			print("\nlzma failed")
 			pass
 			
 		except:
@@ -511,7 +511,7 @@ def downloadrytec():
 				try:
 					epg_alias_names = json.load(f)
 				except ValueError as e:
-					print(str(e) + '\n******** broken alias.txt file ***********')
+					print("%s\n******** broken alias.txt file ***********" % e)
 					print('\n******** check alias.txt file with https://jsonlint.com ********')
 				 
 		###################################################################################################

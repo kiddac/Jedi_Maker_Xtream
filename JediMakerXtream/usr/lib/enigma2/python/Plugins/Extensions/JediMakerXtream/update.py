@@ -215,10 +215,10 @@ class JediMakerXtream_Update(Screen):
 			response = urllib2.urlopen(req)
 			self.Valid = True
 		except urllib2.URLError as e:
-			print e
+			print(e)
 			pass
 		except socket.timeout as e:
-			print e
+			print(e)
 			pass
 		except:
 			pass
@@ -232,7 +232,7 @@ class JediMakerXtream_Update(Screen):
 					self.valid = False
 		except ValueError as e:
 			self.valid = False
-			print e
+			print(e)
 		except:
 			self.valid = False
 			pass
@@ -278,10 +278,10 @@ class JediMakerXtream_Update(Screen):
 			response = urllib2.urlopen(req)
 			self.Valid = True
 		except urllib2.URLError as e:
-			print e
+			print(e)
 			pass
 		except socket.timeout as e:
-			print e
+			print(e)
 			pass
 		except:
 			pass
@@ -295,7 +295,7 @@ class JediMakerXtream_Update(Screen):
 					self.valid = False
 		except ValueError as e:
 			self.valid = False
-			print e
+			print(e)
 		except:
 			self.valid = False
 			pass
@@ -525,6 +525,8 @@ class JediMakerXtream_Update(Screen):
 			self.process_category()
 		else:
 			if jglob.live and jglob.has_epg_importer and jglob.epg_provider and jglob.xmltv_address != '':
+				if jglob.fixepg:
+					bx.downloadXMLTV()
 				bx.buildXMLTVChannelFile(self.epg_name_list)
 				bx.buildXMLTVSourceFile()
 				self.updateBouquetJsonFile()

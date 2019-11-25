@@ -221,7 +221,7 @@ class JediMakerXtream_Playlist(Screen):
 						if param.startswith("type"):
 							self.type = param.split('=')[1]
 						if param.startswith("output"):
-							self.output = param.split('=')[1]
+							self.output = param.split('=')[1].strip()
 					
 		
 				player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)

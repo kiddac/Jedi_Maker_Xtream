@@ -517,6 +517,8 @@ def downloadrytec():
 		###################################################################################################
 		
 		return rytec_ref, epg_alias_names, rytec_allrefs
+	else:
+		return {},[],{}
 		
 
 		

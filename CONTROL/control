@@ -6,3 +6,4 @@ Architecture: all
 Maintainer: kiddac2015@gmail.com
 Description: Jedi Maker Xtream
 Source: 
+Depends: python-lzma

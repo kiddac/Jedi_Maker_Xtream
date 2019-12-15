@@ -318,11 +318,12 @@ class JediMakerXtream_Playlist(Screen):
 		
 		self.playlists_all =  self.playlists_all_new
 		
+		
 		#output to file for testing
 		with open(playlist_file, 'w') as f:
 			json.dump(self.playlists_all, f)
 		jglob.firstrun = 1
-	
+
 	
 	def checkPanel(self,response):
 		try:
@@ -367,7 +368,6 @@ class JediMakerXtream_Playlist(Screen):
 				if self.output not in self.playlist_data['user_info']['allowed_output_formats']:
 					self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0]) 
 		
-		
 		if paneltype == "xtream":
 			self.playlist_data['playlist_info'] = OrderedDict([
 			  ("index", self.index),
@@ -383,7 +383,6 @@ class JediMakerXtream_Playlist(Screen):
 			  ("playlisttype", "xtream"),
 			])
 			
-		
 		elif paneltype == "panel":
 			self.playlist_data['playlist_info'] = OrderedDict([
 			  ("index", self.index),
@@ -410,7 +409,6 @@ class JediMakerXtream_Playlist(Screen):
 			  ("playlisttype", 'external'),
 			])
 			
-		
 		if self.playlists_all != []:
 			for playlist in self.playlists_all:
 				if playlist != {}:
@@ -440,7 +438,6 @@ class JediMakerXtream_Playlist(Screen):
 						alias = playlist['playlist_info']['domain']
 				else:
 					alias = playlist['playlist_info']['address']
-					
 					
 				if 'user_info' in playlist:
 					if 'auth' in playlist['user_info']:
@@ -497,6 +494,7 @@ class JediMakerXtream_Playlist(Screen):
 						 self['liveupdate'].setText(_(str('Live: ' + playlist['bouquet_info']['live_update'])))
 						 self['vodupdate'].setText(_(str('Vod: ' + playlist['bouquet_info']['vod_update'])))
 						 self['seriesupdate'].setText(_(str('Series: ' + playlist['bouquet_info']['series_update'])))
+		
 					
 	def quit(self):
 		jglob.firstrun = 0

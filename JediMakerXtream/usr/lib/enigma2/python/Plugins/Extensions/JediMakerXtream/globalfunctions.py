@@ -46,42 +46,7 @@ def resetUnique():
 	  cfg.bouquet_id.save()
 	  configfile.save()
 	  
-	  
-def checkcategories(live,vod,series):
-	
-	jglob.categories = []
-    
-	if live and jglob.livecategories and jglob.livestreams:
-		for c in range(len(jglob.livecategories)):
-			for s in range(len(jglob.livestreams)):
-				if 'category_id' in jglob.livecategories[c] and 'category_id' in jglob.livestreams[s]:
-					if jglob.livecategories[c]['category_id'] == jglob.livestreams[s]['category_id']:
-						categoryValues = [str(jglob.livecategories[c]['category_name']), 'Live', int(jglob.livecategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
-						break
 					
-
-	if vod and jglob.vodcategories and jglob.vodstreams:	
-		for c in range(len(jglob.vodcategories)):
-			for s in range(len(jglob.vodstreams)):
-				if 'category_id' in jglob.vodcategories[c] and 'category_id' in jglob.vodstreams[s]:
-					if jglob.vodcategories[c]['category_id'] == jglob.vodstreams[s]['category_id']:
-						categoryValues = [str(jglob.vodcategories[c]['category_name']), 'VOD', int(jglob.vodcategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
-						break
-
-	if series and jglob.seriescategories and jglob.seriesstreams:
-    
-
-		for c in range(len(jglob.seriescategories)):
-			for s in range(len(jglob.seriesstreams)):
-				if 'category_id' in jglob.seriescategories[c] and 'category_id' in jglob.seriesstreams[s]:
-					if jglob.seriescategories[c]['category_id'] == jglob.seriesstreams[s]['category_id']:
-						categoryValues = [str(jglob.seriescategories[c]['category_name']), 'Series', int(jglob.seriescategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
-						break
-		 
-						
 def SelectedCategories(live, vod, series):
 
 		for x in jglob.categories:
@@ -232,7 +197,7 @@ def deleteBouquets():
 	refreshBouquets()
 
 
-def process_category(category_name, category_type, category_id, domain, port, username, password, protocol, output, bouquet, epg_alias_names, epg_name_list, rytec_ref, m3uValues, rytec_allrefs):
+def process_category(category_name, category_type, category_id, domain, port, username, password, protocol, output, bouquet, epg_alias_names, epg_name_list, rytec_ref, m3uValues):
 	streamvaluesgroup = []
 	streamvalues = []
 	
@@ -295,20 +260,6 @@ def process_category(category_name, category_type, category_id, domain, port, us
 		for i in range(len(streamvaluesgroup)):
 
 			epgid = False
-
-			##################################### new code #####################################################
-			
-			"""
-			if 'epg_channel_id' in streamvaluesgroup[i]:
-				for ref in rytec_allrefs:
-					hasref = False
-					
-					if streamvaluesgroup[i]['epg_channel_id'] in rytec_allrefs[ref]:
-						hasref = True
-						custom_sid = rytec_allrefs[ref][0][:-2] + str(jglob.livebuffer) + str(':')
-						#print(streamvaluesgroup[i]['epg_channel_id'])
-						#print(custom_sid)
-						"""
 
 			if bouquet['bouquet_info']['epg_force_rytec_uk'] == True \
 			or any (s in category_name.lower() for s in ('uk', 'u.k', 'united kingdon', 'gb', 'bt sport', 'sky sports', 'manchester', 'mufc', 'mutv')) \
@@ -502,7 +453,10 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			streamvaluesgroup[i]['name'] = streamvaluesgroup[i]['name'].replace('"', "")
 			
 			stream_id = streamvaluesgroup[i]['stream_id']
-			catchup = streamvaluesgroup[i]['tv_archive']
+			if 'tv_archive' in streamvaluesgroup[i]:
+				catchup = streamvaluesgroup[i]['tv_archive']
+			else:
+				catchup = 0
 			calc_remainder = int(stream_id) / 65535
 			bouquet_id_sid = jglob.bouquet_id + calc_remainder	
 			stream_id_sid = int(stream_id) - (calc_remainder * 65535)

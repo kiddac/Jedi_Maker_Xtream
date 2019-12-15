@@ -1,9 +1,9 @@
 Package: enigma2-plugin-extensions-jedimakerxtream
-Version: 5.26-20191130
+Version: 5.27-20191215
 Section: misc
 Priority: optional
 Architecture: all
-Maintainer: kiddac2015@gmail.com
+Maintainer: kiddac
 Description: Jedi Maker Xtream
 Source: 
 Depends: python-lzma

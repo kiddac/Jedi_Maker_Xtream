@@ -217,10 +217,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 					
 					if jglob.haslive == False or jglob.livecategories == []:
 						jglob.live = False
-					
-					for c in range(len(jglob.livecategories)):
-						categoryValues = [str(jglob.livecategories[c]['category_name']), 'Live', int(jglob.livecategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
+
 						
 
 			valid = False
@@ -242,10 +239,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 					
 					if jglob.hasvod == False or jglob.vodcategories == []:
 						jglob.vod = False
-						
-					for c in range(len(jglob.vodcategories)):
-						categoryValues = [str(jglob.vodcategories[c]['category_name']), 'VOD', int(jglob.vodcategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
+					
+
 			
 			valid = False 
 			
@@ -268,11 +263,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 					if jglob.hasseries == False or jglob.seriescategories == []:
 						jglob.series = False
 						
-					for c in range(len(jglob.seriescategories)):
-						categoryValues = [str(jglob.seriescategories[c]['category_name']), 'Series', int(jglob.seriescategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
 						
-
+	
 		self.createConfig()
 		self.createSetup()
 		
@@ -632,7 +624,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
 			self.LiveStreamsUrl = player_api + '&action=get_live_streams'
 			self.VodStreamsUrl = player_api + '&action=get_vod_streams'
 			self.SeriesUrl = player_api + '&action=get_series'
-			
+	
 			if jglob.live or jglob.vod or jglob.series:
 				if jglob.live:
 					self['lab1'].setText('Downloading Live data')
@@ -663,7 +655,6 @@ class JediMakerXtream_ChooseBouquets(Screen):
 						self.timer3_conn = self.timer3.timeout.connect(self.downloadSeries)
 					except:
 						self.timer3.callback.append(self.downloadSeries)
-					
 			else:
 				self.close()
 				
@@ -676,13 +667,14 @@ class JediMakerXtream_ChooseBouquets(Screen):
 			host = str(protocol) + str(domain) + ':' + str(port) + '/'
 			username = jglob.current_playlist['playlist_info']['username']
 			password = jglob.current_playlist['playlist_info']['password']
-			self['lab1'].setText('Getting selection list')
+			self['lab1'].setText('Getting categories')
 			self.timer = eTimer()
 			self.timer.start(self.pause, 1)
+			
 			try: 
-				self.timer_conn = self.timer.timeout.connect(self.ignorelist)
+				self.timer_conn = self.timer.timeout.connect(self.getcategories)
 			except:
-				self.timer.callback.append(self.ignorelist)
+				self.timer.callback.append(self.getcategories)
 	
 		else:
 			jglob.live = True
@@ -709,12 +701,14 @@ class JediMakerXtream_ChooseBouquets(Screen):
 	def downloadLive(self):
 		downloads.downloadlivestreams(self.LiveStreamsUrl)
 		
-		if jglob.vod:	
+		if jglob.vod:   
 			self.nextjob(_('Downloading VOD data'),self.downloadVod)
 		elif jglob.series:
 			self.nextjob(_('Downloading Series data'),self.downloadSeries)
 		else:
-			self.nextjob(_('Getting selection list'),self.ignorelist)
+			self.nextjob(_('Getting categories'),self.getcategories)
+
+			
 				
 				
 	def downloadVod(self):
@@ -723,18 +717,34 @@ class JediMakerXtream_ChooseBouquets(Screen):
 		if jglob.series:
 			self.nextjob(_('Downloading Series data'),self.downloadSeries)
 		else:
-			self.nextjob(_('Getting selection list'),self.ignorelist)
-							
+			self.nextjob(_('Getting categories'),self.getcategories)
 
+							
 	def downloadSeries(self):
 		downloads.downloadseriesstreams(self.SeriesUrl)
+		self.nextjob(_('Getting categories'),self.getcategories)
+
+	def getcategories(self):
+		jglob.categories = []
+		
+		if self.playlisttype == 'panel':
+			jglob.livecategories = []
+			jglob.vodcategories = []
+			jglob.seriescategories = []
+			if jglob.live:
+				downloads.getpanellive(jglob.current_playlist)
+			if jglob.vod:
+				downloads.getpanelvod(jglob.current_playlist)
+			if jglob.series:
+				downloads.getpanelseries(jglob.current_playlist)	
+		jfunc.getcategories()
 		self.nextjob(_('Getting selection list'),self.ignorelist)
-
-
+		
+		
 	def ignorelist(self):
 		# Only select previously selected categories or new categories
 		if 'bouquet_info' in jglob.current_playlist and jglob.current_playlist['bouquet_info'] != {}:
-			jfunc.IgnoredCategories(jglob.live, jglob.vod, jglob.series)
+			jfunc.IgnoredCategories()
 			
 		self.timer = eTimer()
 		self.timer.start(self.pause, 1)

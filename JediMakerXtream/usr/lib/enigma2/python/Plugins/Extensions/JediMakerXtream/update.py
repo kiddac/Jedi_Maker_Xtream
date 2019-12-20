@@ -216,7 +216,7 @@ class JediMakerXtream_Update(Screen):
 		
 		try:
 			response = urllib2.urlopen(req)
-			self.Valid = True
+			self.valid = True
 		except urllib2.URLError as e:
 			print(e)
 			pass
@@ -236,6 +236,7 @@ class JediMakerXtream_Update(Screen):
 		except ValueError as e:
 			self.valid = False
 			print(e)
+			pass
 		except:
 			self.valid = False
 			pass
@@ -272,6 +273,7 @@ class JediMakerXtream_Update(Screen):
 				except:
 					self.timer3.callback.append(self.downloadSeries)
 				
+				
 	def checkpanelactive(self):
 		response = None
 		self.valid = False
@@ -279,7 +281,7 @@ class JediMakerXtream_Update(Screen):
 		
 		try:
 			response = urllib2.urlopen(req)
-			self.Valid = True
+			self.valid = True
 		except urllib2.URLError as e:
 			print(e)
 			pass
@@ -299,13 +301,13 @@ class JediMakerXtream_Update(Screen):
 		except ValueError as e:
 			self.valid = False
 			print(e)
+			pass
 		except:
 			self.valid = False
 			pass
 			
 		if self.valid:
-			self.getPanelData()
-			self.nextjob(_('%s - Get ignored categories...') % str(jglob.name),self.ignoredcategories)
+			self.nextjob(_('%s - Getting categories...') % str(jglob.name),self.getcategories)
 				
 
 		   
@@ -317,7 +319,7 @@ class JediMakerXtream_Update(Screen):
 		elif jglob.series:
 			self.nextjob(_('%s - Downloading Series data...') % str(jglob.name),self.downloadSeries)
 		else:
-			self.nextjob(_('%s - Get ignored categories...') % str(jglob.name),self.ignoredcategories)
+			self.nextjob(_('%s - Getting categories...') % str(jglob.name),self.getcategories)
 
 				
 	def downloadVod(self):
@@ -326,13 +328,13 @@ class JediMakerXtream_Update(Screen):
 		if jglob.series:
 			self.nextjob(_('%s - Downloading Series data...') % str(jglob.name),self.downloadSeries)
 		else:
-			self.nextjob(_('%s - Get ignored categories...') % str(jglob.name),self.ignoredcategories)
+			self.nextjob(_('%s - Getting categories...') % str(jglob.name),self.getcategories)
 				
 				
 	def downloadSeries(self):
 		downloads.downloadseriescategories(self.SeriesCategoriesUrl)
 		downloads.downloadseriesstreams(self.SeriesUrl)
-		self.nextjob(_('%s - Get ignored categories...') % str(jglob.name),self.ignoredcategories)
+		self.nextjob(_('%s - Getting categories...') % str(jglob.name),self.getcategories)
 		
 		
 	def getPanelData(self):
@@ -343,9 +345,12 @@ class JediMakerXtream_Update(Screen):
 		valid = False
 		
 		# panel type 1 
-		downloads.getpanellive(self.active)
-		downloads.getpanelvod(self.active)
-		downloads.getpanelseries(self.active)
+		if jglob.live:
+			downloads.getpanellive(self.active)
+		if jglob.vod:
+			downloads.getpanelvod(self.active)
+		if jglob.series:
+			downloads.getpanelseries(self.active)
 		
 		# panel type 2
 		if 'categories' in self.active:
@@ -365,11 +370,7 @@ class JediMakerXtream_Update(Screen):
 						jglob.livecategories == []
 					
 					if jglob.haslive == False or jglob.livecategories == []:
-						jglob.live = False
-						
-					for c in range(len(jglob.livecategories)):
-						categoryValues = [str(jglob.livecategories[c]['category_name']), 'Live', int(jglob.livecategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
+						jglob.live = False		
 						
 			
 			if 'movie' in self.active['categories']:
@@ -390,10 +391,6 @@ class JediMakerXtream_Update(Screen):
 						
 					if jglob.hasvod == False or jglob.vodcategories == []:
 						jglob.vod = False
-						
-					for c in range(len(jglob.vodcategories)):
-						categoryValues = [str(jglob.vodcategories[c]['category_name']), 'VOD', int(jglob.vodcategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
 			
 			
 			if 'series' in self.active['categories']:
@@ -414,21 +411,26 @@ class JediMakerXtream_Update(Screen):
 						
 					if jglob.hasseries == False or jglob.seriescategories == []:
 						jglob.series = False	
-						
-					for c in range(len(jglob.seriescategories)):
-						categoryValues = [str(jglob.seriescategories[c]['category_name']), 'Series', int(jglob.seriescategories[c]['category_id']), True]
-						jglob.categories.append(categoryValues)
-	
+
 		
 	def getM3uCategories(self):
 		# make jglob.getm3ustreams in format (grouptitle, epg_name, source, type)
 		downloads.getM3uCategories(jglob.live, jglob.vod)
 		self.nextjob(_('%s - Get selected categories...') % str(jglob.name),self.getSelected)
-			
+		
+		
+	def getcategories(self):
+		jglob.categories = []
+		
+		if self.playlisttype == 'panel':
+			self.getPanelData()
+		jfunc.getcategories()
+		self.nextjob(_('%s - Getting selection list') % str(jglob.name),self.ignoredcategories)		
+	
 	
 	def ignoredcategories(self):
 		if 'bouquet_info' in jglob.current_playlist and jglob.current_playlist['bouquet_info'] != {}:
-			jfunc.IgnoredCategories(jglob.live, jglob.vod, jglob.series)
+			jfunc.IgnoredCategories()
 		self.nextjob(_('%s - Get selected categories...') % str(jglob.name),self.getSelected)
 		
 

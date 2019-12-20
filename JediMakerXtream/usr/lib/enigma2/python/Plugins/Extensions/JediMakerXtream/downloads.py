@@ -60,12 +60,8 @@ def downloadlivecategories(url):
             
             if not jglob.haslive or jglob.livecategories == []:
                 jglob.live = False
-                    
-            for c in range(len(jglob.livecategories)):
-                categoryValues = [str(jglob.livecategories[c]['category_name']), 'Live', int(jglob.livecategories[c]['category_id']), True]
-                jglob.categories.append(categoryValues)
-    
-        
+               
+
 def downloadvodcategories(url):
     jglob.vodcategories = []
     valid = False
@@ -93,11 +89,7 @@ def downloadvodcategories(url):
             
             if not jglob.hasvod or jglob.vodcategories == []:
                 jglob.vod = False
-                
-            for c in range(len(jglob.vodcategories)):
-                categoryValues = [str(jglob.vodcategories[c]['category_name']), 'VOD', int(jglob.vodcategories[c]['category_id']), True]
-                jglob.categories.append(categoryValues)
-            
+                    
 
 def downloadseriescategories(url):
     jglob.seriescategories = []
@@ -127,11 +119,7 @@ def downloadseriescategories(url):
             
             if not jglob.hasseries or jglob.seriescategories == []:
                 jglob.series = False
-                
-            for c in range(len(jglob.seriescategories)):
-                categoryValues = [str(jglob.seriescategories[c]['category_name']), 'Series', int(jglob.seriescategories[c]['category_id']), True]
-                jglob.categories.append(categoryValues)
-        
+                  
 
 def downloadlivestreams(url):
     jglob.livestreams = []
@@ -368,9 +356,9 @@ def getM3uCategories(live,vod):
                         group_title = 'Uncategorised VOD'
                     jglob.getm3ustreams.append([group_title, epg_name, name, source, 'vod']) 
             else:
-				if group_title == '':
-					group_title = 'Uncategorised'
-				jglob.getm3ustreams.append([group_title, epg_name, name, source, 'live']) 
+                if group_title == '':
+                    group_title = 'Uncategorised'
+                jglob.getm3ustreams.append([group_title, epg_name, name, source, 'live']) 
 
 def downloadrytec():
     haslzma = False

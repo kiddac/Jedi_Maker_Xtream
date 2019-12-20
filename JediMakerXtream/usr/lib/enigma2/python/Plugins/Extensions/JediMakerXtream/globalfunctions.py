@@ -46,49 +46,64 @@ def resetUnique():
 	  cfg.bouquet_id.save()
 	  configfile.save()
 	  
-					
-def SelectedCategories(live, vod, series):
+	  
+def getcategories():
+
+	if jglob.live:
+		for c in range(len(jglob.livecategories)):
+			categoryValues = [str(jglob.livecategories[c]['category_name']), 'Live', int(jglob.livecategories[c]['category_id']), True]
+			jglob.categories.append(categoryValues)
+	if jglob.vod:
+		for c in range(len(jglob.vodcategories)):
+			categoryValues = [str(jglob.vodcategories[c]['category_name']), 'VOD', int(jglob.vodcategories[c]['category_id']), True]
+			jglob.categories.append(categoryValues)
+	if jglob.series:
+		for c in range(len(jglob.seriescategories)):
+			categoryValues = [str(jglob.seriescategories[c]['category_name']), 'Series', int(jglob.seriescategories[c]['category_id']), True]
+			jglob.categories.append(categoryValues)
+			
+									
+def SelectedCategories():
 
 		for x in jglob.categories:
 			ignore = False
-			if live:
+			if jglob.live:
 				for name in jglob.current_playlist['bouquet_info']['selected_live_categories']:
 					if x[0] == name and x[1] == 'Live':
 						x[3] = True
 						break
 						
-			if vod:
+			if jglob.vod:
 				for name in jglob.current_playlist['bouquet_info']['selected_vod_categories']:
 					if x[0] == name and x[1] == 'VOD':
 						x[3] = True
 						break
 	
-			if series:
+			if jglob.series:
 				for name in jglob.current_playlist['bouquet_info']['selected_series_categories']:
 					if x[0] == name and x[1] == 'Series':
 						x[3] = True
 
 
-
-def IgnoredCategories(live, vod, series):    
+def IgnoredCategories():    
 		
 		for x in jglob.categories:
 			ignore = False
-			if live:
+			if jglob.live:
 				for name in jglob.current_playlist['bouquet_info']['ignored_live_categories']:
 					if x[0] == name and x[1] == 'Live':
 						x[3] = False
 						ignore = True
 						break
 						
-			if vod:
+			if jglob.vod:
 				for name in jglob.current_playlist['bouquet_info']['ignored_vod_categories']:
 					if x[0] == name and x[1] == 'VOD':
 						x[3] = False
 						ignore = True
 						break
 	
-			if series:
+			if jglob.series:
 				for name in jglob.current_playlist['bouquet_info']['ignored_series_categories']:
 					if x[0] == name and x[1] == 'Series':
 						x[3] = False
@@ -98,9 +113,7 @@ def IgnoredCategories(live, vod, series):
 				x[3] = True
 				
 
-
 def readbouquetdata():
-	
 	jglob.live = False
 	jglob.vod = False
 	jglob.series = False
@@ -143,9 +156,7 @@ def readbouquetdata():
 		 jglob.series = True
  
 
-	
 def deleteBouquets():
-
 	cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(jglob.name))
 	cleanName = re.sub(r' ', '_', cleanName)
 	cleanName = re.sub(r'_+', '_', cleanName)
@@ -189,11 +200,7 @@ def deleteBouquets():
 		
 	purge('/etc/enigma2', str(cleanName) + str('.tv')) 
 	purge('/etc/enigma2', str(cleanNameOld) + str('.tv')) 
-		
 
-	
-
-		
 	refreshBouquets()
 
 

@@ -215,6 +215,11 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 						jglob.haslive = False
 						jglob.livecategories == []
 					
+					"""
+					if jglob.livecategories != []:
+						jglob.livecategories.append({'category_id:':'0','category_name':'Live Not Categorised','parent_id':0})
+						"""
+					
 					if jglob.haslive == False or jglob.livecategories == []:
 						jglob.live = False
 
@@ -236,6 +241,11 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 					if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
 						jglob.hasvod = False
 						jglob.vodcategories == []
+					
+					"""	
+					if jglob.vodcategories != []:
+						jglob.vodcategories.append({'category_id:':'0','category_name':'VOD Not Categorised','parent_id':0})
+						"""
 					
 					if jglob.hasvod == False or jglob.vodcategories == []:
 						jglob.vod = False
@@ -259,6 +269,10 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 						jglob.hasseries = False
 						jglob.seriescategories == []
 					
+					"""	
+					if jglob.seriescategories != []:
+						jglob.seriescategories.append({'category_id:':'0','category_name':'Series Not Categorised','parent_id':0})
+						"""
 					
 					if jglob.hasseries == False or jglob.seriescategories == []:
 						jglob.series = False

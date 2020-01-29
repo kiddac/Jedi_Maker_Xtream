@@ -54,7 +54,7 @@ def getcategories():
 			categoryValues = [str(jglob.livecategories[c]['category_name']), 'Live', int(jglob.livecategories[c]['category_id']), True]
 			jglob.categories.append(categoryValues)
 	if jglob.vod:
-		for c in range(len(jglob.vodcategories)):
+		for c in range(len(jglob.vodcategories)):	
 			categoryValues = [str(jglob.vodcategories[c]['category_name']), 'VOD', int(jglob.vodcategories[c]['category_id']), True]
 			jglob.categories.append(categoryValues)
 	if jglob.series:
@@ -461,7 +461,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			
 			stream_id = streamvaluesgroup[i]['stream_id']
 			if 'tv_archive' in streamvaluesgroup[i]:
-				catchup = streamvaluesgroup[i]['tv_archive']
+				catchup = int(streamvaluesgroup[i]['tv_archive'])
 			else:
 				catchup = 0
 			calc_remainder = int(stream_id) / 65535

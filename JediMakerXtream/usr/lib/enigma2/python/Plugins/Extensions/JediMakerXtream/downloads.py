@@ -57,6 +57,11 @@ def downloadlivecategories(url):
             if jglob.livecategories == [] or 'user_info' in jglob.livecategories or 'category_id' not in jglob.livecategories[0]:
                 jglob.haslive = False
                 jglob.livecategories == []  
+                
+            """
+            if jglob.livecategories != []:
+				jglob.livecategories.append({'category_id':'0','category_name':'Live Not Categorised','parent_id':0})
+				"""
             
             if not jglob.haslive or jglob.livecategories == []:
                 jglob.live = False
@@ -86,6 +91,11 @@ def downloadvodcategories(url):
             if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
                 jglob.hasvod = False
                 jglob.vodcategories == []
+              
+            """  
+            if jglob.vodcategories != []:
+				jglob.vodcategories.append({'category_id':'0','category_name':'VOD Not Categorised','parent_id':0})
+				"""
             
             if not jglob.hasvod or jglob.vodcategories == []:
                 jglob.vod = False
@@ -116,6 +126,11 @@ def downloadseriescategories(url):
             if jglob.seriescategories == [] or 'user_info' in jglob.seriescategories or 'category_id' not in jglob.seriescategories[0]:
                 jglob.hasseries = False
                 jglob.seriescategories == []
+            
+            """ 
+            if jglob.seriescategories != []:
+				jglob.seriescategories.append({'category_id':'0','category_name':'Series Not Categorised','parent_id':0})
+				"""
             
             if not jglob.hasseries or jglob.seriescategories == []:
                 jglob.series = False

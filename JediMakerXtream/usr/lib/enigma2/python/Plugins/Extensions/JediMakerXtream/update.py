@@ -195,19 +195,17 @@ class JediMakerXtream_Update(Screen):
 			self.get_api = str(self.host) + 'get.php?username=' + str(self.username) + '&password=' + str(self.password) + '&type=m3u_plus&output=' + str(self.output)
 			jglob.xmltv_address = str(self.host) + 'xmltv.php?username=' + str(self.username) + '&password=' + str(self.password) 
 
-		self.nextjob(_('%s - Deleting existing bouquets...') % str(jglob.name),self.deleteBouquets)
-		
-		
-			   
-	def deleteBouquets(self):
-		jfunc.deleteBouquets()
 		if self.playlisttype == 'xtream':
 			self.nextjob(_('%s - Checking URL still active...') % str(jglob.name),self.checkactive)
 		elif self.playlisttype == 'panel':
 			self.nextjob(_('%s - Checking URL still active...') % str(jglob.name),self.checkpanelactive)
 		else:
 			self.nextjob(_('%s - Download M3U Data...') % str(jglob.name),self.getM3uCategories)
-			
+		
+		
+	def deleteBouquets(self):
+		jfunc.deleteBouquets()
+
 			
 	def checkactive(self):
 		response = None
@@ -309,7 +307,6 @@ class JediMakerXtream_Update(Screen):
 		if self.valid:
 			self.nextjob(_('%s - Getting categories...') % str(jglob.name),self.getcategories)
 				
-
 		   
 	def downloadLive(self):	
 		downloads.downloadlivecategories(self.LiveCategoriesUrl)
@@ -369,6 +366,11 @@ class JediMakerXtream_Update(Screen):
 						jglob.haslive = False
 						jglob.livecategories == []
 					
+					"""
+					if jglob.livecategories != []:
+						jglob.livecategories.append({'category_id':'0','category_name':'Live Not Categorised','parent_id':0})
+						"""
+				
 					if jglob.haslive == False or jglob.livecategories == []:
 						jglob.live = False		
 						
@@ -388,6 +390,11 @@ class JediMakerXtream_Update(Screen):
 					if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
 						jglob.hasvod = False
 						jglob.vodcategories == []
+					
+					"""	
+					if jglob.vodcategories != []:
+						jglob.vodcategories.append({'category_id':'0','category_name':'VOD Not Categorised','parent_id':0})
+						"""
 						
 					if jglob.hasvod == False or jglob.vodcategories == []:
 						jglob.vod = False
@@ -408,6 +415,11 @@ class JediMakerXtream_Update(Screen):
 					if jglob.seriescategories == [] or 'user_info' in jglob.seriescategories or 'category_id' not in jglob.seriescategories[0]:
 						jglob.hasseries = False
 						jglob.seriescategories == []
+					
+					"""
+					if jglob.seriescategories != []:
+						jglob.seriescategories.append({'category_id':'0','category_name':'Series Not Categorised','parent_id':0})
+						"""
 						
 					if jglob.hasseries == False or jglob.seriescategories == []:
 						jglob.series = False	
@@ -471,6 +483,7 @@ class JediMakerXtream_Update(Screen):
 
 		
 	def buildBouquets(self):
+		self.nextjob(_('%s - Deleting existing bouquets...') % str(jglob.name),self.deleteBouquets)
 		if self.firstrun == True:
 			self.epg_name_list = []
 	
@@ -501,6 +514,7 @@ class JediMakerXtream_Update(Screen):
 
 					  
 	def buildM3uBouquets(self):
+		self.nextjob(_('%s - Deleting existing bouquets...') % str(jglob.name),self.deleteBouquets)
 		self.categories = []
 		
 		for x in jglob.getm3ustreams:

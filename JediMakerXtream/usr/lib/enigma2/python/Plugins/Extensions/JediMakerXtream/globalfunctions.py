@@ -6,7 +6,7 @@ import os
 import re
 from enigma import eDVBDB
 from Components.config import *
-from plugin import cfg, hdr, playlist_file, rytec_url, rytec_file, sat28_file, alias_file
+from plugin import cfg, playlist_file
 import urllib2
 import json
 import socket

@@ -425,9 +425,7 @@ class JediMakerXtream_Catchup_Listings(Screen):
 			
 			
 	def play(self):
-	
 		playurl = "%s/streaming/timeshift.php?username=%s&password=%s&stream=%s&start=%s&duration=%s" % (jglob.domain, jglob.username, jglob.password, jglob.refstreamnum, self.catchup_all[self.currentSelection][5], self.catchup_all[self.currentSelection][6])
-		print "********** playurl ********* %s " % playurl
 		streamtype  = jglob.currentref.type
 		if streamtype == 1:
 			streamtype = 4097

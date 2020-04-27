@@ -6,22 +6,16 @@ from . import _
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.ProgressBar import ProgressBar
 from enigma import eTimer
-from plugin import skin_path, cfg, rytec_file, rytec_url, alias_file, sat28_file, hdr
+from plugin import skin_path, cfg
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from datetime import datetime
-from Components.ProgressBar import ProgressBar
 
-import re
-import json
-import urllib2
-import os
-import socket
-import jediglobals as jglob
-import globalfunctions as jfunc
 import buildxml as bx
 import downloads
+import globalfunctions as jfunc
+import jediglobals as jglob
 
 
 class JediMakerXtream_BuildBouquets(Screen):

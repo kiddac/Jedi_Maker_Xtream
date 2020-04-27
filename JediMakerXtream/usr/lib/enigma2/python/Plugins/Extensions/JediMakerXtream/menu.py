@@ -6,19 +6,14 @@ from . import _
 
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
-from Components.MultiContent import MultiContentEntryText
 from Components.Sources.StaticText import StaticText
-from enigma import eConsoleAppContainer, eListboxPythonMultiContent, getDesktop, gFont, loadPic, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_WRAP, eTimer
+from plugin import skin_path, playlist_file
 from Screens.MessageBox import MessageBox
-from Screens.Console import Console
 from Screens.Screen import Screen
-from plugin import cfg, skin_path, playlist_file
-import os
-import json
-import jediglobals as jglob
+
 import globalfunctions as jfunc
-from Components.ConfigList import *
-from Components.config import *
+import jediglobals as jglob
+import os
 
 
 class JediMakerXtream_Menu(Screen):
@@ -44,8 +39,7 @@ class JediMakerXtream_Menu(Screen):
 		 
 		self['key_red'] = StaticText(_('Close'))
 		
-		self.createSetup()
-
+		self.onFirstExecBegin.append(self.createSetup)
 		self.onLayoutFinish.append(self.__layoutFinished)
 		
 		
@@ -82,22 +76,22 @@ class JediMakerXtream_Menu(Screen):
 		import settings, playlists, deletebouquets, about, update
 		returnValue = self['menu'].getCurrent()[1]
 		if returnValue is not None:
-			if returnValue is 'm_settings':
+			if returnValue == 'm_settings':
 				self.session.open(settings.JediMakerXtream_Settings)
 				return
-			if returnValue is 'm_playlists':
+			if returnValue == 'm_playlists':
 				self.session.openWithCallback(self.createSetup, playlists.JediMakerXtream_Playlist)
 				return
-			if returnValue is 'm_delete_all':
+			if returnValue == 'm_delete_all':
 				self.deleteBouquets()
 				return
-			if returnValue is 'm_delete_set':
+			if returnValue == 'm_delete_set':
 				self.session.openWithCallback(self.createSetup, deletebouquets.JediMakerXtream_DeleteBouquets)
 				return
-			if returnValue is 'm_about':
+			if returnValue == 'm_about':
 				self.session.openWithCallback(self.createSetup, about.JediMakerXtream_About)
 				return
-			if returnValue is 'm_update':
+			if returnValue == 'm_update':
 				self.session.openWithCallback(self.createSetup, update.JediMakerXtream_Update, 'manual')
 				self.close()
 				return
@@ -138,7 +132,6 @@ class JediMakerXtream_Menu(Screen):
 			# delete leftover empty dicts
 			self.playlists_all = filter(None, self.playlists_all)   
 			
- 
 			os.remove(playlist_file)
 			jfunc.refreshBouquets()
 			

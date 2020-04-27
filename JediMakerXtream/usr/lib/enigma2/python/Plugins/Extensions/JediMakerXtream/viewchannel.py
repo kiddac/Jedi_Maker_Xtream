@@ -6,14 +6,9 @@ from . import _
 
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
-from Components.MultiContent import MultiContentEntryText
 from Components.Sources.StaticText import StaticText
-from enigma import eConsoleAppContainer, eListboxPythonMultiContent, getDesktop, gFont, loadPic, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_WRAP
-from Components.Label import Label
 from Screens.Screen import Screen
 from plugin import skin_path
-
-
 import jediglobals as jglob
 
 

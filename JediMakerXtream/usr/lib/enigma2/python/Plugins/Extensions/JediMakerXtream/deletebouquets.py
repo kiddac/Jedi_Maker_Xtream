@@ -4,22 +4,18 @@
 # for localized messages  	 
 from . import _
 
-from collections import OrderedDict
 from Components.ActionMap import ActionMap
-from Components.config import *
-from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
-from Components.Sources.StaticText import StaticText
-from plugin import skin_path, cfg, playlist_file
-from Screens.Screen import Screen
-
 from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
+from plugin import skin_path, playlist_file
+from Screens.Screen import Screen
 from Tools.LoadPixmap import LoadPixmap
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 
-import os, json, re
-import jediglobals as jglob
 import globalfunctions as jfunc
+import jediglobals as jglob
+import json
+import re
 
 
 class JediMakerXtream_DeleteBouquets(Screen):   
@@ -62,6 +58,7 @@ class JediMakerXtream_DeleteBouquets(Screen):
 		self.getStartList()
 		self.refresh()  
 
+
 	def __layoutFinished(self):
 		self.setTitle(self.setup_title)
 		
@@ -71,7 +68,6 @@ class JediMakerXtream_DeleteBouquets(Screen):
 			pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_on.png")
 		else:
 			pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_off.png")
-
 		return(pixmap, str(name), index, enabled)
 		
 	
@@ -109,6 +105,7 @@ class JediMakerXtream_DeleteBouquets(Screen):
 			self.startList[idx][2] = False
 		self.refresh() 
 
+
 	def keyCancel(self):                
 		self.close()
 
@@ -136,8 +133,6 @@ class JediMakerXtream_DeleteBouquets(Screen):
 			jfunc.purge('/etc/enigma2', 'jmx_vod_' + str(cleanName)  + "_")
 			jfunc.purge('/etc/enigma2', 'jmx_series_' + str(cleanName)  + "_")
 			jfunc.purge('/etc/enigma2', str(cleanName) + str('.tv')) 
-
-	
 
 			if jglob.has_epg_importer:
 				jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.channels.xml')

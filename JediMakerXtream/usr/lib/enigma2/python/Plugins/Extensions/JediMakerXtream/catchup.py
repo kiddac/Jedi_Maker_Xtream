@@ -5,36 +5,22 @@
 from . import _
 
 from Components.ActionMap import ActionMap
-from Components.ConfigList import *
 from Components.Label import Label
-
 from Components.Sources.List import List
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
 from Components.Sources.StaticText import StaticText
-from enigma import eConsoleAppContainer, eListboxPythonMultiContent, eTimer, eEPGCache, eServiceReference, getDesktop, gFont, loadPic, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_WRAP, addFont, iServiceInformation, iPlayableService
-from Screens.MessageBox import MessageBox
+from enigma import eServiceReference
+from Screens.InfoBar import MoviePlayer
+from plugin import skin_path, cfg, hdr, screenwidth
 from Screens.Screen import Screen
-from Components.config import *
 
-from Tools.LoadPixmap import LoadPixmap
-from plugin import skin_path, cfg, playlist_path, playlist_file, hdr, screenwidth
-import re
-import json
-import urllib2
-import os
-import socket
-import sys
-
-from ServiceReference import ServiceReference
-
-import datetime
-import calendar
-import jediglobals as jglob
 import base64
-
-from Screens.InfoBar import InfoBar, MoviePlayer
-
-screenwidth = getDesktop(0).size()
+import calendar
+import datetime
+import jediglobals as jglob
+import json
+import re
+import socket
+import urllib2
 
 
 def downloadSimpleData():
@@ -46,9 +32,7 @@ def downloadSimpleData():
 	jglob.domain = ""
 	error_message = ""
 	isCatchupChannel = False
-	
-	
-	
+
 	refurl = jglob.currentref.getPath()
 	# http://domain.xyx:0000/live/user/pass/12345.ts
 	
@@ -134,11 +118,6 @@ def downloadSimpleData():
 			if response != "":
 				simple_data_table = json.load(response)
 				
-				"""
-				with open('/etc/enigma2/jediplaylists/catchup_json.json', 'w') as f:
-					json.dump(simple_data_table, f)
-					"""
-				
 				jglob.archive = []
 				hasarchive = False
 				if 'epg_listings' in simple_data_table:
@@ -148,12 +127,7 @@ def downloadSimpleData():
 								hasarchive = True
 								jglob.archive.append(listing)
 				  
-				if hasarchive:
-					"""
-					with open('/etc/enigma2/jediplaylists/hasarchive_json.json', 'w') as f:
-						json.dump(jglob.archive, f)
-						"""
-						
+				if hasarchive:		
 					jglob.dates = []
 					for listing in jglob.archive:
 						date = datetime.datetime.strptime(listing['start'], '%Y-%m-%d %H:%M:%S')
@@ -168,9 +142,7 @@ def downloadSimpleData():
 					jglob.dates.append([(_("All %s days")) % dates_count, "0000-00-00"])
 		
 					return error_message, True
-					
 				else:
-					
 					jglob.archive = []
 					
 					numberofdays = 7
@@ -269,7 +241,6 @@ class JediMakerXtream_Catchup(Screen):
 			'menu': self.quit,
 			}, -2)
 
-
 		self.setup_title = ""
 		self.createSetup()
 		self['newlist'].onSelectionChanged.append(self.getCurrentEntry)
@@ -319,11 +290,6 @@ class JediMakerXtream_Catchup(Screen):
 					if listing['start'].startswith(str(self.returnValue)):
 						selectedArchive.append(listing)
 						
-		"""
-		with open('/etc/enigma2/jediplaylists/selectedarchive_json.json', 'w') as f:
-			json.dump(selectedArchive, f) 
-			"""       
-			
 		self.session.open(JediMakerXtream_Catchup_Listings, selectedArchive)
 
 
@@ -409,7 +375,6 @@ class JediMakerXtream_Catchup_Listings(Screen):
 		self.createSetup()
 
 		   
-
 	def createSetup(self):
 		self.list = []
 		
@@ -422,7 +387,6 @@ class JediMakerXtream_Catchup_Listings(Screen):
 		if self.list != []:
 			self['list'].onSelectionChanged.append(self.getCurrentEntry)
 
-			
 			
 	def play(self):
 		playurl = "%s/streaming/timeshift.php?username=%s&password=%s&stream=%s&start=%s&duration=%s" % (jglob.domain, jglob.username, jglob.password, jglob.refstreamnum, self.catchup_all[self.currentSelection][5], self.catchup_all[self.currentSelection][6])

@@ -1,19 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from xml.dom import minidom
-from xml.dom.minidom import parse, parseString
-import xml.etree.cElementTree as ET
-import re
-import os
-import jediglobals as jglob
-import globalfunctions as jfunc
-import sys
 from plugin import cfg
-import urllib2
+from xml.dom import minidom
+
 import downloads
+import globalfunctions as jfunc
+import jediglobals as jglob
+import os
+import re
+import sys
+import xml.etree.cElementTree as ET
 
 sys.setrecursionlimit(2000)
+
+
 
 def categoryBouquetXml(streamtype, bouquetTitle, bouquetString):
 	cleanTitle = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', bouquetTitle)
@@ -98,7 +99,6 @@ def buildXMLTVChannelFile(epg_name_list):
 	epgfilename = 'jmx.' + str(cleanName) + '.channels.xml'
 	channelpath = filepath + epgfilename
 
-	bouquetfilepath = '/etc/enigma2/'
 	root = ET.Element('channels')
 
 	# if xmltv file doesn't already exist, create file and build.
@@ -119,7 +119,6 @@ def buildXMLTVChannelFile(epg_name_list):
 	else:
 		tree = ET.parse(channelpath)
 		root = tree.getroot()
-		e = str(ET.tostring(root, 'utf-8'))
 		
 		for channel in root.findall('channel'):
 			root.remove(channel)
@@ -194,6 +193,5 @@ def downloadXMLTV():
 		with open(epgpath, 'r') as f:
 			#tree = ET.parse(f)
 			tree = ET.parse(f, parser=ET.XMLParser(encoding='utf-8'))
-			root = tree.getroot()
 
 		tree.write('/etc/epgimport/' + 'jmx.' + str(cleanName) + '.xmltv2.xml', encoding='utf-8', xml_declaration=True)

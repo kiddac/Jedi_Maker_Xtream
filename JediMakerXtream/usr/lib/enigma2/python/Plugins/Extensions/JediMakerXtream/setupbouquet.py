@@ -4,32 +4,29 @@
 # for localized messages     
 from . import _
 
+from collections import OrderedDict
+from Components.ActionMap import ActionMap
+from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigPassword, ConfigYesNo, ConfigEnableDisable, NoSave
+from Components.ConfigList import ConfigListScreen 
+from Components.Label import Label
+from Components.Pixmap import Pixmap
+from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
+from datetime import datetime
+from enigma import eTimer
+from plugin import skin_path, cfg, playlist_file
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Tools.LoadPixmap import LoadPixmap
+
+import buildbouquet
+import downloads
+import globalfunctions as jfunc
+import jediglobals as jglob
+import json
+import os
 import owibranding
 
-from Screens.Screen import Screen
-from plugin import skin_path, cfg, playlist_file
-
-from Components.Pixmap import Pixmap
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Sources.StaticText import StaticText
-from Components.Label import Label
-from Components.Sources.List import List
-from Components.config import *
-from Components.ConfigList import *
-from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Screens.MessageBox import MessageBox
-
-from collections import OrderedDict
-from datetime import datetime
-from Tools.LoadPixmap import LoadPixmap
-from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
-
-import os
-import json
-import buildbouquet, playlists
-import jediglobals as jglob
-import globalfunctions as jfunc
-import downloads
 
 class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
@@ -117,18 +114,14 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 		elif self.playlisttype == 'panel':
 			username = jglob.current_playlist['playlist_info']['username']
 			password = jglob.current_playlist['playlist_info']['password']
-			panel_api = str(host) + 'panel_api.php?username=' + str(username) + '&password=' + str(password)
 			jglob.xmltv_address = str(host) + 'xmltv.php?username=' + str(username) + '&password=' + str(password) 
 			jglob.epg_provider = True
 			
 		else:
 			jglob.epg_provider = False
 			
-
 		jglob.old_name = jglob.name
 		jglob.categories = []
-
-		
 
 		if 'bouquet_info' in jglob.current_playlist and jglob.current_playlist['bouquet_info'] != {}:
 			jfunc.readbouquetdata()
@@ -215,15 +208,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 						jglob.haslive = False
 						jglob.livecategories == []
 					
-					"""
-					if jglob.livecategories != []:
-						jglob.livecategories.append({'category_id:':'0','category_name':'Live Not Categorised','parent_id':0})
-						"""
-					
 					if jglob.haslive == False or jglob.livecategories == []:
 						jglob.live = False
-
-						
 
 			valid = False
 						
@@ -241,17 +227,10 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 					if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
 						jglob.hasvod = False
 						jglob.vodcategories == []
-					
-					"""	
-					if jglob.vodcategories != []:
-						jglob.vodcategories.append({'category_id:':'0','category_name':'VOD Not Categorised','parent_id':0})
-						"""
-					
+
 					if jglob.hasvod == False or jglob.vodcategories == []:
 						jglob.vod = False
 					
-
-			
 			valid = False 
 			
 			if 'series' in jglob.current_playlist['categories']:
@@ -269,16 +248,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 						jglob.hasseries = False
 						jglob.seriescategories == []
 					
-					"""	
-					if jglob.seriescategories != []:
-						jglob.seriescategories.append({'category_id:':'0','category_name':'Series Not Categorised','parent_id':0})
-						"""
-					
 					if jglob.hasseries == False or jglob.seriescategories == []:
 						jglob.series = False
-						
-						
-	
+
 		self.createConfig()
 		self.createSetup()
 		
@@ -324,6 +296,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 			self.bufferoption = jglob.vodbuffer
 		self.BufferCfg = NoSave(ConfigSelection(default=self.bufferoption, choices=[('0', _('No Buffering(0)')), ('1', _('Buffering Enabled(1)')), ('3', _('Progressive Buffering(3)'))]))
 		self.FixEPGCfg = NoSave(ConfigEnableDisable(default=jglob.fixepg))
+
 
 	def createSetup(self):
 		self.list = []
@@ -401,8 +374,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 		self['config'].l.setList(self.list)
 		
 		self.setInfo()
-		 
 		self.handleInputHelpers()
+		
 		
 	# dreamos workaround for showing setting descriptions
 	def setInfo(self):
@@ -465,6 +438,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 		if entry == _('Rebuild XMLTV EPG data'):
 			self['information'].setText(_("\n(Optional) Download and attempt to rebuild XMLTV EPG data to UTF-8 encoding (Slower).\nOnly required if you think you have corrupt external EPG."))
 			return
+
 
 	def handleInputHelpers(self):
 		if self['config'].getCurrent() is not None:
@@ -568,6 +542,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 			self.close()
 	
 
+
 class JediMakerXtream_ChooseBouquets(Screen):
 
 	def __init__(self, session):
@@ -618,10 +593,8 @@ class JediMakerXtream_ChooseBouquets(Screen):
 		
 		self.cat_list = ''
 		self.currentSelection = 0
-		
 		self.playlisttype = jglob.current_playlist['playlist_info']['playlisttype']
 		
-
 		if self.playlisttype == 'xtream':
 			protocol = jglob.current_playlist['playlist_info']['protocol']
 			domain = jglob.current_playlist['playlist_info']['domain']
@@ -672,8 +645,6 @@ class JediMakerXtream_ChooseBouquets(Screen):
 			else:
 				self.close()
 				
-			
-				
 		elif self.playlisttype == 'panel':
 			protocol = jglob.current_playlist['playlist_info']['protocol']
 			domain = jglob.current_playlist['playlist_info']['domain']
@@ -722,9 +693,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
 		else:
 			self.nextjob(_('Getting categories'),self.getcategories)
 
-			
-				
-				
+
 	def downloadVod(self):
 		downloads.downloadvodstreams(self.VodStreamsUrl)
 
@@ -737,6 +706,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
 	def downloadSeries(self):
 		downloads.downloadseriesstreams(self.SeriesUrl)
 		self.nextjob(_('Getting categories'),self.getcategories)
+
 
 	def getcategories(self):
 		jglob.categories = []

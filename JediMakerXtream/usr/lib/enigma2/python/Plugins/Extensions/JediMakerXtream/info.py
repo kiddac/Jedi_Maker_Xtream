@@ -4,12 +4,13 @@
 # for localized messages  	 
 from . import _
 
-from Screens.Screen import Screen
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from datetime import datetime
 from plugin import skin_path
+from Screens.Screen import Screen
+
 import jediglobals as jglob
 
 
@@ -98,6 +99,7 @@ class JediMakerXtream_UserInfo(Screen):
 					self.usertext  += str(value) + ':\t\t' + str(jglob.current_playlist['server_info'][value]) + '\n'
 			
 		self['userinfo'].setText(self.usertext)
+
 
 	def quit(self):
 		self.close()

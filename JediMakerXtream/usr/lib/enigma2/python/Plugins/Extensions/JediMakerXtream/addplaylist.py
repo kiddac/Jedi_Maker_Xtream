@@ -4,25 +4,21 @@
 # for localized messages     
 from . import _
 
+from plugin import skin_path, playlist_path, playlist_file
+from Components.ActionMap import ActionMap
+from Components.Label import Label
+from Components.Pixmap import Pixmap
+from Components.Sources.StaticText import StaticText
+from Components.config import NoSave, ConfigText, ConfigSelection, ConfigNumber, getConfigListEntry, ConfigPassword, ConfigYesNo, ConfigEnableDisable, configfile
+from Components.ConfigList import ConfigListScreen 
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+
+import globalfunctions as jfunc
+import jediglobals as jglob
+import json
 import owibranding
 
-from Screens.Screen import Screen
-from plugin import skin_path, cfg, playlist_path, playlist_file
-from Components.Pixmap import Pixmap
-from Components.ActionMap import ActionMap,  NumberActionMap
-from Components.Sources.StaticText import StaticText
-from Components.Label import Label
-from Components.Sources.List import List
-from Components.ConfigList import *
-from Components.config import *
-from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Screens.MessageBox import MessageBox
-from collections import OrderedDict
-
-import json
-import os
-import jediglobals as jglob
-import globalfunctions as jfunc
 
 
 class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
@@ -179,7 +175,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
 		self['config'].l.setList(self.list)
 		
 		self.setInfo()
-		
 		self.handleInputHelpers()
 		
 		
@@ -275,6 +270,7 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
 
 	def getCurrentEntry(self):
 		return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
+
 
 	def getCurrentValue(self):
 		return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''

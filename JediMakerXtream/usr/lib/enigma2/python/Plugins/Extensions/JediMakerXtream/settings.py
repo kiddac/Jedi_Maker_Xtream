@@ -4,22 +4,18 @@
 # for localized messages     
 from . import _
 
-import owibranding
-
-from Screens.Screen import Screen
-from plugin import skin_path, cfg, autoStartTimer
-
-from Components.Pixmap import Pixmap
-from Components.ActionMap import ActionMap, NumberActionMap
-from Components.Sources.StaticText import StaticText
+from Components.ActionMap import ActionMap
+from Components.ConfigList import ConfigListScreen
+from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigPassword, ConfigYesNo, ConfigEnableDisable, configfile
 from Components.Label import Label
-from Components.Sources.List import List
-from Components.ConfigList import *
-from Components.config import *
-from Screens.VirtualKeyBoard import VirtualKeyBoard
-
+from Components.Pixmap import Pixmap
+from Components.Sources.StaticText import StaticText
+from plugin import skin_path, cfg, autoStartTimer
 from Screens.LocationBox import LocationBox
 from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+
+import owibranding
 
 
 class JediMakerXtream_Settings(ConfigListScreen, Screen):
@@ -30,7 +26,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 		
 		skin = skin_path + 'jmx_settings.xml'
 	
-		
 		self.dreamos = False
 		
 		try:
@@ -62,7 +57,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 		
 		self['lab1'] = Label('')
 		
-
 		self['actions'] = ActionMap(["SetupActions"],
 		{
 		 'cancel': self.cancel,
@@ -124,6 +118,7 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 		self.setInfo()
 		self.handleInputHelpers()
 		
+		
 	# dreamos workaround for showing setting descriptions
 	def setInfo(self):
 		
@@ -178,7 +173,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 			return
 			
 		
-
 	def handleInputHelpers(self):
 		if self['config'].getCurrent() is not None:
 			if isinstance(self['config'].getCurrent()[1], ConfigText) or isinstance(self['config'].getCurrent()[1], ConfigPassword) :
@@ -226,6 +220,7 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 
 	def getCurrentEntry(self):
 		return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
+
 
 	def getCurrentValue(self):
 		return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''

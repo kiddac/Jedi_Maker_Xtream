@@ -2,17 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from collections import OrderedDict
+from Components.config import configfile
+from enigma import eDVBDB
+from plugin import cfg, playlist_file
+
+import buildxml as bx
+import jediglobals as jglob
+import json
 import os
 import re
-from enigma import eDVBDB
-from Components.config import *
-from plugin import cfg, playlist_file
-import urllib2
-import json
-import socket
-import jediglobals as jglob
-import buildxml as bx
-
 
 
 def getPlaylistJson():
@@ -64,9 +62,8 @@ def getcategories():
 			
 									
 def SelectedCategories():
-
 		for x in jglob.categories:
-			ignore = False
+			#ignore = False
 			if jglob.live:
 				for name in jglob.current_playlist['bouquet_info']['selected_live_categories']:
 					if x[0] == name and x[1] == 'Live':
@@ -86,7 +83,6 @@ def SelectedCategories():
 
 
 def IgnoredCategories():    
-		
 		for x in jglob.categories:
 			ignore = False
 			if jglob.live:
@@ -273,12 +269,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			or any (s in streamvaluesgroup[i]['name'].strip().lower() for s in ('uk', 'u.k', 'gb', 'bt sport', 'sky sports', 'manchester', 'mufc', 'mutv')):
 
 				if bouquet['bouquet_info']['epg_rytec_uk'] == True:
-					
-					
-					
 					swapname = str(streamvaluesgroup[i]['name']).strip().lower() # make lowercase
-					
-					#print(swapname)
 					swapname = re.sub(r'\|.+?\||\[.+?\]', '', swapname) # replace words in pipes and square brackets
 					
 					if all (s not in swapname  for s in ('(english)', '(w)', '(e)', '(ireland)', '(aberdeen)', '(dundee/tay)' )):
@@ -467,10 +458,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 			calc_remainder = int(stream_id) / 65535
 			bouquet_id_sid = jglob.bouquet_id + calc_remainder	
 			stream_id_sid = int(stream_id) - (calc_remainder * 65535)
-			added = streamvaluesgroup[i]['added']
-			
-			
-			#if hasref == False:
+
 			if 'custom_sid' in streamvaluesgroup[i]:
 				if re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
 					custom_sid = streamvaluesgroup[i]['custom_sid'][:-2] + str(jglob.livebuffer) + str(':')
@@ -597,7 +585,6 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
 			name = name.replace(":", "")
 			name = name.replace('"', "")
 			
-			
 			source = m3u[3]
 			source = source.replace(':', '%3a')
 			
@@ -629,7 +616,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
 		
 		for m3u in streamvaluesgroup:
 			
-			group_title = m3u[0]
+			#group_title = m3u[0]
 			epg_name = m3u[1]
 			name = m3u[2]
 			source = m3u[3]

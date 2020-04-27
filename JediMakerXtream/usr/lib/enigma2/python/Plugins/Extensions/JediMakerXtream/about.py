@@ -10,6 +10,7 @@ from Components.Sources.StaticText import StaticText
 from plugin import skin_path
 from Screens.Screen import Screen
 
+
 class JediMakerXtream_About(Screen):
 
 	def __init__(self, session):
@@ -28,14 +29,14 @@ class JediMakerXtream_About(Screen):
 		 'menu': self.quit}, -2)
 		self['key_red'] = StaticText(_('Close'))
 		self['about'] = Label('')
-		self.createSetup()
+		self.onFirstExecBegin.append(self.createSetup)
 		self.onLayoutFinish.append(self.__layoutFinished)
 		
 	def __layoutFinished(self):
 		self.setTitle(self.setup_title)
 	
 	def createSetup(self):
-		self.credit = 'JediMakerXtream V5.29 (C) 2018/2019 - KiddaC\n\n'
+		self.credit = 'JediMakerXtream V5.30 (C) 2018/2019/2020 - KiddaC\n\n'
 		self.credit += 'Support for this plugin can be found on https://linuxsat-support.com\n\n'
 		self.credit += 'Plugin enables the simple bouquet creation of standard xtream and M3U playlist(s).\n'
 		self.credit += '*Playing streams via the plugin is currently unavailable.\n'    

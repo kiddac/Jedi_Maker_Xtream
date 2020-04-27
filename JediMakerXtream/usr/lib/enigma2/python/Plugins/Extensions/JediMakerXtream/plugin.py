@@ -4,25 +4,16 @@
 # for localized messages  	 
 from . import _
 
-from Components.config import *
-#from enigma import getDesktop, addFont, eTimer
-
+from Components.ActionMap import HelpableActionMap
+from Components.config import config, ConfigSelection, ConfigNumber, ConfigYesNo, ConfigEnableDisable, ConfigClock, ConfigDirectory, ConfigSubsection
+from enigma import eTimer, eServiceReference, getDesktop, addFont
 from Plugins.Plugin import PluginDescriptor
+from Screens.EpgSelection import EPGSelection
+from Screens.MessageBox import MessageBox
+from ServiceReference import ServiceReference
 
 import os
-import socket
 import jediglobals as jglob
-
-from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
-from Components.Label import Label
-from enigma import eConsoleAppContainer, eListboxPythonMultiContent, eTimer, eEPGCache, eServiceReference, getDesktop, gFont, loadPic, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_WRAP, addFont, iServiceInformation, iPlayableService
-from Screens.EpgSelection import EPGSelection
-from Screens.ChannelSelection import *
-from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
-
-from ServiceReference import ServiceReference
-from Components.ServiceList import ServiceList
 
 
 autoStartTimer = None
@@ -117,7 +108,6 @@ def extensionsmenu(session, **kwargs):
 	
 
 class AutoStartTimer:
-	
 	def __init__(self, session):
 		self.session = session
 		self.timer = eTimer() 
@@ -186,7 +176,6 @@ class AutoStartTimer:
 
 
 def autostart(reason, session = None, **kwargs):
-	
 	if session is not None:
 		global jediEPGSelection__init__
 		
@@ -259,37 +248,21 @@ def EPGSelectionPLI__init__(self, session, service = None, zapFunc = None, event
 	'catchup': self.showJediCatchup,
 	})
 	
-	
-
 
 def showJediCatchup(self):
 	
 	error_message = ""
 	hascatchup = False
-	
-	# get currently playing channel
-	
-	#print("**** store original channel ****")
+
 	self.oldref = self.session.nav.getCurrentlyPlayingServiceReference()
 	self.oldrefstring = self.oldref.toString()
 
 	listcurrent = self['list'].getCurrent()
-	service_event = listcurrent[0]
 	service_ref = listcurrent[1]
 
 	current_service = service_ref.ref.toString()
-	#print("**** current service %s") % current_service
 
-	eventName = ''
-	if service_event is not None:
-		eventName = service_event.getEventName()
-	
-	
-	# zap to highlighted channel before continuing 
-	
-	#print("**** zap to selected channel ****")
 	if self.oldrefstring != current_service:
-		#print("**** channel differs ****")
 		self.session.nav.playService(eServiceReference(current_service))
 	service = self.session.nav.getCurrentService()
 	
@@ -313,9 +286,7 @@ def showJediCatchup(self):
 
 def playOriginalChannel(self):
 	if self.oldrefstring != jglob.currentrefstring:
-		#print("**** playing original channel ****")
 		self.session.nav.playService(eServiceReference(self.oldrefstring))
-		#print("**** playing original channel success ****")
 	
 
 def Plugins(**kwargs):

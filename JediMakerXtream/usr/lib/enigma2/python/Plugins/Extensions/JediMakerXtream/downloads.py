@@ -1,18 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from collections import OrderedDict
+from plugin import cfg, hdr, rytec_url, rytec_file, sat28_file, alias_file
+from StringIO import StringIO
+
+import gzip
+import jediglobals as jglob
+import json
 import os
 import re
-from Components.config import *
-from plugin import cfg, hdr, rytec_url, rytec_file, sat28_file, alias_file
-import urllib2
-import json
 import socket
-import jediglobals as jglob
-import xml.etree.ElementTree as ET
-from StringIO import StringIO
-import gzip
+import urllib2
 
 
 def checkGZIP(url):
@@ -57,11 +55,6 @@ def downloadlivecategories(url):
             if jglob.livecategories == [] or 'user_info' in jglob.livecategories or 'category_id' not in jglob.livecategories[0]:
                 jglob.haslive = False
                 jglob.livecategories == []  
-                
-            """
-            if jglob.livecategories != []:
-				jglob.livecategories.append({'category_id':'0','category_name':'Live Not Categorised','parent_id':0})
-				"""
             
             if not jglob.haslive or jglob.livecategories == []:
                 jglob.live = False
@@ -91,11 +84,6 @@ def downloadvodcategories(url):
             if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
                 jglob.hasvod = False
                 jglob.vodcategories == []
-              
-            """  
-            if jglob.vodcategories != []:
-				jglob.vodcategories.append({'category_id':'0','category_name':'VOD Not Categorised','parent_id':0})
-				"""
             
             if not jglob.hasvod or jglob.vodcategories == []:
                 jglob.vod = False
@@ -127,11 +115,7 @@ def downloadseriescategories(url):
                 jglob.hasseries = False
                 jglob.seriescategories == []
             
-            """ 
-            if jglob.seriescategories != []:
-				jglob.seriescategories.append({'category_id':'0','category_name':'Series Not Categorised','parent_id':0})
-				"""
-            
+
             if not jglob.hasseries or jglob.seriescategories == []:
                 jglob.series = False
                   
@@ -375,6 +359,7 @@ def getM3uCategories(live,vod):
                     group_title = 'Uncategorised'
                 jglob.getm3ustreams.append([group_title, epg_name, name, source, 'live']) 
 
+
 def downloadrytec():
     haslzma = False
     try:
@@ -479,15 +464,11 @@ def downloadrytec():
         
         
 def downloadgetfile(url):
-    valid = False
     response = checkGZIP(url)
     channelnum = 0
     m3uValues = {}
     series_group_title = 'Uncategorised'
     series_name = ''
-    series_container_extension = ''
-    series_url = ''
-    count = 0
     
     if response != None:
         for line in response.splitlines():

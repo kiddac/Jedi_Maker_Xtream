@@ -8,24 +8,19 @@ from collections import OrderedDict
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
-from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
-from enigma import getDesktop, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, eTimer
+from enigma import getDesktop, eTimer
+from jediStaticText import StaticText
+from plugin import skin_path, cfg, playlist_path, playlist_file, hdr
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.LoadPixmap import LoadPixmap
-from plugin import skin_path, cfg, playlist_path, playlist_file, hdr
-import re
+
 import json
 import urllib2
 import os
 import addplaylist, info, setupbouquet
-import socket
-import sys
 import jediglobals as jglob
 import globalfunctions as jfunc
-from jediStaticText import StaticText
-
 
 
 screenwidth = getDesktop(0).size()
@@ -107,8 +102,8 @@ class JediMakerXtream_Playlist(Screen):
 			self.timer_conn = self.timer.timeout.connect(self.loadPlaylist)
 		except:
 			self.timer.callback.append(self.loadPlaylist)
-
-
+			
+		
 	def __layoutFinished(self):
 		self.setTitle(self.setup_title)
 		if self.list != []:
@@ -171,20 +166,11 @@ class JediMakerXtream_Playlist(Screen):
 			for line in lines:
 				
 				response = ""
-				
 				player = False
 				panel = False
-				extinf = False
-				
-				playervalid = False
-				panelvalid = False
-				
 				valid = False
-				address = ''
-				playlisttype = ''
 				self.playlist_data = {}
 				
-				#declare defaults
 				self.protocol = 'http://'
 				self.domain = ''
 				self.port = 80
@@ -194,7 +180,6 @@ class JediMakerXtream_Playlist(Screen):
 				self.output = 'ts'
 				self.host = ''
 				player_api = ''
-				output_format = ''
 				filename = ''
 			
 				urlsplit1 = line.split("/")
@@ -226,7 +211,7 @@ class JediMakerXtream_Playlist(Screen):
 		
 				player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
 				panel_api = str(self.host) + 'panel_api.php?username=' + str(self.username) + '&password=' + str(self.password)
-				full_url = line
+				#full_url = line
 				
 				player_req = urllib2.Request(player_api, headers=hdr)
 				panel_req = urllib2.Request(panel_api, headers=hdr)
@@ -265,7 +250,7 @@ class JediMakerXtream_Playlist(Screen):
 							req = urllib2.Request(line, headers=hdr)
 							response = urllib2.urlopen(req, None, cfg.timeout.value+5)
 							if 'EXTINF' in response.read():
-								extinf = True
+								#extinf = True
 								valid = True
 			
 						except Exception as e:
@@ -281,7 +266,7 @@ class JediMakerXtream_Playlist(Screen):
 							req = urllib2.Request(line, headers=hdr)
 							response = urllib2.urlopen(req, None, cfg.timeout.value+5)
 							if 'EXTINF' in response.read():
-								extinf = True
+								#extinf = True
 								valid = True
 								
 						except Exception as e:

@@ -4,25 +4,23 @@
 # for localized messages  	 
 from . import _
 
-from collections import OrderedDict
 from Components.ActionMap import ActionMap
 from Components.Label import Label
+from Components.ProgressBar import ProgressBar
+from datetime import datetime
 from enigma import eTimer
 from plugin import skin_path, playlist_file, hdr, cfg, screenwidth
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-import urllib2
+
+import buildxml as bx
+import downloads
+import globalfunctions as jfunc
+import jediglobals as jglob
 import json
 import socket
 import os
-from datetime import datetime
-
-from Components.ProgressBar import ProgressBar
-
-import jediglobals as jglob
-import globalfunctions as jfunc
-import buildxml as bx
-import downloads
+import urllib2
 
 
 class JediMakerXtream_Update(Screen):
@@ -63,8 +61,6 @@ class JediMakerXtream_Update(Screen):
 					
 			self.skin = skin
 				
-	
-				
 		Screen.setTitle(self, _('Updating Bouquets'))
 		
 		self['action'] = Label('')
@@ -84,9 +80,7 @@ class JediMakerXtream_Update(Screen):
 			if 'bouquet_info' in playlist:
 				self.playlists_bouquets.append(playlist)
 				
-		
 		self.progresscount = len(self.playlists_bouquets) 
-
 		self.progresscurrent = 0
 		self['progress'].setRange((0, self.progresscount))
 		self['progress'].setValue(self.progresscurrent)
@@ -142,7 +136,6 @@ class JediMakerXtream_Update(Screen):
 		self.valid = False
 		jglob.current_playlist = self.playlists_bouquets[self.x]
 
-		
 		self['progress'].setRange((0, self.progresscount))
 		self['progress'].setValue(self.progresscurrent)
 		self.progresscurrent += 1 
@@ -150,7 +143,6 @@ class JediMakerXtream_Update(Screen):
 		self['status'].setText(_('Updating Playlist %d of %d') % (self.progresscurrent, self.progresscount))
 		self.nextjob(_('%s - Reading bouquet data...') % str(jglob.name),self.readbouquetdata)
 			
-		  
 		self.x += 1
 		
 
@@ -365,19 +357,12 @@ class JediMakerXtream_Update(Screen):
 					if jglob.livecategories == [] or 'user_info' in jglob.livecategories or 'category_id' not in jglob.livecategories[0]:
 						jglob.haslive = False
 						jglob.livecategories == []
-					
-					"""
-					if jglob.livecategories != []:
-						jglob.livecategories.append({'category_id':'0','category_name':'Live Not Categorised','parent_id':0})
-						"""
 				
 					if jglob.haslive == False or jglob.livecategories == []:
 						jglob.live = False		
 						
 			
 			if 'movie' in self.active['categories']:
-				
-				print("***** panel has categories / movies *******")
 				jglob.hasvod = True
 				try:
 					jglob.vodcategories = self.active['categories']['movie']
@@ -390,19 +375,12 @@ class JediMakerXtream_Update(Screen):
 					if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
 						jglob.hasvod = False
 						jglob.vodcategories == []
-					
-					"""	
-					if jglob.vodcategories != []:
-						jglob.vodcategories.append({'category_id':'0','category_name':'VOD Not Categorised','parent_id':0})
-						"""
 						
 					if jglob.hasvod == False or jglob.vodcategories == []:
 						jglob.vod = False
 			
 			
 			if 'series' in self.active['categories']:
-				
-				print("***** panel has categories / series *******")
 				jglob.hasseries = True
 				try:
 					jglob.seriescategories = self.active['categories']['series']
@@ -415,18 +393,12 @@ class JediMakerXtream_Update(Screen):
 					if jglob.seriescategories == [] or 'user_info' in jglob.seriescategories or 'category_id' not in jglob.seriescategories[0]:
 						jglob.hasseries = False
 						jglob.seriescategories == []
-					
-					"""
-					if jglob.seriescategories != []:
-						jglob.seriescategories.append({'category_id':'0','category_name':'Series Not Categorised','parent_id':0})
-						"""
 						
 					if jglob.hasseries == False or jglob.seriescategories == []:
 						jglob.series = False	
 
 		
 	def getM3uCategories(self):
-		# make jglob.getm3ustreams in format (grouptitle, epg_name, source, type)
 		downloads.getM3uCategories(jglob.live, jglob.vod)
 		self.nextjob(_('%s - Get selected categories...') % str(jglob.name),self.getSelected)
 		
@@ -447,7 +419,6 @@ class JediMakerXtream_Update(Screen):
 		
 
 	def getSelected(self):
-		#get selected categories from bouquet file
 		if self.playlisttype == 'xtream' or self.playlisttype == 'panel':
 			
 			jglob.selectedcategories = []
@@ -477,7 +448,6 @@ class JediMakerXtream_Update(Screen):
 		
 
 	def downloadgetfile(self):
-		#self.m3uValues = []
 		self.m3uValues = downloads.downloadgetfile(self.get_api)
 		self.nextjob(_('%s - Building bouquets...') % str(jglob.name), self.buildBouquets)
 

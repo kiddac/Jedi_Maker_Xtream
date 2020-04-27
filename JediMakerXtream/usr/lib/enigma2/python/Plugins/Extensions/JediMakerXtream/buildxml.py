@@ -159,7 +159,7 @@ def buildXMLTVSourceFile():
 		if jglob.fixepg:
 			xml_str += '<url><![CDATA[' + str(filepath + 'jmx.' + str(cleanName) + '.xmltv2.xml') + ']]></url>\n'
 		else:
-			xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + ']]></url>\n'
+			xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + '&next_days=7]]></url>\n'
 			
 		xml_str += '</source>\n'
 		xml_str += '</sourcecat>\n'

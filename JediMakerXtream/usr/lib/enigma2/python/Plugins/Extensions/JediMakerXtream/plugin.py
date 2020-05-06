@@ -9,6 +9,15 @@ from Components.config import config, ConfigSelection, ConfigNumber, ConfigYesNo
 from enigma import eTimer, eServiceReference, getDesktop, addFont
 from Plugins.Plugin import PluginDescriptor
 from Screens.EpgSelection import EPGSelection
+
+vixEPG = False
+
+try:
+	from Screens.EpgSelectionGrid import EPGSelectionGrid
+	vixEPG = True
+except:
+	pass
+	
 from Screens.MessageBox import MessageBox
 from ServiceReference import ServiceReference
 
@@ -178,25 +187,42 @@ class AutoStartTimer:
 def autostart(reason, session = None, **kwargs):
 	if session is not None:
 		global jediEPGSelection__init__
-		
 		jediEPGSelection__init__ = EPGSelection.__init__
 		
-		try:
-			check = EPGSelection.setPiPService
-			EPGSelection.__init__ = EPGSelectionVTi__init__
-		except AttributeError:
+		if vixEPG:
+			global jediEPGSelectionGrid__init__
+			jediEPGSelectionGrid__init__ = EPGSelectionGrid.__init__
+			
 			try:
-				check = EPGSelection.togglePIG
-				EPGSelection.__init__ = EPGSelectionATV__init__
+				check = EPGSelectionGrid.togglePIG
+				EPGSelectionGrid.__init__ = EPGSelectionVIX__init__
+				EPGSelectionGrid.showJediCatchup = showJediCatchup
+				EPGSelectionGrid.playOriginalChannel = playOriginalChannel
 			except AttributeError:
+				print "******** VIX check failed *****"
+				pass
+		else:		
+			try:
+				check = EPGSelection.setPiPService
+				EPGSelection.__init__ = EPGSelectionVTi__init__
+			except AttributeError:
+				print "******** VTI check failed *****"
 				try:
-					check = EPGSelection.runPlugin
-					EPGSelection.__init__ = EPGSelectionPLI__init__
+					check = EPGSelection.togglePIG
+					EPGSelection.__init__ = EPGSelectionATV__init__
 				except AttributeError:
-					EPGSelection.__init__ = EPGSelection__init__
+					print "******** ATV check failed *****"
+					try:
+						check = EPGSelection.runPlugin
+						EPGSelection.__init__ = EPGSelectionPLI__init__
+					except AttributeError:
+						print "******** PLI check failed *****"	
+						EPGSelection.__init__ = EPGSelection__init__
 
-		EPGSelection.showJediCatchup = showJediCatchup
-		EPGSelection.playOriginalChannel = playOriginalChannel
+			EPGSelection.showJediCatchup = showJediCatchup
+			EPGSelection.playOriginalChannel = playOriginalChannel
+		
+
 
 	global autoStartTimer
 	if reason == 0:
@@ -205,12 +231,9 @@ def autostart(reason, session = None, **kwargs):
 				autoStartTimer = AutoStartTimer(session)
 	return
 	
-
 			
 def EPGSelection__init__(self, session, service, zapFunc = None, eventid = None, bouquetChangeCB = None, serviceChangeCB = None):
-	
 	print("**** EPGSelection ****")
-	
 	jediEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
 	self['jediCatchupAction'] = HelpableActionMap(self, "JediCatchupActions", {
 	'catchup': self.showJediCatchup,
@@ -219,9 +242,7 @@ def EPGSelection__init__(self, session, service, zapFunc = None, eventid = None,
 	
 
 def EPGSelectionVTi__init__(self, session, service, zapFunc = None, eventid = None, bouquetChangeCB = None, serviceChangeCB = None, isEPGBar = None, switchBouquet = None, EPGNumberZap = None, togglePiP = None):
-	
 	print("**** EPGSelectionVTi ****")
-		
 	jediEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, isEPGBar, switchBouquet, EPGNumberZap, togglePiP)
 	self['jediCatchupAction'] = HelpableActionMap(self, "JediCatchupActions", {
 	'catchup': self.showJediCatchup,
@@ -229,20 +250,23 @@ def EPGSelectionVTi__init__(self, session, service, zapFunc = None, eventid = No
 
 
 def EPGSelectionATV__init__(self, session, service = None, zapFunc = None, eventid = None, bouquetChangeCB = None, serviceChangeCB = None, EPGtype = None, StartBouquet = None, StartRef = None, bouquets = None):
-
 	print("**** EPGSelectionATV ****")
-		
 	jediEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, EPGtype, StartBouquet, StartRef, bouquets)
 	if EPGtype != "vertical":
 		self['jediCatchupAction'] = HelpableActionMap(self, "JediCatchupActions", {
 		 'catchup': self.showJediCatchup,
 		})
+		
+def EPGSelectionVIX__init__(self, session, epgConfig=None, isInfobar=False, zapFunc=None, startBouquet=None, startRef=None, bouquets=None, timeFocus=None):	
+	print("**** EPGSelectionVIX ****")
+	jediEPGSelectionGrid__init__(self, session, epgConfig, isInfobar, zapFunc, startBouquet, startRef, bouquets, timeFocus)
+	self['jediCatchupAction'] = HelpableActionMap(self, "JediCatchupActions", {
+	'catchup': self.showJediCatchup,
+	})
 
 
 def EPGSelectionPLI__init__(self, session, service = None, zapFunc = None, eventid = None, bouquetChangeCB = None, serviceChangeCB = None, parent = None):
-	
 	print("**** EPGSelectionPLI ****")
-		
 	jediEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, parent)
 	self['jediCatchupAction'] = HelpableActionMap(self, "JediCatchupActions", {
 	'catchup': self.showJediCatchup,
@@ -274,7 +298,10 @@ def showJediCatchup(self):
 	
 	if service.streamed():
 		import catchup
-		error_message, hascatchup = catchup.downloadSimpleData()
+		try:
+			error_message, hascatchup = catchup.downloadSimpleData()
+		except:
+			pass
 		
 		if error_message != "":
 			self.session.open(MessageBox, '%s' % error_message, MessageBox.TYPE_ERROR, timeout=5)

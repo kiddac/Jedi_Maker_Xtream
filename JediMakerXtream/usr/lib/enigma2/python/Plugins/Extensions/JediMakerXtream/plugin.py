@@ -257,9 +257,9 @@ def EPGSelectionATV__init__(self, session, service = None, zapFunc = None, event
 		 'catchup': self.showJediCatchup,
 		})
 		
-def EPGSelectionVIX__init__(self, session, epgConfig=None, isInfobar=False, zapFunc=None, startBouquet=None, startRef=None, bouquets=None, timeFocus=None):	
+def EPGSelectionVIX__init__(self, session, zapFunc, startBouquet, startRef, bouquets, timeFocus=None, isInfobar=False):	
 	print("**** EPGSelectionVIX ****")
-	jediEPGSelectionGrid__init__(self, session, epgConfig, isInfobar, zapFunc, startBouquet, startRef, bouquets, timeFocus)
+	jediEPGSelectionGrid__init__(self, session, zapFunc, startBouquet, startRef, bouquets, timeFocus, isInfobar)
 	self['jediCatchupAction'] = HelpableActionMap(self, "JediCatchupActions", {
 	'catchup': self.showJediCatchup,
 	})

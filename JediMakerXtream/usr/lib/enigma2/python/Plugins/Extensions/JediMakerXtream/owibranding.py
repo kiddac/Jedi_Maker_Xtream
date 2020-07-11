@@ -358,8 +358,8 @@ def getAllInfo():
             brand = "Amiko"
             model = "ViperComboHDD"
         elif procmodel == "viperslim":
-                brand = "Amiko"
-                model = "Viper Slim"
+            brand = "Amiko"
+            model = "Viper Slim"
         elif procmodel == "wetekplay":
             brand = "WeTeK"
             model = "Play"

@@ -58,8 +58,8 @@ series = False
 has_epg_importer = False
 epg_provider = False
 if has_epg_importer:
-	epg_provider = True
-	
+    epg_provider = True
+    
 prefix_name = True  
 
 livebuffer = "0"

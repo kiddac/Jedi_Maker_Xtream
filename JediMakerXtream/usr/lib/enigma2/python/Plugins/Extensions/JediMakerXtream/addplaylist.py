@@ -14,7 +14,7 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
-from Components.config import NoSave, ConfigText, ConfigSelection, ConfigNumber, getConfigListEntry, ConfigPassword, ConfigYesNo, ConfigEnableDisable, configfile
+from Components.config import NoSave, ConfigText, ConfigSelection, ConfigNumber, getConfigListEntry, ConfigBoolean, configfile
 from Components.ConfigList import ConfigListScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -91,9 +91,9 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
                 self.address = jglob.current_playlist['playlist_info']['address']
 
         self['actions'] = ActionMap(['SetupActions'], {
-                'cancel': self.cancel,
-                'save': self.save,
-            }, -2)
+            'cancel': self.cancel,
+            'save': self.save,
+        }, -2)
 
         self.initConfig()
         self.createSetup()
@@ -106,10 +106,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
 
     def layoutFinished(self):
         self.setTitle(self.setup_title)
-
-
-    def exit(self):
-        self.close()
 
 
     def initConfig(self):
@@ -222,63 +218,16 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             return
 
 
-    def handleInputHelpers(self):
-        if self['config'].getCurrent() is not None:
-            if isinstance(self['config'].getCurrent()[1], ConfigText) or isinstance(self['config'].getCurrent()[1], ConfigPassword):
-                if 'VKeyIcon' in self:
-                    if isinstance(self['config'].getCurrent()[1], ConfigNumber):
-                        self['VirtualKB'].setEnabled(False)
-                        self['VKeyIcon'].hide()
-                    else:
-                        self['VirtualKB'].setEnabled(True)
-                        self['VKeyIcon'].show()
-
-                if not isinstance(self['config'].getCurrent()[1], ConfigNumber):
-
-                     if isinstance(self['config'].getCurrent()[1].help_window, ConfigText) or isinstance(self['config'].getCurrent()[1].help_window, ConfigPassword):
-                        if self['config'].getCurrent()[1].help_window.instance is not None:
-                            helpwindowpos = self['HelpWindow'].getPosition()
-
-                            if helpwindowpos:
-                                helpwindowposx, helpwindowposy = helpwindowpos
-                                if helpwindowposx and helpwindowposy:
-                                    from enigma import ePoint
-                                    self['config'].getCurrent()[1].help_window.instance.move(ePoint(helpwindowposx, helpwindowposy))
-
-            else:
-                if 'VKeyIcon' in self:
-                    self['VirtualKB'].setEnabled(False)
-                    self['VKeyIcon'].hide()
-        else:
-            if 'VKeyIcon' in self:
-                self['VirtualKB'].setEnabled(False)
-                self['VKeyIcon'].hide()
-
-
     def changedEntry(self):
-        self.item = self['config'].getCurrent()
-        for x in self.onChangedEntry:
-            x()
         try:
-            if isinstance(self['config'].getCurrent()[1], ConfigEnableDisable) or isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
+            if isinstance(self['config'].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
                 self.createSetup()
         except:
             pass
-
-
-    def getCurrentEntry(self):
-        return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
-
-
-    def getCurrentValue(self):
-        return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
+	ConfigListScreen.changedEntry(self)
 
 
     def save(self):
-        if self['config'].isChanged():
-            for x in self['config'].list:
-                x[1].save()
-
         jglob.firstrun = 0
 
         if self.playlisttypeCfg.value == 'standard':
@@ -300,22 +249,11 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             self.editEntry()
         else:
             self.createNewEntry()
-        configfile.save()
-        self.close()
+        ConfigListScreen.keySave(self)
 
 
     def cancel(self, answer=None):
-        if answer is None:
-            if self['config'].isChanged():
-                self.session.openWithCallback(self.cancel, MessageBox, _('Really close without saving settings?'))
-            else:
-                self.close()
-        elif answer:
-            for x in self['config'].list:
-                x[1].cancel()
-
-            self.close()
-        return
+	ConfigListScreen.keyCancel(self)
 
 
     def createNewEntry(self):

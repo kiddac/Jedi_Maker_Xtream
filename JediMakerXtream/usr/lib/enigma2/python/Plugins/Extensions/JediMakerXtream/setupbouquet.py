@@ -15,7 +15,7 @@ from .plugin import skin_path, cfg, playlist_file
 
 from collections import OrderedDict
 from Components.ActionMap import ActionMap
-from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigPassword, ConfigYesNo, ConfigEnableDisable, NoSave
+from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigBoolean, ConfigYesNo, ConfigEnableDisable, NoSave
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -76,9 +76,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self['lab1'] = Label(_('Loading data... Please wait...'))
 
         self['actions'] = ActionMap(['SetupActions'], {
-         'save': self.save,
-         'cancel': self.cancel
-         }, -2)
+            'save': self.save,
+            'cancel': self.cancel
+        }, -2)
 
         self.pause = 100
 
@@ -282,15 +282,15 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
         if os.path.isdir('/usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp'):
             self.LiveTypeCfg = NoSave(ConfigSelection(default=jglob.live_type, choices=[
-             ('1', _('DVB(1)')),
-             ('4097', _('IPTV(4097)')),
-             ('5001', _('GStreamer(5001)')),
-             ('5002', 'ExtPlayer(5002)')]))
+                ('1', _('DVB(1)')),
+                ('4097', _('IPTV(4097)')),
+                ('5001', _('GStreamer(5001)')),
+                ('5002', 'ExtPlayer(5002)')]))
             self.VodTypeCfg = NoSave(ConfigSelection(default=jglob.vod_type, choices=[
-             ('1', _('DVB(1)')),
-             ('4097', _('IPTV(4097)')),
-             ('5001', _('GStreamer(5001)')),
-             ('5002', 'ExtPlayer(5002)')]))
+                ('1', _('DVB(1)')),
+                ('4097', _('IPTV(4097)')),
+                ('5001', _('GStreamer(5001)')),
+                ('5002', 'ExtPlayer(5002)')]))
         else:
             self.LiveTypeCfg = NoSave(ConfigSelection(default=jglob.live_type, choices=[('1', _('DVB(1)')), ('4097', _('IPTV(4097)'))]))
             self.VodTypeCfg = NoSave(ConfigSelection(default=jglob.vod_type, choices=[('1', _('DVB(1)')), ('4097', _('IPTV(4097)'))]))
@@ -446,57 +446,13 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             return
 
 
-    def handleInputHelpers(self):
-        if self['config'].getCurrent() is not None:
-            if isinstance(self['config'].getCurrent()[1], ConfigText) or isinstance(self['config'].getCurrent()[1], ConfigPassword):
-                if 'VKeyIcon' in self:
-                    if isinstance(self['config'].getCurrent()[1], ConfigNumber):
-                        self['VirtualKB'].setEnabled(False)
-                        self['VKeyIcon'].hide()
-                    else:
-                        self['VirtualKB'].setEnabled(True)
-                        self['VKeyIcon'].show()
-
-                if not isinstance(self['config'].getCurrent()[1], ConfigNumber):
-
-                     if isinstance(self['config'].getCurrent()[1].help_window, ConfigText) or isinstance(self['config'].getCurrent()[1].help_window, ConfigPassword):
-                        if self['config'].getCurrent()[1].help_window.instance is not None:
-                            helpwindowpos = self['HelpWindow'].getPosition()
-
-                            if helpwindowpos:
-                                helpwindowposx, helpwindowposy = helpwindowpos
-                                if helpwindowposx and helpwindowposy:
-                                    from enigma import ePoint
-                                    self['config'].getCurrent()[1].help_window.instance.move(ePoint(helpwindowposx, helpwindowposy))
-
-            else:
-                if 'VKeyIcon' in self:
-                    self['VirtualKB'].setEnabled(False)
-                    self['VKeyIcon'].hide()
-        else:
-            if 'VKeyIcon' in self:
-                self['VirtualKB'].setEnabled(False)
-                self['VKeyIcon'].hide()
-
-
     def changedEntry(self):
-        self.item = self['config'].getCurrent()
-        for x in self.onChangedEntry:
-            x()
-
         try:
-            if isinstance(self['config'].getCurrent()[1], ConfigEnableDisable) or isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
+            if isinstance(self['config'].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
                 self.createSetup()
         except:
             pass
-
-
-    def getCurrentEntry(self):
-        return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
-
-
-    def getCurrentValue(self):
-        return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
+	ConfigListScreen.changedEntry(self)
 
 
     def save(self):
@@ -577,16 +533,16 @@ class JediMakerXtream_ChooseBouquets(Screen):
         self['lab1'] = Label(_('Loading data... Please wait...'))
 
         self['setupActions'] = ActionMap(['ColorActions', 'SetupActions', 'ChannelSelectEPGActions'], {
-             'red': self.keyCancel,
-             'green': self.keyGreen,
-             'yellow': self.toggleAllSelection,
-             'blue': self.clearAllSelection,
-             'save': self.keyGreen,
-             'cancel': self.keyCancel,
-             'ok': self.toggleSelection,
-             'info': self.viewChannels,
-             'showEPGList': self.viewChannels
-             }, -2)
+            'red': self.keyCancel,
+            'green': self.keyGreen,
+            'yellow': self.toggleAllSelection,
+            'blue': self.clearAllSelection,
+            'save': self.keyGreen,
+            'cancel': self.keyCancel,
+            'ok': self.toggleSelection,
+            'info': self.viewChannels,
+            'showEPGList': self.viewChannels
+        }, -2)
 
         self['key_red'] = StaticText(_('Cancel'))
         self['key_green'] = StaticText(_('Create'))
@@ -849,8 +805,8 @@ class JediMakerXtream_ChooseBouquets(Screen):
             ('ignored_vod_categories', []),
             ('ignored_series_categories', []),
             ('live_update', '---'),
-            ('vod_update',  '---'),
-            ('series_update',  '---'),
+            ('vod_update', '---'),
+            ('series_update', '---'),
             ('xmltv_address', jglob.xmltv_address),
             ('vod_order', jglob.vod_order),
             ('epg_provider', jglob.epg_provider),

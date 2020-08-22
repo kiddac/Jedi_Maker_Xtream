@@ -9,13 +9,11 @@ from .plugin import skin_path, cfg, autoStartTimer
 
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigPassword, ConfigYesNo, ConfigEnableDisable, configfile
+from Components.config import config, getConfigListEntry, ConfigSelection, ConfigBoolean
 from Components.Label import Label
-from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 
 from Screens.LocationBox import LocationBox
-from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
 
@@ -49,12 +47,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self['information'] = Label('')
         self['key_red'] = StaticText(_('Cancel'))
         self['key_green'] = StaticText(_('Save'))
-
-        self['VirtualKB'].setEnabled(False)
-        self['HelpWindow'] = Pixmap()
-        self['VKeyIcon'] = Pixmap()
-        self['HelpWindow'].hide()
-        self['VKeyIcon'].hide()
 
         self['lab1'] = Label('')
 
@@ -173,90 +165,27 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
             return
 
 
-    def handleInputHelpers(self):
-        if self['config'].getCurrent() is not None:
-            if isinstance(self['config'].getCurrent()[1], ConfigText) or isinstance(self['config'].getCurrent()[1], ConfigPassword) :
-
-                if 'VKeyIcon' in self:
-                    if isinstance(self['config'].getCurrent()[1], ConfigNumber):
-                        self['VirtualKB'].setEnabled(False)
-                        self['VKeyIcon'].hide()
-                    else:
-                        self['VirtualKB'].setEnabled(True)
-                        self['VKeyIcon'].show()
-
-                if not isinstance(self['config'].getCurrent()[1], ConfigNumber):
-
-                    if isinstance(self['config'].getCurrent()[1].help_window, ConfigText) or isinstance(self['config'].getCurrent()[1].help_window, ConfigPassword):
-                        if self['config'].getCurrent()[1].help_window.instance is not None:
-                            helpwindowpos = self['HelpWindow'].getPosition()
-
-                            if helpwindowpos:
-                                helpwindowposx, helpwindowposy = helpwindowpos
-                                if helpwindowposx and helpwindowposy:
-                                    from enigma import ePoint
-                                    self['config'].getCurrent()[1].help_window.instance.move(ePoint(helpwindowposx, helpwindowposy))
-
-            else:
-                if 'VKeyIcon' in self:
-                    self['VirtualKB'].setEnabled(False)
-                    self['VKeyIcon'].hide()
-        else:
-            if 'VKeyIcon' in self:
-                self['VirtualKB'].setEnabled(False)
-                self['VKeyIcon'].hide()
-
-
     def changedEntry(self):
-        self.item = self['config'].getCurrent()
-        for x in self.onChangedEntry:
-            x()
-
         try:
-            if isinstance(self['config'].getCurrent()[1], ConfigEnableDisable) or isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
+            if isinstance(self['config'].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
                 self.createSetup()
         except:
             pass
-
-
-    def getCurrentEntry(self):
-        return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
-
-
-    def getCurrentValue(self):
-        return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
+	ConfigListScreen.changedEntry(self)
 
 
     def save(self):
         global autoStartTimer
-
-        if self['config'].isChanged():
-            for x in self['config'].list:
-                x[1].save()
-            configfile.save()
-
         if autoStartTimer is not None:
             autoStartTimer.update()
-        self.close(True)
-        return
+        ConfigListScreen.keySave(self)
 
 
     def cancel(self, answer=None):
-        if answer is None:
-            if self['config'].isChanged():
-                self.session.openWithCallback(self.cancel, MessageBox, _('Really close without saving settings?'))
-            else:
-                self.close()
-        elif answer:
-            for x in self['config'].list:
-                x[1].cancel()
-
-            self.close()
-        return
+	ConfigListScreen.keyCancel(self)
 
 
     def ok(self):
-        ConfigListScreen.keyOK(self)
         sel = self['config'].getCurrent()[1]
         if sel and sel == cfg.location:
             self.setting = 'playlist'
@@ -264,33 +193,29 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         if sel and sel == cfg.m3ulocation:
             self.setting = 'm3u'
             self.openDirectoryBrowser(cfg.m3ulocation.value)
-        else:
-            pass
+        ConfigListScreen.keyOK(self)
 
 
     def openDirectoryBrowser(self, path):
         try:
             self.session.openWithCallback(
-             self.openDirectoryBrowserCB,
-             LocationBox,
-             windowTitle=_('Choose Directory:'),
-             text=_('Choose directory'),
-             currDir=str(path),
-             bookmarks=config.movielist.videodirs,
-             autoAdd=False,
-             editDir=True,
-             inhibitDirs=['/bin', '/boot', '/dev', '/home', '/lib', '/proc', '/run', '/sbin', '/sys', '/var'],
-             minFree=15)
+                self.openDirectoryBrowserCB,
+                LocationBox,
+                windowTitle=_('Choose Directory:'),
+                text=_('Choose directory'),
+                currDir=str(path),
+                bookmarks=config.movielist.videodirs,
+                autoAdd=False,
+                editDir=True,
+                inhibitDirs=['/bin', '/boot', '/dev', '/home', '/lib', '/proc', '/run', '/sbin', '/sys', '/var'],
+                minFree=15)
         except Exception as e:
-            print(("[jmxSettings] openDirectoryBrowser get failed: %s" % e))
-        except:
-            pass
+            print("[jmxSettings] openDirectoryBrowser get failed: %s" % e)
 
 
     def openDirectoryBrowserCB(self, path):
-            if path is not None:
-                if self.setting == 'playlist':
-                    cfg.location.setValue(path)
-                if self.setting == 'm3u':
-                    cfg.m3ulocation.setValue(path)
-            return
+        if path is not None:
+            if self.setting == 'playlist':
+                cfg.location.setValue(path)
+            if self.setting == 'm3u':
+                cfg.m3ulocation.setValue(path)

@@ -66,51 +66,51 @@ def getcategories():
 
 
 def SelectedCategories():
-        for x in jglob.categories:
-            # ignore = False
-            if jglob.live:
-                for name in jglob.current_playlist['bouquet_info']['selected_live_categories']:
-                    if x[0] == name and x[1] == 'Live':
-                        x[3] = True
-                        break
+    for x in jglob.categories:
+        # ignore = False
+        if jglob.live:
+            for name in jglob.current_playlist['bouquet_info']['selected_live_categories']:
+                if x[0] == name and x[1] == 'Live':
+                    x[3] = True
+                    break
 
-            if jglob.vod:
-                for name in jglob.current_playlist['bouquet_info']['selected_vod_categories']:
-                    if x[0] == name and x[1] == 'VOD':
-                        x[3] = True
-                        break
+        if jglob.vod:
+            for name in jglob.current_playlist['bouquet_info']['selected_vod_categories']:
+                if x[0] == name and x[1] == 'VOD':
+                    x[3] = True
+                    break
 
-            if jglob.series:
-                for name in jglob.current_playlist['bouquet_info']['selected_series_categories']:
-                    if x[0] == name and x[1] == 'Series':
-                        x[3] = True
+        if jglob.series:
+            for name in jglob.current_playlist['bouquet_info']['selected_series_categories']:
+                if x[0] == name and x[1] == 'Series':
+                    x[3] = True
 
 
 def IgnoredCategories():
-        for x in jglob.categories:
-            ignore = False
-            if jglob.live:
-                for name in jglob.current_playlist['bouquet_info']['ignored_live_categories']:
-                    if x[0] == name and x[1] == 'Live':
-                        x[3] = False
-                        ignore = True
-                        break
+    for x in jglob.categories:
+        ignore = False
+        if jglob.live:
+            for name in jglob.current_playlist['bouquet_info']['ignored_live_categories']:
+                if x[0] == name and x[1] == 'Live':
+                    x[3] = False
+                    ignore = True
+                    break
 
-            if jglob.vod:
-                for name in jglob.current_playlist['bouquet_info']['ignored_vod_categories']:
-                    if x[0] == name and x[1] == 'VOD':
-                        x[3] = False
-                        ignore = True
-                        break
+        if jglob.vod:
+            for name in jglob.current_playlist['bouquet_info']['ignored_vod_categories']:
+                if x[0] == name and x[1] == 'VOD':
+                    x[3] = False
+                    ignore = True
+                    break
 
-            if jglob.series:
-                for name in jglob.current_playlist['bouquet_info']['ignored_series_categories']:
-                    if x[0] == name and x[1] == 'Series':
-                        x[3] = False
-                        ignore = True
-                        break
-            if ignore is False:
-                x[3] = True
+        if jglob.series:
+            for name in jglob.current_playlist['bouquet_info']['ignored_series_categories']:
+                if x[0] == name and x[1] == 'Series':
+                    x[3] = False
+                    ignore = True
+                    break
+        if ignore is False:
+            x[3] = True
 
 
 def readbouquetdata():
@@ -458,8 +458,8 @@ def process_category(category_name, category_type, category_id, domain, port, us
             else:
                 catchup = 0
             calc_remainder = int(stream_id) / 65535
-            bouquet_id_sid = jglob.bouquet_id + calc_remainder
-            stream_id_sid = int(stream_id) - (calc_remainder * 65535)
+            bouquet_id_sid = int(jglob.bouquet_id + calc_remainder)
+            stream_id_sid = int(stream_id ) - int(calc_remainder * 65535) 
 
             if 'custom_sid' in streamvaluesgroup[i]:
                 if re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
@@ -551,7 +551,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
                 break
 
         bx.categoryBouquetXml('series', bouquetTitle, bouquetString)
-        bx.bouquetsTvXml('series',  bouquetTitle)
+        bx.bouquetsTvXml('series', bouquetTitle)
 
     return epg_name_list
 

@@ -31,24 +31,21 @@ class JediMakerXtream_ViewChannels(Screen):
         self.current = current
 
         self['actions'] = ActionMap(['ColorActions', 'OkCancelActions', 'MenuActions'], {
-         'ok': self.quit,
-         'cancel': self.quit,
-         'red': self.quit,
-         'menu': self.quit}, -2)
+            'ok': self.quit,
+            'cancel': self.quit,
+            'red': self.quit,
+            'menu': self.quit}, -2)
 
         self['key_red'] = StaticText(_('Close'))
 
         self.getchannels()
         self.onLayoutFinish.append(self.__layoutFinished)
 
-
     def __layoutFinished(self):
         self.setTitle(self.setup_title)
 
-
     def quit(self):
         self.close()
-
 
     def getchannels(self):
         self.list = []

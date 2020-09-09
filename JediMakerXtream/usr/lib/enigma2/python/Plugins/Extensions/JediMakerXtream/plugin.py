@@ -15,6 +15,7 @@ from ServiceReference import ServiceReference
 
 import os
 
+
 vixEPG = False
 
 try:
@@ -22,6 +23,7 @@ try:
     vixEPG = True
 except:
     pass
+
 
 autoStartTimer = None
 screenwidth = getDesktop(0).size()
@@ -47,7 +49,7 @@ cfg.main = ConfigYesNo(default=True)
 cfg.unique = ConfigNumber()
 cfg.usershow = ConfigSelection(default='domain', choices=[('domain', _('Domain')), ('domainconn', _('Domain | Connections'))])
 cfg.enabled = ConfigEnableDisable(default=False)
-cfg.wakeup = ConfigClock(default=((7*60) + 9) * 60)  # 7:00
+cfg.wakeup = ConfigClock(default=((7 * 60) + 9) * 60)  # 7:00
 cfg.skin = ConfigSelection(default='default', choices=folders)
 cfg.bouquet_id = ConfigNumber()
 cfg.timeout = ConfigNumber(default=3)
@@ -124,7 +126,6 @@ class AutoStartTimer:
             self.timer.callback.append(self.onTimer)
         self.update()
 
-
     def getWakeTime(self):
         import time
         if cfg.enabled.value:
@@ -135,7 +136,6 @@ class AutoStartTimer:
         else:
             return -1
 
-
     def update(self, atLeast=0):
         import time
         self.timer.stop()
@@ -144,7 +144,7 @@ class AutoStartTimer:
         if wake > 0:
             if wake < nowtime + atLeast:
                 # Tomorrow.
-                wake += 24*3600
+                wake += 24 * 3600
             next = wake - int(nowtime)
             if next > 3600:
                 next = 3600
@@ -154,7 +154,6 @@ class AutoStartTimer:
         else:
             wake = -1
         return wake
-
 
     def onTimer(self):
         import time
@@ -167,7 +166,6 @@ class AutoStartTimer:
             atLeast = 60
         self.update(atLeast)
 
-
     def runUpdate(self):
         print('\n *********** Updating Jedi Bouquets************ \n')
         from . import update
@@ -175,6 +173,7 @@ class AutoStartTimer:
 
 
 def autostart(reason, session=None, **kwargs):
+
     if session is not None:
         global jediEPGSelection__init__
         jediEPGSelection__init__ = EPGSelection.__init__
@@ -225,7 +224,6 @@ def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bou
     jediEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB)
     self['jediCatchupAction'] = HelpableActionMap(self, "JediCatchupActions", {
         'catchup': self.showJediCatchup,
-
     })
 
 

@@ -73,10 +73,8 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         if self.setInfo not in self['config'].onSelectionChanged:
             self['config'].onSelectionChanged.append(self.setInfo)
 
-
     def layoutFinished(self):
         self.setTitle(self.setup_title)
-
 
     def initConfig(self):
         self.cfg_location = getConfigListEntry(_('playlists.txt location'), cfg.location)
@@ -91,7 +89,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self.cfg_catchupprefix = getConfigListEntry(_('Select Catchup prefix symbol'), cfg.catchupprefix)
         self.cfg_groups = getConfigListEntry(_('Group bouquets into its own folder'), cfg.groups)
         self.cfg_placement = getConfigListEntry(_("Place Bouquet at"), cfg.placement)
-
 
     def createSetup(self):
         self.list = []
@@ -117,7 +114,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 
         self.setInfo()
         self.handleInputHelpers()
-
 
     # dreamos workaround for showing setting descriptions
     def setInfo(self):
@@ -172,10 +168,9 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
             self['information'].setText(_("Place created IPTV bouquets at top or bottom of current bouquets."))
             return
 
-
     def handleInputHelpers(self):
         if self['config'].getCurrent() is not None:
-            if isinstance(self['config'].getCurrent()[1], ConfigText) or isinstance(self['config'].getCurrent()[1], ConfigPassword) :
+            if isinstance(self['config'].getCurrent()[1], ConfigText) or isinstance(self['config'].getCurrent()[1], ConfigPassword):
 
                 if 'VKeyIcon' in self:
                     if isinstance(self['config'].getCurrent()[1], ConfigNumber):
@@ -206,7 +201,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
                 self['VirtualKB'].setEnabled(False)
                 self['VKeyIcon'].hide()
 
-
     def changedEntry(self):
         self.item = self['config'].getCurrent()
         for x in self.onChangedEntry:
@@ -218,14 +212,11 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         except:
             pass
 
-
     def getCurrentEntry(self):
         return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
 
-
     def getCurrentValue(self):
         return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
-
 
     def save(self):
         global autoStartTimer
@@ -240,7 +231,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self.close(True)
         return
 
-
     def cancel(self, answer=None):
         if answer is None:
             if self['config'].isChanged():
@@ -254,7 +244,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
             self.close()
         return
 
-
     def ok(self):
         ConfigListScreen.keyOK(self)
         sel = self['config'].getCurrent()[1]
@@ -267,30 +256,28 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         else:
             pass
 
-
     def openDirectoryBrowser(self, path):
         try:
             self.session.openWithCallback(
-             self.openDirectoryBrowserCB,
-             LocationBox,
-             windowTitle=_('Choose Directory:'),
-             text=_('Choose directory'),
-             currDir=str(path),
-             bookmarks=config.movielist.videodirs,
-             autoAdd=False,
-             editDir=True,
-             inhibitDirs=['/bin', '/boot', '/dev', '/home', '/lib', '/proc', '/run', '/sbin', '/sys', '/var'],
-             minFree=15)
+                self.openDirectoryBrowserCB,
+                LocationBox,
+                windowTitle=_('Choose Directory:'),
+                text=_('Choose directory'),
+                currDir=str(path),
+                bookmarks=config.movielist.videodirs,
+                autoAdd=False,
+                editDir=True,
+                inhibitDirs=['/bin', '/boot', '/dev', '/home', '/lib', '/proc', '/run', '/sbin', '/sys', '/var'],
+                minFree=15)
         except Exception as e:
             print(("[jmxSettings] openDirectoryBrowser get failed: %s" % e))
         except:
             pass
 
-
     def openDirectoryBrowserCB(self, path):
-            if path is not None:
-                if self.setting == 'playlist':
-                    cfg.location.setValue(path)
-                if self.setting == 'm3u':
-                    cfg.m3ulocation.setValue(path)
-            return
+        if path is not None:
+            if self.setting == 'playlist':
+                cfg.location.setValue(path)
+            if self.setting == 'm3u':
+                cfg.m3ulocation.setValue(path)
+        return

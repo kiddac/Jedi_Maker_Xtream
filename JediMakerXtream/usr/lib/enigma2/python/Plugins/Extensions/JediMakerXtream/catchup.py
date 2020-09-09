@@ -34,7 +34,6 @@ else:
     from urllib2 import urlopen, Request, URLError
 
 
-
 def downloadSimpleData():
     refurl = ""
     refstream = ""
@@ -57,23 +56,22 @@ def downloadSimpleData():
 
         # get domain, username, password from path
         match1 = False
-        if re.search('(https|http):\/\/[^\/]+\/(live|movie|series)\/[^\/]+\/[^\/]+\/\d+(\.m3u8|\.ts|$)', refurl) is not None:
+        if re.search(r'(https|http):\/\/[^\/]+\/(live|movie|series)\/[^\/]+\/[^\/]+\/\d+(\.m3u8|\.ts|$)', refurl) is not None:
             match1 = True
 
         match2 = False
-        if re.search('(https|http):\/\/[^\/]+\/[^\/]+\/[^\/]+\/\d+(\.m3u8|\.ts|$)', refurl) is not None:
+        if re.search(r'(https|http):\/\/[^\/]+\/[^\/]+\/[^\/]+\/\d+(\.m3u8|\.ts|$)', refurl) is not None:
             match2 = True
 
         if match1:
-            jglob.username = re.search('[^\/]+(?=\/[^\/]+\/\d+\.)', refurl).group()
-            jglob.password = re.search('[^\/]+(?=\/\d+\.)', refurl).group()
-            jglob.domain = re.search('(https|http):\/\/[^\/]+', refurl).group()
+            jglob.username = re.search(r'[^\/]+(?=\/[^\/]+\/\d+\.)', refurl).group()
+            jglob.password = re.search(r'[^\/]+(?=\/\d+\.)', refurl).group()
+            jglob.domain = re.search(r'(https|http):\/\/[^\/]+', refurl).group()
 
         elif match2:
-            jglob.username = re.search('[^\/]+(?=\/[^\/]+\/[^\/]+$)', refurl).group()
-            jglob.password = re.search('[^\/]+(?=\/[^\/]+$)', refurl).group()
-            jglob.domain = re.search('(https|http):\/\/[^\/]+', refurl).group()
-
+            jglob.username = re.search(r'[^\/]+(?=\/[^\/]+\/[^\/]+$)', refurl).group()
+            jglob.password = re.search(r'[^\/]+(?=\/[^\/]+$)', refurl).group()
+            jglob.domain = re.search(r'(https|http):\/\/[^\/]+', refurl).group()
 
         simpleurl = "%s/player_api.php?username=%s&password=%s&action=get_simple_data_table&stream_id=%s" % (jglob.domain, jglob.username, jglob.password, jglob.refstreamnum)
         getLiveStreams = "%s/player_api.php?username=%s&password=%s&action=get_live_streams" % (jglob.domain, jglob.username, jglob.password)
@@ -96,8 +94,6 @@ def downloadSimpleData():
         except:
             print("\n ***** download Live Streams unknown error")
             pass
-
-
 
         if response != "":
             liveStreams = json.load(response)
@@ -128,7 +124,6 @@ def downloadSimpleData():
             except:
                 print("\n ***** downloadSimpleData unknown error")
                 pass
-
 
             if response != "":
                 simple_data_table = json.load(response)
@@ -196,11 +191,9 @@ def downloadSimpleData():
             return error_message, False
 
 
-
 class JediMakerXtream_Catchup(Screen):
 
     def __init__(self, session):
-
 
         skin = """
             <screen name="JediCatchup" position="center,center" size="600,600" >
@@ -255,25 +248,20 @@ class JediMakerXtream_Catchup(Screen):
         self['newlist'].onSelectionChanged.append(self.getCurrentEntry)
         self.onLayoutFinish.append(self.__layoutFinished)
 
-
     def __layoutFinished(self):
         self.setTitle(self.setup_title)
-
 
     def getCurrentEntry(self):
         self.currentSelection = self['newlist'].getIndex()
 
-
     def quit(self):
         self.close()
-
 
     def openSelected(self):
         self.returnValue = self['newlist'].getCurrent()[1]
         if self.returnValue is not None:
             self.getSelectedDateData()
         return
-
 
     def createSetup(self):
         self.list = []
@@ -284,7 +272,6 @@ class JediMakerXtream_Catchup(Screen):
 
         self['newlist'].list = self.list
         self['newlist'].setList(self.list)
-
 
     def getSelectedDateData(self):
         selectedArchive = []
@@ -300,7 +287,6 @@ class JediMakerXtream_Catchup(Screen):
                         selectedArchive.append(listing)
 
         self.session.open(JediMakerXtream_Catchup_Listings, selectedArchive)
-
 
 
 class JediMakerXtream_Catchup_Listings(Screen):
@@ -322,25 +308,22 @@ class JediMakerXtream_Catchup_Listings(Screen):
         self['description'] = Label('')
         self['actions'] = ActionMap(['SetupActions'], {
 
-         'ok': self.play,
-         'cancel': self.quit,
-         'menu': self.quit,
+            'ok': self.play,
+            'cancel': self.quit,
+            'menu': self.quit,
         }, -2)
 
         self['key_red'] = StaticText(_('Close'))
         self.getlistings()
         self.onLayoutFinish.append(self.__layoutFinished)
 
-
     def __layoutFinished(self):
         self.setTitle(self.setup_title)
         if self.list != []:
             self.getCurrentEntry()
 
-
     def quit(self):
         self.close()
-
 
     def getlistings(self):
 
@@ -383,19 +366,17 @@ class JediMakerXtream_Catchup_Listings(Screen):
 
         self.createSetup()
 
-
     def createSetup(self):
         self.list = []
 
         for listing in self.catchup_all:
-                self.list.append((str(listing[0]), str(listing[1]), str(listing[2]), str(listing[3]), str(listing[4]), str(listing[5]), str(listing[6])))
+            self.list.append((str(listing[0]), str(listing[1]), str(listing[2]), str(listing[3]), str(listing[4]), str(listing[5]), str(listing[6])))
 
         self['list'].list = self.list
         self['list'].setList(self.list)
 
         if self.list != []:
             self['list'].onSelectionChanged.append(self.getCurrentEntry)
-
 
     def play(self):
         playurl = "%s/streaming/timeshift.php?username=%s&password=%s&stream=%s&start=%s&duration=%s" % (jglob.domain, jglob.username, jglob.password, jglob.refstreamnum, self.catchup_all[self.currentSelection][5], self.catchup_all[self.currentSelection][6])
@@ -405,7 +386,6 @@ class JediMakerXtream_Catchup_Listings(Screen):
         sref = eServiceReference(streamtype, 0, playurl)
         sref.setName(self.catchup_all[self.currentSelection][3])
         self.session.open(MoviePlayer, sref)
-
 
     def getCurrentEntry(self):
         self.currentSelection = self['list'].getIndex()

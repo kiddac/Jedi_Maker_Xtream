@@ -28,9 +28,9 @@ class JediMakerXtream_UserInfo(Screen):
         self.setup_title = _('User Information')
 
         self['actions'] = ActionMap(['SetupActions'], {
-         'ok': self.quit,
-         'cancel': self.quit,
-         'menu': self.quit}, -2)
+            'ok': self.quit,
+            'cancel': self.quit,
+            'menu': self.quit}, -2)
         self['userinfo'] = Label('')
         self['description'] = Label('')
         self['key_red'] = StaticText(_('Close'))
@@ -38,10 +38,8 @@ class JediMakerXtream_UserInfo(Screen):
         self.createUserSetup()
         self.onLayoutFinish.append(self.__layoutFinished)
 
-
     def __layoutFinished(self):
         self.setTitle(self.setup_title)
-
 
     def createUserSetup(self):
 
@@ -99,7 +97,6 @@ class JediMakerXtream_UserInfo(Screen):
                     self.usertext += str(value) + ':\t\t' + str(jglob.current_playlist['server_info'][value]) + '\n'
 
         self['userinfo'].setText(self.usertext)
-
 
     def quit(self):
         self.close()

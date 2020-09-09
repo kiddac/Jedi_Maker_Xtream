@@ -15,6 +15,12 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
 import os
+import sys
+
+try:
+    pythonVer = sys.version_info.major
+except:
+    pythonVer = 2
 
 
 class JediMakerXtream_Menu(Screen):
@@ -33,20 +39,38 @@ class JediMakerXtream_Menu(Screen):
         self.setup_title = _('Main Menu')
 
         self['actions'] = ActionMap(['ColorActions', 'OkCancelActions', 'MenuActions'], {
-         'ok': self.openSelected,
-         'cancel': self.quit,
-         'red': self.quit,
-         'menu': self.quit}, -2)
+            'ok': self.openSelected,
+            'cancel': self.quit,
+            'red': self.quit,
+            'menu': self.quit}, -2)
 
         self['key_red'] = StaticText(_('Close'))
 
-        self.onFirstExecBegin.append(self.createSetup)
+        self.onFirstExecBegin.append(self.check_dependencies)
         self.onLayoutFinish.append(self.__layoutFinished)
-
 
     def __layoutFinished(self):
         self.setTitle(self.setup_title)
 
+    def check_dependencies(self):
+        dependencies = True
+        if pythonVer == 3:
+            if not os.path.isfile("/usr/lib/python3.8/lzma.py"):
+                dependencies = False
+
+        else:
+            if not os.path.exists("/usr/lib/python2.7/site-packages/backports/lzma"):
+                dependencies = False
+
+        if dependencies is False:
+            """
+            if not access("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", X_OK):
+                chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)"""
+            chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)
+            cmd1 = ". /usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh"
+            self.session.openWithCallback(self.createSetup, Console, title="Checking Python Dependencies", cmdlist=[cmd1], closeOnSuccess=False)
+        else:
+            self.createSetup()
 
     def createSetup(self):
         self.list = []
@@ -61,17 +85,15 @@ class JediMakerXtream_Menu(Screen):
                 jglob.bouquets_exist = True
                 break
 
-
         if jglob.bouquets_exist:
-                self.list.append((_('Update Bouquets'), 'm_update'))
-                self.list.append((_('Delete Individual Bouquets'), 'm_delete_set'))
-                self.list.append((_('Delete All Jedi IPTV Bouquets'), 'm_delete_all'))
+            self.list.append((_('Update Bouquets'), 'm_update'))
+            self.list.append((_('Delete Individual Bouquets'), 'm_delete_set'))
+            self.list.append((_('Delete All Jedi IPTV Bouquets'), 'm_delete_all'))
 
         self.list.append((_('About'), 'm_about'))
 
         self['menu'].list = self.list
         self['menu'].setList(self.list)
-
 
     def openSelected(self):
         from . import settings
@@ -103,11 +125,9 @@ class JediMakerXtream_Menu(Screen):
 
             return
 
-
     def quit(self):
         jglob.firstrun = 0
         self.close(False)
-
 
     def deleteBouquets(self, answer=None):
         if answer is None:

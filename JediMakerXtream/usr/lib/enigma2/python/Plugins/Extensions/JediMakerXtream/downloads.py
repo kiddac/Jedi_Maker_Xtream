@@ -11,7 +11,6 @@ import json
 import os
 import re
 import socket
-import urllib2
 import sys
 
 pythonVer = 2
@@ -23,7 +22,6 @@ if pythonVer == 3:
     from urllib.error import URLError
 else:
     from urllib2 import urlopen, Request, URLError
-
 
 
 def checkGZIP(url):
@@ -38,10 +36,10 @@ def checkGZIP(url):
             deflatedContent = gzip.GzipFile(fileobj=buffer)
             return deflatedContent.read()
         else:
-            return response.read()
+            return response.read().decode()
     except:
         pass
-        return response
+        return response.decode()
 
 
 def downloadlivecategories(url):
@@ -356,7 +354,7 @@ def getM3uCategories(live, vod):
             if stream == "live":
                 if live:
                     if group_title == '':
-                            group_title = 'Uncategorised Live'
+                        group_title = 'Uncategorised Live'
                     jglob.getm3ustreams.append([group_title, epg_name, name, source, 'live'])
 
             elif stream == "vod":
@@ -438,14 +436,14 @@ def downloadrytec():
             epg_channel_id = ''
             channelname = ''
 
-            if re.search('(?<=<\/channel><!-- ).*(?= --)', line) is not None:
-                channelname = re.search('(?<=<\/channel><!-- ).*(?= --)', line).group()
+            if re.search(r'(?<=<\/channel><!-- ).*(?= --)', line) is not None:
+                channelname = re.search(r'(?<=<\/channel><!-- ).*(?= --)', line).group()
 
-            if re.search('(?<=\">1).*(?=<\/)', line) is not None:
-                serviceref = re.search('(?<=\">1).*(?=<\/)', line).group()
+            if re.search(r'(?<=\">1).*(?=<\/)', line) is not None:
+                serviceref = re.search(r'(?<=\">1).*(?=<\/)', line).group()
 
-            if re.search('(?<=id=\")[a-zA-Z0-9\.]+', line) is not None:
-                epg_channel_id = re.search('(?<=id=\")[a-zA-Z0-9\.]+', line).group()
+            if re.search(r'(?<=id=\")[a-zA-Z0-9\.]+', line) is not None:
+                epg_channel_id = re.search(r'(?<=id=\")[a-zA-Z0-9\.]+', line).group()
 
             rytec_ref[channelname.lower()] = [serviceref, epg_channel_id, channelname]
 

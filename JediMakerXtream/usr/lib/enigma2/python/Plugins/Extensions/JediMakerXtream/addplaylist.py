@@ -91,9 +91,9 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
                 self.address = jglob.current_playlist['playlist_info']['address']
 
         self['actions'] = ActionMap(['SetupActions'], {
-                'cancel': self.cancel,
-                'save': self.save,
-            }, -2)
+            'cancel': self.cancel,
+            'save': self.save,
+        }, -2)
 
         self.initConfig()
         self.createSetup()
@@ -103,14 +103,11 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
         if self.setInfo not in self['config'].onSelectionChanged:
             self['config'].onSelectionChanged.append(self.setInfo)
 
-
     def layoutFinished(self):
         self.setTitle(self.setup_title)
 
-
     def exit(self):
         self.close()
-
 
     def initConfig(self):
         if self.editmode:
@@ -137,7 +134,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             self.passwordCfg = NoSave(ConfigText(default=_('password'), fixed_size=False))
             self.outputCfg = NoSave(ConfigSelection(default=self.output, choices=[('ts', 'ts'), ('m3u8', 'm3u8')]))
             self.addressCfg = NoSave(ConfigText(default=self.address, fixed_size=False))
-
 
     def createSetup(self):
         self.list = []
@@ -174,7 +170,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
 
         self.setInfo()
         self.handleInputHelpers()
-
 
     # dreamos workaround for showing setting descriptions
     def setInfo(self):
@@ -221,7 +216,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             self['information'].setText(_("\nEnter EPG Url."))
             return
 
-
     def handleInputHelpers(self):
         if self['config'].getCurrent() is not None:
             if isinstance(self['config'].getCurrent()[1], ConfigText) or isinstance(self['config'].getCurrent()[1], ConfigPassword):
@@ -235,7 +229,7 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
 
                 if not isinstance(self['config'].getCurrent()[1], ConfigNumber):
 
-                     if isinstance(self['config'].getCurrent()[1].help_window, ConfigText) or isinstance(self['config'].getCurrent()[1].help_window, ConfigPassword):
+                    if isinstance(self['config'].getCurrent()[1].help_window, ConfigText) or isinstance(self['config'].getCurrent()[1].help_window, ConfigPassword):
                         if self['config'].getCurrent()[1].help_window.instance is not None:
                             helpwindowpos = self['HelpWindow'].getPosition()
 
@@ -254,7 +248,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
                 self['VirtualKB'].setEnabled(False)
                 self['VKeyIcon'].hide()
 
-
     def changedEntry(self):
         self.item = self['config'].getCurrent()
         for x in self.onChangedEntry:
@@ -265,14 +258,11 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
         except:
             pass
 
-
     def getCurrentEntry(self):
         return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
 
-
     def getCurrentValue(self):
         return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
-
 
     def save(self):
         if self['config'].isChanged():
@@ -292,7 +282,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             self.passwordCfg.value = self.passwordCfg.value.strip()
             self.outputCfg.value = self.outputCfg.value.strip()
 
-
         elif self.addressCfg.value != 'http://' or self.addressCfg.value != '':
             self.addressCfg.value = self.addressCfg.value.strip()
 
@@ -302,7 +291,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             self.createNewEntry()
         configfile.save()
         self.close()
-
 
     def cancel(self, answer=None):
         if answer is None:
@@ -317,7 +305,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             self.close()
         return
 
-
     def createNewEntry(self):
         if self.playlisttypeCfg.value == 'standard':
             self.newEntry = '\n' + str(self.protocolCfg.value) + str(self.serverCfg.value) + ':' + str(self.portCfg.value) + '/get.php?username=' + str(self.usernameCfg.value) + \
@@ -327,7 +314,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
         with open(playlist_path, 'a') as f:
             f.write(self.newEntry)
             f.close()
-
 
     def editEntry(self):
         if self.playlisttypeCfg.value == 'standard':

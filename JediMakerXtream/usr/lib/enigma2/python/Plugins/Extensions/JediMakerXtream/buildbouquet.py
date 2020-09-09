@@ -76,10 +76,8 @@ class JediMakerXtream_BuildBouquets(Screen):
 
         self.onFirstExecBegin.append(self.start)
 
-
     def keyCancel(self):
         self.close()
-
 
     def nextjob(self, actiontext, function):
         self['action'].setText(actiontext)
@@ -89,7 +87,6 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.timer_conn = self.timer.timeout.connect(function)
         except:
             self.timer.callback.append(function)
-
 
     def start(self):
         if self.bouquet['playlist_info']['playlisttype'] == 'xtream' or self.bouquet['playlist_info']['playlisttype'] == 'panel':
@@ -110,14 +107,12 @@ class JediMakerXtream_BuildBouquets(Screen):
         else:
             self.nextjob(_('Starting...'), self.startcreate)
 
-
     def downloadrytec(self):
         self.rytec_ref, self.epg_alias_names = downloads.downloadrytec()
 
         self.progresscurrent += 1
         self['progress'].setValue(self.progresscurrent)
         self.nextjob(_('Starting...'), self.startcreate)
-
 
     def startcreate(self):
         if self.bouquet['playlist_info']['playlisttype'] == 'xtream' or self.bouquet['playlist_info']['playlisttype'] == 'panel':
@@ -135,13 +130,11 @@ class JediMakerXtream_BuildBouquets(Screen):
             else:
                 self.showError(_('No valid M3U streams in file.'))
 
-
     def downloadgetfile(self):
         self.m3uValues = downloads.downloadgetfile(self.get_api)
         self.progresscurrent += 1
         self['progress'].setValue(self.progresscurrent)
         self.nextjob(_('Deleting Existing Bouquets...'), self.deleteBouquets)
-
 
     def deleteBouquets(self):
         jfunc.deleteBouquets()
@@ -149,13 +142,11 @@ class JediMakerXtream_BuildBouquets(Screen):
         self['progress'].setValue(self.progresscurrent)
         self.nextjob(_('Saving Bouquet Data File...'), self.bouquetType)
 
-
     def bouquetType(self):
         if self.bouquet['playlist_info']['playlisttype'] == 'xtream' or self.bouquet['playlist_info']['playlisttype'] == 'panel':
             self.nextjob(_('Building Bouquets...'), self.buildBouquets)
         else:
             self.nextjob(_('Building M3U Bouquets...'), self.buildM3uBouquets)
-
 
     def buildBouquets(self):
         self['progress'].setRange((0, self.progresscount))
@@ -189,7 +180,6 @@ class JediMakerXtream_BuildBouquets(Screen):
 
             self.session.openWithCallback(self.done, MessageBox, str(len(self.categories)) + _(' IPTV Bouquets Created'), MessageBox.TYPE_INFO, timeout=30)
 
-
     def process_category(self):
         category_name = self.categories[self.category_num][0]
         category_type = self.categories[self.category_num][1]
@@ -211,7 +201,6 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.nextjob(_('Building Categories %d of %d') % (self.job_current, self.job_total), self.buildBouquets)
         else:
             self.buildBouquets()
-
 
     def buildM3uBouquets(self):
 
@@ -254,7 +243,6 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.nextjob(_('Refreshing Bouquets...'), jfunc.refreshBouquets)
             self.session.openWithCallback(self.done, MessageBox, str(len(self.categories)) + ' IPTV Bouquets Created', MessageBox.TYPE_INFO, timeout=30)
 
-
     def m3u_process_category(self):
         category_name = self.categories[self.category_num][0]
         category_type = self.categories[self.category_num][1]
@@ -263,12 +251,10 @@ class JediMakerXtream_BuildBouquets(Screen):
         self.nextjob(_('Building M3U Bouquets...'), self.buildM3uBouquets)
         self.buildM3uBouquets()
 
-
     def showError(self, message):
         question = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
         question.setTitle(_('Create Bouquets'))
         self.close()
-
 
     def done(self, answer=None):
         jglob.finished = True

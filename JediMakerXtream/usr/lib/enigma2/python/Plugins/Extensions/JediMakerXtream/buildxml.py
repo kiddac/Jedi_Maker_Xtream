@@ -53,29 +53,29 @@ def bouquetsTvXml(streamtype, bouquetTitle):
         groupname = 'userbouquet.jmx_' + str(cleanGroup) + '.tv'
 
         if cfg.placement.value == "bottom":
-            with open('/etc/enigma2/bouquets.tv', 'a+') as f:
+            with open('/etc/enigma2/bouquets.tv', 'r+') as f:
                 bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) + '" ORDER BY bouquet\n'
-                if bouquetTvString not in f:
-                    f.write(bouquetTvString)
+                if str(bouquetTvString) not in f:
+                    f.write(str(bouquetTvString))
 
         filename = '/etc/enigma2/' + str(groupname)
         with open(filename, 'a+') as f:
             nameString = "#NAME " + str(jglob.name) + "\n"
-            if nameString not in f:
-                f.write(nameString)
+            if str(nameString) not in f:
+                f.write(str(nameString))
 
             filename = 'subbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
-            if bouquetTvString not in f:
-                f.write(bouquetTvString)
+            if str(bouquetTvString) not in f:
+                f.write(str(bouquetTvString))
 
     else:
         if cfg.placement.value == "bottom":
             filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
             with open('/etc/enigma2/bouquets.tv', 'a+') as f:
                 bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
-                if bouquetTvString not in f:
-                    f.write(bouquetTvString)
+                if str(bouquetTvString) not in f:
+                    f.write(str(bouquetTvString))
 
 
 def buildXMLTVChannelFile(epg_name_list):
@@ -110,9 +110,9 @@ def buildXMLTVChannelFile(epg_name_list):
             newchannel.set('id', epg_name_list[i][0])
             newchannel.text = epg_name_list[i][1]
 
-        xml_str = str(ET.tostring(root, 'utf-8'))
+        xml_str = ET.tostring(root).decode('utf-8')
         doc = minidom.parseString(xml_str)
-        xml_output = doc.toprettyxml(encoding='utf-8', indent='')
+        xml_output = doc.toprettyxml(indent='')
         xml_output = os.linesep.join([s for s in xml_output.splitlines() if s.strip()])
         with open(channelpath, 'w') as f:
             f.write(xml_output)

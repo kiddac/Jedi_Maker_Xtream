@@ -27,7 +27,7 @@ ignoredcategories = []
 
 haslzma = False
 
-bouquet_id  = 0
+bouquet_id = 0
 name = ''
 old_name = ''
 live_type = '4097'
@@ -38,7 +38,7 @@ selected_series_categories = []
 
 ignore_live_categories = []
 ignore_vod_categories = []
-ignore_series_categories = [] 
+ignore_series_categories = []
 
 live_update = '---'
 vod_update = '---'
@@ -59,19 +59,19 @@ has_epg_importer = False
 epg_provider = False
 if has_epg_importer:
     epg_provider = True
-    
-prefix_name = True  
+
+prefix_name = True
 
 livebuffer = "0"
-vodbuffer = "0" 
+vodbuffer = "0"
 
 # catchup globals
 
-currentref = None 
+currentref = None
 currentrefstring = ""
-name = "" 
-archive = [] 
-dates = [] 
+name = ""
+archive = []
+dates = []
 username = ""
 password = ""
 domain = ""
@@ -80,7 +80,3 @@ refstreamnum = ""
 rytecnames = []
 
 fixepg = False
-
-
-
-

@@ -24,9 +24,9 @@ class JediMakerXtream_About(Screen):
         self.setup_title = _('About')
 
         self['actions'] = ActionMap(['SetupActions'], {
-         'ok': self.quit,
-         'cancel': self.quit,
-         'menu': self.quit}, -2)
+            'ok': self.quit,
+            'cancel': self.quit,
+            'menu': self.quit}, -2)
         self['key_red'] = StaticText(_('Close'))
         self['about'] = Label('')
         self.onFirstExecBegin.append(self.createSetup)
@@ -36,7 +36,7 @@ class JediMakerXtream_About(Screen):
         self.setTitle(self.setup_title)
 
     def createSetup(self):
-        self.credit = 'JediMakerXtream V6.00 (C) 2018/2019/2020 - KiddaC\n\n'
+        self.credit = 'JediMakerXtream V6.01 (C) 2018/2019/2020 - KiddaC\n\n'
         self.credit += 'Support for this plugin can be found on https://linuxsat-support.com\n\n'
         self.credit += 'Plugin enables the simple bouquet creation of standard xtream and M3U playlist(s).\n'
         self.credit += '*Playing streams via the plugin is currently unavailable.\n'

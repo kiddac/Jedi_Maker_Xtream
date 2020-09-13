@@ -37,7 +37,7 @@ def checkGZIP(url):
             return deflatedContent.read()
         else:
             return response.read().decode()
-    
+
     except URLError as e:
         print(e)
         pass
@@ -58,7 +58,6 @@ def checkGZIP(url):
                 return response.read()
         else:
             return response
-            
 
 
 def downloadlivecategories(url):

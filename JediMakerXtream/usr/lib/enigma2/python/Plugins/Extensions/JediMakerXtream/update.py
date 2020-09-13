@@ -456,7 +456,7 @@ class JediMakerXtream_Update(Screen):
             self.protocol = self.protocol.replace(':', '%3a')
             self.epg_name_list = jfunc.process_category(category_name, category_type, category_id, self.domain, self.port, self.username, self.password, self.protocol, self.output, jglob.current_playlist, self.epg_alias_names, self.epg_name_list, self.rytec_ref, self.m3uValues)
             self.category_num += 1
-        
+
         if jglob.live and jglob.has_epg_importer and jglob.epg_provider and jglob.xmltv_address != '':
             if jglob.fixepg:
                 bx.downloadXMLTV()

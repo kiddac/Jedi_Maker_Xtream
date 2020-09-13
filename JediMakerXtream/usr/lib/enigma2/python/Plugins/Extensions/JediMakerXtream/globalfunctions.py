@@ -459,7 +459,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
                 catchup = 0
             calc_remainder = int(stream_id) / 65535
             bouquet_id_sid = int(jglob.bouquet_id + calc_remainder)
-            stream_id_sid = int(stream_id ) - int(calc_remainder * 65535) 
+            stream_id_sid = int(stream_id) - int(calc_remainder * 65535)
 
             if 'custom_sid' in streamvaluesgroup[i]:
                 if re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:0:', str(streamvaluesgroup[i]['custom_sid'])):

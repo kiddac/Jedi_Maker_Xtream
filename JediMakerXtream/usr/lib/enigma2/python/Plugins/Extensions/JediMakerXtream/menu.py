@@ -11,6 +11,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 
+from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
@@ -63,10 +64,9 @@ class JediMakerXtream_Menu(Screen):
                 dependencies = False
 
         if dependencies is False:
-            """
-            if not access("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", X_OK):
-                chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)"""
-            chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)
+            if not os.access("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", os.X_OK):
+                os.chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)
+            # os.chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)
             cmd1 = ". /usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh"
             self.session.openWithCallback(self.createSetup, Console, title="Checking Python Dependencies", cmdlist=[cmd1], closeOnSuccess=False)
         else:

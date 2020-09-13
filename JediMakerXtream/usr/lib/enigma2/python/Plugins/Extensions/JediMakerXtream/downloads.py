@@ -37,9 +37,28 @@ def checkGZIP(url):
             return deflatedContent.read()
         else:
             return response.read().decode()
-    except:
+    
+    except URLError as e:
+        print(e)
         pass
-        return response.decode()
+
+    except socket.timeout as e:
+        print(e)
+        pass
+
+    except socket.error as e:
+        print(e)
+        pass
+
+    except:
+        if response:
+            try:
+                return response.decode()
+            except:
+                return response.read()
+        else:
+            return response
+            
 
 
 def downloadlivecategories(url):

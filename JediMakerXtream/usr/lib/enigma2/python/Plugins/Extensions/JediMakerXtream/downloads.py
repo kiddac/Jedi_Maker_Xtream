@@ -34,30 +34,17 @@ def checkGZIP(url):
         if response.info().get('Content-Encoding') == 'gzip':
             buffer = StringIO(response.read())
             deflatedContent = gzip.GzipFile(fileobj=buffer)
-            return deflatedContent.read()
+            if pythonVer == 3:
+                return deflatedContent.read().decode('utf-8')
+            else:
+                return deflatedContent.read()
         else:
-            return response.read().decode()
-
-    except URLError as e:
-        print(e)
-        pass
-
-    except socket.timeout as e:
-        print(e)
-        pass
-
-    except socket.error as e:
-        print(e)
-        pass
-
-    except:
-        if response:
-            try:
-                return response.decode()
-            except:
+            if pythonVer == 3:
+                return response.read().decode('utf-8')
+            else:
                 return response.read()
-        else:
-            return response
+    except:
+        return None
 
 
 def downloadlivecategories(url):
@@ -495,7 +482,7 @@ def downloadgetfile(url):
     if response is not None:
         for line in response.splitlines():
 
-            line = line.decode('utf-8')
+            #line = line.decode('utf-8')
 
             if not line.startswith('#EXTINF') and not line.startswith('http'):
                 continue

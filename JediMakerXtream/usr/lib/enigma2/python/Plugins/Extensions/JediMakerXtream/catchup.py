@@ -51,7 +51,7 @@ def downloadSimpleData():
         refstream = refurl.split('/')[-1]
         # 12345.ts
 
-        jglob.refstreamnum = int(list(filter(str.isdigit, refstream)))
+        jglob.refstreamnum = int(''.join(filter(str.isdigit, refstream)))
         # 12345
 
         # get domain, username, password from path
@@ -352,7 +352,7 @@ class JediMakerXtream_Catchup_Listings(Screen):
                 cu_time_all = "%s - %s" % (cu_start_time, cu_end_time)
 
             if 'start_timestamp' in listing and 'stop_timestamp' in listing:
-                cu_duration = (int(listing['stop_timestamp']) - int(listing['start_timestamp'])) / 60
+                cu_duration = (int(listing['stop_timestamp']) - int(listing['start_timestamp'])) // 60
 
             if 'title' in listing:
                 cu_title = base64.b64decode(listing['title'])

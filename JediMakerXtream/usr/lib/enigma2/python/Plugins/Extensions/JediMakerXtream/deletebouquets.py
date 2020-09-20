@@ -131,11 +131,11 @@ class JediMakerXtream_DeleteBouquets(Screen):
                 jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.channels.xml')
                 jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.sources.xml')
 
-            jfunc.refreshBouquets()
             self.deleteBouquetFile(bouquet_name)
             jglob.firstrun = 0
             jglob.current_selection = 0
             jglob.current_playlist = []
+            jfunc.refreshBouquets()
         self.close()
 
     def deleteBouquetFile(self, bouquet_name):

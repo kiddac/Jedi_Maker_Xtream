@@ -131,7 +131,7 @@ class JediMakerXtream_Update(Screen):
         if self.x < len(self.playlists_bouquets):
             self.catloop()
         else:
-            jfunc.refreshBouquets()
+            # jfunc.refreshBouquets()
             if self.runtype == 'manual':
                 self.session.openWithCallback(self.done, MessageBox, str(len(self.playlists_bouquets)) + _(' Providers IPTV Updated'), MessageBox.TYPE_INFO, timeout=5)
             else:
@@ -243,6 +243,7 @@ class JediMakerXtream_Update(Screen):
                 self.timer1.start(self.pause, 1)
                 try:
                     self.timer1_conn = self.timer1.timeout.connect(self.downloadLive)
+
                 except:
                     self.timer1.callback.append(self.downloadLive)
 
@@ -412,7 +413,6 @@ class JediMakerXtream_Update(Screen):
 
     def getSelected(self):
         if self.playlisttype == 'xtream' or self.playlisttype == 'panel':
-
             jglob.selectedcategories = []
             jglob.ignoredcategories = []
 
@@ -429,8 +429,8 @@ class JediMakerXtream_Update(Screen):
 
         if (self.playlisttype == 'xtream' or self.playlisttype == 'panel') and jglob.series:
             self.nextjob(_('%s - Downloading Data...') % str(jglob.name), self.downloadgetfile)
-
-        self.nextjob(_('%s - Deleting existing bouquets...') % str(jglob.name), self.deleteBouquets)
+        else:
+            self.nextjob(_('%s - Deleting existing bouquets...') % str(jglob.name), self.deleteBouquets)
 
     def downloadgetfile(self):
         self.m3uValues = downloads.downloadgetfile(self.get_api)
@@ -449,11 +449,13 @@ class JediMakerXtream_Update(Screen):
         self.process_category()
 
     def process_category(self):
+        self.category_num = 0
         while self.category_num < len(self.categories):
             category_name = self.categories[self.category_num][0]
             category_type = self.categories[self.category_num][1]
             category_id = self.categories[self.category_num][2]
             self.protocol = self.protocol.replace(':', '%3a')
+
             self.epg_name_list = jfunc.process_category(category_name, category_type, category_id, self.domain, self.port, self.username, self.password, self.protocol, self.output, jglob.current_playlist, self.epg_alias_names, self.epg_name_list, self.rytec_ref, self.m3uValues)
             self.category_num += 1
 
@@ -519,6 +521,8 @@ class JediMakerXtream_Update(Screen):
         # output to file
         with open(playlist_file, 'w') as f:
             json.dump(self.playlists_all, f)
+            
 
     def done(self, answer=None):
+        jfunc.refreshBouquets()
         self.close()

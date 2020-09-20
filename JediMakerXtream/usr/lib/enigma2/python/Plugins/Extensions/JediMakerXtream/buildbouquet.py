@@ -119,7 +119,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 
             if len(self.categories) > 0:
                 if jglob.series:
-                    self.nextjob(_('Downloading Data...'), self.downloadgetfile)
+                    self.nextjob(_('Downloading get.php...'), self.downloadgetfile)
                 else:
                     self.nextjob(_('Deleting Existing Bouquets...'), self.deleteBouquets)
             else:
@@ -176,7 +176,7 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.progresscurrent += 1
             self['progress'].setValue(self.progresscurrent)
 
-            self.nextjob(_('Refreshing Bouquets...'), jfunc.refreshBouquets)
+            # self.nextjob(_('Refreshing Bouquets...'), jfunc.refreshBouquets)
 
             self.session.openWithCallback(self.done, MessageBox, str(len(self.categories)) + _(' IPTV Bouquets Created'), MessageBox.TYPE_INFO, timeout=30)
 
@@ -240,7 +240,7 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.progresscurrent += 1
             self['progress'].setValue(self.progresscurrent)
 
-            self.nextjob(_('Refreshing Bouquets...'), jfunc.refreshBouquets)
+            # self.nextjob(_('Refreshing Bouquets...'), jfunc.refreshBouquets)
             self.session.openWithCallback(self.done, MessageBox, str(len(self.categories)) + ' IPTV Bouquets Created', MessageBox.TYPE_INFO, timeout=30)
 
     def m3u_process_category(self):
@@ -258,4 +258,5 @@ class JediMakerXtream_BuildBouquets(Screen):
 
     def done(self, answer=None):
         jglob.finished = True
+        jfunc.refreshBouquets()
         self.close()

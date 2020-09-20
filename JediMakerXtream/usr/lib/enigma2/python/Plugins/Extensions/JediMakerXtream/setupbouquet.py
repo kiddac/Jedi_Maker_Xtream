@@ -3,7 +3,6 @@
 
 # for localized messages
 from . import _
-
 from . import buildbouquet
 from . import downloads
 from . import globalfunctions as jfunc
@@ -15,7 +14,8 @@ from .plugin import skin_path, cfg, playlist_file
 
 from collections import OrderedDict
 from Components.ActionMap import ActionMap
-from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigPassword, ConfigYesNo, ConfigEnableDisable, NoSave
+# from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigPassword, ConfigYesNo, ConfigEnableDisable, NoSave
+from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigBoolean, NoSave
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -68,9 +68,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self['key_green'] = StaticText(_('Continue'))
 
         self['VirtualKB'].setEnabled(False)
-        self['HelpWindow'] = Pixmap()
         self['VKeyIcon'] = Pixmap()
-        self['HelpWindow'].hide()
         self['VKeyIcon'].hide()
         self['lab1'] = Label(_('Loading data... Please wait...'))
 
@@ -195,7 +193,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         # panel type 2
         if 'categories' in jglob.current_playlist:
             if 'live' in jglob.current_playlist['categories']:
-                print("***** panel has categories / live *******")
                 jglob.haslive = True
                 try:
                     jglob.livecategories = jglob.current_playlist['categories']['live']
@@ -216,7 +213,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             valid = False
 
             if 'movie' in jglob.current_playlist['categories']:
-                print("***** panel has categories / movies *******")
                 jglob.hasvod = True
                 try:
                     jglob.vodcategories = jglob.current_playlist['categories']['movie']
@@ -236,7 +232,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             valid = False
 
             if 'series' in jglob.current_playlist['categories']:
-                print("***** panel has categories / series *******")
                 jglob.hasseries = True
                 try:
                     jglob.seriescategories = jglob.current_playlist['categories']['series']
@@ -260,20 +255,20 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self['lab1'].setText('')
         self.NameCfg = NoSave(ConfigText(default=jglob.name, fixed_size=False))
 
-        self.PrefixNameCfg = NoSave(ConfigYesNo(default=jglob.prefix_name))
+        self.PrefixNameCfg = NoSave(ConfigBoolean(default=jglob.prefix_name))
 
-        self.LiveCategoriesCfg = NoSave(ConfigYesNo(default=jglob.live))
-        self.VodCategoriesCfg = NoSave(ConfigYesNo(default=jglob.vod))
-        self.SeriesCategoriesCfg = NoSave(ConfigYesNo(default=jglob.series))
+        self.LiveCategoriesCfg = NoSave(ConfigBoolean(default=jglob.live))
+        self.VodCategoriesCfg = NoSave(ConfigBoolean(default=jglob.vod))
+        self.SeriesCategoriesCfg = NoSave(ConfigBoolean(default=jglob.series))
 
         self.XmltvCfg = NoSave(ConfigText(default=jglob.xmltv_address, fixed_size=False))
 
         self.VodOrderCfg = NoSave(ConfigSelection(default='alphabetical', choices=[('original', _('Original Order')), ('alphabetical', _('A-Z')), ('date', _('Newest First')), ('date2', _('Oldest First'))]))
 
-        self.EpgProviderCfg = NoSave(ConfigEnableDisable(default=jglob.epg_provider))
-        self.EpgRytecUKCfg = NoSave(ConfigEnableDisable(default=jglob.epg_rytec_uk))
-        self.EpgSwapNamesCfg = NoSave(ConfigEnableDisable(default=jglob.epg_swap_names))
-        self.ForceRytecUKCfg = NoSave(ConfigEnableDisable(default=jglob.epg_force_rytec_uk))
+        self.EpgProviderCfg = NoSave(ConfigBoolean(default=jglob.epg_provider))
+        self.EpgRytecUKCfg = NoSave(ConfigBoolean(default=jglob.epg_rytec_uk))
+        self.EpgSwapNamesCfg = NoSave(ConfigBoolean(default=jglob.epg_swap_names))
+        self.ForceRytecUKCfg = NoSave(ConfigBoolean(default=jglob.epg_force_rytec_uk))
 
         if os.path.isdir('/usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp'):
             self.LiveTypeCfg = NoSave(ConfigSelection(default=jglob.live_type, choices=[
@@ -296,7 +291,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         if jglob.vodbuffer != '0':
             self.bufferoption = jglob.vodbuffer
         self.BufferCfg = NoSave(ConfigSelection(default=self.bufferoption, choices=[('0', _('No Buffering(0)')), ('1', _('Buffering Enabled(1)')), ('3', _('Progressive Buffering(3)'))]))
-        self.FixEPGCfg = NoSave(ConfigEnableDisable(default=jglob.fixepg))
+        self.FixEPGCfg = NoSave(ConfigBoolean(default=jglob.fixepg))
 
     def createSetup(self):
         self.list = []
@@ -438,52 +433,38 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
     def handleInputHelpers(self):
         if self['config'].getCurrent() is not None:
-            if isinstance(self['config'].getCurrent()[1], ConfigText) or isinstance(self['config'].getCurrent()[1], ConfigPassword):
+            if isinstance(self['config'].getCurrent()[1], ConfigText):
                 if 'VKeyIcon' in self:
-                    if isinstance(self['config'].getCurrent()[1], ConfigNumber):
-                        self['VirtualKB'].setEnabled(False)
-                        self['VKeyIcon'].hide()
-                    else:
-                        self['VirtualKB'].setEnabled(True)
-                        self['VKeyIcon'].show()
-
-                if not isinstance(self['config'].getCurrent()[1], ConfigNumber):
-
-                    if isinstance(self['config'].getCurrent()[1].help_window, ConfigText) or isinstance(self['config'].getCurrent()[1].help_window, ConfigPassword):
-                        if self['config'].getCurrent()[1].help_window.instance is not None:
-                            helpwindowpos = self['HelpWindow'].getPosition()
-
-                            if helpwindowpos:
-                                helpwindowposx, helpwindowposy = helpwindowpos
-                                if helpwindowposx and helpwindowposy:
-                                    from enigma import ePoint
-                                    self['config'].getCurrent()[1].help_window.instance.move(ePoint(helpwindowposx, helpwindowposy))
-
+                    self['VirtualKB'].setEnabled(True)
+                    self['VKeyIcon'].show()
             else:
                 if 'VKeyIcon' in self:
                     self['VirtualKB'].setEnabled(False)
                     self['VKeyIcon'].hide()
-        else:
-            if 'VKeyIcon' in self:
-                self['VirtualKB'].setEnabled(False)
-                self['VKeyIcon'].hide()
 
     def changedEntry(self):
+        """
         self.item = self['config'].getCurrent()
         for x in self.onChangedEntry:
             x()
+            """
 
         try:
-            if isinstance(self['config'].getCurrent()[1], ConfigEnableDisable) or isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
+            # if isinstance(self['config'].getCurrent()[1], ConfigEnableDisable) or isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
+            if isinstance(self['config'].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
                 self.createSetup()
         except:
             pass
 
+    """
     def getCurrentEntry(self):
         return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
+        """
 
+    """
     def getCurrentValue(self):
         return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
+        """
 
     def save(self):
         jglob.name = self.NameCfg.value

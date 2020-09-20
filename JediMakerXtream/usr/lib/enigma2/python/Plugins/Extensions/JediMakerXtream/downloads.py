@@ -482,7 +482,7 @@ def downloadgetfile(url):
     if response is not None:
         for line in response.splitlines():
 
-            #line = line.decode('utf-8')
+            # line = line.decode('utf-8')
 
             if not line.startswith('#EXTINF') and not line.startswith('http'):
                 continue
@@ -518,5 +518,4 @@ def downloadgetfile(url):
 
                 else:
                     continue
-
     return m3uValues

@@ -27,16 +27,13 @@ def categoryBouquetXml(streamtype, bouquetTitle, bouquetString):
         cleanGroup = re.sub(r' ', '_', cleanGroup)
         cleanGroup = re.sub(r'_+', '_', cleanGroup)
         filepath = '/etc/enigma2/'
-
         filename = 'subbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
         fullpath = filepath + filename
-        with open(fullpath, 'w+') as f:
-            f.write(bouquetString)
     else:
         filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
         fullpath = filepath + filename
-        with open(fullpath, 'w+') as f:
-            f.write(bouquetString)
+    with open(fullpath, 'w+') as f:
+        f.write(bouquetString)
 
 
 def bouquetsTvXml(streamtype, bouquetTitle):

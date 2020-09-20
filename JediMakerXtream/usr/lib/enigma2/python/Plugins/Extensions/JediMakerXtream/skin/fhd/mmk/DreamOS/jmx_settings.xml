@@ -17,7 +17,6 @@
     <widget name="information" position="790,130" size="650,400" font="slykregular;33" foregroundColor="#00ffff00" backgroundColor="#101010" transparent="1" />
     <widget name="lab1" position="790,160" size="650,400" font="slykregular;36" foregroundColor="#00ffff00" backgroundColor="#101010" transparent="1" />
     <widget name="VKeyIcon" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/key_text.png" position="1845,1005" zPosition="4" size="30,30" transparent="1" alphatest="blend" />
-    <widget name="HelpWindow" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/vkey_icon.png" position="0,0" size="1920,60" alphatest="blend" transparent="1" zPosition="1" />
     <!-- Buttons -->
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/backb.png" position="0,970" size="1920,110" alphatest="blend" transparent="1" zPosition="-1" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/key_red.png" position="50,1005" size="30,30" alphatest="blend" transparent="1" />

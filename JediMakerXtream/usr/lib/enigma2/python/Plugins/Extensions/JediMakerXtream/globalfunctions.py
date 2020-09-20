@@ -50,7 +50,6 @@ def resetUnique():
 
 
 def getcategories():
-
     if jglob.live:
         for c in range(len(jglob.livecategories)):
             categoryValues = [str(jglob.livecategories[c]['category_name']), 'Live', int(jglob.livecategories[c]['category_id']), True]
@@ -538,16 +537,12 @@ def process_category(category_name, category_type, category_id, domain, port, us
         custom_sid = ':0:1:0:0:0:0:0:0:' + str(jglob.vodbuffer) + str(':')
 
         for i in range(len(streamvaluesgroup)):
-
             name = streamvaluesgroup[i]['name']
-
             if category_name in m3uValues:
                 for channel in m3uValues[category_name]:
-
                     source = jglob.vod_type + custom_sid + channel['url'].replace(':', '%3a')
                     bouquetString += '#SERVICE ' + str(source) + ':' + str(channel['name']) + '\n'
                     bouquetString += '#DESCRIPTION ' + str(channel['name']) + '\n'
-
                 break
 
         bx.categoryBouquetXml('series', bouquetTitle, bouquetString)

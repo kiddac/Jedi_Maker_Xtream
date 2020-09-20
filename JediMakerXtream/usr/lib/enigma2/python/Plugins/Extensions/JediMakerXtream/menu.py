@@ -158,7 +158,7 @@ class JediMakerXtream_Menu(Screen):
             self.playlists_all = [_f for _f in self.playlists_all if _f]
 
             os.remove(playlist_file)
-            jfunc.refreshBouquets()
+            # jfunc.refreshBouquets()
 
             self.createSetup()
         return

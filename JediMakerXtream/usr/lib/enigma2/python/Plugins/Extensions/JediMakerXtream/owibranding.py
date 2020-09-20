@@ -730,8 +730,6 @@ def getAllInfo():
         except:  # nosec  # noqa: E722  # set a default
             kernel = 2
 
-    print("****** kernel ********** %s" % kernel)
-
     distro = "unknown"
     imagever = "unknown"
     imagebuild = ""

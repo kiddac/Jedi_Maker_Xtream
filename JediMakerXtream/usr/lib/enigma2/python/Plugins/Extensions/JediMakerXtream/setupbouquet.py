@@ -457,7 +457,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             pass
 
     def getCurrentEntry(self):
-        self.currentSelection = self['list'].getIndex()
         return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
 
     def save(self):
@@ -741,6 +740,9 @@ class JediMakerXtream_ChooseBouquets(Screen):
             self.session.open(viewchannel.JediMakerXtream_ViewChannels, jglob.categories[self.currentSelection])
         except:
             return
+
+    def getCurrentEntry(self):
+        self.currentSelection = self['list'].getIndex()
 
     def m3uStart(self):
         downloads.getM3uCategories(jglob.live, jglob.vod)

@@ -196,17 +196,8 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         except:
             pass
 
-    """
     def getCurrentEntry(self):
-        # return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
-        return self["config"].getCurrent()[0]
-        """
-
-    """
-    def getCurrentValue(self):
-        return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
-        ConfigListScreen.changedEntry(self)
-        """
+        return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
 
     def save(self):
         global autoStartTimer

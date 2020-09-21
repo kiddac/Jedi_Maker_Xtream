@@ -456,15 +456,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         except:
             pass
 
-    """
     def getCurrentEntry(self):
-        return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
-        """
-
-    """
-    def getCurrentValue(self):
-        return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
-        """
+        self.currentSelection = self['list'].getIndex()
+        return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
 
     def save(self):
         jglob.name = self.NameCfg.value
@@ -740,9 +734,6 @@ class JediMakerXtream_ChooseBouquets(Screen):
         for idx, item in enumerate(self['list'].list):
             jglob.categories[idx][3] = False
         self.refresh()
-
-    def getCurrentEntry(self):
-        self.currentSelection = self['list'].getIndex()
 
     def viewChannels(self):
         from . import viewchannel

@@ -521,7 +521,6 @@ class JediMakerXtream_Update(Screen):
         # output to file
         with open(playlist_file, 'w') as f:
             json.dump(self.playlists_all, f)
-            
 
     def done(self, answer=None):
         jfunc.refreshBouquets()

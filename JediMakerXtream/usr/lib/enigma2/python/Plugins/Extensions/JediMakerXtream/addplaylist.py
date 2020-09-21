@@ -242,17 +242,10 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             pass
         ConfigListScreen.changedEntry(self)
 
-    """
-    def getCurrentEntry(self):
-        # return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
-        return self["config"].getCurrent()[0]
-        """
 
-    """
-    def getCurrentValue(self):
-        return self['config'].getCurrent() and str(self['config'].getCurrent()[1].getText()) or ''
-        ConfigListScreen.changedEntry(self)
-        """
+    def getCurrentEntry(self):
+        return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
+
 
     def save(self):
         """

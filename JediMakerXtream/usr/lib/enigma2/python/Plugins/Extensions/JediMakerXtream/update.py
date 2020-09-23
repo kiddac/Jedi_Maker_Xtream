@@ -135,7 +135,7 @@ class JediMakerXtream_Update(Screen):
             if self.runtype == 'manual':
                 self.session.openWithCallback(self.done, MessageBox, str(len(self.playlists_bouquets)) + _(' Providers IPTV Updated'), MessageBox.TYPE_INFO, timeout=5)
             else:
-                self.close()
+                self.done()
 
     def catloop(self):
         self.category_num = 0

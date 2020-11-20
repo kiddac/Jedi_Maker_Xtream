@@ -22,11 +22,11 @@ else
     echo
     if [[ $pyv =~ "Python 3" ]]; then
         echo "checking python3-lzma"
-        apt-get install liblzma5
+        apt-get -y install liblzma5
         echo
     else
         echo "checking python2-lzma"
-        apt-get install python-lzma
+        apt-get -y install python-lzma
         echo
     fi
 fi

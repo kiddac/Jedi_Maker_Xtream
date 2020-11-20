@@ -6,7 +6,7 @@ from . import _
 from . import jediglobals as jglob
 
 from Components.ActionMap import HelpableActionMap
-from Components.config import config, ConfigSelection, ConfigNumber, ConfigClock, ConfigDirectory, ConfigSubsection, ConfigBoolean
+from Components.config import config, ConfigSelection, ConfigNumber, ConfigClock, ConfigDirectory, ConfigSubsection, ConfigYesNo
 from enigma import eTimer, eServiceReference, getDesktop, addFont
 from Plugins.Plugin import PluginDescriptor
 from Screens.EpgSelection import EPGSelection
@@ -42,20 +42,20 @@ for folder in folders:
 config.plugins.JediMakerXtream = ConfigSubsection()
 
 cfg = config.plugins.JediMakerXtream
-cfg.extensions = ConfigBoolean(default=False)
+cfg.extensions = ConfigYesNo(default=False)
 cfg.location = ConfigDirectory(default='/etc/enigma2/jediplaylists/')
 cfg.m3ulocation = ConfigDirectory(default='/etc/enigma2/jediplaylists/')
-cfg.main = ConfigBoolean(default=True)
+cfg.main = ConfigYesNo(default=True)
 cfg.unique = ConfigNumber()
 cfg.usershow = ConfigSelection(default='domain', choices=[('domain', _('Domain')), ('domainconn', _('Domain | Connections'))])
-cfg.enabled = ConfigBoolean(default=False)
+cfg.enabled = ConfigYesNo(default=False)
 cfg.wakeup = ConfigClock(default=((7 * 60) + 9) * 60)  # 7:00
 cfg.skin = ConfigSelection(default='default', choices=folders)
 cfg.bouquet_id = ConfigNumber()
 cfg.timeout = ConfigNumber(default=3)
-cfg.catchup = ConfigBoolean(default=False)
+cfg.catchup = ConfigYesNo(default=False)
 cfg.catchupprefix = ConfigSelection(default='~', choices=[('~', '~'), ('!', '!'), ('#', '#'), ('-', '-'), ('<', '<'), ('^', '^')])
-cfg.groups = ConfigBoolean(default=False)
+cfg.groups = ConfigYesNo(default=False)
 cfg.placement = ConfigSelection(default="bottom", choices=[("bottom", _("Bottom")), ("top", _("Top"))])
 
 skin_path = skin_directory + cfg.skin.value + '/'

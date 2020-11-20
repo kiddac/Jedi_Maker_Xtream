@@ -14,8 +14,7 @@ from .plugin import skin_path, cfg, playlist_file
 
 from collections import OrderedDict
 from Components.ActionMap import ActionMap
-# from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigPassword, ConfigYesNo, ConfigEnableDisable, NoSave
-from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigBoolean, NoSave
+from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigYesNo, ConfigNumber, NoSave
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -24,7 +23,6 @@ from Components.Sources.StaticText import StaticText
 from datetime import datetime
 from enigma import eTimer
 
-from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Tools.LoadPixmap import LoadPixmap
 
@@ -70,6 +68,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self['VirtualKB'].setEnabled(False)
         self['VKeyIcon'] = Pixmap()
         self['VKeyIcon'].hide()
+        self['HelpWindow'] = Pixmap()
+        self['HelpWindow'].hide()
         self['lab1'] = Label(_('Loading data... Please wait...'))
 
         self['actions'] = ActionMap(['SetupActions'], {
@@ -91,9 +91,14 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         # if xtream or external
         if self.playlisttype != 'local':
             protocol = jglob.current_playlist['playlist_info']['protocol']
+            xmltvprotocol = protocol
+            # if 'https' in xmltvprotocol:
+            # xmltvprotocol = xmltvprotocol.replace('https', 'http')
             domain = jglob.current_playlist['playlist_info']['domain']
             port = str(jglob.current_playlist['playlist_info']['port'])
             host = str(protocol) + str(domain) + ':' + str(port) + '/'
+            xmltvhost = str(xmltvprotocol) + str(domain) + ':' + str(port) + '/'
+
             jglob.name = domain
         else:
             jglob.name = address
@@ -102,7 +107,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             username = jglob.current_playlist['playlist_info']['username']
             password = jglob.current_playlist['playlist_info']['password']
             player_api = str(host) + 'player_api.php?username=' + str(username) + '&password=' + str(password)
-            jglob.xmltv_address = str(host) + 'xmltv.php?username=' + str(username) + '&password=' + str(password)
+            jglob.xmltv_address = str(xmltvhost) + 'xmltv.php?username=' + str(username) + '&password=' + str(password)
 
             self.LiveCategoriesUrl = player_api + '&action=get_live_categories'
             self.VodCategoriesUrl = player_api + '&action=get_vod_categories'
@@ -117,7 +122,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         elif self.playlisttype == 'panel':
             username = jglob.current_playlist['playlist_info']['username']
             password = jglob.current_playlist['playlist_info']['password']
-            jglob.xmltv_address = str(host) + 'xmltv.php?username=' + str(username) + '&password=' + str(password)
+            jglob.xmltv_address = str(xmltvhost) + 'xmltv.php?username=' + str(username) + '&password=' + str(password)
             jglob.epg_provider = True
 
         else:
@@ -255,20 +260,20 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self['lab1'].setText('')
         self.NameCfg = NoSave(ConfigText(default=jglob.name, fixed_size=False))
 
-        self.PrefixNameCfg = NoSave(ConfigBoolean(default=jglob.prefix_name))
+        self.PrefixNameCfg = NoSave(ConfigYesNo(default=jglob.prefix_name))
 
-        self.LiveCategoriesCfg = NoSave(ConfigBoolean(default=jglob.live))
-        self.VodCategoriesCfg = NoSave(ConfigBoolean(default=jglob.vod))
-        self.SeriesCategoriesCfg = NoSave(ConfigBoolean(default=jglob.series))
+        self.LiveCategoriesCfg = NoSave(ConfigYesNo(default=jglob.live))
+        self.VodCategoriesCfg = NoSave(ConfigYesNo(default=jglob.vod))
+        self.SeriesCategoriesCfg = NoSave(ConfigYesNo(default=jglob.series))
 
         self.XmltvCfg = NoSave(ConfigText(default=jglob.xmltv_address, fixed_size=False))
 
         self.VodOrderCfg = NoSave(ConfigSelection(default='alphabetical', choices=[('original', _('Original Order')), ('alphabetical', _('A-Z')), ('date', _('Newest First')), ('date2', _('Oldest First'))]))
 
-        self.EpgProviderCfg = NoSave(ConfigBoolean(default=jglob.epg_provider))
-        self.EpgRytecUKCfg = NoSave(ConfigBoolean(default=jglob.epg_rytec_uk))
-        self.EpgSwapNamesCfg = NoSave(ConfigBoolean(default=jglob.epg_swap_names))
-        self.ForceRytecUKCfg = NoSave(ConfigBoolean(default=jglob.epg_force_rytec_uk))
+        self.EpgProviderCfg = NoSave(ConfigYesNo(default=jglob.epg_provider))
+        self.EpgRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_rytec_uk))
+        self.EpgSwapNamesCfg = NoSave(ConfigYesNo(default=jglob.epg_swap_names))
+        self.ForceRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_force_rytec_uk))
 
         if os.path.isdir('/usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp'):
             self.LiveTypeCfg = NoSave(ConfigSelection(default=jglob.live_type, choices=[
@@ -291,7 +296,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         if jglob.vodbuffer != '0':
             self.bufferoption = jglob.vodbuffer
         self.BufferCfg = NoSave(ConfigSelection(default=self.bufferoption, choices=[('0', _('No Buffering(0)')), ('1', _('Buffering Enabled(1)')), ('3', _('Progressive Buffering(3)'))]))
-        self.FixEPGCfg = NoSave(ConfigBoolean(default=jglob.fixepg))
+        self.FixEPGCfg = NoSave(ConfigYesNo(default=jglob.fixepg))
 
     def createSetup(self):
         self.list = []
@@ -432,34 +437,43 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             return
 
     def handleInputHelpers(self):
-        if self['config'].getCurrent() is not None:
-            if isinstance(self['config'].getCurrent()[1], ConfigText):
+        from enigma import ePoint
+        currConfig = self["config"].getCurrent()
+
+        if currConfig is not None:
+            if isinstance(currConfig[1], ConfigText):
                 if 'VKeyIcon' in self:
-                    self['VirtualKB'].setEnabled(True)
-                    self['VKeyIcon'].show()
+                    if isinstance(currConfig[1], ConfigNumber):
+                        self['VirtualKB'].setEnabled(False)
+                        self['VKeyIcon'].hide()
+                    else:
+                        self['VirtualKB'].setEnabled(True)
+                        self['VKeyIcon'].show()
+
+                if "HelpWindow" in self and currConfig[1].help_window and currConfig[1].help_window.instance is not None:
+                    helpwindowpos = self["HelpWindow"].getPosition()
+                    currConfig[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
             else:
                 if 'VKeyIcon' in self:
                     self['VirtualKB'].setEnabled(False)
                     self['VKeyIcon'].hide()
 
     def changedEntry(self):
-        """
         self.item = self['config'].getCurrent()
         for x in self.onChangedEntry:
             x()
-            """
 
         try:
-            # if isinstance(self['config'].getCurrent()[1], ConfigEnableDisable) or isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
-            if isinstance(self['config'].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
+            if isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
                 self.createSetup()
         except:
             pass
 
     def getCurrentEntry(self):
-        return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
+        return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
 
     def save(self):
+        from Screens.MessageBox import MessageBox
         jglob.name = self.NameCfg.value
         if jglob.old_name != jglob.name:
             if jglob.name.strip() == '' or jglob.name.strip() is None:
@@ -577,37 +591,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
             self.SeriesUrl = player_api + '&action=get_series'
 
             if jglob.live or jglob.vod or jglob.series:
-                if jglob.live:
-                    self['lab1'].setText('Downloading Live data')
-
-                    self.timer1 = eTimer()
-                    self.timer1.start(self.pause, 1)
-                    try:
-                        self.timer1_conn = self.timer1.timeout.connect(self.downloadLive)
-                    except:
-                        self.timer1.callback.append(self.downloadLive)
-
-                if jglob.vod:
-                    self['lab1'].setText('Downloading VOD data')
-
-                    self.timer2 = eTimer()
-                    self.timer2.start(self.pause, 1)
-                    try:
-                        self.timer2_conn = self.timer2.timeout.connect(self.downloadVod)
-                    except:
-                        self.timer2.callback.append(self.downloadVod)
-
-                if jglob.series:
-                    self['lab1'].setText('Downloading Series data')
-
-                    self.timer3 = eTimer()
-                    self.timer3.start(self.pause, 1)
-                    try:
-                        self.timer3_conn = self.timer3.timeout.connect(self.downloadSeries)
-                    except:
-                        self.timer3.callback.append(self.downloadSeries)
-            else:
-                self.close()
+                self.getcategories()
 
         elif self.playlisttype == 'panel':
             protocol = jglob.current_playlist['playlist_info']['protocol']
@@ -643,28 +627,6 @@ class JediMakerXtream_ChooseBouquets(Screen):
             self.timer_conn = self.timer.timeout.connect(function)
         except:
             self.timer.callback.append(function)
-
-    def downloadLive(self):
-        downloads.downloadlivestreams(self.LiveStreamsUrl)
-
-        if jglob.vod:
-            self.nextjob(_('Downloading VOD data'), self.downloadVod)
-        elif jglob.series:
-            self.nextjob(_('Downloading Series data'), self.downloadSeries)
-        else:
-            self.nextjob(_('Getting categories'), self.getcategories)
-
-    def downloadVod(self):
-        downloads.downloadvodstreams(self.VodStreamsUrl)
-
-        if jglob.series:
-            self.nextjob(_('Downloading Series data'), self.downloadSeries)
-        else:
-            self.nextjob(_('Getting categories'), self.getcategories)
-
-    def downloadSeries(self):
-        downloads.downloadseriesstreams(self.SeriesUrl)
-        self.nextjob(_('Getting categories'), self.getcategories)
 
     def getcategories(self):
         jglob.categories = []

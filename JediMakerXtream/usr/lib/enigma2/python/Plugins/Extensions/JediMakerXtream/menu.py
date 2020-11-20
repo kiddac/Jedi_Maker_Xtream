@@ -55,22 +55,22 @@ class JediMakerXtream_Menu(Screen):
 
     def check_dependencies(self):
         dependencies = True
-        if pythonVer == 3:
-            if not os.path.isfile("/usr/lib/python3.8/lzma.py"):
+        
+        try:
+            import lzma
+        except:
+            try:
+                from backports import lzma
+            except:
                 dependencies = False
-
-        else:
-            if not os.path.exists("/usr/lib/python2.7/site-packages/backports/lzma"):
-                dependencies = False
-
+            
         if dependencies is False:
-            if not os.access("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", os.X_OK):
-                os.chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)
-            # os.chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)
+            os.chmod("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh", 0o0755)
             cmd1 = ". /usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/dependencies.sh"
             self.session.openWithCallback(self.createSetup, Console, title="Checking Python Dependencies", cmdlist=[cmd1], closeOnSuccess=False)
         else:
             self.createSetup()
+            
 
     def createSetup(self):
         self.list = []

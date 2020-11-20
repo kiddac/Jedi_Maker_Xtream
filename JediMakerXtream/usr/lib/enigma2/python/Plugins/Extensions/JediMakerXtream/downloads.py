@@ -333,19 +333,24 @@ def getM3uCategories(live, vod):
             else:
                 group_title = ''
 
-            if re.search('tvg-name=\"(.*?)\"', line) is not None:
+            if re.search('(?<=,).*$', line) is not None:
+                name = re.search('(?<=,).*$', line).group().strip()
+
+            elif re.search('tvg-name=\"(.*?)\"', line) is not None:
                 name = re.search('tvg-name=\"(.*?)\"', line).group(1).strip()
+
             else:
-                if re.search('(?<=,).*$', line) is not None:
-                    name = re.search('(?<=,).*$', line).group().strip()
-                else:
-                    name = ''
+                name = ''
 
             if name == '':
                 channelnum += 1
                 name = 'Channel ' + str(channelnum)
 
-        if line.startswith('http'):
+                if line.startswith('https'):
+                    line.replace('https', 'http')
+                series_url = line.strip()
+
+        elif line.startswith('http'):
             source = line.strip()
 
             stream = "unknown"
@@ -494,13 +499,14 @@ def downloadgetfile(url):
                 else:
                     series_group_title = 'Uncategorised'
 
-                if re.search('tvg-name=\"(.*?)\"', line) is not None:
+                if re.search('(?<=,).*$', line) is not None:
+                    series_name = re.search('(?<=,).*$', line).group().strip()
+
+                elif re.search('tvg-name=\"(.*?)\"', line) is not None:
                     series_name = re.search('tvg-name=\"(.*?)\"', line).group(1).strip()
+
                 else:
-                    if re.search('(?<=,).*$', line) is not None:
-                        series_name = re.search('(?<=,).*$', line).group().strip()
-                    else:
-                        series_name = ''
+                    series_name = ''
 
                 if series_name == '':
                     channelnum += 1

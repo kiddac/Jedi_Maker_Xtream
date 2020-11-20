@@ -8,15 +8,13 @@ from . import owibranding
 from .plugin import skin_path, cfg, autoStartTimer
 
 from Components.ActionMap import ActionMap
-# from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigPassword, ConfigYesNo, ConfigEnableDisable, configfile
-from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigBoolean, configfile
+from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigYesNo, configfile
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 
 from Screens.LocationBox import LocationBox
-# from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
 
@@ -54,6 +52,8 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self['VirtualKB'].setEnabled(False)
         self['VKeyIcon'] = Pixmap()
         self['VKeyIcon'].hide()
+        self['HelpWindow'] = Pixmap()
+        self['HelpWindow'].hide()
 
         self['lab1'] = Label('')
 
@@ -168,57 +168,55 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
             return
 
     def handleInputHelpers(self):
-        if self['config'].getCurrent() is not None:
-            if isinstance(self['config'].getCurrent()[1], ConfigText):
+        from enigma import ePoint
+        currConfig = self["config"].getCurrent()
+
+        if currConfig is not None:
+            if isinstance(currConfig[1], ConfigText):
                 if 'VKeyIcon' in self:
-                    if isinstance(self['config'].getCurrent()[1], ConfigNumber):
+                    if isinstance(currConfig[1], ConfigNumber):
                         self['VirtualKB'].setEnabled(False)
                         self['VKeyIcon'].hide()
                     else:
                         self['VirtualKB'].setEnabled(True)
                         self['VKeyIcon'].show()
+
+                if "HelpWindow" in self and currConfig[1].help_window and currConfig[1].help_window.instance is not None:
+                    helpwindowpos = self["HelpWindow"].getPosition()
+                    currConfig[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
             else:
                 if 'VKeyIcon' in self:
                     self['VirtualKB'].setEnabled(False)
                     self['VKeyIcon'].hide()
 
     def changedEntry(self):
-        """
         self.item = self['config'].getCurrent()
         for x in self.onChangedEntry:
             x()
-            """
 
         try:
-            # if isinstance(self['config'].getCurrent()[1], ConfigEnableDisable) or isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
-            if isinstance(self['config'].getCurrent()[1], (ConfigBoolean, ConfigSelection)):
+            if isinstance(self['config'].getCurrent()[1], ConfigYesNo) or isinstance(self['config'].getCurrent()[1], ConfigSelection):
                 self.createSetup()
         except:
             pass
 
     def getCurrentEntry(self):
-        return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
+        return self['config'].getCurrent() and self['config'].getCurrent()[0] or ''
 
     def save(self):
         global autoStartTimer
-
-        """
         if self['config'].isChanged():
             for x in self['config'].list:
                 x[1].save()
+            cfg.save()
             configfile.save()
-            """
 
         if autoStartTimer is not None:
             autoStartTimer.update()
-        """
         self.close(True)
-        return
-        """
-        ConfigListScreen.keySave(self)
 
     def cancel(self, answer=None):
-        """
+        from Screens.MessageBox import MessageBox
         if answer is None:
             if self['config'].isChanged():
                 self.session.openWithCallback(self.cancel, MessageBox, _('Really close without saving settings?'))
@@ -230,8 +228,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 
             self.close()
         return
-        """
-        ConfigListScreen.keyCancel(self)
 
     def ok(self):
         sel = self['config'].getCurrent()[1]
@@ -241,10 +237,7 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         if sel and sel == cfg.m3ulocation:
             self.setting = 'm3u'
             self.openDirectoryBrowser(cfg.m3ulocation.value)
-        """
-        else:
-            pass
-            """
+
         ConfigListScreen.keyOK(self)
 
     def openDirectoryBrowser(self, path):

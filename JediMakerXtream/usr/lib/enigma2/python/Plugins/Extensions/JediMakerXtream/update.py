@@ -131,7 +131,8 @@ class JediMakerXtream_Update(Screen):
         if self.x < len(self.playlists_bouquets):
             self.catloop()
         else:
-            # jfunc.refreshBouquets()
+            jfunc.refreshBouquets()
+            bx.sortbouquetsTvXml(self)
             if self.runtype == 'manual':
                 self.session.openWithCallback(self.done, MessageBox, str(len(self.playlists_bouquets)) + _(' Providers IPTV Updated'), MessageBox.TYPE_INFO, timeout=5)
             else:
@@ -162,9 +163,13 @@ class JediMakerXtream_Update(Screen):
 
         if self.playlisttype != 'local':
             self.protocol = jglob.current_playlist['playlist_info']['protocol']
+            self.xmltvprotocol = self.protocol
+            if 'https' in self.xmltvprotocol:
+                self.xmltvprotocol = xmltvprotocol.replace('https', 'http')
             self.domain = jglob.current_playlist['playlist_info']['domain']
             self.port = str(jglob.current_playlist['playlist_info']['port'])
             self.host = str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'
+            self.xmltvhost = str(self.xmltvprotocol) + str(self.domain) + ':' + str(self.port) + '/'
 
         if self.playlisttype == 'xtream':
             self.username = jglob.current_playlist['playlist_info']['username']
@@ -175,7 +180,7 @@ class JediMakerXtream_Update(Screen):
             self.player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
             self.get_api = str(self.host) + 'get.php?username=' + str(self.username) + '&password=' + str(self.password) + '&type=m3u_plus&output=' + str(self.output)
 
-            jglob.xmltv_address = str(self.host) + 'xmltv.php?username=' + str(self.username) + '&password=' + str(self.password)
+            jglob.xmltv_address = str(self.xmltvhost) + 'xmltv.php?username=' + str(self.username) + '&password=' + str(self.password)
 
             self.LiveCategoriesUrl = self.player_api + '&action=get_live_categories'
             self.VodCategoriesUrl = self.player_api + '&action=get_vod_categories'
@@ -193,7 +198,7 @@ class JediMakerXtream_Update(Screen):
 
             self.panel_api = str(self.host) + 'panel_api.php?username=' + str(self.username) + '&password=' + str(self.password)
             self.get_api = str(self.host) + 'get.php?username=' + str(self.username) + '&password=' + str(self.password) + '&type=m3u_plus&output=' + str(self.output)
-            jglob.xmltv_address = str(self.host) + 'xmltv.php?username=' + str(self.username) + '&password=' + str(self.password)
+            jglob.xmltv_address = str(self.xmltvhost) + 'xmltv.php?username=' + str(self.username) + '&password=' + str(self.password)
 
         if self.playlisttype == 'xtream':
             self.nextjob(_('%s - Checking URL still active...') % str(jglob.name), self.checkactive)
@@ -247,7 +252,7 @@ class JediMakerXtream_Update(Screen):
                 except:
                     self.timer1.callback.append(self.downloadLive)
 
-            if jglob.vod:
+            elif jglob.vod:
                 self['action'].setText('Downloading VOD data')
 
                 self.timer2 = eTimer()
@@ -257,7 +262,7 @@ class JediMakerXtream_Update(Screen):
                 except:
                     self.timer2.callback.append(self.downloadVod)
 
-            if jglob.series:
+            elif jglob.series:
                 self['action'].setText('Downloading Series data')
 
                 self.timer3 = eTimer()

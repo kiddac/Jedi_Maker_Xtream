@@ -49,11 +49,11 @@ def bouquetsTvXml(streamtype, bouquetTitle):
 
         groupname = 'userbouquet.jmx_' + str(cleanGroup) + '.tv'
 
-        if cfg.placement.value == "bottom":
-            with open('/etc/enigma2/bouquets.tv', 'r+') as f:
-                bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) + '" ORDER BY bouquet\n'
-                if str(bouquetTvString) not in f:
-                    f.write(str(bouquetTvString))
+
+        with open('/etc/enigma2/bouquets.tv', 'a+') as f:
+            bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) + '" ORDER BY bouquet\n'
+            if str(bouquetTvString) not in f:
+                f.write(str(bouquetTvString))
 
         filename = '/etc/enigma2/' + str(groupname)
         with open(filename, 'a+') as f:
@@ -67,13 +67,35 @@ def bouquetsTvXml(streamtype, bouquetTitle):
                 f.write(str(bouquetTvString))
 
     else:
-        if cfg.placement.value == "bottom":
-            filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
-            with open('/etc/enigma2/bouquets.tv', 'a+') as f:
-                bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
-                if str(bouquetTvString) not in f:
-                    f.write(str(bouquetTvString))
+        filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
 
+        with open('/etc/enigma2/bouquets.tv', 'a+') as f:
+            bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
+            if str(bouquetTvString) not in f:
+                f.write(str(bouquetTvString))
+
+
+def sortbouquetsTvXml(self):
+    if cfg.placement.value == "bottom":
+        return
+    else:
+        jfunc.refreshBouquets()
+        templist = []
+        with open('/etc/enigma2/bouquets.tv', 'r+') as f:
+            lines = f.readlines() 
+            f.seek(0)
+            for line in lines: 
+                if line.startswith("#NAME"):
+                    f.write(line)
+                    continue
+                elif not 'jmx_' in line:
+                    templist.append(line)
+                    continue
+                f.write(line)
+            f.truncate()
+            f.readlines()
+            for entry in templist:
+                f.write(entry)
 
 def buildXMLTVChannelFile(epg_name_list):
 
@@ -155,7 +177,10 @@ def buildXMLTVSourceFile():
         if jglob.fixepg:
             xml_str += '<url><![CDATA[' + str(filepath + 'jmx.' + str(cleanName) + '.xmltv2.xml') + ']]></url>\n'
         else:
-            xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + '&next_days=7]]></url>\n'
+            if "xmltv.php" in str(jglob.xmltv_address):
+                xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + '&next_days=7]]></url>\n'
+            else:
+                xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + ']]></url>\n'
 
         xml_str += '</source>\n'
         xml_str += '</sourcecat>\n'

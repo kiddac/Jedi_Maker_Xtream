@@ -25,6 +25,8 @@ import socket
 import os
 import sys
 
+socket.setdefaulttimeout(5.0)
+
 pythonVer = 2
 if sys.version_info.major == 3:
     pythonVer = 3
@@ -164,8 +166,6 @@ class JediMakerXtream_Update(Screen):
         if self.playlisttype != 'local':
             self.protocol = jglob.current_playlist['playlist_info']['protocol']
             self.xmltvprotocol = self.protocol
-            if 'https' in self.xmltvprotocol:
-                self.xmltvprotocol = xmltvprotocol.replace('https', 'http')
             self.domain = jglob.current_playlist['playlist_info']['domain']
             self.port = str(jglob.current_playlist['playlist_info']['port'])
             self.host = str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'
@@ -213,7 +213,7 @@ class JediMakerXtream_Update(Screen):
         req = Request(self.player_api, headers=hdr)
 
         try:
-            response = urlopen(req)
+            response = urlopen(req, timeout=5)
             self.valid = True
         except URLError as e:
             print(e)
@@ -224,23 +224,19 @@ class JediMakerXtream_Update(Screen):
         except:
             pass
 
-        try:
-            self.active = json.load(response)
-            if 'user_info' in self.active:
-                if self.active['user_info']['auth'] == 1:
-                    self.valid = True
-                else:
-                    self.valid = False
-        except ValueError as e:
-            self.valid = False
-            print(e)
-            pass
-        except:
-            self.valid = False
-            pass
+        if self.valid:
+            try:
+                self.active = json.load(response)
+                if 'user_info' in self.active:
+                    if self.active['user_info']['auth'] == 1:
+                        self.valid = True
+                    else:
+                        self.valid = False
+            except:
+                self.valid = False
+                pass
 
         if self.valid:
-
             if jglob.live:
                 self['action'].setText('Downloading Live data')
 
@@ -271,6 +267,8 @@ class JediMakerXtream_Update(Screen):
                     self.timer3_conn = self.timer3.timeout.connect(self.downloadSeries)
                 except:
                     self.timer3.callback.append(self.downloadSeries)
+        else:
+            self.nextjob((''), self.loopPlaylists)
 
     def checkpanelactive(self):
         response = None
@@ -278,7 +276,7 @@ class JediMakerXtream_Update(Screen):
         req = Request(self.panel_api, headers=hdr)
 
         try:
-            response = urlopen(req)
+            response = urlopen(req, timeout=5)
             self.valid = True
         except URLError as e:
             print(e)
@@ -289,23 +287,22 @@ class JediMakerXtream_Update(Screen):
         except:
             pass
 
-        try:
-            self.active = json.load(response)
-            if 'user_info' in self.active:
-                if self.active['user_info']['auth'] == 1:
-                    self.valid = True
-                else:
-                    self.valid = False
-        except ValueError as e:
-            self.valid = False
-            print(e)
-            pass
-        except:
-            self.valid = False
-            pass
+        if self.valid:
+            try:
+                self.active = json.load(response)
+                if 'user_info' in self.active:
+                    if self.active['user_info']['auth'] == 1:
+                        self.valid = True
+                    else:
+                        self.valid = False
+            except:
+                self.valid = False
+                pass
 
         if self.valid:
             self.nextjob(_('%s - Getting categories...') % str(jglob.name), self.getcategories)
+        else:
+            self.nextjob((''), self.loopPlaylists)
 
     def downloadLive(self):
         downloads.downloadlivecategories(self.LiveCategoriesUrl)

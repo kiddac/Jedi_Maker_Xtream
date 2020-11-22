@@ -4,6 +4,7 @@
 from . import downloads
 from . import globalfunctions as jfunc
 from . import jediglobals as jglob
+from collections import OrderedDict
 
 from .plugin import cfg
 from xml.dom import minidom
@@ -42,38 +43,37 @@ def bouquetsTvXml(streamtype, bouquetTitle):
     cleanTitle = re.sub(r'_+', '_', cleanTitle)
 
     if cfg.groups.value is True:
-
         cleanGroup = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', jglob.name)
         cleanGroup = re.sub(r' ', '_', cleanGroup)
         cleanGroup = re.sub(r'_+', '_', cleanGroup)
 
         groupname = 'userbouquet.jmx_' + str(cleanGroup) + '.tv'
-
-
+        
+        with open('/etc/enigma2/bouquets.tv', 'r') as f:
+            content = f.read()
+            
         with open('/etc/enigma2/bouquets.tv', 'a+') as f:
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) + '" ORDER BY bouquet\n'
-            if str(bouquetTvString) not in f:
+            if str(bouquetTvString) not in content:
                 f.write(str(bouquetTvString))
 
         filename = '/etc/enigma2/' + str(groupname)
+        
         with open(filename, 'a+') as f:
             nameString = "#NAME " + str(jglob.name) + "\n"
-            if str(nameString) not in f:
-                f.write(str(nameString))
+            f.write(str(nameString))
 
             filename = 'subbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
-            if str(bouquetTvString) not in f:
-                f.write(str(bouquetTvString))
+            f.write(str(bouquetTvString))
 
     else:
         filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
-
+            
         with open('/etc/enigma2/bouquets.tv', 'a+') as f:
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
-            if str(bouquetTvString) not in f:
-                f.write(str(bouquetTvString))
-
+            f.write(str(bouquetTvString))
+      
 
 def sortbouquetsTvXml(self):
     if cfg.placement.value == "bottom":
@@ -83,6 +83,10 @@ def sortbouquetsTvXml(self):
         templist = []
         with open('/etc/enigma2/bouquets.tv', 'r+') as f:
             lines = f.readlines() 
+            
+            # remove duplicates
+            # lines = list(OrderedDict.fromkeys(lines))
+            
             f.seek(0)
             for line in lines: 
                 if line.startswith("#NAME"):

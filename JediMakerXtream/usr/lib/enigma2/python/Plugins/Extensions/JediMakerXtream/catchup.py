@@ -355,10 +355,10 @@ class JediMakerXtream_Catchup_Listings(Screen):
                 cu_duration = (int(listing['stop_timestamp']) - int(listing['start_timestamp'])) // 60
 
             if 'title' in listing:
-                cu_title = base64.b64decode(listing['title'])
+                cu_title = base64.b64decode(listing['title']).decode("utf-8")
 
             if 'description' in listing:
-                cu_description = base64.b64decode(listing['description'])
+                cu_description = base64.b64decode(listing['description']).decode("utf-8")
 
             self.catchup_all.append([self.index, str(cu_date_all), str(cu_time_all), str(cu_title), str(cu_description), str(cu_play_start), str(cu_duration)])
 

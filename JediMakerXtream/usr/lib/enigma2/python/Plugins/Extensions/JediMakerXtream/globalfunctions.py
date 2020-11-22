@@ -24,7 +24,6 @@ def getPlaylistJson():
 
             except:
                 os.remove(playlist_file)
-
     return playlists_all
 
 

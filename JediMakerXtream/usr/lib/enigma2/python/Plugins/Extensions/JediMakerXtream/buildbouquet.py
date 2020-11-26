@@ -193,8 +193,6 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.process_category()
 
         else:
-            jfunc.refreshBouquets()
-            bx.sortbouquetsTvXml(self)
             if jglob.live and jglob.has_epg_importer and jglob.epg_provider and jglob.xmltv_address != '':
                 if jglob.fixepg:
                     bx.downloadXMLTV()

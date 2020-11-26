@@ -133,8 +133,6 @@ class JediMakerXtream_Update(Screen):
         if self.x < len(self.playlists_bouquets):
             self.catloop()
         else:
-            jfunc.refreshBouquets()
-            bx.sortbouquetsTvXml(self)
             if self.runtype == 'manual':
                 self.session.openWithCallback(self.done, MessageBox, str(len(self.playlists_bouquets)) + _(' Providers IPTV Updated'), MessageBox.TYPE_INFO, timeout=5)
             else:

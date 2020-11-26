@@ -48,17 +48,17 @@ def bouquetsTvXml(streamtype, bouquetTitle):
         cleanGroup = re.sub(r'_+', '_', cleanGroup)
 
         groupname = 'userbouquet.jmx_' + str(cleanGroup) + '.tv'
-        
+
         with open('/etc/enigma2/bouquets.tv', 'r') as f:
             content = f.read()
-            
+
         with open('/etc/enigma2/bouquets.tv', 'a+') as f:
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) + '" ORDER BY bouquet\n'
             if str(bouquetTvString) not in content:
                 f.write(str(bouquetTvString))
 
         filename = '/etc/enigma2/' + str(groupname)
-        
+
         with open(filename, 'a+') as f:
             nameString = "#NAME " + str(jglob.name) + "\n"
             f.write(str(nameString))
@@ -69,37 +69,11 @@ def bouquetsTvXml(streamtype, bouquetTitle):
 
     else:
         filename = 'userbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
-            
+
         with open('/etc/enigma2/bouquets.tv', 'a+') as f:
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
             f.write(str(bouquetTvString))
-      
 
-def sortbouquetsTvXml(self):
-    if cfg.placement.value == "bottom":
-        return
-    else:
-        jfunc.refreshBouquets()
-        templist = []
-        with open('/etc/enigma2/bouquets.tv', 'r+') as f:
-            lines = f.readlines() 
-            
-            # remove duplicates
-            # lines = list(OrderedDict.fromkeys(lines))
-            
-            f.seek(0)
-            for line in lines: 
-                if line.startswith("#NAME"):
-                    f.write(line)
-                    continue
-                elif not 'jmx_' in line:
-                    templist.append(line)
-                    continue
-                f.write(line)
-            f.truncate()
-            f.readlines()
-            for entry in templist:
-                f.write(entry)
 
 def buildXMLTVChannelFile(epg_name_list):
 

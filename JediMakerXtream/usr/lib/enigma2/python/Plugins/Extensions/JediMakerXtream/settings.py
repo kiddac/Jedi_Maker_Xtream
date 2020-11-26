@@ -87,7 +87,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self.cfg_catchup = getConfigListEntry(_('Prefix Catchup channels'), cfg.catchup)
         self.cfg_catchupprefix = getConfigListEntry(_('Select Catchup prefix symbol'), cfg.catchupprefix)
         self.cfg_groups = getConfigListEntry(_('Group bouquets into its own folder'), cfg.groups)
-        self.cfg_placement = getConfigListEntry(_("Place Bouquet at"), cfg.placement)
 
     def createSetup(self):
         self.list = []
@@ -99,7 +98,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
             self.list.append(self.cfg_wakeup)
 
         self.list.append(self.cfg_groups)
-        self.list.append(self.cfg_placement)
         self.list.append(self.cfg_catchup)
         if cfg.catchup.value is True:
             self.list.append(self.cfg_catchupprefix)
@@ -161,10 +159,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 
         if entry == _('Group bouquets into its own folder'):
             self['information'].setText(_("Create a group bouquet for each playlist.\n *Experimental* "))
-            return
-
-        if entry == _('Place Bouquet at'):
-            self['information'].setText(_("Place created IPTV bouquets at top or bottom of current bouquets."))
             return
 
     def handleInputHelpers(self):

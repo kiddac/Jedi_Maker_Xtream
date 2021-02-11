@@ -191,7 +191,6 @@ class JediMakerXtream_BuildBouquets(Screen):
 
         if self.category_num < len(self.categories):
             self.process_category()
-
         else:
             if jglob.live and jglob.has_epg_importer and jglob.epg_provider and jglob.xmltv_address != '':
                 if jglob.fixepg:

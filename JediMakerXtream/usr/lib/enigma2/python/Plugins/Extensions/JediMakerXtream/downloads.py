@@ -26,10 +26,11 @@ else:
 
 def checkGZIP(url):
     response = None
+
     request = Request(url, headers=hdr)
 
     try:
-        response = urlopen(request)
+        response = urlopen(request, timeout=10)
 
         if response.info().get('Content-Encoding') == 'gzip':
             buffer = StringIO(response.read())
@@ -43,7 +44,8 @@ def checkGZIP(url):
                 return response.read().decode('utf-8')
             else:
                 return response.read()
-    except:
+    except Exception as e:
+        print(e)
         return None
 
 
@@ -346,10 +348,6 @@ def getM3uCategories(live, vod):
                 channelnum += 1
                 name = 'Channel ' + str(channelnum)
 
-                if line.startswith('https'):
-                    line.replace('https', 'http')
-                series_url = line.strip()
-
         elif line.startswith('http'):
             source = line.strip()
 
@@ -478,7 +476,10 @@ def downloadrytec():
 
 
 def downloadgetfile(url):
+    print("**** downloadgetfile ****")
+
     response = checkGZIP(url)
+
     channelnum = 0
     m3uValues = {}
     series_group_title = 'Uncategorised'
@@ -499,11 +500,11 @@ def downloadgetfile(url):
                 else:
                     series_group_title = 'Uncategorised'
 
-                if re.search('(?<=,).*$', line) is not None:
-                    series_name = re.search('(?<=,).*$', line).group().strip()
-
-                elif re.search('tvg-name=\"(.*?)\"', line) is not None:
+                if re.search('tvg-name=\"(.*?)\"', line) is not None:
                     series_name = re.search('tvg-name=\"(.*?)\"', line).group(1).strip()
+
+                elif re.search('(?<=",).*$', line) is not None:
+                    series_name = re.search('(?<=",).*$', line).group().strip()
 
                 else:
                     series_name = ''
@@ -516,7 +517,6 @@ def downloadgetfile(url):
                 series_url = line.strip()
 
                 if '/series/' in series_url:
-
                     if series_group_title not in m3uValues:
                         m3uValues[series_group_title] = [{'name': series_name, 'url': series_url}]
                     else:

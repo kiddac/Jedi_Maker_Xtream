@@ -214,7 +214,7 @@ class JediMakerXtream_Playlist(Screen):
                         if param.startswith("type"):
                             self.type = param.split('=')[1]
                         if param.startswith("output"):
-                            self.output = param.split('=')[1].strip()
+                            self.output = param.split('=')[1].split(' ')[0].strip()
 
                 player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
                 panel_api = str(self.host) + 'panel_api.php?username=' + str(self.username) + '&password=' + str(self.password)
@@ -347,7 +347,10 @@ class JediMakerXtream_Playlist(Screen):
 
             if 'allowed_output_formats' in self.playlist_data['user_info']:
                 if self.output not in self.playlist_data['user_info']['allowed_output_formats']:
-                    self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0])
+                    try:
+                        self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0])
+                    except:
+                        self.output = "ts"
 
         if paneltype == "xtream":
             self.playlist_data['playlist_info'] = OrderedDict([

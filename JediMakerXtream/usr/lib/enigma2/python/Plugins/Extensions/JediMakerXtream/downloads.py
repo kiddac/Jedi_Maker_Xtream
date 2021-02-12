@@ -30,7 +30,7 @@ def checkGZIP(url):
     request = Request(url, headers=hdr)
 
     try:
-        response = urlopen(request, timeout=10)
+        response = urlopen(request, timeout=20)
 
         if response.info().get('Content-Encoding') == 'gzip':
             buffer = StringIO(response.read())

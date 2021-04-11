@@ -71,7 +71,6 @@ class JediMakerXtream_Menu(Screen):
         else:
             self.createSetup()
             
-
     def createSetup(self):
         self.list = []
 

@@ -276,7 +276,7 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
 
         configfile.save()
         self.close()
-  
+
         ConfigListScreen.keySave(self)
 
     def cancel(self, answer=None):

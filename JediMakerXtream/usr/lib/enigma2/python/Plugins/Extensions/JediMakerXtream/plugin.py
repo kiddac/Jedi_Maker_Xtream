@@ -67,10 +67,7 @@ alias_file = '/etc/enigma2/jediplaylists/alias.txt'
 sat28_file = '/etc/enigma2/jediplaylists/28.2e.txt'
 
 
-hdr = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
-       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-       'Accept-Encoding': 'deflate'}
-
+hdr = {'User-Agent': 'Enigma2 - JediMakerXtream Plugin'}
 
 if not os.path.exists('/etc/enigma2/jediplaylists/'):
     os.makedirs('/etc/enigma2/jediplaylists/')

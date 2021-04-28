@@ -119,12 +119,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
             jglob.epg_provider = True
 
-        elif self.playlisttype == 'panel':
-            username = jglob.current_playlist['playlist_info']['username']
-            password = jglob.current_playlist['playlist_info']['password']
-            jglob.xmltv_address = str(xmltvhost) + 'xmltv.php?username=' + str(username) + '&password=' + str(password)
-            jglob.epg_provider = True
-
         else:
             jglob.epg_provider = False
 
@@ -157,13 +151,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             except:
                 self.timer.callback.append(self.downloadEnigma2Data)
 
-        elif self.playlisttype == "panel":
-            self.timer = eTimer()
-            self.timer.start(self.pause, 1)
-            try:
-                self.timer_conn = self.timer.timeout.connect(self.getPanelData)
-            except:
-                self.timer.callback.append(self.getPanelData)
         else:
             self.createConfig()
             self.createSetup()
@@ -180,79 +167,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         downloads.downloadlivecategories(self.LiveCategoriesUrl)
         downloads.downloadvodcategories(self.VodCategoriesUrl)
         downloads.downloadseriescategories(self.SeriesCategoriesUrl)
-        self.createConfig()
-        self.createSetup()
-
-    def getPanelData(self):
-        jglob.livecategories = []
-        jglob.vodcategories = []
-        jglob.seriescategories = []
-
-        valid = False
-
-        # panel type 1
-        downloads.getpanellive(jglob.current_playlist)
-        downloads.getpanelvod(jglob.current_playlist)
-        downloads.getpanelseries(jglob.current_playlist)
-
-        # panel type 2
-        if 'categories' in jglob.current_playlist:
-            if 'live' in jglob.current_playlist['categories']:
-                jglob.haslive = True
-                try:
-                    jglob.livecategories = jglob.current_playlist['categories']['live']
-                    valid = True
-                except:
-                    print("\n ***** download live category error *****")
-                    jglob.haslive = False
-
-                if valid:
-
-                    if jglob.livecategories == [] or 'user_info' in jglob.livecategories or 'category_id' not in jglob.livecategories[0]:
-                        jglob.haslive = False
-                        jglob.livecategories == []
-
-                    if jglob.haslive is False or jglob.livecategories == []:
-                        jglob.live = False
-
-            valid = False
-
-            if 'movie' in jglob.current_playlist['categories']:
-                jglob.hasvod = True
-                try:
-                    jglob.vodcategories = jglob.current_playlist['categories']['movie']
-                    valid = True
-                except:
-                    print("\n ***** download vod category error *****")
-                    jglob.hasvod = False
-
-                if valid:
-                    if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
-                        jglob.hasvod = False
-                        jglob.vodcategories == []
-
-                    if jglob.hasvod is False or jglob.vodcategories == []:
-                        jglob.vod = False
-
-            valid = False
-
-            if 'series' in jglob.current_playlist['categories']:
-                jglob.hasseries = True
-                try:
-                    jglob.seriescategories = jglob.current_playlist['categories']['series']
-                    valid = True
-                except:
-                    print("\n ***** download series category error *****")
-                    jglob.hasseries = False
-
-                if valid:
-                    if jglob.seriescategories == [] or 'user_info' in jglob.seriescategories or 'category_id' not in jglob.seriescategories[0]:
-                        jglob.hasseries = False
-                        jglob.seriescategories == []
-
-                    if jglob.hasseries is False or jglob.seriescategories == []:
-                        jglob.series = False
-
         self.createConfig()
         self.createSetup()
 
@@ -304,7 +218,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
         self.list.append(getConfigListEntry(_('Use name as bouquet prefix'), self.PrefixNameCfg))
 
-        if self.playlisttype == 'xtream' or self.playlisttype == 'panel':
+        if self.playlisttype == 'xtream':
 
             if jglob.haslive:
                 self.list.append(getConfigListEntry(_('Live categories'), self.LiveCategoriesCfg))
@@ -593,22 +507,6 @@ class JediMakerXtream_ChooseBouquets(Screen):
             if jglob.live or jglob.vod or jglob.series:
                 self.getcategories()
 
-        elif self.playlisttype == 'panel':
-            protocol = jglob.current_playlist['playlist_info']['protocol']
-            domain = jglob.current_playlist['playlist_info']['domain']
-            port = str(jglob.current_playlist['playlist_info']['port'])
-            host = str(protocol) + str(domain) + ':' + str(port) + '/'
-            username = jglob.current_playlist['playlist_info']['username']
-            password = jglob.current_playlist['playlist_info']['password']
-            self['lab1'].setText('Getting categories')
-            self.timer = eTimer()
-            self.timer.start(self.pause, 1)
-
-            try:
-                self.timer_conn = self.timer.timeout.connect(self.getcategories)
-            except:
-                self.timer.callback.append(self.getcategories)
-
         else:
             jglob.live = True
             jglob.vod = True
@@ -630,17 +528,6 @@ class JediMakerXtream_ChooseBouquets(Screen):
 
     def getcategories(self):
         jglob.categories = []
-
-        if self.playlisttype == 'panel':
-            jglob.livecategories = []
-            jglob.vodcategories = []
-            jglob.seriescategories = []
-            if jglob.live:
-                downloads.getpanellive(jglob.current_playlist)
-            if jglob.vod:
-                downloads.getpanelvod(jglob.current_playlist)
-            if jglob.series:
-                downloads.getpanelseries(jglob.current_playlist)
         jfunc.getcategories()
         self.nextjob(_('Getting selection list'), self.ignorelist)
 
@@ -771,7 +658,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
         if jglob.series:
             jglob.current_playlist['bouquet_info']['series_update'] = datetime.now().strftime('%x  %X')
 
-        if self.playlisttype == 'xtream' or self.playlisttype == 'panel':
+        if self.playlisttype == 'xtream':
             jglob.selectedcategories = self.getSelectionsList()
 
             for category in jglob.selectedcategories:

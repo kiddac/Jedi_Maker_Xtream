@@ -225,68 +225,6 @@ def downloadseriesstreams(url):
         if jglob.hasseries is False:
             jglob.series = False
 
-
-def getpanellive(playlist):
-    jglob.livestreams = []
-    if 'available_channels' in playlist:
-        for channel in playlist['available_channels']:
-            if 'stream_type' in playlist['available_channels'][channel]:
-                if playlist['available_channels'][channel]['stream_type'] == "live":
-                    jglob.livestreams.append(playlist['available_channels'][channel])
-                    jglob.haslive = True
-                    jglob.live = True
-
-            elif 'live' in playlist['available_channels'][channel]:
-                if playlist['available_channels'][channel]['live'] == "1":
-                    jglob.haslive = True
-                    jglob.live = True
-                    if playlist['available_channels'][channel]['category_name'] is None:
-                        playlist['available_channels'][channel]['category_name'] = "Live Streams"
-                    if playlist['available_channels'][channel]['category_id'] is None:
-                        playlist['available_channels'][channel]['category_id'] = "1"
-
-                    categoryValues = [str(playlist['available_channels'][channel]['category_name']), 'Live', int(playlist['available_channels'][channel]['category_id']), True]
-                    if categoryValues not in jglob.categories:
-                        jglob.categories.append(categoryValues)
-                    jglob.livestreams.append(playlist['available_channels'][channel])
-
-
-def getpanelvod(playlist):
-    jglob.vodstreams = []
-    if 'available_channels' in playlist:
-        for channel in playlist['available_channels']:
-            if 'stream_type' in playlist['available_channels'][channel]:
-                if playlist['available_channels'][channel]['stream_type'] == "movie":
-                    jglob.vodstreams.append(playlist['available_channels'][channel])
-                    jglob.hasvod = True
-                    jglob.vod = True
-
-            elif 'live' in playlist['available_channels'][channel]:
-                if playlist['available_channels'][channel]['live'] == "0":
-                    jglob.hasvod = True
-                    jglob.vod = True
-
-                    if playlist['available_channels'][channel]['category_name'] is None:
-                        playlist['available_channels'][channel]['category_name'] = "Movies"
-                    if playlist['available_channels'][channel]['category_id'] is None:
-                        playlist['available_channels'][channel]['category_id'] = "2"
-
-                    categoryValues = [str(playlist['available_channels'][channel]['category_name']), 'VOD', int(playlist['available_channels'][channel]['category_id']), True]
-                    if categoryValues not in jglob.categories:
-                        jglob.categories.append(categoryValues)
-                    jglob.vodstreams.append(playlist['available_channels'][channel])
-
-
-def getpanelseries(playlist):
-    if 'available_channels' in playlist:
-        for channel in playlist['available_channels']:
-            if 'stream_type' in playlist['available_channels'][channel]:
-                if playlist['available_channels'][channel]['stream_type'] == "series":
-                    jglob.seriesstreams.append(playlist['available_channels'][channel])
-                    jglob.hasvod = True
-                    jglob.vod = True
-
-
 def getM3uCategories(live, vod):
     lines = []
     channelnum = 0

@@ -175,7 +175,6 @@ class JediMakerXtream_Playlist(Screen):
 
                 response = ""
                 player = False
-                panel = False
                 valid = False
                 self.playlist_data = {}
 
@@ -217,11 +216,7 @@ class JediMakerXtream_Playlist(Screen):
                             self.output = param.split('=')[1].split(' ')[0].strip()
 
                 player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
-                panel_api = str(self.host) + 'panel_api.php?username=' + str(self.username) + '&password=' + str(self.password)
-                # full_url = line
-
                 player_req = Request(player_api, headers=hdr)
-                panel_req = Request(panel_api, headers=hdr)
 
                 # check if iptv playlist
                 if 'get.php' in line and self.domain != '' and self.username != '' and self.password != '':
@@ -236,21 +231,6 @@ class JediMakerXtream_Playlist(Screen):
 
                     except:
                         pass
-
-                    if not valid or response == "":
-                        player = False
-                        try:
-
-                            response = urlopen(panel_req, timeout=cfg.timeout.value + 5)
-                            panel = True
-                            valid = self.checkPanel(response)
-
-                        except Exception as e:
-                            print(e)
-                            pass
-
-                        except:
-                            pass
 
                     if not valid or response == "":
                         try:
@@ -285,8 +265,6 @@ class JediMakerXtream_Playlist(Screen):
 
                 if player:
                     self.buildPlaylist(line, valid, "xtream")
-                elif panel:
-                    self.buildPlaylist(line, valid, "panel")
                 else:
                     self.buildPlaylist(line, valid, "extinf")
 
@@ -367,21 +345,6 @@ class JediMakerXtream_Playlist(Screen):
                 ("playlisttype", "xtream"),
             ])
 
-        elif paneltype == "panel":
-            self.playlist_data['playlist_info'] = OrderedDict([
-                ("index", self.index),
-                ("protocol", self.protocol),
-                ("domain", self.domain),
-                ("port", self.port),
-                ("username", self.username),
-                ("password", self.password),
-                ("type", self.type),
-                ("output", self.output),
-                ("address", line),
-                ("valid", valid),
-                ("playlisttype", "panel"),
-            ])
-
         else:
             self.playlist_data['playlist_info'] = OrderedDict([
                 ("index", self.index),
@@ -414,7 +377,7 @@ class JediMakerXtream_Playlist(Screen):
             validstate = 'Invalid'
 
             if playlist != {}:
-                if playlist['playlist_info']['playlisttype'] == 'xtream' or playlist['playlist_info']['playlisttype'] == 'panel' or 'get.php' in playlist['playlist_info']['address']:
+                if playlist['playlist_info']['playlisttype'] == 'xtream' or 'get.php' in playlist['playlist_info']['address']:
                     if 'bouquet_info' in playlist and 'name' in playlist['bouquet_info']:
                         alias = playlist['bouquet_info']['name']
                     else:
@@ -487,7 +450,7 @@ class JediMakerXtream_Playlist(Screen):
                 else:
                     self.session.open(MessageBox, _('Server down or user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
         else:
-            if (jglob.current_playlist['playlist_info']['playlisttype'] == 'xtream' or jglob.current_playlist['playlist_info']['playlisttype'] == 'panel') and jglob.current_playlist['playlist_info']['valid'] is False:
+            if jglob.current_playlist['playlist_info']['playlisttype'] == 'xtream' and jglob.current_playlist['playlist_info']['valid'] is False:
                 self.session.open(MessageBox, _('Url is invalid or playlist/user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
 
             if jglob.current_playlist['playlist_info']['playlisttype'] == 'external':

@@ -196,10 +196,15 @@ class JediMakerXtream_Playlist(Screen):
             self.port = 80
             self.username = ''
             self.password = ''
-            self.type = 'm3u_plus'
+            self.type = 'm3u'
             self.output = 'ts'
             self.host = ''
             self.name = ''
+            player_api = ''
+            player = False
+            valid = False
+            response = ""
+            self.playlist_data = {}
 
             if not line.startswith("#") and line.startswith('http'):
                 line = line.strip()
@@ -241,9 +246,6 @@ class JediMakerXtream_Playlist(Screen):
 
                 player_api = "%s/player_api.php?username=%s&password=%s" % (self.host, self.username, self.password)
                 player_req = Request(player_api, headers=hdr)
-                player = False
-                valid = False
-                response = ""
 
                 # check if iptv playlist
                 if 'get.php' in line and self.domain != '' and self.username != '' and self.password != '':
@@ -258,6 +260,20 @@ class JediMakerXtream_Playlist(Screen):
 
                     except:
                         pass
+
+                    if not valid or response == "":
+                        player = False
+                        try:
+                            response = urlopen(panel_req, timeout=cfg.timeout.value + 5)
+                            panel = True
+                            valid = self.checkPanel(response)
+
+                        except Exception as e:
+                            print(e)
+                            pass
+
+                        except:
+                            pass
 
                     if not valid or response == "":
                         try:

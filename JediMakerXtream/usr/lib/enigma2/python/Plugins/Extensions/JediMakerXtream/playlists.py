@@ -35,6 +35,11 @@ if pythonVer == 3:
 else:
     from urllib2 import urlopen, Request
 
+try:
+    from urlparse import urlparse, parse_qs
+except:
+    from urllib.parse import urlparse, parse_qs
+
 screenwidth = getDesktop(0).size()
 
 
@@ -166,57 +171,79 @@ class JediMakerXtream_Playlist(Screen):
 
         self.playlists_all_new = []
 
-        with open(playlist_path) as f:
+        with open(playlist_path, 'r+') as f:
             lines = f.readlines()
             f.seek(0)
-            self.index = 0
-
+            f.writelines((line.strip(' ') for line in lines if line.strip()))
+            f.seek(0)
             for line in lines:
+                if not line.startswith('http://') and not line.startswith('https://') and not line.startswith('#'):
+                    line = '# ' + line
+                if "=mpegts" in line:
+                    line = line.replace("=mpegts", "=ts")
+                if "=hls" in line:
+                    line = line.replace("=hls", "=m3u8")
+                if line.strip() == "#":
+                    line = ""
+                f.write(line)
+            f.seek(0)
 
-                response = ""
-                player = False
-                valid = False
-                self.playlist_data = {}
+        self.index = 0
 
-                self.protocol = 'http://'
-                self.domain = ''
-                self.port = 80
-                self.username = ''
-                self.password = ''
-                self.type = 'm3u'
-                self.output = 'ts'
-                self.host = ''
-                player_api = ''
-                filename = ''
+        for line in lines:
+            self.protocol = 'http://'
+            self.domain = ''
+            self.port = 80
+            self.username = ''
+            self.password = ''
+            self.type = 'm3u_plus'
+            self.output = 'ts'
+            self.host = ''
+            self.name = ''
 
-                urlsplit1 = line.split("/")
-                urlsplit2 = line.split("?")
+            if not line.startswith("#") and line.startswith('http'):
+                line = line.strip()
 
-                self.protocol = urlsplit1[0] + "//"
+                parsed_uri = urlparse(line)
+
+                self.protocol = parsed_uri.scheme + "://"
 
                 if not (self.protocol == "http://" or self.protocol == "https://"):
                     continue
 
-                if len(urlsplit1) > 2:
-                    self.domain = urlsplit1[2].split(':')[0]
-                    if len(urlsplit1[2].split(':')) > 1:
-                        self.port = urlsplit1[2].split(':')[1]
+                self.domain = parsed_uri.hostname
+                self.name = self.domain
+                if line.partition(" #")[-1]:
+                    self.name = line.partition(" #")[-1]
 
-                self.host = str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'
+                if parsed_uri.port:
+                    self.port = parsed_uri.port
 
-                if len(urlsplit2) > 1:
-                    for param in urlsplit2[1].split("&"):
-                        if param.startswith("username"):
-                            self.username = param.split('=')[1]
-                        if param.startswith("password"):
-                            self.password = param.split('=')[1]
-                        if param.startswith("type"):
-                            self.type = param.split('=')[1]
-                        if param.startswith("output"):
-                            self.output = param.split('=')[1].split(' ')[0].strip()
+                self.host = "%s%s:%s" % (self.protocol, self.domain, self.port)
 
-                player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
+                query = parse_qs(parsed_uri.query, keep_blank_values=True)
+
+                if "username" in query:
+                    self.username = query['username'][0].strip()
+                else:
+                    continue
+
+                if "password" in query:
+                    self.password = query['password'][0].strip()
+                else:
+                    continue
+
+                if "type" in query:
+                    self.type = query['type'][0].strip()
+
+                if "output" in query:
+                    self.output = query['output'][0].strip()
+
+                player_api = "%s/player_api.php?username=%s&password=%s" % (self.host, self.username, self.password)
                 player_req = Request(player_api, headers=hdr)
+                player = False
+                valid = False
+                response = ""
 
                 # check if iptv playlist
                 if 'get.php' in line and self.domain != '' and self.username != '' and self.password != '':
@@ -269,6 +296,7 @@ class JediMakerXtream_Playlist(Screen):
                     self.buildPlaylist(line, valid, "extinf")
 
         # add local M3Us
+        filename = ''
         for filename in os.listdir(cfg.m3ulocation.value):
 
             self.playlist_data = {}
@@ -343,6 +371,7 @@ class JediMakerXtream_Playlist(Screen):
                 ("address", line),
                 ("valid", valid),
                 ("playlisttype", "xtream"),
+                ("name", self.name),
             ])
 
         else:
@@ -354,6 +383,7 @@ class JediMakerXtream_Playlist(Screen):
                 ("address", line),
                 ("valid", valid),
                 ("playlisttype", 'external'),
+                ("name", self.name),
             ])
 
         if self.playlists_all != []:
@@ -378,10 +408,7 @@ class JediMakerXtream_Playlist(Screen):
 
             if playlist != {}:
                 if playlist['playlist_info']['playlisttype'] == 'xtream' or 'get.php' in playlist['playlist_info']['address']:
-                    if 'bouquet_info' in playlist and 'name' in playlist['bouquet_info']:
-                        alias = playlist['bouquet_info']['name']
-                    else:
-                        alias = playlist['playlist_info']['domain']
+                    alias = playlist['playlist_info']['name']
                 else:
                     alias = playlist['playlist_info']['address']
 

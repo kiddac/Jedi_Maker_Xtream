@@ -99,7 +99,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             host = str(protocol) + str(domain) + ':' + str(port) + '/'
             xmltvhost = str(xmltvprotocol) + str(domain) + ':' + str(port) + '/'
 
-            jglob.name = domain
+            jglob.name = jglob.current_playlist['playlist_info']['name']
         else:
             jglob.name = address
 
@@ -188,7 +188,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self.EpgRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_rytec_uk))
         self.EpgSwapNamesCfg = NoSave(ConfigYesNo(default=jglob.epg_swap_names))
         self.ForceRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_force_rytec_uk))
-        
+
         streamtypechoices = [('1', 'DVB(1)'), ('4097', 'IPTV(4097)')]
 
         if os.path.exists("/usr/bin/gstplayer"):

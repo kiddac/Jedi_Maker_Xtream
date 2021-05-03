@@ -188,21 +188,20 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self.EpgRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_rytec_uk))
         self.EpgSwapNamesCfg = NoSave(ConfigYesNo(default=jglob.epg_swap_names))
         self.ForceRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_force_rytec_uk))
+        
+        streamtypechoices = [('1', 'DVB(1)'), ('4097', 'IPTV(4097)')]
 
-        if os.path.isdir('/usr/lib/enigma2/python/Plugins/SystemPlugins/ServiceApp'):
-            self.LiveTypeCfg = NoSave(ConfigSelection(default=jglob.live_type, choices=[
-                ('1', _('DVB(1)')),
-                ('4097', _('IPTV(4097)')),
-                ('5001', _('GStreamer(5001)')),
-                ('5002', 'ExtPlayer(5002)')]))
-            self.VodTypeCfg = NoSave(ConfigSelection(default=jglob.vod_type, choices=[
-                ('1', _('DVB(1)')),
-                ('4097', _('IPTV(4097)')),
-                ('5001', _('GStreamer(5001)')),
-                ('5002', 'ExtPlayer(5002)')]))
-        else:
-            self.LiveTypeCfg = NoSave(ConfigSelection(default=jglob.live_type, choices=[('1', _('DVB(1)')), ('4097', _('IPTV(4097)'))]))
-            self.VodTypeCfg = NoSave(ConfigSelection(default=jglob.vod_type, choices=[('1', _('DVB(1)')), ('4097', _('IPTV(4097)'))]))
+        if os.path.exists("/usr/bin/gstplayer"):
+            streamtypechoices.append(('5001', 'GStreamer(5001)'))
+
+        if os.path.exists("/usr/bin/exteplayer3"):
+            streamtypechoices.append(('5002', 'ExtePlayer(5002)'))
+
+        if os.path.exists("/usr/bin/apt-get"):
+            streamtypechoices.append(('8193', 'GStreamer(8193)'))
+
+        self.LiveTypeCfg = NoSave(ConfigSelection(default=jglob.live_type, choices=streamtypechoices))
+        self.VodTypeCfg = NoSave(ConfigSelection(default=jglob.vod_type, choices=streamtypechoices))
 
         self.bufferoption = '0'
         if jglob.livebuffer != '0':

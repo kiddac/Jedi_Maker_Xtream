@@ -270,7 +270,8 @@ class JediMakerXtream_Catchup(Screen):
         for date in jglob.dates:
             self.list.append((str(date[0]), str(date[1])))
 
-        self['newlist'].list = self.list.reverse()
+        # self['newlist'].list = self.list.reverse()
+        self.list.reverse()
         self['newlist'].setList(self.list)
 
     def getSelectedDateData(self):
@@ -369,10 +370,13 @@ class JediMakerXtream_Catchup_Listings(Screen):
     def createSetup(self):
         self.list = []
 
+        self.catchup_all.reverse()
         for listing in self.catchup_all:
             self.list.append((str(listing[0]), str(listing[1]), str(listing[2]), str(listing[3]), str(listing[4]), str(listing[5]), str(listing[6])))
+  
 
-        self['list'].list = self.list.reverse()
+        # self['list'].list = self.list.reverse()
+        # self.list.reverse()
         self['list'].setList(self.list)
 
         if self.list != []:

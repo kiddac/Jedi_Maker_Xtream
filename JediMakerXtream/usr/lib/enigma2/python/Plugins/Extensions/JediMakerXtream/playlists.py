@@ -212,10 +212,10 @@ class JediMakerXtream_Playlist(Screen):
                 parsed_uri = urlparse(line)
 
                 self.protocol = parsed_uri.scheme + "://"
-
-                if not (self.protocol == "http://" or self.protocol == "https://"):
+    
+                if not self.protocol == "http://" and not self.protocol == "https://":
                     continue
-
+                
                 self.domain = parsed_uri.hostname
                 self.name = self.domain
                 if line.partition(" #")[-1]:
@@ -227,17 +227,13 @@ class JediMakerXtream_Playlist(Screen):
                 self.host = "%s%s:%s" % (self.protocol, self.domain, self.port)
 
                 query = parse_qs(parsed_uri.query, keep_blank_values=True)
-
+               
                 if "username" in query:
                     self.username = query['username'][0].strip()
-                else:
-                    continue
-
+               
                 if "password" in query:
                     self.password = query['password'][0].strip()
-                else:
-                    continue
-
+           
                 if "type" in query:
                     self.type = query['type'][0].strip()
 

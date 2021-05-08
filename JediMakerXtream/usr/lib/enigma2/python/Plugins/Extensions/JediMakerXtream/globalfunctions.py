@@ -142,6 +142,7 @@ def readbouquetdata():
     jglob.livebuffer = jglob.current_playlist['bouquet_info']['buffer_live']
     jglob.vodbuffer = jglob.current_playlist['bouquet_info']['buffer_vod']
     jglob.fixepg = jglob.current_playlist['bouquet_info']['fixepg']
+    jglob.catchupshift = jglob.current_playlist['bouquet_info']['catchupshift']
 
     if jglob.selected_live_categories != []:
         jglob.live = True

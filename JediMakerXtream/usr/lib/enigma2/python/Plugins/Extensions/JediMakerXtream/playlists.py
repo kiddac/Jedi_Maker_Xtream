@@ -15,8 +15,8 @@ from collections import OrderedDict
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
+from datetime import datetime
 from enigma import getDesktop, eTimer
-
 
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
@@ -212,10 +212,10 @@ class JediMakerXtream_Playlist(Screen):
                 parsed_uri = urlparse(line)
 
                 self.protocol = parsed_uri.scheme + "://"
-    
+
                 if not self.protocol == "http://" and not self.protocol == "https://":
                     continue
-                
+
                 self.domain = parsed_uri.hostname
                 self.name = self.domain
                 if line.partition(" #")[-1]:
@@ -227,13 +227,13 @@ class JediMakerXtream_Playlist(Screen):
                 self.host = "%s%s:%s" % (self.protocol, self.domain, self.port)
 
                 query = parse_qs(parsed_uri.query, keep_blank_values=True)
-               
+
                 if "username" in query:
                     self.username = query['username'][0].strip()
-               
+
                 if "password" in query:
                     self.password = query['password'][0].strip()
-           
+
                 if "type" in query:
                     self.type = query['type'][0].strip()
 
@@ -347,6 +347,9 @@ class JediMakerXtream_Playlist(Screen):
             pass
 
     def buildPlaylist(self, line, valid, paneltype):
+
+        serveroffset = 0
+
         if 'user_info' in self.playlist_data:
             if 'message' in self.playlist_data['user_info']:
                 del self.playlist_data['user_info']['message']
@@ -370,6 +373,10 @@ class JediMakerXtream_Playlist(Screen):
                     except:
                         self.output = "ts"
 
+            if 'time_now' in self.playlist_data['server_info']:
+                time_now_datestamp = datetime.strptime(str(self.playlist_data['server_info']['time_now']), "%Y-%m-%d %H:%M:%S")
+                serveroffset = datetime.now().hour - time_now_datestamp.hour
+
         if paneltype == "xtream":
             self.playlist_data['playlist_info'] = OrderedDict([
                 ("index", self.index),
@@ -384,6 +391,7 @@ class JediMakerXtream_Playlist(Screen):
                 ("valid", valid),
                 ("playlisttype", "xtream"),
                 ("name", self.name),
+                ("serveroffset", serveroffset),
             ])
 
         else:

@@ -84,8 +84,12 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self.cfg_extensions = getConfigListEntry(_('Show in extensions'), cfg.extensions)
         self.cfg_skin = getConfigListEntry(_('Select skin'), cfg.skin)
         self.cfg_timeout = getConfigListEntry(_('Server timeout (seconds)'), cfg.timeout)
+        
         self.cfg_catchup = getConfigListEntry(_('Prefix Catchup channels'), cfg.catchup)
         self.cfg_catchupprefix = getConfigListEntry(_('Select Catchup prefix symbol'), cfg.catchupprefix)
+        self.cfg_catchupstart = getConfigListEntry(_('Margin before catchup (mins)'), cfg.catchupstart)
+        self.cfg_catchupend = getConfigListEntry(_('Margin after catchup (mins)'), cfg.catchupend)
+        
         self.cfg_groups = getConfigListEntry(_('Group bouquets into its own folder'), cfg.groups)
 
     def createSetup(self):
@@ -101,6 +105,10 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self.list.append(self.cfg_catchup)
         if cfg.catchup.value is True:
             self.list.append(self.cfg_catchupprefix)
+        
+        self.list.append(self.cfg_catchupstart)
+        self.list.append(self.cfg_catchupend)
+        
         self.list.append(self.cfg_timeout)
         self.list.append(self.cfg_main)
         self.list.append(self.cfg_extensions)

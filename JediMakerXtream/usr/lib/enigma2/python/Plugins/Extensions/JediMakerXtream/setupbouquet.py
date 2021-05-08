@@ -14,7 +14,7 @@ from .plugin import skin_path, cfg, playlist_file
 
 from collections import OrderedDict
 from Components.ActionMap import ActionMap
-from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigYesNo, ConfigNumber, NoSave
+from Components.config import getConfigListEntry, ConfigText, ConfigSelection, ConfigYesNo, ConfigNumber, NoSave, ConfigSelectionNumber
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -92,8 +92,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         if self.playlisttype != 'local':
             protocol = jglob.current_playlist['playlist_info']['protocol']
             xmltvprotocol = protocol
-            # if 'https' in xmltvprotocol:
-            # xmltvprotocol = xmltvprotocol.replace('https', 'http')
             domain = jglob.current_playlist['playlist_info']['domain']
             port = str(jglob.current_playlist['playlist_info']['port'])
             host = str(protocol) + str(domain) + ':' + str(port) + '/'
@@ -141,7 +139,12 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             jglob.vod = False
             jglob.series = False
             jglob.prefix_name = True
+
+            jglob.livebuffer = "0"
+            jglob.vodbuffer = "0"
+
             jglob.fixepg = False
+            jglob.catchupshift = 0
 
         if self.playlisttype == 'xtream':
             self.timer = eTimer()
@@ -188,6 +191,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self.EpgRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_rytec_uk))
         self.EpgSwapNamesCfg = NoSave(ConfigYesNo(default=jglob.epg_swap_names))
         self.ForceRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_force_rytec_uk))
+
+        self.catchupShiftCfg = NoSave(ConfigSelectionNumber(min=-9, max=9, stepwidth=1, default=jglob.catchupshift))
 
         streamtypechoices = [('1', 'DVB(1)'), ('4097', 'IPTV(4097)')]
 
@@ -239,6 +244,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
             if (self.LiveCategoriesCfg.value is True and self.LiveTypeCfg.value != "1") or (self.VodCategoriesCfg.value is True and self.VodTypeCfg.value != "1"):
                 self.list.append(getConfigListEntry(_('Buffer streams'), self.BufferCfg))
+
+            if jglob.haslive:
+                self.list.append(getConfigListEntry(_('Catchup Timeshift'), self.catchupShiftCfg))
 
             if self.LiveCategoriesCfg.value is True and jglob.has_epg_importer:
                 self.list.append(getConfigListEntry(_('Use your provider EPG'), self.EpgProviderCfg))
@@ -328,7 +336,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             return
 
         if entry == _('EPG url'):
-            self['information'].setText(_("Enter the EPG url for your playlist. If unknown leave as default."))
+            self['information'].setText(_("\nEnter the EPG url for your playlist. If unknown leave as default."))
             return
 
         if entry == _('Use Rytec UK EPG'):
@@ -340,13 +348,17 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             return
 
         if entry == _('UK only: Force UK name swap'):
-            self['information'].setText(_("Use for UK providers that do not specify UK in the category title or channel title.\nMay cause non UK channels to have the wrong epg.\nTrying creating bouquets without this option turned off first."))
+            self['information'].setText(_("\nUse for UK providers that do not specify UK in the category title or channel title.\nMay cause non UK channels to have the wrong epg.\nTrying creating bouquets without this option turned off first."))
 
         if entry == _('Buffer streams'):
             self['information'].setText(_("\nSet stream buffer (Experimental)."))
 
         if entry == _('Rebuild XMLTV EPG data'):
             self['information'].setText(_("\n(Optional) Download and attempt to rebuild XMLTV EPG data to UTF-8 encoding (Slower).\nOnly required if you think you have corrupt external EPG."))
+            return
+
+        if entry == _('Catchup Timeshift'):
+            self['information'].setText(_("\nOffset the displayed catchup times"))
             return
 
     def handleInputHelpers(self):
@@ -412,6 +424,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         jglob.epg_rytec_uk = self.EpgRytecUKCfg.value
         jglob.epg_swap_names = self.EpgSwapNamesCfg.value
         jglob.epg_force_rytec_uk = self.ForceRytecUKCfg.value
+        jglob.catchupshift = self.catchupShiftCfg.value
 
         if self.LiveTypeCfg.value != "1":
             jglob.livebuffer = self.BufferCfg.value
@@ -645,7 +658,8 @@ class JediMakerXtream_ChooseBouquets(Screen):
             ('prefix_name', jglob.prefix_name),
             ('buffer_live', jglob.livebuffer),
             ('buffer_vod', jglob.vodbuffer),
-            ('fixepg', jglob.fixepg)
+            ('fixepg', jglob.fixepg),
+            ('catchupshift', jglob.catchupshift)
         ])
 
         if jglob.live:

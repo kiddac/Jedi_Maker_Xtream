@@ -6,7 +6,7 @@ from . import _
 from . import jediglobals as jglob
 
 from Components.ActionMap import HelpableActionMap
-from Components.config import config, ConfigSelection, ConfigNumber, ConfigClock, ConfigDirectory, ConfigSubsection, ConfigYesNo
+from Components.config import config, ConfigSelection, ConfigNumber, ConfigClock, ConfigDirectory, ConfigSubsection, ConfigYesNo, ConfigSelectionNumber
 from enigma import eTimer, eServiceReference, getDesktop, addFont
 from Plugins.Plugin import PluginDescriptor
 from Screens.EpgSelection import EPGSelection
@@ -55,6 +55,8 @@ cfg.bouquet_id = ConfigNumber()
 cfg.timeout = ConfigNumber(default=3)
 cfg.catchup = ConfigYesNo(default=False)
 cfg.catchupprefix = ConfigSelection(default='~', choices=[('~', '~'), ('!', '!'), ('#', '#'), ('-', '-'), ('<', '<'), ('^', '^')])
+cfg.catchupstart = ConfigSelectionNumber(0, 30, 1, default=0)
+cfg.catchupend = ConfigSelectionNumber(0, 30, 1, default=0)
 cfg.groups = ConfigYesNo(default=False)
 
 skin_path = skin_directory + cfg.skin.value + '/'

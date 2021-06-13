@@ -364,6 +364,10 @@ class JediMakerXtream_Playlist(Screen):
                 if 'timestamp_now' in self.playlist_data['server_info']:
                     del self.playlist_data['server_info']['timestamp_now']
 
+                if 'time_now' in self.playlist_data['server_info']:
+                    time_now_datestamp = datetime.strptime(str(self.playlist_data['server_info']['time_now']), "%Y-%m-%d %H:%M:%S")
+                    serveroffset = datetime.now().hour - time_now_datestamp.hour
+
             # if user entered output type not valid, get output type from provider.
 
             if 'allowed_output_formats' in self.playlist_data['user_info']:
@@ -372,10 +376,6 @@ class JediMakerXtream_Playlist(Screen):
                         self.output = str(self.playlist_data['user_info']['allowed_output_formats'][0])
                     except:
                         self.output = "ts"
-
-            if 'time_now' in self.playlist_data['server_info']:
-                time_now_datestamp = datetime.strptime(str(self.playlist_data['server_info']['time_now']), "%Y-%m-%d %H:%M:%S")
-                serveroffset = datetime.now().hour - time_now_datestamp.hour
 
         if paneltype == "xtream":
             self.playlist_data['playlist_info'] = OrderedDict([

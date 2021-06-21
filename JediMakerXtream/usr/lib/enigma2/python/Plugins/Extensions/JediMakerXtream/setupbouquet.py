@@ -571,6 +571,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
     def refresh(self):
         self.drawList = []
         self.drawList = [self.buildListEntry(x[0], x[1], x[2], x[3]) for x in jglob.categories]
+        self['list'].setList(self.drawList)
         self['list'].updateList(self.drawList)
 
     def toggleSelection(self):

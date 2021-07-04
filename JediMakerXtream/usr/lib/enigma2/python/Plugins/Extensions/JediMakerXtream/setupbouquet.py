@@ -155,8 +155,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
                 self.timer.callback.append(self.downloadEnigma2Data)
 
         else:
-            self.createConfig()
-            self.createSetup()
+            self.onFirstExecBegin.append(self.createConfig)
 
         self.onLayoutFinish.append(self.__layoutFinished)
 
@@ -215,6 +214,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             self.bufferoption = jglob.vodbuffer
         self.BufferCfg = NoSave(ConfigSelection(default=self.bufferoption, choices=[('0', _('No Buffering(0)')), ('1', _('Buffering Enabled(1)')), ('3', _('Progressive Buffering(3)'))]))
         self.FixEPGCfg = NoSave(ConfigYesNo(default=jglob.fixepg))
+
+        self.createSetup()
 
     def createSetup(self):
         self.list = []
@@ -292,9 +293,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self['config'].list = self.list
         self['config'].l.setList(self.list)
 
-        self.setInfo()
-        self.handleInputHelpers()
-
     # dreamos workaround for showing setting descriptions
     def setInfo(self):
         entry = str(self.getCurrentEntry())
@@ -360,6 +358,8 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         if entry == _('Catchup Timeshift'):
             self['information'].setText(_("\nOffset the displayed catchup times"))
             return
+
+        self.handleInputHelpers()
 
     def handleInputHelpers(self):
         from enigma import ePoint
@@ -566,7 +566,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
     def getStartList(self):
         self['lab1'].setText('')
         self.drawList = [self.buildListEntry(x[0], x[1], x[2], x[3]) for x in jglob.categories]
-        self.refresh()
+        self['list'].setList(self.drawList)
 
     def refresh(self):
         self.drawList = []

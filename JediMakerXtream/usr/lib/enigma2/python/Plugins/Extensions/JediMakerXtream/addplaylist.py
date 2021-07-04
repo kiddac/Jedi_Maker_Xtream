@@ -95,8 +95,7 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             'save': self.save,
         }, -2)
 
-        self.initConfig()
-        self.createSetup()
+        self.onFirstExecBegin.append(self.initConfig)
 
         self.onLayoutFinish.append(self.layoutFinished)
 
@@ -132,6 +131,8 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             self.outputCfg = NoSave(ConfigSelection(default=self.output, choices=[('ts', 'ts'), ('m3u8', 'm3u8')]))
             self.addressCfg = NoSave(ConfigText(default=self.address, fixed_size=False))
 
+        self.createSetup()
+
     def createSetup(self):
         self.list = []
         if not self.editmode:
@@ -164,9 +165,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
 
         self['config'].list = self.list
         self['config'].l.setList(self.list)
-
-        self.setInfo()
-        self.handleInputHelpers()
 
     # dreamos workaround for showing setting descriptions
     def setInfo(self):
@@ -212,6 +210,8 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
         if entry == _('Epg Url'):
             self['information'].setText(_("\nEnter EPG Url."))
             return
+
+        self.handleInputHelpers()
 
     def handleInputHelpers(self):
         from enigma import ePoint

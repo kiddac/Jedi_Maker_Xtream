@@ -225,6 +225,7 @@ def downloadseriesstreams(url):
         if jglob.hasseries is False:
             jglob.series = False
 
+
 def getM3uCategories(live, vod):
     lines = []
     channelnum = 0
@@ -358,11 +359,9 @@ def downloadrytec():
         pass
 
     if os.path.isfile(rytec_file) and os.stat(rytec_file).st_size > 0 and haslzma:
-        with lzma.open(rytec_file, 'rb') as fd:
-
+        with lzma.open(rytec_file, 'rt', encoding="UTF-8") as fd:
             with open(sat28_file, 'w') as outfile:
                 for line in fd:
-
                     if "<!-- 28.2E -->" in line and "0000FFFF" not in line:
                         jglob.rytecnames.append(line)
                     # get all 28.2e but ignore bad epg importer refs

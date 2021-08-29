@@ -57,7 +57,7 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
         self['key_green'] = StaticText(_('Save'))
         self['information'] = Label('')
 
-        self['VirtualKB'].setEnabled(False)
+        # self['VirtualKB'].setEnabled(False)
         self['VKeyIcon'] = Pixmap()
         self['VKeyIcon'].hide()
         self['HelpWindow'] = Pixmap()
@@ -93,6 +93,7 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
         self['actions'] = ActionMap(['SetupActions'], {
             'cancel': self.cancel,
             'save': self.save,
+            'ok': self.void,
         }, -2)
 
         self.onFirstExecBegin.append(self.initConfig)
@@ -104,6 +105,11 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
 
     def layoutFinished(self):
         self.setTitle(self.setup_title)
+
+    def void(self):
+        currConfig = self["config"].getCurrent()
+        if isinstance(currConfig[1], ConfigNumber):
+            pass
 
     def initConfig(self):
         if self.editmode:
@@ -221,18 +227,39 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             if isinstance(currConfig[1], ConfigText):
                 if 'VKeyIcon' in self:
                     if isinstance(currConfig[1], ConfigNumber):
-                        self['VirtualKB'].setEnabled(False)
+                        try:
+                            self['VirtualKB'].setEnabled(False)
+                        except:
+                            pass
+
+                        try:
+                            self["virtualKeyBoardActions"].setEnabled(False)
+                        except:
+                            pass
+
                         self['VKeyIcon'].hide()
                     else:
-                        self['VirtualKB'].setEnabled(True)
+                        try:
+                            self['VirtualKB'].setEnabled(True)
+                        except:
+                            pass
+
+                        try:
+                            self["virtualKeyBoardActions"].setEnabled(True)
+                        except:
+                            pass
                         self['VKeyIcon'].show()
 
                 if "HelpWindow" in self and currConfig[1].help_window and currConfig[1].help_window.instance is not None:
                     helpwindowpos = self["HelpWindow"].getPosition()
                     currConfig[1].help_window.instance.move(ePoint(helpwindowpos[0], helpwindowpos[1]))
+
             else:
                 if 'VKeyIcon' in self:
-                    self['VirtualKB'].setEnabled(False)
+                    try:
+                        self['VirtualKB'].setEnabled(False)
+                    except:
+                        pass
                     self['VKeyIcon'].hide()
 
     def changedEntry(self):

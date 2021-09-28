@@ -140,7 +140,6 @@ class JediMakerXtream_Playlist(Screen):
         return(pixmap, str(name), extra)
 
     def loadPlaylist(self):
-
         if jglob.firstrun == 0:
             self.playlists_all = jfunc.getPlaylistJson()
             self.getPlaylistUserFile()
@@ -168,7 +167,6 @@ class JediMakerXtream_Playlist(Screen):
             f.truncate()
 
     def getPlaylistUserFile(self):
-
         self.playlists_all_new = []
 
         with open(playlist_path, 'r+') as f:
@@ -258,25 +256,10 @@ class JediMakerXtream_Playlist(Screen):
                         pass
 
                     if not valid or response == "":
-                        player = False
-                        try:
-                            response = urlopen(panel_req, timeout=cfg.timeout.value + 5)
-                            panel = True
-                            valid = self.checkPanel(response)
-
-                        except Exception as e:
-                            print(e)
-                            pass
-
-                        except:
-                            pass
-
-                    if not valid or response == "":
                         try:
                             req = Request(line, headers=hdr)
                             response = urlopen(req, None, cfg.timeout.value + 5)
                             if 'EXTINF' in response.read():
-                                # extinf = True
                                 valid = True
 
                         except Exception as e:
@@ -290,10 +273,14 @@ class JediMakerXtream_Playlist(Screen):
                     if 'http' in line:
                         try:
                             req = Request(line, headers=hdr)
+
                             response = urlopen(req, None, cfg.timeout.value + 5)
-                            if 'EXTINF' in response.read():
-                                # extinf = True
-                                valid = True
+                            if pythonVer == 3:
+                                if 'EXTINF' in response.read().decode('utf-8'):
+                                    valid = True
+                            else:
+                                if 'EXTINF' in response.read():
+                                    valid = True
 
                         except Exception as e:
                             print(e)
@@ -347,9 +334,7 @@ class JediMakerXtream_Playlist(Screen):
             pass
 
     def buildPlaylist(self, line, valid, paneltype):
-
         serveroffset = 0
-
         if 'user_info' in self.playlist_data:
             if 'message' in self.playlist_data['user_info']:
                 del self.playlist_data['user_info']['message']
@@ -369,7 +354,6 @@ class JediMakerXtream_Playlist(Screen):
                     serveroffset = datetime.now().hour - time_now_datestamp.hour
 
             # if user entered output type not valid, get output type from provider.
-
             if 'allowed_output_formats' in self.playlist_data['user_info']:
                 if self.output not in self.playlist_data['user_info']['allowed_output_formats']:
                     try:
@@ -523,7 +507,6 @@ class JediMakerXtream_Playlist(Screen):
             self.session.open(MessageBox, _('Edit unavailable for local M3Us.\nManually Delete/Amend M3U files in folder.\n') + cfg.m3ulocation.value, MessageBox.TYPE_ERROR, timeout=5)
 
     def deletePlaylist(self, answer=None):
-
         if jglob.current_playlist['playlist_info']['playlisttype'] != 'local':
             if answer is None:
                 self.session.openWithCallback(self.deletePlaylist, MessageBox, _('Permanently delete selected playlist?'))

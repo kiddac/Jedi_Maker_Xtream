@@ -227,6 +227,7 @@ def downloadseriesstreams(url):
 
 
 def getM3uCategories(live, vod):
+    # print("**** getM3uCategories ***")
     lines = []
     channelnum = 0
     jglob.getm3ustreams = []
@@ -264,6 +265,10 @@ def getM3uCategories(live, vod):
             lines = f.readlines()
 
     for line in lines:
+
+        if pythonVer == 3 and jglob.current_playlist['playlist_info']['playlisttype'] == 'external':
+            line = line.decode('utf-8')
+
         if not line.startswith('#EXTINF') and not line.startswith('http'):
             continue
 
@@ -413,8 +418,6 @@ def downloadrytec():
 
 
 def downloadgetfile(url):
-    print("**** downloadgetfile ****")
-
     response = checkGZIP(url)
 
     channelnum = 0
@@ -424,8 +427,6 @@ def downloadgetfile(url):
 
     if response is not None:
         for line in response.splitlines():
-
-            # line = line.decode('utf-8')
 
             if not line.startswith('#EXTINF') and not line.startswith('http'):
                 continue

@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2019-07-27 17:06+0100\n"
-"PO-Revision-Date: 2021-02-26 09:19+0000\n"
+"PO-Revision-Date: 2021-09-06 10:54+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Last-Translator: \n"
-"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: update2.py\n"
 "X-Poedit-SearchPath-1: setupbouquet.py\n"
 "X-Poedit-SearchPath-2: playlists.py\n"
@@ -34,13 +34,15 @@ msgstr "Sobre nós"
 msgid "Close"
 msgstr "Fechar"
 
+# Adicionar playlista
 #: addplaylist.py:43 playlists.py:47
 msgid "Add Playlist"
-msgstr "Adicionar playlist"
+msgstr "Adicionar playlista"
 
+# Editar playlista
 #: addplaylist.py:46 playlists.py:116
 msgid "Edit Playlist"
-msgstr "Editar playlist"
+msgstr "Editar playlista"
 
 #: addplaylist.py:96 deletebouquets.py:43 settings.py:60 setupbouquet.py:141
 #: setupbouquet.py:380
@@ -67,7 +69,6 @@ msgstr "Lista de reprodução padrão"
 msgid "M3U File"
 msgstr "Arquivo M3U"
 
-# ts
 #: addplaylist.py:121 addplaylist.py:132
 msgid "ts"
 msgstr "ts"
@@ -76,12 +77,10 @@ msgstr "ts"
 msgid "m3u8"
 msgstr "m3u8"
 
-# Username
 #: addplaylist.py:130
 msgid "username"
 msgstr "usuário"
 
-# Password
 #: addplaylist.py:131
 msgid "password"
 msgstr "senha"
@@ -142,7 +141,7 @@ msgstr ""
 
 #: addplaylist.py:145 addplaylist.py:157
 msgid "Username"
-msgstr "Username"
+msgstr "usuário"
 
 #: addplaylist.py:145 addplaylist.py:157
 msgid ""
@@ -152,11 +151,11 @@ msgstr ""
 "\n"
 "Digite nome de usuário."
 
-# Password
 #: addplaylist.py:146 addplaylist.py:158
 msgid "Password"
-msgstr "Password"
+msgstr "senha"
 
+# tipo de saída
 #: addplaylist.py:146 addplaylist.py:158
 msgid ""
 "\n"
@@ -165,24 +164,27 @@ msgstr ""
 "\n"
 "Digite senha."
 
-# Resultado
+# tipo de saída
 #: addplaylist.py:147 addplaylist.py:159
 msgid "Output Type"
-msgstr "Resultado"
+msgstr "tipo de saída"
 
+# Insira o tipo de saída do stream.
 #: addplaylist.py:147 addplaylist.py:159
 msgid ""
 "\n"
 "Enter stream output type."
 msgstr ""
 "\n"
-"Digite o tipo de saída de fluxo."
+"Insira o tipo de saída do stream."
 
-# M3U
+# Localização externa M3U
 #: addplaylist.py:149 addplaylist.py:164
 msgid "M3U external location"
-msgstr ""
+msgstr "Localização externa M3U"
 
+# Insira o url da lista M3U incluindo o protocolo.
+# por exemplo. http://www.domain.xyz
 #: addplaylist.py:149 addplaylist.py:164
 msgid ""
 "\n"
@@ -190,8 +192,8 @@ msgid ""
 "eg. http://www.domain.xyz"
 msgstr ""
 "\n"
-"Digite url da lista M3U, incluindo protocolo. \n"
-"Eg. http://www.domain.xyz"
+"Insira o url da lista M3U incluindo o protocolo.\n"
+"por exemplo. http://www.domain.xyz"
 
 #: addplaylist.py:153
 msgid "Bouquet Name"
@@ -205,17 +207,19 @@ msgstr ""
 "\n"
 "Digite o nome a ser exibido em buquês."
 
+# Epg Url
 #: addplaylist.py:161
 msgid "Epg Url"
-msgstr "URL do servidor"
+msgstr "Epg Url"
 
+# Insira o URL do EPG.
 #: addplaylist.py:161
 msgid ""
 "\n"
 "Enter EPG Url."
 msgstr ""
 "\n"
-"Digite url EPG."
+"Insira o URL do EPG."
 
 #: addplaylist.py:250 settings.py:178
 msgid "Really close without saving settings?"
@@ -225,7 +229,6 @@ msgstr "Realmente Fecha Sem Salvar as Configurações?"
 msgid "Building Bouquets"
 msgstr "Construindo Buquês"
 
-# Construindo Buquês":"
 #: buildbouquet.py:47
 msgid "Building Bouquets..."
 msgstr "Construindo Buquês\":\"."
@@ -234,22 +237,18 @@ msgstr "Construindo Buquês\":\"."
 msgid "Starting..."
 msgstr "Iniciando..."
 
-# Baixando dados da séries
 #: buildbouquet.py:106
 msgid "Downloading Series Data..."
 msgstr "Baixando dados da série..."
 
-# Excluindo buquês existentes":".
 #: buildbouquet.py:114 buildbouquet.py:155
 msgid "Deleting Existing Bouquets..."
 msgstr "Excluindo buquês existentes\":\"."
 
-# Selecionado Sem categorias.
 #: buildbouquet.py:123
 msgid "No categories selected."
 msgstr "Selecionado Sem categorias."
 
-# Nenhum fluxo M3U válido no arquivo.
 #: buildbouquet.py:145
 msgid "No valid M3U streams in file."
 msgstr "Nenhum fluxo M3U válido no arquivo."
@@ -262,89 +261,88 @@ msgstr "Salvando arquivo de dados do Bouquet..."
 msgid "Building Bouquets from M3U File"
 msgstr "Construindo buquês de arquivo M3U"
 
+# Construindo categorias% d de% d
 #: buildbouquet.py:200 buildbouquet.py:262
 #, python-format
 msgid "Building Categories %d of %d"
-msgstr "Categorias de construção %d de %d"
+msgstr "Construindo categorias% d de% d"
 
 #: buildbouquet.py:201
 #, python-format
 msgid "%s: %s"
 msgstr "%s: %s"
 
-# Refresque Buquês.
 #: buildbouquet.py:226 buildbouquet.py:301
 msgid "Refreshing Bouquets..."
 msgstr "Refresque Buquês."
 
-msgid "IPTV Bouquets Created"
-msgstr "IPTV boques criados"
+#: buildbouquet.py:232
+msgid " IPTV Bouquets Created"
+msgstr " Buquês IPTV Criados"
 
 #: buildbouquet.py:265
 msgid "Building 'General' Bouquet"
 msgstr "Construindo buquê 'geral'"
 
+# Categorias de construção
 #: buildbouquet.py:267
 msgid "Building Categories"
-msgstr "Categorias de Construção"
+msgstr "Categorias de construção"
 
 #: buildbouquet.py:327
 msgid "Create Bouquets"
 msgstr "Criar buquês"
 
-# Todos os% s dias
 #: catchup.py:133
 #, python-format
 msgid "All %s days"
 msgstr "Todos os% s dias"
 
-# O canal não tem arquivo de TV.
 #: catchup.py:138
 msgid "Channel has no TV Archive."
 msgstr "O canal não tem arquivo de TV."
 
-# Erro:errode download de dados.
 #: catchup.py:141
 msgid "Error: Downloading data error."
 msgstr "Erro:errode download de dados."
 
-# %s
 #: catchup.py:233 plugin.py:304
 #, python-format
 msgid "%s"
 msgstr "%s"
 
-# Tv arquivo:%s
 #: catchup.py:271
 #, python-format
 msgid "TV Archive: %s"
 msgstr "Tv arquivo:%s"
 
-# Excluir buquês
 #: deletebouquets.py:36
 msgid "Delete Bouquets"
 msgstr "Excluir buquês"
 
+# Excluir
 #: deletebouquets.py:44
 msgid "Delete"
-msgstr "Apagar"
+msgstr "Excluir"
 
-# Alternar buquês
+# Alternar tudo
 #: deletebouquets.py:45 setupbouquet.py:382
 msgid "Toggle All"
-msgstr "Alternar buquês"
+msgstr "Alternar tudo"
 
 #: deletebouquets.py:46 setupbouquet.py:383
 msgid "Clear All"
-msgstr "ApagarTodos"
+msgstr "Apagar tudo"
 
+# Selecione todos os buquês de iptv que deseja excluir.
+# Pressione OK para alternar a seleção
 #: deletebouquets.py:48
 msgid ""
 "Select all the iptv bouquets you wish to delete. \n"
 "Press OK to toggle the selection"
 msgstr ""
-"Select all the iptv bouquets you wish to delete. \n"
-"Press OK to toggle the selection"
+"Selecione todos os buquês de iptv que deseja excluir.\n"
+"Pressione OK para alternar a seleção"
 
 #: info.py:26
 msgid "User Information"
@@ -354,29 +352,29 @@ msgstr "Informação do Usuário"
 msgid "Main Menu"
 msgstr "Menu Principal"
 
+# Playlistas
 #: menu.py:57 playlists.py:41
 msgid "Playlists"
-msgstr "Playlists"
+msgstr "Playlistas"
 
+# Definições
 #: menu.py:58 settings.py:42
 msgid "Settings"
-msgstr "Configurações da Lista de Reprodução"
+msgstr "Definições"
 
+# Atualizar buquês
 #: menu.py:69
 msgid "Update Bouquets"
-msgstr "Atualizar"
+msgstr "Atualizar buquês"
 
-# Excluir buquês individuais
 #: menu.py:70
 msgid "Delete Individual Bouquets"
 msgstr "Excluir buquês individuais"
 
-# Excluir todos os buquês Jedi IPTV
 #: menu.py:71
 msgid "Delete All Jedi IPTV Bouquets"
 msgstr "Excluir todos os buquês Jedi IPTV"
 
-# Excluir permanentemente todos os buquês criados por Jedi?
 #: menu.py:112
 msgid "Permanently delete all Jedi created bouquets?"
 msgstr "Excluir permanentemente todos os buquês criados por Jedi?"
@@ -385,7 +383,6 @@ msgstr "Excluir permanentemente todos os buquês criados por Jedi?"
 msgid "Back"
 msgstr "Retroceder"
 
-# Excluir lista de reprodução
 #: playlists.py:117
 msgid "Delete Playlist"
 msgstr "Excluir lista de reprodução"
@@ -394,33 +391,35 @@ msgstr "Excluir lista de reprodução"
 msgid "User Info"
 msgstr "Informação do Usuário"
 
+# Pressione OK para criar buquês.
+# Visualize seus buquês saindo do plugin Jedi e pressione o botão TV.
+# Acesse as configurações do plug-in do Importador de EPG, selecione sua lista de reprodução nas fontes ... Salvar ... Baixe as fontes manualmente.
 #: playlists.py:119
 msgid ""
 "Press OK to create bouquets. \n"
 "View your bouquets by exiting the Jedi plugin and then press the TV button. \n"
 "Go into EPG Importer plugin settings, select your playlist in sources... Save... Manually download sources."
 msgstr ""
-"Press OK to create bouquets. \n"
-"View your bouquets by exiting the Jedi plugin and then press the TV button. \n"
-"Go into EPG Importer plugin settings, select your playlist in sources... Save... Manually download sources."
+"Pressione OK para criar buquês.\n"
+"Visualize seus buquês saindo do plugin Jedi e pressione o botão TV.\n"
+"Acesse as configurações do plug-in do Importador de EPG, selecione sua lista de reprodução nas fontes ... Salvar ... Baixe as fontes manualmente."
 
-# Ao vivo
 #: playlists.py:120 playlists.py:404
 msgid "Live: ---"
 msgstr "Ao vivo"
 
+# Film: ---
 #: playlists.py:121 playlists.py:405
 msgid "Vod: ---"
-msgstr "Vod: ---"
+msgstr "Film: ---"
 
 #: playlists.py:122 playlists.py:406
 msgid "Series: ---"
 msgstr "Series: ---"
 
-# Ativa/o:
 #: playlists.py:367
-msgid "Active:"
-msgstr "Ativa/o:"
+msgid "Active: "
+msgstr "Ativa/o"
 
 #: playlists.py:367
 msgid "  Max: "
@@ -432,80 +431,83 @@ msgstr "Banido"
 
 #: playlists.py:373
 msgid "Disabled"
-msgstr "Desabilitada"
+msgstr "Desativado"
 
-# Servidor inativo ou usuário não autorizado mais!
 #: playlists.py:424 playlists.py:506
 msgid "Server down or user no longer authorised!"
 msgstr "Servidor inativo ou usuário não autorizado mais!"
 
-# Url é inválido ou lista de reprodução / usuário não está mais autorizado!
 #: playlists.py:427 playlists.py:512
 msgid "Url is invalid or playlist/user no longer authorised!"
 msgstr "Url é inválido ou lista de reprodução / usuário não está mais autorizado!"
 
-# Informações do usuário não disponíveis para esta lista de reprodução
 #: playlists.py:430 playlists.py:433
 msgid "User Info not available for this playlist\n"
 msgstr "Informações do usuário não disponíveis para esta lista de reprodução\n"
 
+# Edição indisponível para M3Us locais.
+# Exclua / corrija manualmente os arquivos M3U na pasta.
 #: playlists.py:452
 msgid ""
 "Edit unavailable for local M3Us.\n"
 "Manually Delete/Amend M3U files in folder.\n"
 msgstr ""
-"Edit unavailable for local M3Us.\n"
-"Manually Delete/Amend M3U files in folder.\n"
+"Edição indisponível para M3Us locais.\n"
+"Exclua / corrija manualmente os arquivos M3U na pasta.\n"
 
-# Excluir permanentemente a lista de reprodução selecionada?
 #: playlists.py:459
 msgid "Permanently delete selected playlist?"
-msgstr ""
+msgstr "Excluir permanentemente a lista de reprodução selecionada"
 
-# Excluir indisponível para M3U local. Selecionar / corrigir manualmente arquivos M3U
+# Excluir indisponível para M3Us locais.
+# Exclua / corrija manualmente os arquivos M3U na pasta.
 #: playlists.py:492
 msgid ""
 "Delete unavailable for local M3Us.\n"
 "Manually Delete/Amend M3U files in folder.\n"
 msgstr ""
-"Exclua indisponível para M3Us locais.\n"
-"Excluir/Alterar manualmente arquivos M3U na pasta.\n"
+"Excluir indisponível para M3Us locais.\n"
+"Exclua / corrija manualmente os arquivos M3U na pasta.\n"
 
-# Playlist é
+# Playlista é
 #: playlists.py:504
-msgid "Playlist is"
-msgstr "Playlist é"
+msgid "Playlist is "
+msgstr "Playlista é"
 
-# Domínio
 #: plugin.py:50
 msgid "Domain"
 msgstr "Domínio"
 
-# Conexão de domínio
 #: plugin.py:50
 msgid "Domain | Connections"
 msgstr "Conexão de domínio"
 
+# ~
 #: plugin.py:57
 msgid "~"
 msgstr "~"
 
+# !
 #: plugin.py:57
 msgid "!"
 msgstr "!"
 
+# #
 #: plugin.py:57
 msgid "#"
 msgstr "#"
 
+# -
 #: plugin.py:57
 msgid "-"
 msgstr "-"
 
+# <
 #: plugin.py:57
 msgid "<"
 msgstr "<"
 
+# ^
 #: plugin.py:57
 msgid "^"
 msgstr "^"
@@ -514,12 +516,11 @@ msgstr "^"
 msgid "Jedi Maker Xtream"
 msgstr "Jedi Maker Xtream"
 
-# Catchup disponível apenas em fluxos de IPTV.
+# Retransmição disponível apenas em fluxos de IPTV.
 #: plugin.py:308
 msgid "Catchup only available on IPTV Streams."
 msgstr "Catchup disponível apenas em fluxos de IPTV."
 
-# Buquês IPTV Criados
 #: plugin.py:323
 msgid "IPTV Bouquets Creator"
 msgstr "Buquês IPTV Criados"
@@ -528,33 +529,38 @@ msgstr "Buquês IPTV Criados"
 msgid "JediMakerXtream"
 msgstr "JediMakerXtream"
 
+# localização playlistas.txt
 #: settings.py:76
 msgid "playlists.txt location"
-msgstr "playlists.txt location"
+msgstr "localização playlistas.txt"
 
+# Selecione a localização de suas listas de reprodução.txt arquivo. ou seja, /media/hdd/playlistas. Pressione 'OK' para alterar o local.
+# O local padrão é /etc/enigma2/jediplaylistas
 #: settings.py:76
 msgid ""
 "Select the location of your playlists.txt file. i.e. /media/hdd/playlists. Press 'OK' to change location.\n"
 "\n"
 "Default location is /etc/enigma2/jediplaylists"
 msgstr ""
-"Selecione a localização de suas listas de reprodução.txt arquivo. ou seja, /media/hdd/playlists. Pressione 'OK' para alterar o local.\n"
+"Selecione a localização de suas listas de reprodução.txt arquivo. ou seja, /media/hdd/playlistas. Pressione 'OK' para alterar o local.\n"
 "\n"
-"O local padrão é /etc/enigma2/jediplaylists"
+"O local padrão é /etc/enigma2/jediplaylistas"
 
 #: settings.py:77
 msgid "Local M3U File location"
 msgstr "Localização do arquivo M3U local"
 
+# Selecione a localização de seus arquivos m3u locais. ou seja, /media/hdd/playlistas. Pressione 'OK' para alterar o local.
+# O local padrão é /etc/enigma2/jediplaylistas
 #: settings.py:77
 msgid ""
 "Select the location of your local m3u files. i.e. /media/hdd/playlists. Press 'OK' to change location.\n"
 "\n"
 "Default location is /etc/enigma2/jediplaylists"
 msgstr ""
-"Selecione a localização de seus arquivos m3u locais. ou seja, /media/hdd/playlists. Pressione 'OK' para alterar o local.\n"
+"Selecione a localização de seus arquivos m3u locais. ou seja, /media/hdd/playlistas. Pressione 'OK' para alterar o local.\n"
 "\n"
-"O local padrão é /etc/enigma2/jediplaylists"
+"O local padrão é /etc/enigma2/jediplaylistas"
 
 #: settings.py:78
 msgid "Automatic live bouquet update"
@@ -564,13 +570,15 @@ msgstr "Atualização automática do buquê ao vivo"
 msgid "Update your live bouquets automatically."
 msgstr "Atualize seus buquês ao vivo automaticamente."
 
+# Horário de início da atualização automática ao vivo
 #: settings.py:79
 msgid "Automatic live update start time"
-msgstr "Tempo de início de atualização ao vivo automático"
+msgstr "Horário de início da atualização automática ao vivo"
 
+# Selecione a hora da atualização automática.
 #: settings.py:79
 msgid "Select the time of the automatic update."
-msgstr "Selecione o tempo da atualização automática."
+msgstr "Selecione a hora da atualização automática."
 
 #: settings.py:80
 msgid "Show in main menu"
@@ -584,57 +592,63 @@ msgstr ""
 "Exibir JediMakerXtream no menu principal.\n"
 "*Reiniciar gui necessário."
 
-# Mostrar em extensões
 #: settings.py:81
 msgid "Show in extensions"
 msgstr "Mostrar em extensões"
 
-# Listas de reprodução JediMakerXtream de início rápido no menu de extensões. * Reiniciar
 #: settings.py:81
 msgid ""
-"Listas de reprodução JediMakerXtream de início rápido no menu de extensões. * ReiniciarQuick start JediMakerXtream playlists from extensions menu.\n"
+"Quick start JediMakerXtream playlists from extensions menu.\n"
 "*Restart GUI required."
-msgstr "Listas de reprodução JediMakerXtream de início rápido no menu de extensões. * Reiniciar."
+msgstr "Listas de reprodução JediMakerXtream de início rápido no menu de extensões. * Reiniciar"
 
+# Selecione a skin
 #: settings.py:82
 msgid "Select skin"
-msgstr "Selecione Skin*ReiniciarGuiRequerido"
+msgstr "Selecione a skin"
 
+# Selecione uma das skins disponíveis.
+# * Reinicie a GUI necessária.
 #: settings.py:82
 msgid ""
 "Select from the available skins.\n"
 "*Restart GUI required."
 msgstr ""
-"Selecione entre as skins disponíveis.\n"
-"*Reiniciar gui necessário."
+"Selecione uma das skins disponíveis.\n"
+"* Reinicie a GUI necessária."
 
+# Tempo limite do servidor (segundos)
 #: settings.py:83
 msgid "Server timeout (seconds)"
-msgstr "Tempo Limite do Servidor (segundos)"
+msgstr "Tempo limite do servidor (segundos)"
 
+# Corrija o tempo limite em chamadas do servidor.
+# Pode ser aumentado para listas de reprodução muito grandes, servidores lentos ou proxies lentos.
 #: settings.py:83
 msgid ""
 "Amend the timeout on server calls.\n"
 "\n"
 "Can be increased for very large playlists, slow servers, or slow proxies."
 msgstr ""
-"Altere o tempo limite nas chamadas do servidor.\n"
+"Corrija o tempo limite em chamadas do servidor.\n"
 "\n"
 "Pode ser aumentado para listas de reprodução muito grandes, servidores lentos ou proxies lentos."
 
-# Canais de captura de prefixo
+# Perfixo de canais Catchup
 #: settings.py:84
 msgid "Prefix Catchup channels"
-msgstr "Canais de captura de prefixo"
+msgstr "Perfixo de canais Catchup"
 
 #: settings.py:84
 msgid "Mark channels that have catchup with a prefix in your bouquets."
 msgstr "Marque canais que tenham catchup com um prefixo em seus buquês."
 
+# Selecione o símbolo de prefixo atualizar-se
 #: settings.py:85
 msgid "Select Catchup prefix symbol"
 msgstr "Selecione o símbolo de prefixo catchup"
 
+# Selecione o símbolo para prefixar seus canais de atualizar-se com
 #: settings.py:85
 msgid "Select the symbol to prefix your catchup channels with."
 msgstr "Selecione o símbolo para prefixar seus canais de catchup com."
@@ -661,15 +675,17 @@ msgstr "Ordem original"
 
 #: setupbouquet.py:161
 msgid "A-Z"
-msgstr "ClassiF:A-Z"
+msgstr "A-Z"
 
+# Os mais novos primeiro
 #: setupbouquet.py:161
 msgid "Newest First"
-msgstr "Classif:Mais recente"
+msgstr "Os mais novos primeiro"
 
+# Mais velhos primeiro
 #: setupbouquet.py:161
 msgid "Oldest First"
-msgstr "Antigos primeiro"
+msgstr "Mais velhos primeiro"
 
 #: setupbouquet.py:170 setupbouquet.py:175 setupbouquet.py:180
 #: setupbouquet.py:181
@@ -701,13 +717,14 @@ msgstr ""
 msgid "Use name as bouquet prefix"
 msgstr "Use o nome como prefixo de buquê"
 
+# Use o prefixo do nome do provedor em seus buquês
 #: setupbouquet.py:188
 msgid ""
 "\n"
 "Use provider name prefix in your bouquets"
 msgstr ""
 "\n"
-"Use prefixo de nome do provedor em seus buquês"
+"Use o prefixo do nome do provedor em seus buquês"
 
 #: setupbouquet.py:193
 msgid "Live categories"
@@ -721,12 +738,12 @@ msgstr ""
 "\n"
 "Inclua categorias LIVE em seus buquês."
 
-# Tipo transmição ao vivo".
 #: setupbouquet.py:196 setupbouquet.py:227
 msgid "Stream type for Live"
 msgstr "Tipo transmição ao vivo"
 
-# sta configuração permite que você escolha qual player E2 usará para o seu show
+# sta configuração permite que você escolha qual player E2 usará para suas transmissões ao vivo.
+# Se suas transmissões ao vivo não forem reproduzidas, tente alterar esta configuração.
 #: setupbouquet.py:196 setupbouquet.py:227
 msgid ""
 "\n"
@@ -734,29 +751,29 @@ msgid ""
 "If your live streams do not play try changing this setting."
 msgstr ""
 "\n"
-"Esta configuração permite que você escolha qual jogador O2 usará para suas transmissões ao vivo.\n"
-"Se suas transmissões ao vivo não jogarem, tente alterar essa configuração."
+"sta configuração permite que você escolha qual player E2 usará para suas transmissões ao vivo.\n"
+"Se suas transmissões ao vivo não forem reproduzidas, tente alterar esta configuração."
 
-# Categorias VOD
+# Categorias de FILMES
 #: setupbouquet.py:199
 msgid "VOD categories"
-msgstr "Categorias de VOD"
+msgstr "Categorias de FILMES"
 
-# Incluir categorias VOD em seus buquês
+# Inclua categorias de FILMES em seus buquês.
 #: setupbouquet.py:199
 msgid ""
 "\n"
 "Include VOD categories in your bouquets."
 msgstr ""
 "\n"
-"Inclua categorias de VOD em seus buquês."
+"Inclua categorias de FILMES em seus buquês."
 
-# Categorias de series
 #: setupbouquet.py:202 setupbouquet.py:231
 msgid "Series categories"
 msgstr "Categorias de séries"
 
-# Inclua categorias SÉRIE em seus buquês. ** Observação: Seleção de séries
+# Inclua categorias SERIES em seus buquês.
+# ** Nota: Selecionar séries pode ser lento para preencher as listas.**
 #: setupbouquet.py:202 setupbouquet.py:231
 msgid ""
 "\n"
@@ -767,12 +784,13 @@ msgstr ""
 "Inclua categorias SERIES em seus buquês. \n"
 "** Nota: Selecionar séries pode ser lento para preencher as listas.**"
 
-# Tipo de VOD/SERIES
+# Tipo de Fluxo FILMES / SERIES:
 #: setupbouquet.py:205
-msgid "Stream type fo rVOD/SERIES"
-msgstr "Tipo de VOD/SERIES"
+msgid "Stream type for VOD/SERIES"
+msgstr "Tipo de Fluxo FILMES / SERIES:"
 
-# Esta configuração permite que você escolha qual player E2 usará para o seu Vo
+# Esta configuração permite que você escolha qual jogador O2 usará para seus fluxos FILMES/Série.
+# Se os fluxos vod não reproduzirem tente alterar essa configuração.
 #: setupbouquet.py:205 setupbouquet.py:234
 msgid ""
 "\n"
@@ -780,27 +798,27 @@ msgid ""
 "If your VOD streams do not play try changing this setting."
 msgstr ""
 "\n"
-"Esta configuração permite que você escolha qual jogador O2 usará para seus fluxos VOD/Série.\n"
+"Esta configuração permite que você escolha qual jogador O2 usará para seus fluxos FILMES/Série.\n"
 "Se os fluxos vod não reproduzirem tente alterar essa configuração."
 
+# Ordem de buquê de FILMES
 #: setupbouquet.py:208
 msgid "VOD bouquet order"
-msgstr "Ordem de buquê de VOD"
+msgstr "Ordem de buquê de FILMES"
 
+# Selecione a ordem de classificação para seus buquês de FILMES.
 #: setupbouquet.py:208
 msgid ""
 "\n"
 "Select the sort order for your VOD Bouquets."
 msgstr ""
 "\n"
-"Selecione a ordem de classificação para seus buquês de VOD."
+"Selecione a ordem de classificação para seus buquês de FILMES."
 
-# Use o seu provedor EPG
 #: setupbouquet.py:211 setupbouquet.py:238
 msgid "Use your provider EPG"
 msgstr "Use o seu provedor EPG"
 
-# Use EPG do seu provedor
 #: setupbouquet.py:211 setupbouquet.py:238
 msgid ""
 "\n"
@@ -813,19 +831,17 @@ msgstr ""
 
 #: setupbouquet.py:214 setupbouquet.py:241
 msgid "EPG url"
-msgstr "URL do servidor"
+msgstr "Epg Url"
 
-# Digite o EPG irl para sua lista de reprodução. Se desconhecido, deixe como padrão
+# Insira o url do EPG para sua lista de reprodução. Se desconhecido, deixe como padrão.
 #: setupbouquet.py:214 setupbouquet.py:241
 msgid "Enter the EPG url for your playlist. If unknown leave as default."
-msgstr "Digite a url EPG para sua lista de reprodução. Se desconhecido deixar como padrão."
+msgstr "Insira o url do EPG para sua lista de reprodução. Se desconhecido, deixe como padrão."
 
-# Use Rytec UK EPG
 #: setupbouquet.py:217
 msgid "Use Rytec UK EPG"
 msgstr "Use Rytec UK EPG"
 
-# Tente combinar os nomes Rytec do Reino Unido no fundo para preencher o Reino Unido E
 #: setupbouquet.py:217
 msgid ""
 "\n"
@@ -836,12 +852,10 @@ msgstr ""
 "Tente combinar os nomes rytec do Reino Unido em segundo plano para preencher o EPG do Reino Unido.\n"
 "Note que isso substituirá o EPG do seu provedor no Reino Unido."
 
-# Substitua os nomes dos canais do Reino Unido em buquês por nomes de troca
 #: setupbouquet.py:220
 msgid "Replace UK channel names in bouquets with swap names"
 msgstr "Substitua nomes de canais do Reino Unido em buquês com nomes de troca"
 
-# Isso irá alterar os canais do Reino Unido em buquês para que o
 #: setupbouquet.py:220
 msgid ""
 "\n"
@@ -850,12 +864,10 @@ msgstr ""
 "\n"
 "Isso alterará os nomes dos canais do Reino Unido em buquês de canais para os nomes de swap computados."
 
-# Apenas Reino Unido: Forçar troca de nome no Reino Unido
 #: setupbouquet.py:221
 msgid "UK only: Force UK name swap"
 msgstr "Somente no Reino Unido: Forçar a troca de nomes no Reino Unido"
 
-# Use para provedores do Reino Unido que não especificam Reino Unido no título da categoria ou ch
 #: setupbouquet.py:221
 msgid ""
 "Use for UK providers that do not specify UK in the category title or channel title.\n"
@@ -880,21 +892,22 @@ msgstr ""
 
 #: setupbouquet.py:229
 msgid "Vod Categories"
-msgstr "Categorias de VOD"
+msgstr "Categorias de FILMES"
 
+# Inclua categorias de FILMES em seus buquês.
 #: setupbouquet.py:229
 msgid ""
 "\n"
 "Include VOD categories in your bouquets if available."
 msgstr ""
 "\n"
-"Inclua categorias de VOD em seus buquês."
+"Inclua categorias de FILMES em seus buquês."
 
+# Tipo de Fluxo FILMES/ Series
 #: setupbouquet.py:234
 msgid "Stream type for VOD/Series"
-msgstr "Tipo de Fluxo VOD / Series"
+msgstr "Tipo de Fluxo FILMES/ Series"
 
-# Escolha buquês
 #: setupbouquet.py:337
 msgid "Choose Bouquets"
 msgstr "Escolha buquês"
@@ -903,12 +916,10 @@ msgstr "Escolha buquês"
 msgid "Create"
 msgstr "Criar buquês"
 
-# Mostrar canais
 #: setupbouquet.py:384
 msgid "Show Channels"
 msgstr "Mostrar canais"
 
-# Selecione as categorias da lista de reprodução para as quais deseja buquês. Pressione O
 #: setupbouquet.py:385
 msgid ""
 "Select the playlist categories you wish to create bouquets for. \n"
@@ -923,24 +934,26 @@ msgstr ""
 msgid "Updating Bouquets"
 msgstr "Configurações de buquês"
 
+# Iniciando atualização
 #: update2.py:77
 msgid "Starting Update..."
-msgstr "Iniciando..."
+msgstr "Iniciando atualização"
 
 #: update2.py:98
 msgid " Providers IPTV Updated"
 msgstr " Buquês IPTV Criados"
 
+# Atualizando a lista de reprodução% d de% d
 #: update2.py:115
 #, python-format
 msgid "Updating Playlist %d of %d"
-msgstr "Categorias de construção %d de %d"
+msgstr "Atualizando a lista de reprodução% d de% d"
 
-# Playlist:%s
+# Lista de reprodução:% s
 #: update2.py:116
 #, python-format
-msgid "Playlist:%s"
-msgstr "Playlist:%s"
+msgid "Playlist: %s"
+msgstr "Lista de reprodução:% s"
 
 #: viewchannel.py:30
 msgid "Channel List"

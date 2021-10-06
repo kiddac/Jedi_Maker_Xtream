@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2021-10-06 15:16+0200\n"
-"PO-Revision-Date: 2021-10-06 15:18+0200\n"
+"PO-Revision-Date: 2021-10-06 16:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -65,7 +65,7 @@ msgstr "https://"
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:128
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:131
 msgid "Standard Playlist"
-msgstr "Standaard Playlist"
+msgstr "Standaard playlist"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:121
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:128
@@ -150,6 +150,8 @@ msgid ""
 "\n"
 "Select the protocol for your playlists url."
 msgstr ""
+"\n"
+"Selecteer het protocol voor uw playlist url."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:189
 msgid ""
@@ -157,6 +159,9 @@ msgid ""
 "Enter playlist url without protocol http:// \n"
 "e.g. domain.xyz"
 msgstr ""
+"\n"
+"Invoeren van playlist url zonder protocol http:// \n"
+"b.v. domain.xyz"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:193
 msgid ""
@@ -164,6 +169,9 @@ msgid ""
 "Enter Port Number without colon : \n"
 "e.g. 25461"
 msgstr ""
+"\n"
+"Invoeren van poort nummer zonder dubbelpunt : \n"
+"b.v. 25461"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:197
 msgid ""
@@ -186,6 +194,8 @@ msgid ""
 "\n"
 "Enter stream output type."
 msgstr ""
+"\n"
+"Invoeren van stream uitvoer formaat type."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:209
 msgid ""
@@ -193,37 +203,44 @@ msgid ""
 "Enter M3U list url including protocol. \n"
 "eg. http://www.domain.xyz"
 msgstr ""
+"\n"
+"Invoeren van M3U lijst url inclusief protocol. \n"
+"bv. http://www.domein.xyz"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:213
 msgid ""
 "\n"
 "Enter the name to be displayed in bouquets."
 msgstr ""
+"\n"
+"Voer de naam in die moet worden getoond in de bouquets."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:217
 msgid ""
 "\n"
 "Enter EPG Url."
 msgstr ""
+"\n"
+"Invoeren van EPG URL."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:313
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:245
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Afsluiten zonder opslaan?"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:31
 msgid "Building Bouquets"
-msgstr ""
+msgstr "Samenstellen bouquets"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:39
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:177
 msgid "Building Bouquets..."
-msgstr ""
+msgstr "Samenstellen bouquets..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:116
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:124
 msgid "Downloading Rytec UK EPG data..."
-msgstr ""
+msgstr "Downloaden van Rytec UK EPG gegevens..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:118
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:125
@@ -232,42 +249,42 @@ msgstr "Starten..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:131
 msgid "Downloading Live data..."
-msgstr ""
+msgstr "Downloaden van LIVE gegevens..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:133
 msgid "No categories selected."
-msgstr ""
+msgstr "Geen categorieën geselecteerd."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:136
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:161
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:167
 msgid "Deleting Existing Bouquets..."
-msgstr ""
+msgstr "Verwijderen van bestaande bouquets..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:138
 msgid "No valid M3U streams in file."
-msgstr ""
+msgstr "Geen geldige M3U streams in bestand."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:145
 msgid "Downloading VOD data"
-msgstr "Downloaden van VOD data"
+msgstr "Downloaden van VOD gegevens"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:152
 msgid "Downloading Series data"
-msgstr "Downloaden van Series data"
+msgstr "Downloaden van SERIES gegevens"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:159
 msgid "Downloading get.php file for series stream data"
-msgstr "Downloaden van get.php bestand voor series stream data"
+msgstr "Downloaden van get.php bestand voor series stream gegevens"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:173
 msgid "Saving Bouquet Data File..."
-msgstr "Opslaan van Bouquet data bestand..."
+msgstr "Opslaan van bouquet gegevens bestand..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:179
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:280
 msgid "Building M3U Bouquets..."
-msgstr "Samenstellen van M3U Bouquetens..."
+msgstr "Samenstellen van M3U bouquetens..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:184
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:230
@@ -278,11 +295,11 @@ msgstr "Samenstellen van categorieën %d of %d"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:210
 msgid " IPTV Bouquets Created"
-msgstr " IPTV Bouquets gecreëerd"
+msgstr " IPTV bouquets gecreëerd"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:240
 msgid "Building 'General' Bouquet"
-msgstr "Samenstellen van 'Algemeen' Bouquet"
+msgstr "Samenstellen van 'Algemeen' bouquet"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:242
 msgid "Building Categories"
@@ -290,7 +307,7 @@ msgstr "Samenstellen categorieën"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:285
 msgid "Create Bouquets"
-msgstr "Creëren Bouquets"
+msgstr "Creëren bouquets"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:153
 #, python-format
@@ -299,15 +316,15 @@ msgstr "Alle %s dagen"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:183
 msgid "Program Data Not Available"
-msgstr "Program Data niet beschikbaar"
+msgstr "Programma gegevens niet beschikbaar"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:187
 msgid "Error: Downloading data error."
-msgstr ""
+msgstr "Fout: Tijdens downloaden van gegevens."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:191
 msgid "Channel has no TV Archive."
-msgstr ""
+msgstr "Zender heeft geen TV archief."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:305
 #, python-format
@@ -316,7 +333,7 @@ msgstr "TV archief: %s"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:30
 msgid "Delete Bouquets"
-msgstr "Verwijder Bouquets"
+msgstr "Verwijder bouquets"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:38
 msgid "Delete"
@@ -330,13 +347,15 @@ msgstr "Omkeren"
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:40
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:519
 msgid "Clear All"
-msgstr ""
+msgstr "Alles wissen"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:42
 msgid ""
 "Select all the iptv bouquets you wish to delete. \n"
 "Press OK to invert the selection"
 msgstr ""
+"Selecteer alle iptv bouquets die u wilt verwijderen.\n"
+"Druk op OK om selectie om te keren"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/info.py:28
 msgid "User Information"
@@ -358,19 +377,19 @@ msgstr "Instellingen"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:88
 msgid "Update Bouquets"
-msgstr ""
+msgstr "Bijwerken bouquets"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:89
 msgid "Delete Individual Bouquets"
-msgstr ""
+msgstr "Verwijder individuele bouquets"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:90
 msgid "Delete All Jedi IPTV Bouquets"
-msgstr ""
+msgstr "Verwijder alle Jedi IPTV bouquets"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:133
 msgid "Permanently delete all Jedi created bouquets?"
-msgstr ""
+msgstr "Verwijder alle door JEDI gecreëerde bouquets?"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:69
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:73
@@ -385,7 +404,7 @@ msgstr "Terug"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:104
 msgid "Delete Playlist"
-msgstr "Playlist verwijderen"
+msgstr "Playlist wissen"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:105
 msgid "User Info"
@@ -402,7 +421,7 @@ msgstr ""
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:107
 msgid "Last Update:"
-msgstr "Laatste Update:"
+msgstr "Update:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:425
 msgid "Active: "
@@ -414,7 +433,7 @@ msgstr "  Max: "
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:427
 msgid "Banned"
-msgstr ""
+msgstr "Verbannen"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:429
 msgid "Disabled"
@@ -457,7 +476,7 @@ msgstr ""
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:559
 msgid "Playlist is "
-msgstr ""
+msgstr "Playlist is "
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:50
 msgid "Domain"
@@ -473,11 +492,11 @@ msgstr "Jedi Maker Xtream"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:296
 msgid "Catchup only available on IPTV Streams."
-msgstr ""
+msgstr "Catchup enkel beschikbaar bij IPTV streams."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:309
 msgid "IPTV Bouquets Creator"
-msgstr ""
+msgstr "IPTV Bouquets Creator"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:310
 msgid "JediMakerXtream"
@@ -544,7 +563,7 @@ msgstr "Marge na catchup (min.)"
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:93
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:168
 msgid "Group bouquets into its own folder"
-msgstr ""
+msgstr "Groepeer bouquets in hun eigen map"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:129
 msgid ""
@@ -611,15 +630,15 @@ msgstr ""
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:271
 msgid "Choose Directory:"
-msgstr ""
+msgstr "Selecteer map:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:272
 msgid "Choose directory"
-msgstr ""
+msgstr "Selecteer map"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:54
 msgid "Bouquets Settings"
-msgstr ""
+msgstr "Bouquets instellingen"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:66
 msgid "Continue"
@@ -627,7 +646,7 @@ msgstr "Doorgaan"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:193
 msgid "Original Order"
-msgstr ""
+msgstr "Originele volgorde"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:193
 msgid "A-Z"
@@ -635,88 +654,88 @@ msgstr "A-Z"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:193
 msgid "Newest First"
-msgstr ""
+msgstr "Nieuwste eerst"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:193
 msgid "Oldest First"
-msgstr ""
+msgstr "Oudste eerst"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:221
 msgid "No Buffering(0)"
-msgstr ""
+msgstr "Geen Buffering(0)"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:221
 msgid "Buffering Enabled(1)"
-msgstr ""
+msgstr "Buffering ingeschakeld(1)"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:221
 msgid "Progressive Buffering(3)"
-msgstr ""
+msgstr "Progressieve Buffering(3)"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:228
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:306
 msgid "Bouquet name"
-msgstr ""
+msgstr "Bouquet naam"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:230
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:310
 msgid "Use name as bouquet prefix"
-msgstr ""
+msgstr "Gebruik bouquet naam als voorvoegsel"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:235
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:275
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:314
 msgid "Live categories"
-msgstr ""
+msgstr "Live categorieën"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:238
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:278
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:318
 msgid "Stream type for Live"
-msgstr ""
+msgstr "Streamtype voor Live"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:241
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:322
 msgid "VOD categories"
-msgstr ""
+msgstr "VOD categorieën"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:244
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:282
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:326
 msgid "Series categories"
-msgstr ""
+msgstr "Series categorieën"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:247
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:330
 msgid "Stream type for VOD/SERIES"
-msgstr ""
+msgstr "Streamtype voor VOD/SERIES"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:250
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:334
 msgid "VOD bouquet order"
-msgstr ""
+msgstr "VOD bouquet sortering"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:253
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:288
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:357
 msgid "Buffer streams"
-msgstr ""
+msgstr "Buffer streams"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:256
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:364
 msgid "Catchup Timeshift"
-msgstr ""
+msgstr "Catchup Timeshift"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:259
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:291
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:338
 msgid "Use your provider EPG"
-msgstr ""
+msgstr "Gebruik eigen provider EPG"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:262
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:346
 msgid "Use Rytec UK EPG"
-msgstr ""
+msgstr "Gebruik Rytec UK EPG"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:265
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:350
@@ -746,7 +765,7 @@ msgstr "VOD categorieën"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:285
 msgid "Stream type for VOD/Series"
-msgstr ""
+msgstr "Streamtype voor VOD/Series"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:307
 msgid ""
@@ -842,6 +861,8 @@ msgid ""
 "\n"
 "Set stream buffer (Experimental)."
 msgstr ""
+"\n"
+"Stream buffer instellen (Experimenteel)."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:361
 msgid ""
@@ -865,7 +886,7 @@ msgstr ""
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:487
 msgid "Choose Bouquets"
-msgstr ""
+msgstr "Selecteer bouquets"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:517
 msgid "Create"
@@ -881,93 +902,96 @@ msgid ""
 "Press OK to invert the selection.\n"
 "Press INFO to show the channels in this category."
 msgstr ""
+"Selecteer de playlist categorieën waar u bouquets voor wil creëren.\n"
+"Druk OK om de selectie om te keren.\n"
+"Druk INFO om de zenders weer te geven in deze categorie."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:571
 msgid "Getting selection list"
-msgstr ""
+msgstr "Ontvangen geselecteerde lijst"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:78
 msgid "Updating Bouquets"
-msgstr ""
+msgstr "Bijwerken bouquets"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:126
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:130
 msgid "Starting Update..."
-msgstr ""
+msgstr "Start bijwerken..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:137
 msgid " Providers IPTV Updated"
-msgstr ""
+msgstr " IPTV providers bijgewerkt"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:153
 #, python-format
 msgid "Updating Playlist %d of %d"
-msgstr ""
+msgstr "Bijwerken playlist %d of %d"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:154
 #, python-format
 msgid "%s - Reading bouquet data..."
-msgstr ""
+msgstr "%s - Lezen bouquet gegevens..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:192
 #, python-format
 msgid "%s - Checking URL still active..."
-msgstr ""
+msgstr "%s - Controleer of URL nog actief is..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:194
 #, python-format
 msgid "%s - Download M3U Data..."
-msgstr ""
+msgstr "%s - Downloaden M3U gegevens..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:263
 #, python-format
 msgid "%s - Downloading VOD data..."
-msgstr ""
+msgstr "%s - Downloaden VOD gegevens..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:265
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:273
 #, python-format
 msgid "%s - Downloading Series data..."
-msgstr ""
+msgstr "%s - Downloaden SERIES gegevens..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:267
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:275
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:280
 #, python-format
 msgid "%s - Getting categories..."
-msgstr ""
+msgstr "%s - Ontvangen van categorieën..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:284
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:294
 #, python-format
 msgid "%s - Get selected categories..."
-msgstr ""
+msgstr "%s - Verkrijg geselecteerde categorieën..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:289
 #, python-format
 msgid "%s - Getting selection list"
-msgstr ""
+msgstr "%s - Verkrijg geselecteerde lijst"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:313
 #, python-format
 msgid "%s - Downloading Data..."
-msgstr ""
+msgstr "%s - Downloaden gegevens..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:315
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:319
 #, python-format
 msgid "%s - Deleting existing bouquets..."
-msgstr ""
+msgstr "%s - Verwijden bestaande bouquets..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:325
 #, python-format
 msgid "%s - Building bouquets..."
-msgstr ""
+msgstr "%s - Samenstellen bouquets..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:327
 #, python-format
 msgid "%s - Building M3U bouquets..."
-msgstr ""
+msgstr "%s - Samenstellen M3U bouquets..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/viewchannel.py:31
 msgid "Channel List"

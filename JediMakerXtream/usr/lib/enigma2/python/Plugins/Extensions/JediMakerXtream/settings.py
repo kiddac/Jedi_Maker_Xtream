@@ -279,10 +279,7 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 
         except Exception as e:
             print("[jmxSettings] openDirectoryBrowser get failed: %s" % e)
-        """
-        except:
-            pass
-            """
+
 
     def openDirectoryBrowserCB(self, path):
         if path is not None:

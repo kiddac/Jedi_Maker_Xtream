@@ -137,7 +137,7 @@ class JediMakerXtream_Playlist(Screen):
             pixmap = LoadPixmap(cached=True, path=skin_path + 'images/external.png')
         if status == 'Unknown':
             pixmap = LoadPixmap(cached=True, path=skin_path + 'images/blank.png')
-        return(pixmap, str(name), extra)
+        return (pixmap, str(name), extra)
 
     def loadPlaylist(self):
         if jglob.firstrun == 0:
@@ -350,7 +350,14 @@ class JediMakerXtream_Playlist(Screen):
                     del self.playlist_data['server_info']['timestamp_now']
 
                 if 'time_now' in self.playlist_data['server_info']:
-                    time_now_datestamp = datetime.strptime(str(self.playlist_data['server_info']['time_now']), "%Y-%m-%d %H:%M:%S")
+                    try:
+                        time_now_datestamp = datetime.strptime(str(self.playlist_data['server_info']['time_now']), "%Y-%m-%d %H:%M:%S")
+                    except:
+                        try:
+                            time_now_datestamp = datetime.strptime(str(self.playlist_data['server_info']['time_now']), "%Y-%m-%d %H-%M-%S")
+                        except:
+                            time_now_datestamp = datetime.strptime(str(self.playlist_data['server_info']['time_now']), "%Y-%m-%d-%H:%M:%S")
+
                     serveroffset = datetime.now().hour - time_now_datestamp.hour
 
             # if user entered output type not valid, get output type from provider.

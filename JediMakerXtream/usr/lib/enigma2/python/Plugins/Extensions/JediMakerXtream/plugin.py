@@ -55,8 +55,8 @@ cfg.bouquet_id = ConfigNumber()
 cfg.timeout = ConfigNumber(default=3)
 cfg.catchup = ConfigYesNo(default=False)
 cfg.catchupprefix = ConfigSelection(default='~', choices=[('~', '~'), ('!', '!'), ('#', '#'), ('-', '-'), ('<', '<'), ('^', '^')])
-cfg.catchupstart = ConfigSelectionNumber(0, 30, 1, default=0)
-cfg.catchupend = ConfigSelectionNumber(0, 30, 1, default=0)
+cfg.catchupstart = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
+cfg.catchupend = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
 cfg.groups = ConfigYesNo(default=False)
 
 skin_path = skin_directory + cfg.skin.value + '/'

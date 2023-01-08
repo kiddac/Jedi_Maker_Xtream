@@ -197,7 +197,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self.EpgSwapNamesCfg = NoSave(ConfigYesNo(default=jglob.epg_swap_names))
         self.ForceRytecUKCfg = NoSave(ConfigYesNo(default=jglob.epg_force_rytec_uk))
 
-        self.catchupShiftCfg = NoSave(ConfigSelectionNumber(min=-9, max=9, stepwidth=1, default=jglob.catchupshift))
+        self.catchupShiftCfg = NoSave(ConfigSelectionNumber(min=-9, max=9, stepwidth=1, default=jglob.catchupshift, wraparound=True))
 
         streamtypechoices = [('1', 'DVB(1)'), ('4097', 'IPTV(4097)')]
 

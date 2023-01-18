@@ -1,43 +1,36 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-
-# for localized messages
 from . import _
+from .plugin import skin_path, playlist_file, playlists_json, hdr
+from .xStaticText import StaticText
+
 from . import globalfunctions as jfunc
 from . import jediglobals as jglob
-from . import owibranding
-
-from .plugin import skin_path, playlist_path, playlist_file
 
 from Components.ActionMap import ActionMap
 from Components.config import NoSave, ConfigText, ConfigSelection, ConfigNumber, getConfigListEntry, ConfigYesNo, configfile
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Components.Sources.StaticText import StaticText
+from Screens.MessageBox import MessageBox
 
 from Screens.Screen import Screen
 
+import os
 import json
+import shutil
 
 
-class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
-
+class JediMakerXtream_AddServer(ConfigListScreen, Screen):
     def __init__(self, session, editmode):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "jmx_settings.xml"
+        skin = skin_path + "settings.xml"
 
-        self.dreamos = False
-
-        try:
-            from boxbranding import getImageDistro, getImageVersion, getOEVersion
-        except:
-            self.dreamos = True
-            if owibranding.getMachineBrand() == "Dream Multimedia" or owibranding.getOEVersion() == "OE 2.2":
-                skin = skin_path + "DreamOS/jmx_settings.xml"
+        if os.path.exists("/var/lib/dpkg/status"):
+            skin = skin_path + "DreamOS/settings.xml"
 
         with open(skin, "r") as f:
             self.skin = f.read()
@@ -307,7 +300,6 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
         ConfigListScreen.keySave(self)
 
     def cancel(self, answer=None):
-        from Screens.MessageBox import MessageBox
         if answer is None:
             if self["config"].isChanged():
                 self.session.openWithCallback(self.cancel, MessageBox, _("Really close without saving settings?"))
@@ -326,7 +318,7 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
                 "&password=" + str(self.passwordCfg.value) + "&type=" + self.type + "&output=" + str(self.outputCfg.value) + "\n"
         else:
             self.newEntry = "\n" + str(self.addressCfg.value)
-        with open(playlist_path, "a") as f:
+        with open(playlist_file, "a") as f:
             f.write(self.newEntry)
             f.close()
 
@@ -343,7 +335,7 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
             oldEntry = self.address
             editEntry = "\n" + str(self.addressCfg.value) + "\n"
 
-        with open(playlist_path, "r+") as f:
+        with open(playlist_file, "r+") as f:
             new_f = f.readlines()
             f.seek(0)
             for line in new_f:
@@ -380,5 +372,5 @@ class JediMakerXtream_AddPlaylist(ConfigListScreen, Screen):
                         playlist["playlist_info"] = jglob.current_playlist["playlist_info"]
                         break
 
-        with open(playlist_file, "w") as f:
+        with open(playlists_json, "w") as f:
             json.dump(self.playlists_all, f)

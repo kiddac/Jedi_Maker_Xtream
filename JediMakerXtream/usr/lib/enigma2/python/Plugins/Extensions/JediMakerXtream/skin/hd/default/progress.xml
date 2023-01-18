@@ -8,5 +8,5 @@
     </widget>
     <widget name="action" position="center,518" size="1280,30" font="jediregular;23" foregroundColor="#ffffff" backgroundColor="#232323" halign="center" noWrap="1" transparent="1" />
     <widget name="status" position="center,630" size="1280,30" font="jediregular;23" foregroundColor="#ffffff" backgroundColor="#232323" halign="center" noWrap="1" transparent="1" />
-    <widget name="progress" position="205,596" size="870,6" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/hd/default/images/progress.png" borderWidth="1" borderColor="#555555" zPosition="3" transparent="0" />
+    <widget name="progress" position="205,596" size="870,6" borderWidth="1" borderColor="#555555" foregroundColor="#0d84a4" backgroundColor="#000000" zPosition="3" />
 </screen>

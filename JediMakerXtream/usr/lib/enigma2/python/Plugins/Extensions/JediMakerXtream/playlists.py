@@ -1,14 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
 
-from . import addplaylist, info, setupbouquet
+from . import server, info, setupbouquet
 from . import jediglobals as jglob
 from . import globalfunctions as jfunc
 
-from .plugin import skin_path, cfg, playlist_path, playlist_file, hdr
+from .plugin import skin_path, cfg, playlist_file, playlists_json, hdr
 from .jediStaticText import StaticText
 
 from collections import OrderedDict
@@ -49,7 +48,7 @@ class JediMakerXtream_Playlist(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'jmx_playlist.xml'
+        skin = skin_path + 'playlist.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
 
@@ -59,11 +58,11 @@ class JediMakerXtream_Playlist(Screen):
         self.playlists_all = []
 
         # check if playlists.txt file exists in specified location
-        if os.path.isfile(playlist_path) and os.stat(playlist_path).st_size > 0:
+        if os.path.isfile(playlist_file) and os.stat(playlist_file).st_size > 0:
             self.removeBlanks()
             self.checkFile()
         else:
-            open(playlist_path, 'a').close()
+            open(playlist_file, 'a').close()
 
         self["playlists"] = List(self.drawList)
         self['lab1'] = Label(_('Loading data... Please wait...'))
@@ -146,7 +145,7 @@ class JediMakerXtream_Playlist(Screen):
         self.createSetup()
 
     def removeBlanks(self):
-        with open(playlist_path, 'r+') as f:
+        with open(playlist_file, 'r+') as f:
             lines = f.readlines()
             f.seek(0)
             f.writelines((line.strip(' ') for line in lines if line.strip()))
@@ -154,7 +153,7 @@ class JediMakerXtream_Playlist(Screen):
 
     def checkFile(self):
         jglob.playlist_exists = False
-        with open(playlist_path, 'r+') as f:
+        with open(playlist_file, 'r+') as f:
             lines = f.readlines()
             f.seek(0)
 
@@ -169,7 +168,7 @@ class JediMakerXtream_Playlist(Screen):
     def getPlaylistUserFile(self):
         self.playlists_all_new = []
 
-        with open(playlist_path, 'r+') as f:
+        with open(playlist_file, 'r+') as f:
             lines = f.readlines()
             f.seek(0)
             f.writelines((line.strip(' ') for line in lines if line.strip()))
@@ -314,7 +313,7 @@ class JediMakerXtream_Playlist(Screen):
         self.playlists_all = self.playlists_all_new
 
         # output to file for testing
-        with open(playlist_file, 'w') as f:
+        with open(playlists_json, 'w') as f:
             json.dump(self.playlists_all, f)
         jglob.firstrun = 1
 
@@ -463,7 +462,7 @@ class JediMakerXtream_Playlist(Screen):
             jglob.current_selection = 0
             jglob.current_playlist = []
 
-        if os.path.isfile(playlist_path) and os.stat(playlist_path).st_size > 0:
+        if os.path.isfile(playlist_file) and os.stat(playlist_file).st_size > 0:
 
             self['liveupdate'].setText('Live: ---')
             self['vodupdate'].setText('Vod: ---')
@@ -504,12 +503,12 @@ class JediMakerXtream_Playlist(Screen):
         self.createSetup()
 
     def addPlaylist(self):
-        self.session.openWithCallback(self.refresh, addplaylist.JediMakerXtream_AddPlaylist, False)
+        self.session.openWithCallback(self.refresh, server.JediMakerXtream_AddPlaylist, False)
         return
 
     def editPlaylist(self):
         if jglob.current_playlist['playlist_info']['playlisttype'] != 'local':
-            self.session.openWithCallback(self.refresh, addplaylist.JediMakerXtream_AddPlaylist, True)
+            self.session.openWithCallback(self.refresh, server.JediMakerXtream_AddServer, True)
         else:
             self.session.open(MessageBox, _('Edit unavailable for local M3Us.\nManually Delete/Amend M3U files in folder.\n') + cfg.m3ulocation.value, MessageBox.TYPE_ERROR, timeout=5)
 
@@ -518,7 +517,7 @@ class JediMakerXtream_Playlist(Screen):
             if answer is None:
                 self.session.openWithCallback(self.deletePlaylist, MessageBox, _('Permanently delete selected playlist?'))
             elif answer:
-                with open(playlist_path, 'r+') as f:
+                with open(playlist_file, 'r+') as f:
                     lines = f.readlines()
                     f.seek(0)
 
@@ -542,7 +541,7 @@ class JediMakerXtream_Playlist(Screen):
 
                     self.playlists_all = tempplaylist
 
-                    with open(playlist_file, 'w') as f:
+                    with open(playlists_json, 'w') as f:
                         json.dump(self.playlists_all, f)
 
                 self['playlists'].setIndex(0)

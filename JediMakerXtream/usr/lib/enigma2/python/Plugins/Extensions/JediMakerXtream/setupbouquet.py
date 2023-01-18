@@ -1,15 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
 from . import buildbouquet
 from . import downloads
 from . import globalfunctions as jfunc
 from . import jediglobals as jglob
-from . import owibranding
 
-from .plugin import skin_path, cfg, playlist_file
+from .plugin import skin_path, cfg, playlists_json
 
 
 from collections import OrderedDict
@@ -37,16 +35,10 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'jmx_settings.xml'
+        skin = skin_path + 'settings.xml'
 
-        self.dreamos = False
-
-        try:
-            from boxbranding import getImageDistro, getImageVersion, getOEVersion
-        except:
-            self.dreamos = True
-            if owibranding.getMachineBrand() == "Dream Multimedia" or owibranding.getOEVersion() == "OE 2.2":
-                skin = skin_path + 'DreamOS/jmx_settings.xml'
+        if os.path.exists("/var/lib/dpkg/status"):
+            skin = skin_path + "DreamOS/settings.xml"
 
         with open(skin, 'r') as f:
             self.skin = f.read()
@@ -480,7 +472,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'jmx_bouquets.xml'
+        skin = skin_path + 'bouquets.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
 
@@ -588,7 +580,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
         else:
             pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_off.png")
 
-        return(pixmap, str(name), str(streamtype), index, enabled)
+        return (pixmap, str(name), str(streamtype), index, enabled)
 
     def getStartList(self):
         self['lab1'].setText('')
@@ -734,5 +726,5 @@ class JediMakerXtream_ChooseBouquets(Screen):
 
                 break
 
-        with open(playlist_file, 'w') as f:
+        with open(playlists_json, 'w') as f:
             json.dump(self.playlists_all, f)

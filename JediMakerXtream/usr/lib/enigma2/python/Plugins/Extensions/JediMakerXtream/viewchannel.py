@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
 from . import downloads
 from . import jediglobals as jglob
@@ -21,7 +20,7 @@ class JediMakerXtream_ViewChannels(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'jmx_channels.xml'
+        skin = skin_path + 'channels.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
 

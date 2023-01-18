@@ -1,11 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
-from . import owibranding
-
-from .plugin import skin_path, cfg, autoStartTimer
+from .plugin import skin_path, cfg
 
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigYesNo, configfile
@@ -17,6 +14,8 @@ from Components.Sources.StaticText import StaticText
 from Screens.LocationBox import LocationBox
 from Screens.Screen import Screen
 
+import os
+
 
 class JediMakerXtream_Settings(ConfigListScreen, Screen):
 
@@ -24,16 +23,10 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'jmx_settings.xml'
+        skin = skin_path + 'settings.xml'
 
-        self.dreamos = False
-
-        try:
-            from boxbranding import getImageDistro, getImageVersion, getOEVersion
-        except:
-            self.dreamos = True
-            if owibranding.getMachineBrand() == "Dream Multimedia" or owibranding.getOEVersion() == "OE 2.2":
-                skin = skin_path + 'DreamOS/jmx_settings.xml'
+        if os.path.exists("/var/lib/dpkg/status"):
+            skin = skin_path + "DreamOS/settings.xml"
 
         with open(skin, 'r') as f:
             self.skin = f.read()
@@ -279,7 +272,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 
         except Exception as e:
             print("[jmxSettings] openDirectoryBrowser get failed: %s" % e)
-
 
     def openDirectoryBrowserCB(self, path):
         if path is not None:

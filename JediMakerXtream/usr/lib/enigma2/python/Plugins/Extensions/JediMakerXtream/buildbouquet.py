@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
 
 from . import buildxml as bx
@@ -24,7 +23,7 @@ class JediMakerXtream_BuildBouquets(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'jmx_progress.xml'
+        skin = skin_path + 'progress.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
 
@@ -227,17 +226,17 @@ class JediMakerXtream_BuildBouquets(Screen):
         self.category_num += 1
 
         if self.category_num % 5 == 1:
-            self.nextjob(_('Building Categories %d of %d') % (self.job_current, self.job_total), self.buildBouquets)
+            self.nextjob(_('Building Categories') + str(self.job_current) + _('of') + str(self.job_total), self.buildBouquets)
         else:
             self.buildBouquets()
 
     def buildM3uBouquets(self):
 
         self['progress'].setValue(self.progresscurrent)
-        self['action'].setText(_('Building Categories %d of %d') % (self.job_current, self.job_total))
+        self['action'].setText(_('Building Categories') + str(self.job_current) + _('of') + str(self.job_total))
 
         if len(self.categories) <= 1:
-            self['status'].setText(_("Building 'General' Bouquet"))
+            self['status'].setText(_("Building General Bouquet"))
         else:
             self['status'].setText(_('Building Categories'))
 

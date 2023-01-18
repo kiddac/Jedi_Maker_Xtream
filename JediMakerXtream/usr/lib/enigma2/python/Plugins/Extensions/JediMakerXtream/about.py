@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
 
 from Components.ActionMap import ActionMap
@@ -17,7 +16,7 @@ class JediMakerXtream_About(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'jmx_about.xml'
+        skin = skin_path + 'about.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
 
@@ -36,7 +35,7 @@ class JediMakerXtream_About(Screen):
         self.setTitle(self.setup_title)
 
     def createSetup(self):
-        self.credit = 'JediMakerXtream V6.20 (C) 2018 - 2021 - KiddaC\n\n'
+        self.credit = 'JediMakerXtream V6.21 (C) 2018 - 2021 - KiddaC\n\n'
         self.credit += 'Support for this plugin can be found on https://linuxsat-support.com\n\n'
         self.credit += 'Plugin enables the simple bouquet creation of standard xtream and M3U playlist(s).\n'
         self.credit += '*Playing streams via the plugin is currently unavailable.\n'

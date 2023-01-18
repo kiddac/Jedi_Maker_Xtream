@@ -4,7 +4,6 @@
 from . import downloads
 from . import globalfunctions as jfunc
 from . import jediglobals as jglob
-from collections import OrderedDict
 
 from .plugin import cfg
 from xml.dom import minidom

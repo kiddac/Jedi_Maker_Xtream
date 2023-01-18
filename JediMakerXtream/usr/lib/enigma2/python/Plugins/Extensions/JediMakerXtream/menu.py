@@ -1,12 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
 from . import globalfunctions as jfunc
 from . import jediglobals as jglob
 
-from .plugin import skin_path, playlist_file
+from .plugin import skin_path, playlists_json
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
@@ -17,6 +16,7 @@ from Screens.Screen import Screen
 
 import os
 import sys
+
 
 try:
     pythonVer = sys.version_info.major
@@ -30,7 +30,7 @@ class JediMakerXtream_Menu(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'jmx_mainmenu.xml'
+        skin = skin_path + 'mainmenu.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
 
@@ -156,7 +156,7 @@ class JediMakerXtream_Menu(Screen):
             # delete leftover empty dicts
             self.playlists_all = [_f for _f in self.playlists_all if _f]
 
-            os.remove(playlist_file)
+            os.remove(playlists_json)
             # jfunc.refreshBouquets()
 
             self.createSetup()

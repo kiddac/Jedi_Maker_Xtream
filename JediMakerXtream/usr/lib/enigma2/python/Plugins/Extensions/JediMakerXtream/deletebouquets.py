@@ -1,12 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
 
 from . import globalfunctions as jfunc
 from . import jediglobals as jglob
-from .plugin import skin_path, playlist_file
+from .plugin import skin_path, playlists_json
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -24,7 +23,7 @@ class JediMakerXtream_DeleteBouquets(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.session = session
-        skin = skin_path + 'jmx_bouquets.xml'
+        skin = skin_path + 'bouquets.xml'
         with open(skin, 'r') as f:
             self.skin = f.read()
         self.setup_title = _('Delete Bouquets')
@@ -67,7 +66,7 @@ class JediMakerXtream_DeleteBouquets(Screen):
             pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_on.png")
         else:
             pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_off.png")
-        return(pixmap, str(name), index, enabled)
+        return (pixmap, str(name), index, enabled)
 
     def getStartList(self):
         for playlist in self.playlists_all:
@@ -157,5 +156,5 @@ class JediMakerXtream_DeleteBouquets(Screen):
         # delete leftover empty dicts
         self.playlists_all = [_f for _f in self.playlists_all if _f]
 
-        with open(playlist_file, 'w') as f:
+        with open(playlists_json, 'w') as f:
             json.dump(self.playlists_all, f)

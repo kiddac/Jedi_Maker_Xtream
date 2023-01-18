@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# for localized messages
 from . import _
 
-from .plugin import skin_path, playlist_file, hdr, cfg, screenwidth
+from .plugin import skin_path, playlists_json, hdr, cfg, screenwidth
 
 from . import buildxml as bx
 from . import downloads
@@ -53,7 +52,7 @@ class JediMakerXtream_Update(Screen):
             jglob.has_epg_importer = False
 
         if self.runtype == 'manual':
-            skin = skin_path + 'jmx_progress.xml'
+            skin = skin_path + 'progress.xml'
             with open(skin, 'r') as f:
                 self.skin = f.read()
 
@@ -401,7 +400,7 @@ class JediMakerXtream_Update(Screen):
                 playlist = jglob.current_playlist
 
         # output to file
-        with open(playlist_file, 'w') as f:
+        with open(playlists_json, 'w') as f:
             json.dump(self.playlists_all, f)
 
     def done(self, answer=None):

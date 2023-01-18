@@ -1,23 +1,24 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-16 21:23+0000\n"
-"PO-Revision-Date: 2023-01-16 21:33+0000\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2023-01-16 22:19+0000\n"
+"PO-Revision-Date: 2023-01-16 22:19+0000\n"
+"Last-Translator: Masta2002\n"
 "Language-Team: \n"
-"Language: en\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.2\n"
 "X-Poedit-Basepath: ../../../../../../../../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:24
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:92
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:30
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:318
@@ -25,18 +26,18 @@ msgstr ""
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:48
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/viewchannel.py:41
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:45
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:73
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:102
 msgid "Add Playlist"
-msgstr ""
+msgstr "添加播放列表"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:49
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:103
 msgid "Edit Playlist"
-msgstr ""
+msgstr "编辑播放列表"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:56
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:37
@@ -44,99 +45,99 @@ msgstr ""
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:65
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:516
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:57
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:49
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:120
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:132
 msgid "http://"
-msgstr ""
+msgstr "http://"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:120
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:132
 msgid "https://"
-msgstr ""
+msgstr "https://"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:121
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:128
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:131
 msgid "Standard Playlist"
-msgstr ""
+msgstr "默认播放列表"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:121
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:128
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:131
 msgid "M3U File"
-msgstr ""
+msgstr "M3U 文件"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:135
 msgid "username"
-msgstr ""
+msgstr "用户名"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:136
 msgid "password"
-msgstr ""
+msgstr "密码"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:145
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:180
 msgid "Select playlist type"
-msgstr ""
+msgstr "选择播放列表类型"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:148
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:160
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:184
 msgid "Protocol"
-msgstr ""
+msgstr "协议"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:149
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:161
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:188
 msgid "Server URL"
-msgstr ""
+msgstr "服务器网址"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:150
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:162
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:192
 msgid "Port"
-msgstr ""
+msgstr "端口"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:151
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:163
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:196
 msgid "Username"
-msgstr ""
+msgstr "用户名"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:152
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:164
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:200
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:153
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:165
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:204
 msgid "Output Type"
-msgstr ""
+msgstr "输出类型"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:155
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:170
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:208
 msgid "M3U external location"
-msgstr ""
+msgstr "M3U 外部位置"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:159
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:212
 msgid "Bouquet Name"
-msgstr ""
+msgstr "花束名称"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:167
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:216
 msgid "Epg Url"
-msgstr ""
+msgstr "EPG url"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:181
 msgid ""
@@ -144,12 +145,17 @@ msgid ""
 "Select the type of playlist to add. Standard playlist or external M3U file.\n"
 "Try M3U File for non standard playlists that use custom urls."
 msgstr ""
+"\n"
+"选择要添加的播放列表类型。 默认播放列表或外部 M3U 文件。\n"
+"为使用自定义 URL 的非标准播放列表尝试 M3U 文件。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:185
 msgid ""
 "\n"
 "Select the protocol for your playlists url."
 msgstr ""
+"\n"
+"选择播放列表网址的协议。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:189
 msgid ""
@@ -157,6 +163,9 @@ msgid ""
 "Enter playlist url without protocol http:// \n"
 "e.g. domain.xyz"
 msgstr ""
+"\n"
+"输入不带协议 http:// 播放列表网址\n"
+"例如 domain.xyz"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:193
 msgid ""
@@ -164,24 +173,33 @@ msgid ""
 "Enter Port Number without colon : \n"
 "e.g. 25461"
 msgstr ""
+"\n"
+"输入不带冒号的端口号：\n"
+"例如 25461"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:197
 msgid ""
 "\n"
 "Enter username."
 msgstr ""
+"\n"
+"输入用户名。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:201
 msgid ""
 "\n"
 "Enter password."
 msgstr ""
+"\n"
+"输入密码。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:205
 msgid ""
 "\n"
 "Enter stream output type."
 msgstr ""
+"\n"
+"输入流输出类型。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:209
 msgid ""
@@ -189,96 +207,103 @@ msgid ""
 "Enter M3U list url including protocol. \n"
 "eg. http://www.domain.xyz"
 msgstr ""
+"\n"
+"输入 M3U 列表网址，包括协议。\n"
+"例如。http://www.domain.xyz"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:213
 msgid ""
 "\n"
 "Enter the name to be displayed in bouquets."
 msgstr ""
+"\n"
+"输入要在花束中显示的名称."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:217
 msgid ""
 "\n"
 "Enter EPG Url."
 msgstr ""
+"\n"
+"输入 EPG 网址。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/addplaylist.py:313
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:245
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "是否关闭而不保存设置？"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:31
 msgid "Building Bouquets"
-msgstr ""
+msgstr "创建花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:39
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:177
 msgid "Building Bouquets..."
-msgstr ""
+msgstr "创建花束..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:116
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:124
 msgid "Downloading Rytec UK EPG data..."
-msgstr ""
+msgstr "正在下载Rytec UK EPG数据..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:118
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:125
 msgid "Starting..."
-msgstr ""
+msgstr "开始..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:131
 msgid "Downloading Live data..."
-msgstr ""
+msgstr "正在下载实时数据..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:133
 msgid "No categories selected."
-msgstr ""
+msgstr "未选择任何类别。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:136
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:161
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:167
 msgid "Deleting Existing Bouquets..."
-msgstr ""
+msgstr "正在删除现有花束..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:138
 msgid "No valid M3U streams in file."
-msgstr ""
+msgstr "文件中没有有效的 M3U 流。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:145
 msgid "Downloading VOD data"
-msgstr ""
+msgstr "下载视频点播数据"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:152
 msgid "Downloading Series data"
-msgstr ""
+msgstr "下载系列数据"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:159
 msgid "Downloading get.php file for series stream data"
-msgstr ""
+msgstr "下载序列流数据的 get.php 文件"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:173
 msgid "Saving Bouquet Data File..."
-msgstr ""
+msgstr "正在保存花束数据文件..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:179
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:280
 msgid "Building M3U Bouquets..."
-msgstr ""
+msgstr "创建 M3U 花束..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:184
 #, python-format
 msgid "Building Categories %d of %d"
-msgstr ""
+msgstr "创建类别 %d %d"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:210
 msgid " IPTV Bouquets Created"
-msgstr ""
+msgstr " 创建的 IPTV 花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:230
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:237
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:242
 msgid "Building Categories"
-msgstr ""
+msgstr "创建类别"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:230
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:237
@@ -291,106 +316,108 @@ msgstr ""
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:285
 msgid "Create Bouquets"
-msgstr ""
+msgstr "创建花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:153
 #, python-format
 msgid "All %s days"
-msgstr ""
+msgstr "所有%s天"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:183
 msgid "Program Data Not Available"
-msgstr ""
+msgstr "程序数据不可用"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:187
 msgid "Error: Downloading data error."
-msgstr ""
+msgstr "错误：下载数据错误。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:191
 msgid "Channel has no TV Archive."
-msgstr ""
+msgstr "频道没有电视档案。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/catchup.py:305
 #, python-format
 msgid "TV Archive: %s"
-msgstr ""
+msgstr "电视档案：%s"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:30
 msgid "Delete Bouquets"
-msgstr ""
+msgstr "删除花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:38
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:39
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:518
 msgid "Invert"
-msgstr ""
+msgstr "反转"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:40
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:519
 msgid "Clear All"
-msgstr ""
+msgstr "清除所有"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/deletebouquets.py:42
 msgid ""
 "Select all the iptv bouquets you wish to delete. \n"
 "Press OK to invert the selection"
 msgstr ""
+"选择要删除的所有iptv花束。\n"
+"按“确定”可反转所选内容"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/info.py:28
 msgid "User Information"
-msgstr ""
+msgstr "用户信息"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:40
 msgid "Main Menu"
-msgstr ""
+msgstr "主菜单"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:77
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:56
 msgid "Playlists"
-msgstr ""
+msgstr "播放列表"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:78
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:41
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:88
 msgid "Update Bouquets"
-msgstr ""
+msgstr "更新花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:89
 msgid "Delete Individual Bouquets"
-msgstr ""
+msgstr "删除单个花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:90
 msgid "Delete All Jedi IPTV Bouquets"
-msgstr ""
+msgstr "删除所有绝地IPTV花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/menu.py:133
 msgid "Permanently delete all Jedi created bouquets?"
-msgstr ""
+msgstr "永久删除所有绝地创作的花束？"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:69
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:73
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:502
 msgid "Loading data... Please wait..."
-msgstr ""
+msgstr "正在加载数据...请稍候。。。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:72
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:101
 msgid "Back"
-msgstr ""
+msgstr "返回"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:104
 msgid "Delete Playlist"
-msgstr ""
+msgstr "删除播放列表"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:105
 msgid "User Info"
-msgstr ""
+msgstr "用户信息"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:106
 msgid ""
@@ -400,152 +427,159 @@ msgid ""
 "Go into EPG Importer plugin settings, select your playlist in sources... "
 "Save... Manually download sources."
 msgstr ""
+"按确定创建花束。\n"
+"退出绝地插件，然后按电视按钮查看您的花束。\n"
+"进入 EPG 导入器插件设置，在源中选择您的播放列表...保存...手动下载源。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:107
 msgid "Last Update:"
-msgstr ""
+msgstr "上次更新:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:432
 msgid "Active: "
-msgstr ""
+msgstr "活动: "
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:432
 msgid "  Max: "
-msgstr ""
+msgstr "  最大限度: "
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:434
 msgid "Banned"
-msgstr ""
+msgstr "禁止"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:436
 msgid "Disabled"
-msgstr ""
+msgstr "已禁用"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:438
 msgid "Expired"
-msgstr ""
+msgstr "已过期"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:489
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:568
 msgid "Server down or user no longer authorised!"
-msgstr ""
+msgstr "服务器关闭或用户不再授权！"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:492
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:574
 msgid "Url is invalid or playlist/user no longer authorised!"
-msgstr ""
+msgstr "网址无效或播放列表/用户不再授权！"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:495
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:498
 msgid "User Info not available for this playlist\n"
-msgstr ""
+msgstr "用户信息不适用于此播放列表\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:514
 msgid ""
 "Edit unavailable for local M3Us.\n"
 "Manually Delete/Amend M3U files in folder.\n"
 msgstr ""
+"编辑对本地 M3U 不可用。\n"
+"手动删除/修改文件夹中的M3U文件。\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:519
 msgid "Permanently delete selected playlist?"
-msgstr ""
+msgstr "永久删除选定的播放列表？"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:553
 msgid ""
 "Delete unavailable for local M3Us.\n"
 "Manually Delete/Amend M3U files in folder.\n"
 msgstr ""
+"删除对本地 M3U 不可用。\n"
+"手动删除/修改文件夹中的M3U文件。\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/playlists.py:566
 msgid "Playlist is "
-msgstr ""
+msgstr "播放列表是 "
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:50
 msgid "Domain"
-msgstr ""
+msgstr "范围"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:50
 msgid "Domain | Connections"
-msgstr ""
+msgstr "域名|连接"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:107
 msgid "Jedi Maker Xtream"
-msgstr ""
+msgstr "绝地制造者 X流"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:296
 msgid "Catchup only available on IPTV Streams."
-msgstr ""
+msgstr "追赶仅在IPTV流上可用。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:309
 msgid "IPTV Bouquets Creator"
-msgstr ""
+msgstr "IPTV花束创作者"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:310
 msgid "JediMakerXtream"
-msgstr ""
+msgstr "绝地制造者X流"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:79
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:128
 msgid "playlists.txt location"
-msgstr ""
+msgstr "playlists.txt位置"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:80
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:132
 msgid "Local M3U File location"
-msgstr ""
+msgstr "本地 M3U 文件位置"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:81
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:136
 msgid "Automatic live bouquet update"
-msgstr ""
+msgstr "自动现场花束更新"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:82
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:140
 msgid "Automatic live update start time"
-msgstr ""
+msgstr "自动实时更新开始时间"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:83
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:144
 msgid "Show in main menu"
-msgstr ""
+msgstr "在主菜单中显示"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:84
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:148
 msgid "Show in extensions"
-msgstr ""
+msgstr "在扩展中显示"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:85
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:152
 msgid "Select skin"
-msgstr ""
+msgstr "选择皮肤"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:86
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:156
 msgid "Server timeout (seconds)"
-msgstr ""
+msgstr "服务器超时(秒)"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:88
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:160
 msgid "Prefix Catchup channels"
-msgstr ""
+msgstr "前缀追赶频道"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:89
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:164
 msgid "Select Catchup prefix symbol"
-msgstr ""
+msgstr "选择追赶前缀图标"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:90
 msgid "Margin before catchup (mins)"
-msgstr ""
+msgstr "回放前的时间(分钟)"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:91
 msgid "Margin after catchup (mins)"
-msgstr ""
+msgstr "回放后的时间(分钟)"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:93
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:168
 msgid "Group bouquets into its own folder"
-msgstr ""
+msgstr "将花束分组到自己的文件夹中"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:129
 msgid ""
@@ -554,6 +588,9 @@ msgid ""
 "\n"
 "Default location is /etc/enigma2/jediplaylists"
 msgstr ""
+"选择播放列表的位置.txt文件。即/媒体/硬盘/播放列表。按“确定”更改位置。\n"
+"\n"
+"默认位置是 /etc/enigma2/jediplaylists"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:133
 msgid ""
@@ -562,32 +599,41 @@ msgid ""
 "\n"
 "Default location is /etc/enigma2/jediplaylists"
 msgstr ""
+"选择本地 m3u 文件的位置。即/媒体/硬盘/播放列表。按“确定”更改位置。\n"
+"\n"
+"默认位置是 /etc/enigma2/jediplaylists"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:137
 msgid "Update your live bouquets automatically."
-msgstr ""
+msgstr "自动更新您的现场花束。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:141
 msgid "Select the time of the automatic update."
-msgstr ""
+msgstr "选择自动更新的时间。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:145
 msgid ""
 "Display JediMakerXtream in Main Menu.\n"
 "*Restart GUI required."
 msgstr ""
+"在主菜单中显示 绝地制造者 X流。\n"
+"*需要重新启动 GUI。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:149
 msgid ""
 "Quick start JediMakerXtream playlists from extensions menu.\n"
 "*Restart GUI required."
 msgstr ""
+"从扩展菜单快速启动 绝地制造者 X流 播放列表.\n"
+"*需要重新启动 GUI。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:153
 msgid ""
 "Select from the available skins.\n"
 "*Restart GUI required."
 msgstr ""
+"从可用的皮肤中选择。\n"
+"*需要重新启动 GUI。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:157
 msgid ""
@@ -595,177 +641,188 @@ msgid ""
 "\n"
 "Can be increased for very large playlists, slow servers, or slow proxies."
 msgstr ""
+"修改服务器调用的超时。\n"
+"\n"
+"对于非常大的播放列表、慢速服务器或慢速代理，可以增加。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:161
 msgid "Mark channels that have catchup with a prefix in your bouquets."
-msgstr ""
+msgstr "标记在花束中具有前缀的频道。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:165
 msgid "Select the symbol to prefix your catchup channels with."
-msgstr ""
+msgstr "选择符号以作为追赶频道的前缀。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:169
 msgid ""
 "Create a group bouquet for each playlist.\n"
 " *Experimental* "
 msgstr ""
+"为每个播放列表创建一个组花束。\n"
+" *实验性* "
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:271
 msgid "Choose Directory:"
-msgstr ""
+msgstr "选择目录:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:272
 msgid "Choose directory"
-msgstr ""
+msgstr "选择目录"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:54
 msgid "Bouquets Settings"
-msgstr ""
+msgstr "花束设置"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:66
 msgid "Continue"
-msgstr ""
+msgstr "继续"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:193
 msgid "Original Order"
-msgstr ""
+msgstr "原始顺序"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:193
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:193
 msgid "Newest First"
-msgstr ""
+msgstr "按最新优先"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:193
 msgid "Oldest First"
-msgstr ""
+msgstr "最旧优先"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:221
 msgid "No Buffering(0)"
-msgstr ""
+msgstr "无缓冲（0）"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:221
 msgid "Buffering Enabled(1)"
-msgstr ""
+msgstr "缓冲功能（1）"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:221
 msgid "Progressive Buffering(3)"
-msgstr ""
+msgstr "渐进缓冲（3）"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:228
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:306
 msgid "Bouquet name"
-msgstr ""
+msgstr "花束名称"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:230
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:310
 msgid "Use name as bouquet prefix"
-msgstr ""
+msgstr "使用名称作为花束前缀"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:235
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:275
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:314
 msgid "Live categories"
-msgstr ""
+msgstr "直播类别"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:238
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:278
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:318
 msgid "Stream type for Live"
-msgstr ""
+msgstr "直播的流类型"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:241
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:322
 msgid "VOD categories"
-msgstr ""
+msgstr "视频点播类别"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:244
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:282
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:326
 msgid "Series categories"
-msgstr ""
+msgstr "系列类别"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:247
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:330
 msgid "Stream type for VOD/SERIES"
-msgstr ""
+msgstr "视频点播/系列的流类型"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:250
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:334
 msgid "VOD bouquet order"
-msgstr ""
+msgstr "视频点播花束顺序"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:253
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:288
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:357
 msgid "Buffer streams"
-msgstr ""
+msgstr "缓冲流"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:256
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:364
 msgid "Catchup Timeshift"
-msgstr ""
+msgstr "追赶时移"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:259
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:291
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:338
 msgid "Use your provider EPG"
-msgstr ""
+msgstr "使用您的提供商 EPG"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:262
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:346
 msgid "Use Rytec UK EPG"
-msgstr ""
+msgstr "使用 Rytec UK EPG"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:265
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:350
 msgid "Replace UK channel names in bouquets with swap names"
-msgstr ""
+msgstr "将花束中的英国频道名称替换为交换名称"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:266
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:354
 msgid "UK only: Force UK name swap"
-msgstr ""
+msgstr "仅限英国：强制英国名称交换"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:269
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:294
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:342
 msgid "EPG url"
-msgstr ""
+msgstr "Epg Url"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:272
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:297
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:360
 msgid "Rebuild XMLTV EPG data"
-msgstr ""
+msgstr "重建 XMLTV EPG 数据"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:280
 msgid "Vod categories"
-msgstr ""
+msgstr "视频点播类别"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:285
 msgid "Stream type for VOD/Series"
-msgstr ""
+msgstr "视频点播/系列的流类型"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:307
 msgid ""
 "\n"
 "Enter name to be shown as a prefix in your bouquets"
 msgstr ""
+"\n"
+"输入要在花束中显示为前缀的名称"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:311
 msgid ""
 "\n"
 "Use provider name prefix in your bouquets"
 msgstr ""
+"\n"
+"在花束中使用提供商名称前缀"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:315
 msgid ""
 "\n"
 "Include LIVE categories in your bouquets."
 msgstr ""
+"\n"
+"在您的花束中包含实时类别。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:319
 msgid ""
@@ -774,12 +831,17 @@ msgid ""
 "streams.\n"
 "If your live streams do not play try changing this setting."
 msgstr ""
+"\n"
+"此设置允许您选择 E2 将用于直播流的播放器。\n"
+"如果您的直播无法播放，请尝试更改此设置。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:323
 msgid ""
 "\n"
 "Include VOD categories in your bouquets."
 msgstr ""
+"\n"
+"在您的花束中包含点播类别。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:327
 msgid ""
@@ -787,6 +849,9 @@ msgid ""
 "Include SERIES categories in your bouquets. \n"
 "** Note: Selecting Series can be slow to populate the lists.**"
 msgstr ""
+"\n"
+"在花束中包含系列类别。\n"
+"** 注意：选择“系列”填充列表的速度可能很慢.**"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:331
 msgid ""
@@ -795,12 +860,17 @@ msgid ""
 "Series streams.\n"
 "If your VOD streams do not play try changing this setting."
 msgstr ""
+"\n"
+"此设置允许您选择 E2 将用于 VOD/系列流的播放器。\n"
+"如果您的 VOD 流无法播放，请尝试更改此设置。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:335
 msgid ""
 "\n"
 "Select the sort order for your VOD Bouquets."
 msgstr ""
+"\n"
+"选择 点播花束的排序顺序。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:339
 msgid ""
@@ -808,12 +878,17 @@ msgid ""
 "Make provider xmltv for use in EPG Importer.\n"
 "Provider source needs to be selected in EPG Importer plugin."
 msgstr ""
+"\n"
+"使提供程序 xmltv 用于 EPG 导入程序。\n"
+"需要在 EPG 导入器插件中选择提供程序源。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:343
 msgid ""
 "\n"
 "Enter the EPG url for your playlist. If unknown leave as default."
 msgstr ""
+"\n"
+"输入播放列表的 EPG 网址。如果未知，则保留默认值。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:347
 msgid ""
@@ -821,6 +896,9 @@ msgid ""
 "Try to match the UK Rytec names in the background to populate UK EPG.\n"
 "Note this will override your provider's UK EPG."
 msgstr ""
+"\n"
+"尝试在后台匹配英国Rytec名称以填充英国EPG。\n"
+"请注意，这将覆盖提供商的英国 EPG。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:351
 msgid ""
@@ -828,6 +906,8 @@ msgid ""
 "This will amend the UK channels names in channel bouquets to that of the "
 "computed swap names."
 msgstr ""
+"\n"
+"这会将通道花束中的英国通道名称修改为计算的交换名称。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:355
 msgid ""
@@ -837,12 +917,18 @@ msgid ""
 "May cause non UK channels to have the wrong epg.\n"
 "Trying creating bouquets without this option turned off first."
 msgstr ""
+"\n"
+"用于未在类别标题或频道标题中指定英国的英国提供商。\n"
+"可能会导致非英国频道的 epg 错误。\n"
+"尝试在不关闭此选项的情况下创建花束。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:358
 msgid ""
 "\n"
 "Set stream buffer (Experimental)."
 msgstr ""
+"\n"
+"设置流缓冲区（实验性）。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:361
 msgid ""
@@ -851,30 +937,35 @@ msgid ""
 "(Slower).\n"
 "Only required if you think you have corrupt external EPG."
 msgstr ""
+"\n"
+"（可选）下载并尝试将 XMLTV EPG 数据重建为 UTF-8 编码（较慢）。\n"
+"仅当您认为外部 EPG 已损坏时才需要。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:365
 msgid ""
 "\n"
 "Offset the displayed catchup times"
 msgstr ""
+"\n"
+"偏移显示的追赶时间"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:432
 msgid ""
 "Bouquet name cannot be blank. Please enter a unique bouquet name. Minimum 2 "
 "characters."
-msgstr ""
+msgstr "花束名称不能为空。请输入唯一的花束名称。最少 2 个字符。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:487
 msgid "Choose Bouquets"
-msgstr ""
+msgstr "选择花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:517
 msgid "Create"
-msgstr ""
+msgstr "创建"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:520
 msgid "Show Channels"
-msgstr ""
+msgstr "显示频道"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:521
 msgid ""
@@ -882,94 +973,100 @@ msgid ""
 "Press OK to invert the selection.\n"
 "Press INFO to show the channels in this category."
 msgstr ""
+"选择要为其创建花束的播放列表类别。\n"
+"按“确定”可反转所选内容。\n"
+"按 INFO 以显示此类别中的频道。"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/setupbouquet.py:571
 msgid "Getting selection list"
-msgstr ""
+msgstr "获取选择列表"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:78
 msgid "Updating Bouquets"
-msgstr ""
+msgstr "更新花束"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:126
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:130
 msgid "Starting Update..."
-msgstr ""
+msgstr "正在启动更新..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:137
 msgid " Providers IPTV Updated"
-msgstr ""
+msgstr " 提供商 IPTV 更新"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:153
 #, python-format
 msgid "Updating Playlist %d of %d"
-msgstr ""
+msgstr "更新%d的播放列表%d"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:154
 #, python-format
 msgid "%s - Reading bouquet data..."
-msgstr ""
+msgstr "%s - 正在读取花束数据..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:192
 #, python-format
 msgid "%s - Checking URL still active..."
-msgstr ""
+msgstr "%s - 正在检查 URL 仍处于活动状态..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:194
 #, python-format
 msgid "%s - Download M3U Data..."
-msgstr ""
+msgstr "%s - 下载M3U数据..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:263
 #, python-format
 msgid "%s - Downloading VOD data..."
-msgstr ""
+msgstr "%s - 正在下载视频点播数据..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:265
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:273
 #, python-format
 msgid "%s - Downloading Series data..."
-msgstr ""
+msgstr "%s - 正在下载系列数据..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:267
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:275
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:280
 #, python-format
 msgid "%s - Getting categories..."
-msgstr ""
+msgstr "%s - 获取类别..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:284
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:294
 #, python-format
 msgid "%s - Get selected categories..."
-msgstr ""
+msgstr "%s - 获取所选类别..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:289
 #, python-format
 msgid "%s - Getting selection list"
-msgstr ""
+msgstr "%s - 获取选择列表"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:313
 #, python-format
 msgid "%s - Downloading Data..."
-msgstr ""
+msgstr "%s - 正在下载数据..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:315
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:319
 #, python-format
 msgid "%s - Deleting existing bouquets..."
-msgstr ""
+msgstr "%s - 删除现有的花束..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:325
 #, python-format
 msgid "%s - Building bouquets..."
-msgstr ""
+msgstr "%s - 创建花束..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/update.py:327
 #, python-format
 msgid "%s - Building M3U bouquets..."
-msgstr ""
+msgstr "%s - 创建M3U花束..."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/viewchannel.py:31
 msgid "Channel List"
-msgstr ""
+msgstr "频道列表"
+
+#~ msgid "Building 'General' Bouquet"
+#~ msgstr "创建“通用”花束"

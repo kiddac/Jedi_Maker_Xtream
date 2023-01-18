@@ -4,7 +4,7 @@
 
 from . import jediglobals as jglob
 
-from .plugin import cfg, playlist_file
+from .plugin import cfg, playlists_json
 
 from collections import OrderedDict
 from Components.config import configfile
@@ -17,13 +17,13 @@ import re
 
 def getPlaylistJson():
     playlists_all = []
-    if os.path.isfile(playlist_file) and os.stat(playlist_file).st_size > 0:
-        with open(playlist_file) as f:
+    if os.path.isfile(playlists_json) and os.stat(playlists_json).st_size > 0:
+        with open(playlists_json) as f:
             try:
                 playlists_all = json.load(f, object_pairs_hook=OrderedDict)
 
             except:
-                os.remove(playlist_file)
+                os.remove(playlists_json)
     return playlists_all
 
 

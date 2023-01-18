@@ -59,6 +59,7 @@ folders = os.listdir(skin_directory)
 config.plugins.JediMakerXtream = ConfigSubsection()
 
 cfg = config.plugins.JediMakerXtream
+cfg.extensions = ConfigYesNo(default=False)
 cfg.location = ConfigDirectory(default="/etc/enigma2/jediplaylists/")
 cfg.m3ulocation = ConfigDirectory(default="/etc/enigma2/jediplaylists/")
 cfg.main = ConfigYesNo(default=True)

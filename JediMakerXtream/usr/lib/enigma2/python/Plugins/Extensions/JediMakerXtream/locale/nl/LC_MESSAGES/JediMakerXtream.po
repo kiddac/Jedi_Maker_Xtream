@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JediMakerXtream\n"
-"POT-Creation-Date: 2023-01-16 21:32+0000\n"
-"PO-Revision-Date: 2023-01-16 21:33+0000\n"
+"POT-Creation-Date: 2023-01-21 21:46+0000\n"
+"PO-Revision-Date: 2023-01-21 21:46+0000\n"
 "Last-Translator: John van Dreumel <johnvandreumel@gmail.com>\n"
 "Language-Team: John van Dreumel johnvandreumel@gmail.com\n"
 "Language: nl\n"
@@ -10,327 +10,214 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: about.py:24 menu.py:92
+#: about.py:23 menu.py:92
 msgid "About"
 msgstr "Informatie"
 
-#: about.py:30 catchup.py:318 info.py:36 menu.py:48 viewchannel.py:41
-msgid "Close"
-msgstr "Sluit"
+#: about.py:31 playlists.py:71 playlists.py:100 serverinfo.py:59
+msgid "Back"
+msgstr "Terug"
 
-#: addplaylist.py:45 playlists.py:73 playlists.py:102
-msgid "Add Playlist"
-msgstr "Playlist +"
-
-#: addplaylist.py:49 playlists.py:103
-msgid "Edit Playlist"
-msgstr "Wijzig de playlist"
-
-#: addplaylist.py:56 deletebouquets.py:37 settings.py:48 setupbouquet.py:65
-#: setupbouquet.py:516
-msgid "Cancel"
-msgstr "Annuleer"
-
-#: addplaylist.py:57 settings.py:49
-msgid "Save"
-msgstr "Opslaan"
-
-#: addplaylist.py:120 addplaylist.py:132
-msgid "http://"
-msgstr "http://"
-
-#: addplaylist.py:120 addplaylist.py:132
-msgid "https://"
-msgstr "https://"
-
-#: addplaylist.py:121 addplaylist.py:128 addplaylist.py:131
-msgid "Standard Playlist"
-msgstr "Standaard playlist"
-
-#: addplaylist.py:121 addplaylist.py:128 addplaylist.py:131
-msgid "M3U File"
-msgstr "M3U bestand"
-
-#: addplaylist.py:135
-msgid "username"
-msgstr "gebruikersnaam"
-
-#: addplaylist.py:136
-msgid "password"
-msgstr "wachtwoord"
-
-#: addplaylist.py:145 addplaylist.py:180
-msgid "Select playlist type"
-msgstr "Kies het type playlist"
-
-#: addplaylist.py:148 addplaylist.py:160 addplaylist.py:184
-msgid "Protocol"
-msgstr "Protocol"
-
-#: addplaylist.py:149 addplaylist.py:161 addplaylist.py:188
-msgid "Server URL"
-msgstr "Server URL"
-
-#: addplaylist.py:150 addplaylist.py:162 addplaylist.py:192
-msgid "Port"
-msgstr "Poort"
-
-#: addplaylist.py:151 addplaylist.py:163 addplaylist.py:196
-msgid "Username"
-msgstr "Gebruikersnaam"
-
-#: addplaylist.py:152 addplaylist.py:164 addplaylist.py:200
-msgid "Password"
-msgstr "Wachtwoord"
-
-#: addplaylist.py:153 addplaylist.py:165 addplaylist.py:204
-msgid "Output Type"
-msgstr "Soort output"
-
-#: addplaylist.py:155 addplaylist.py:170 addplaylist.py:208
-msgid "M3U external location"
-msgstr "M3U externe locatie"
-
-#: addplaylist.py:159 addplaylist.py:212
-msgid "Bouquet Name"
-msgstr "Bouquetnaam"
-
-#: addplaylist.py:167 addplaylist.py:216
-msgid "Epg Url"
-msgstr "EPG URL"
-
-#: addplaylist.py:181
-msgid ""
-"\n"
-"Select the type of playlist to add. Standard playlist or external M3U file.\n"
-"Try M3U File for non standard playlists that use custom urls."
+#: about.py:32 serverinfo.py:60
+msgid "OK"
 msgstr ""
-"\n"
-"Selecteer het type playlist dat u wilt toevoegen. Standaard afspeellijst of "
-"extern M3U-bestand.\n"
-"Probeer M3U-bestand voor niet-standaard playlist die aangepaste url's "
-"gebruiken."
 
-#: addplaylist.py:185
-msgid ""
-"\n"
-"Select the protocol for your playlists url."
+#: about.py:42
+msgid "JediMakerXtream "
 msgstr ""
-"\n"
-"Kies het door uw playlist gebruikte protocol."
 
-#: addplaylist.py:189
+#: about.py:43
 msgid ""
+"Support for this plugin and latest versions can be found on https://linuxsat-"
+"support.com\n"
 "\n"
-"Enter playlist url without protocol http:// \n"
-"e.g. domain.xyz"
 msgstr ""
-"\n"
-"Voer de URL van uw playlist in zonder protocol http:// \n"
-"Bijvoorbeeld. domein.xyz"
 
-#: addplaylist.py:193
+#: about.py:44
 msgid ""
+"Plugin enables the simple bouquet creation of standard Xtream codes/XUI One, "
+"external and local m3u8 playlists. \n"
+"Play your files via your TV bouquets.\n"
 "\n"
-"Enter Port Number without colon : \n"
-"e.g. 25461"
 msgstr ""
-"\n"
-"Voer het poortnummer in zonder dubbele punt : \n"
-"b.v. 25461"
 
-#: addplaylist.py:197
+#: about.py:45
+msgid "Credits:\n"
+msgstr ""
+
+#: about.py:46
+msgid "AutoBouquetMaker, EpgImporter, AutoBackup (used as code reference).\n"
+msgstr ""
+
+#: about.py:47
 msgid ""
-"\n"
-"Enter username."
+"Lululla for all the hard work done on XCPlugin and assistance with the "
+"project.\n"
 msgstr ""
-"\n"
-"Voer de gebruikersnaam in."
 
-#: addplaylist.py:201
+#: about.py:48
+msgid "Massive thanks to Seagen for his endless multi image testing.\n"
+msgstr ""
+
+#: about.py:49
 msgid ""
+"And thanks to all the other coders and Linuxsat testers who helped in the "
+"development of this project.\n"
 "\n"
-"Enter password."
 msgstr ""
-"\n"
-"Voer het wachtwoord in."
 
-#: addplaylist.py:205
+#: about.py:50
 msgid ""
-"\n"
-"Enter stream output type."
+"If you would like to buy me a beer or a coffee: https://paypal.me/kiddac \n"
 msgstr ""
-"\n"
-"Voer het type output in."
 
-#: addplaylist.py:209
-msgid ""
-"\n"
-"Enter M3U list url including protocol. \n"
-"eg. http://www.domain.xyz"
+#: about.py:51
+msgid "Cheers - all donations are very much appreciated."
 msgstr ""
-"\n"
-"Voer de URL van de M3U-lijst in, inclusief het protocol. \n"
-"Bijvoorbeeld: http://www.domain.xyz"
 
-#: addplaylist.py:213
-msgid ""
-"\n"
-"Enter the name to be displayed in bouquets."
-msgstr ""
-"\n"
-"Voer de naam in die in de boeketten getoond moet worden."
-
-#: addplaylist.py:217
-msgid ""
-"\n"
-"Enter EPG Url."
-msgstr ""
-"\n"
-"Toon de URL van de EPG."
-
-#: addplaylist.py:313 settings.py:245
-msgid "Really close without saving settings?"
-msgstr "Wilt u echt stoppen zonder de ingeven op te slaan?"
-
-#: buildbouquet.py:31
+#: buildbouquet.py:30
 msgid "Building Bouquets"
 msgstr "Bouquets worden gebouwd"
 
-#: buildbouquet.py:39 buildbouquet.py:177
+#: buildbouquet.py:38 buildbouquet.py:176
 msgid "Building Bouquets..."
 msgstr "Bouquets worden gebouwd..."
 
-#: buildbouquet.py:116 update.py:124
+#: buildbouquet.py:115 update.py:123
 msgid "Downloading Rytec UK EPG data..."
 msgstr ""
 
-#: buildbouquet.py:118 buildbouquet.py:125
+#: buildbouquet.py:117 buildbouquet.py:124
 msgid "Starting..."
 msgstr "Start..."
 
-#: buildbouquet.py:131
+#: buildbouquet.py:130
 msgid "Downloading Live data..."
 msgstr ""
 
-#: buildbouquet.py:133
+#: buildbouquet.py:132
 msgid "No categories selected."
 msgstr "Er zijn geen categorieën gekozen."
 
-#: buildbouquet.py:136 buildbouquet.py:161 buildbouquet.py:167
+#: buildbouquet.py:135 buildbouquet.py:160 buildbouquet.py:166
 msgid "Deleting Existing Bouquets..."
 msgstr "Verwijdert bestaande bouquetten..."
 
-#: buildbouquet.py:138
+#: buildbouquet.py:137
 msgid "No valid M3U streams in file."
 msgstr "ER zitten geen correcte M3U streams in het pakket."
 
-#: buildbouquet.py:145
+#: buildbouquet.py:144
 msgid "Downloading VOD data"
 msgstr ""
 
-#: buildbouquet.py:152
+#: buildbouquet.py:151
 msgid "Downloading Series data"
 msgstr ""
 
-#: buildbouquet.py:159
+#: buildbouquet.py:158
 msgid "Downloading get.php file for series stream data"
 msgstr ""
 
-#: buildbouquet.py:173
+#: buildbouquet.py:172
 msgid "Saving Bouquet Data File..."
 msgstr "Het bouquet databestand wordt opgeslagen..."
 
-#: buildbouquet.py:179 buildbouquet.py:280
+#: buildbouquet.py:178 buildbouquet.py:279
 msgid "Building M3U Bouquets..."
 msgstr ""
 
-#: buildbouquet.py:184
+#: buildbouquet.py:183
 #, python-format
 msgid "Building Categories %d of %d"
 msgstr "Categorieën worden gebouwd %d of %d"
 
-#: buildbouquet.py:210
+#: buildbouquet.py:209
 msgid " IPTV Bouquets Created"
 msgstr " IPTV bouquetten zijn gebouwd"
 
-#: buildbouquet.py:230 buildbouquet.py:237 buildbouquet.py:242
+#: buildbouquet.py:229 buildbouquet.py:236 buildbouquet.py:241
 msgid "Building Categories"
 msgstr "Categorieën worden gebouwd"
 
-#: buildbouquet.py:230 buildbouquet.py:237
+#: buildbouquet.py:229 buildbouquet.py:236
 msgid "of"
 msgstr ""
 
-#: buildbouquet.py:240
+#: buildbouquet.py:239
 msgid "Building General Bouquet"
 msgstr ""
 
-#: buildbouquet.py:285
+#: buildbouquet.py:284
 msgid "Create Bouquets"
 msgstr "Bouquetten worden gebouwd"
 
-#: catchup.py:153
+#: catchup.py:151
 #, python-format
 msgid "All %s days"
 msgstr "Alle %s dagen"
 
-#: catchup.py:183
+#: catchup.py:181
 msgid "Program Data Not Available"
 msgstr ""
 
-#: catchup.py:187
+#: catchup.py:185
 msgid "Error: Downloading data error."
 msgstr "Fout: Download data fout."
 
-#: catchup.py:191
+#: catchup.py:189
 msgid "Channel has no TV Archive."
 msgstr "De zender heeft geen TV archief."
 
-#: catchup.py:305
+#: catchup.py:303
 #, python-format
 msgid "TV Archive: %s"
 msgstr "TV Archive: %s"
 
-#: deletebouquets.py:30
+#: catchup.py:316 menu.py:48 viewchannel.py:40
+msgid "Close"
+msgstr "Sluit"
+
+#: deletebouquets.py:29
 msgid "Delete Bouquets"
 msgstr "Verwijder bouquetten"
 
-#: deletebouquets.py:38
+#: deletebouquets.py:36 server.py:49 settings.py:41 setupbouquet.py:57
+#: setupbouquet.py:508
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: deletebouquets.py:37
 msgid "Delete"
 msgstr "Verwijder"
 
-#: deletebouquets.py:39 setupbouquet.py:518
+#: deletebouquets.py:38 setupbouquet.py:510
 msgid "Invert"
 msgstr ""
 
-#: deletebouquets.py:40 setupbouquet.py:519
+#: deletebouquets.py:39 setupbouquet.py:511
 msgid "Clear All"
 msgstr "Verwijder alles"
 
-#: deletebouquets.py:42
+#: deletebouquets.py:41
 msgid ""
 "Select all the iptv bouquets you wish to delete. \n"
 "Press OK to invert the selection"
 msgstr ""
 
-#: info.py:28
-msgid "User Information"
-msgstr "Gebruikersinformatie"
-
 #: menu.py:40
 msgid "Main Menu"
 msgstr "Hoofdmenu"
 
-#: menu.py:77 playlists.py:56
+#: menu.py:77 playlists.py:55
 msgid "Playlists"
 msgstr "Playlist(s)"
 
-#: menu.py:78 settings.py:41
+#: menu.py:78 settings.py:34
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -350,23 +237,27 @@ msgstr "Verwijder alle Jedi IPTV bouquetten"
 msgid "Permanently delete all Jedi created bouquets?"
 msgstr "Moet ik alle door Jedi gemaakte bouquetten definitief verwijderen?"
 
-#: playlists.py:69 setupbouquet.py:73 setupbouquet.py:502
+#: playlists.py:68 setupbouquet.py:65 setupbouquet.py:494
 msgid "Loading data... Please wait..."
 msgstr ""
 
-#: playlists.py:72 playlists.py:101
-msgid "Back"
-msgstr "Terug"
+#: playlists.py:72 playlists.py:101 server.py:38
+msgid "Add Playlist"
+msgstr "Playlist +"
 
-#: playlists.py:104
+#: playlists.py:102 server.py:42
+msgid "Edit Playlist"
+msgstr "Wijzig de playlist"
+
+#: playlists.py:103
 msgid "Delete Playlist"
 msgstr "Playlist -"
 
-#: playlists.py:105
+#: playlists.py:104
 msgid "User Info"
 msgstr "Gebruikersinfo"
 
-#: playlists.py:106
+#: playlists.py:105
 msgid ""
 "Press OK to create bouquets. \n"
 "View your bouquets by exiting the Jedi plugin and then press the TV "
@@ -380,44 +271,44 @@ msgstr ""
 "Ga daarna naar de instellingen van de EPG Import plug-in, kies jouw playlist "
 "bij de bronnen... Opslaan... Handmatig bronnen downloaden."
 
-#: playlists.py:107
+#: playlists.py:106
 msgid "Last Update:"
 msgstr ""
 
-#: playlists.py:432
+#: playlists.py:431
 msgid "Active: "
 msgstr "Actief: "
 
-#: playlists.py:432
+#: playlists.py:431
 msgid "  Max: "
 msgstr "  Max: "
 
-#: playlists.py:434
+#: playlists.py:433
 msgid "Banned"
 msgstr "Gebanned"
 
-#: playlists.py:436
+#: playlists.py:435
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: playlists.py:438
+#: playlists.py:437
 msgid "Expired"
 msgstr ""
 
-#: playlists.py:489 playlists.py:568
+#: playlists.py:488 playlists.py:567
 msgid "Server down or user no longer authorised!"
 msgstr "De server is inactief of u bent niet langer geautoriseerd!"
 
-#: playlists.py:492 playlists.py:574
+#: playlists.py:491 playlists.py:573
 msgid "Url is invalid or playlist/user no longer authorised!"
 msgstr ""
 "De URL is onjuist of de playlist / gebruiker is niet meer geautoriseerd!"
 
-#: playlists.py:495 playlists.py:498
+#: playlists.py:494 playlists.py:497
 msgid "User Info not available for this playlist\n"
 msgstr "De gebruikersinformatie is niet beschikbaar voor deze playlist\n"
 
-#: playlists.py:514
+#: playlists.py:513
 msgid ""
 "Edit unavailable for local M3Us.\n"
 "Manually Delete/Amend M3U files in folder.\n"
@@ -425,11 +316,11 @@ msgstr ""
 "Het bewerken van lokale M3U's niet beschikbaar.\n"
 "M3U-bestanden in de map handmatig verwijderen / wijzigen.\n"
 
-#: playlists.py:519
+#: playlists.py:518
 msgid "Permanently delete selected playlist?"
 msgstr "Playlist definitief verwijderen?"
 
-#: playlists.py:553
+#: playlists.py:552
 msgid ""
 "Delete unavailable for local M3Us.\n"
 "Manually Delete/Amend M3U files in folder.\n"
@@ -437,87 +328,293 @@ msgstr ""
 "Het verwijderen van lokale M3U's is niet beschikbaar.\n"
 "M3U-bestanden in de map handmatig verwijderen / wijzigen.\n"
 
-#: playlists.py:566
+#: playlists.py:565
 msgid "Playlist is "
 msgstr "Playlist is "
 
-#: plugin.py:50
+#: plugin.py:67
 msgid "Domain"
 msgstr "Domein"
 
-#: plugin.py:50
+#: plugin.py:67
 msgid "Domain | Connections"
 msgstr "Domein / connecties"
 
-#: plugin.py:107
+#: plugin.py:144
 msgid "Jedi Maker Xtream"
 msgstr "Jedi Maker Xtream"
 
-#: plugin.py:296
+#: plugin.py:346
 msgid "Catchup only available on IPTV Streams."
 msgstr "Catchup is enkel beschikbaar bij IPTV streams."
 
-#: plugin.py:309
-msgid "IPTV Bouquets Creator"
-msgstr "IPTV bouquet maker"
+#: plugin.py:365
+msgid "IPTV Bouquets Creator by KiddaC"
+msgstr ""
 
-#: plugin.py:310
+#: plugin.py:366
 msgid "JediMakerXtream"
 msgstr "JediMakerXtream"
 
-#: settings.py:79 settings.py:128
+#: server.py:50 settings.py:42
+msgid "Save"
+msgstr "Opslaan"
+
+#: server.py:113 server.py:125
+msgid "http://"
+msgstr "http://"
+
+#: server.py:113 server.py:125
+msgid "https://"
+msgstr "https://"
+
+#: server.py:114 server.py:121 server.py:124
+msgid "Standard Playlist"
+msgstr "Standaard playlist"
+
+#: server.py:114 server.py:121 server.py:124
+msgid "M3U File"
+msgstr "M3U bestand"
+
+#: server.py:128
+msgid "username"
+msgstr "gebruikersnaam"
+
+#: server.py:129
+msgid "password"
+msgstr "wachtwoord"
+
+#: server.py:138 server.py:173
+msgid "Select playlist type"
+msgstr "Kies het type playlist"
+
+#: server.py:141 server.py:153 server.py:177
+msgid "Protocol"
+msgstr "Protocol"
+
+#: server.py:142 server.py:154 server.py:181
+msgid "Server URL"
+msgstr "Server URL"
+
+#: server.py:143 server.py:155 server.py:185
+msgid "Port"
+msgstr "Poort"
+
+#: server.py:144 server.py:156 server.py:189
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: server.py:145 server.py:157 server.py:193
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: server.py:146 server.py:158 server.py:197
+msgid "Output Type"
+msgstr "Soort output"
+
+#: server.py:148 server.py:163 server.py:201
+msgid "M3U external location"
+msgstr "M3U externe locatie"
+
+#: server.py:152 server.py:205
+msgid "Bouquet Name"
+msgstr "Bouquetnaam"
+
+#: server.py:160 server.py:209
+msgid "Epg Url"
+msgstr "EPG URL"
+
+#: server.py:174
+msgid ""
+"\n"
+"Select the type of playlist to add. Standard playlist or external M3U file.\n"
+"Try M3U File for non standard playlists that use custom urls."
+msgstr ""
+"\n"
+"Selecteer het type playlist dat u wilt toevoegen. Standaard afspeellijst of "
+"extern M3U-bestand.\n"
+"Probeer M3U-bestand voor niet-standaard playlist die aangepaste url's "
+"gebruiken."
+
+#: server.py:178
+msgid ""
+"\n"
+"Select the protocol for your playlists url."
+msgstr ""
+"\n"
+"Kies het door uw playlist gebruikte protocol."
+
+#: server.py:182
+msgid ""
+"\n"
+"Enter playlist url without protocol http:// \n"
+"e.g. domain.xyz"
+msgstr ""
+"\n"
+"Voer de URL van uw playlist in zonder protocol http:// \n"
+"Bijvoorbeeld. domein.xyz"
+
+#: server.py:186
+msgid ""
+"\n"
+"Enter Port Number without colon : \n"
+"e.g. 25461"
+msgstr ""
+"\n"
+"Voer het poortnummer in zonder dubbele punt : \n"
+"b.v. 25461"
+
+#: server.py:190
+msgid ""
+"\n"
+"Enter username."
+msgstr ""
+"\n"
+"Voer de gebruikersnaam in."
+
+#: server.py:194
+msgid ""
+"\n"
+"Enter password."
+msgstr ""
+"\n"
+"Voer het wachtwoord in."
+
+#: server.py:198
+msgid ""
+"\n"
+"Enter stream output type."
+msgstr ""
+"\n"
+"Voer het type output in."
+
+#: server.py:202
+msgid ""
+"\n"
+"Enter M3U list url including protocol. \n"
+"eg. http://www.domain.xyz"
+msgstr ""
+"\n"
+"Voer de URL van de M3U-lijst in, inclusief het protocol. \n"
+"Bijvoorbeeld: http://www.domain.xyz"
+
+#: server.py:206
+msgid ""
+"\n"
+"Enter the name to be displayed in bouquets."
+msgstr ""
+"\n"
+"Voer de naam in die in de boeketten getoond moet worden."
+
+#: server.py:210
+msgid ""
+"\n"
+"Enter EPG Url."
+msgstr ""
+"\n"
+"Toon de URL van de EPG."
+
+#: server.py:305 settings.py:238
+msgid "Really close without saving settings?"
+msgstr "Wilt u echt stoppen zonder de ingeven op te slaan?"
+
+#: serverinfo.py:27
+msgid "User Information"
+msgstr "Gebruikersinformatie"
+
+#: serverinfo.py:42
+msgid "Status:"
+msgstr ""
+
+#: serverinfo.py:43
+msgid "Is Trial:"
+msgstr ""
+
+#: serverinfo.py:44
+msgid "Active Connections:"
+msgstr ""
+
+#: serverinfo.py:45
+msgid "Max Connections:"
+msgstr ""
+
+#: serverinfo.py:46
+msgid "Created At:"
+msgstr ""
+
+#: serverinfo.py:47
+msgid "Expiry Date:"
+msgstr ""
+
+#: serverinfo.py:48
+msgid "Allowed Output Formats:"
+msgstr ""
+
+#: serverinfo.py:49
+msgid "Real URL:"
+msgstr ""
+
+#: serverinfo.py:50
+msgid "Timezone:"
+msgstr ""
+
+#: serverinfo.py:51
+msgid "Server Offset:"
+msgstr ""
+
+#: settings.py:72 settings.py:121
 msgid "playlists.txt location"
 msgstr "playlist.txt lokatie"
 
-#: settings.py:80 settings.py:132
+#: settings.py:73 settings.py:125
 msgid "Local M3U File location"
 msgstr "Lokale M3U lokatie"
 
-#: settings.py:81 settings.py:136
+#: settings.py:74 settings.py:129
 msgid "Automatic live bouquet update"
 msgstr "Automatische live bouquet update"
 
-#: settings.py:82 settings.py:140
+#: settings.py:75 settings.py:133
 msgid "Automatic live update start time"
 msgstr "Starttijd voor de Automatische bouquet update"
 
-#: settings.py:83 settings.py:144
+#: settings.py:76 settings.py:137
 msgid "Show in main menu"
 msgstr "Toon in het hoofdmenu"
 
-#: settings.py:84 settings.py:148
+#: settings.py:77 settings.py:141
 msgid "Show in extensions"
 msgstr "Toon ook binnen applicaties"
 
-#: settings.py:85 settings.py:152
+#: settings.py:78 settings.py:145
 msgid "Select skin"
 msgstr "Kies de gebruikte skin"
 
-#: settings.py:86 settings.py:156
+#: settings.py:79 settings.py:149
 msgid "Server timeout (seconds)"
 msgstr "Server timeout (seconden)"
 
-#: settings.py:88 settings.py:160
+#: settings.py:81 settings.py:153
 msgid "Prefix Catchup channels"
 msgstr "Voorvoegsel Catchup zenders"
 
-#: settings.py:89 settings.py:164
+#: settings.py:82 settings.py:157
 msgid "Select Catchup prefix symbol"
 msgstr "Kies het Catchup voorvoegsel symbool"
 
-#: settings.py:90
+#: settings.py:83
 msgid "Margin before catchup (mins)"
 msgstr ""
 
-#: settings.py:91
+#: settings.py:84
 msgid "Margin after catchup (mins)"
 msgstr ""
 
-#: settings.py:93 settings.py:168
+#: settings.py:86 settings.py:161
 msgid "Group bouquets into its own folder"
 msgstr ""
 
-#: settings.py:129
+#: settings.py:122
 msgid ""
 "Select the location of your playlists.txt file. i.e. /media/hdd/playlists. "
 "Press 'OK' to change location.\n"
@@ -529,7 +626,7 @@ msgstr ""
 "\n"
 "De standaard locatie is /etc/enigma2/jediplaylists"
 
-#: settings.py:133
+#: settings.py:126
 msgid ""
 "Select the location of your local m3u files. i.e. /media/hdd/playlists. "
 "Press 'OK' to change location.\n"
@@ -541,15 +638,15 @@ msgstr ""
 "\n"
 "De standaard locatie is /etc/enigma2/jediplaylists"
 
-#: settings.py:137
+#: settings.py:130
 msgid "Update your live bouquets automatically."
 msgstr "Update uw live bouquets automatisch."
 
-#: settings.py:141
+#: settings.py:134
 msgid "Select the time of the automatic update."
 msgstr "Voer de tijd in van de automatische update."
 
-#: settings.py:145
+#: settings.py:138
 msgid ""
 "Display JediMakerXtream in Main Menu.\n"
 "*Restart GUI required."
@@ -557,7 +654,7 @@ msgstr ""
 "Toon JediMakerXtream in het hoofdmenu.\n"
 "*Een herstart van Enigma 2 is vereist."
 
-#: settings.py:149
+#: settings.py:142
 msgid ""
 "Quick start JediMakerXtream playlists from extensions menu.\n"
 "*Restart GUI required."
@@ -565,7 +662,7 @@ msgstr ""
 "Snel starten JediMakerXtream playlists vanuit het applicatie-menu.\n"
 "*Een herstart van Enigma2 is vereist."
 
-#: settings.py:153
+#: settings.py:146
 msgid ""
 "Select from the available skins.\n"
 "*Restart GUI required."
@@ -573,7 +670,7 @@ msgstr ""
 "Maak een keuze uit de beschikbare skins.\n"
 "*Een herstart van Enigma2 is vereist."
 
-#: settings.py:157
+#: settings.py:150
 msgid ""
 "Amend the timeout on server calls.\n"
 "\n"
@@ -584,138 +681,138 @@ msgstr ""
 "Deze kan worden vergroot voor zeer grote playlists, trage servers, of trage "
 "proxies."
 
-#: settings.py:161
+#: settings.py:154
 msgid "Mark channels that have catchup with a prefix in your bouquets."
 msgstr ""
 "Markeer zenders die catchup hebben met een voorvoegsel in uw boeketten."
 
-#: settings.py:165
+#: settings.py:158
 msgid "Select the symbol to prefix your catchup channels with."
 msgstr "Kies het symbool als voorvoegsel van de catchup zenders."
 
-#: settings.py:169
+#: settings.py:162
 msgid ""
 "Create a group bouquet for each playlist.\n"
 " *Experimental* "
 msgstr ""
 
-#: settings.py:271
+#: settings.py:264
 msgid "Choose Directory:"
 msgstr "Kies de directory:"
 
-#: settings.py:272
+#: settings.py:265
 msgid "Choose directory"
 msgstr "Kies de directory"
 
-#: setupbouquet.py:54
+#: setupbouquet.py:46
 msgid "Bouquets Settings"
 msgstr "Bouquets instellingen"
 
-#: setupbouquet.py:66
+#: setupbouquet.py:58
 msgid "Continue"
 msgstr "Ga verder"
 
-#: setupbouquet.py:193
+#: setupbouquet.py:185
 msgid "Original Order"
 msgstr "Oorspronkelijke volgorde"
 
-#: setupbouquet.py:193
+#: setupbouquet.py:185
 msgid "A-Z"
 msgstr "A-Z"
 
-#: setupbouquet.py:193
+#: setupbouquet.py:185
 msgid "Newest First"
 msgstr "De nieuwste eerst"
 
-#: setupbouquet.py:193
+#: setupbouquet.py:185
 msgid "Oldest First"
 msgstr "De oudste eerst"
 
-#: setupbouquet.py:221
+#: setupbouquet.py:213
 msgid "No Buffering(0)"
 msgstr ""
 
-#: setupbouquet.py:221
+#: setupbouquet.py:213
 msgid "Buffering Enabled(1)"
 msgstr ""
 
-#: setupbouquet.py:221
+#: setupbouquet.py:213
 msgid "Progressive Buffering(3)"
 msgstr ""
 
-#: setupbouquet.py:228 setupbouquet.py:306
+#: setupbouquet.py:220 setupbouquet.py:298
 msgid "Bouquet name"
 msgstr "Bouquetnaam"
 
-#: setupbouquet.py:230 setupbouquet.py:310
+#: setupbouquet.py:222 setupbouquet.py:302
 msgid "Use name as bouquet prefix"
 msgstr "Gebruik de naam als voorvoegsel van het bouquet"
 
-#: setupbouquet.py:235 setupbouquet.py:275 setupbouquet.py:314
+#: setupbouquet.py:227 setupbouquet.py:267 setupbouquet.py:306
 msgid "Live categories"
 msgstr "Live TV categorieën"
 
-#: setupbouquet.py:238 setupbouquet.py:278 setupbouquet.py:318
+#: setupbouquet.py:230 setupbouquet.py:270 setupbouquet.py:310
 msgid "Stream type for Live"
 msgstr "Type stream voor Live TV"
 
-#: setupbouquet.py:241 setupbouquet.py:322
+#: setupbouquet.py:233 setupbouquet.py:314
 msgid "VOD categories"
 msgstr "Video On Demand categorieën"
 
-#: setupbouquet.py:244 setupbouquet.py:282 setupbouquet.py:326
+#: setupbouquet.py:236 setupbouquet.py:274 setupbouquet.py:318
 msgid "Series categories"
 msgstr "TV series catergorieën"
 
-#: setupbouquet.py:247 setupbouquet.py:330
+#: setupbouquet.py:239 setupbouquet.py:322
 msgid "Stream type for VOD/SERIES"
 msgstr "Type stream voor VOD / Series"
 
-#: setupbouquet.py:250 setupbouquet.py:334
+#: setupbouquet.py:242 setupbouquet.py:326
 msgid "VOD bouquet order"
 msgstr "VOD bouquet volgorde"
 
-#: setupbouquet.py:253 setupbouquet.py:288 setupbouquet.py:357
+#: setupbouquet.py:245 setupbouquet.py:280 setupbouquet.py:349
 msgid "Buffer streams"
 msgstr ""
 
-#: setupbouquet.py:256 setupbouquet.py:364
+#: setupbouquet.py:248 setupbouquet.py:356
 msgid "Catchup Timeshift"
 msgstr ""
 
-#: setupbouquet.py:259 setupbouquet.py:291 setupbouquet.py:338
+#: setupbouquet.py:251 setupbouquet.py:283 setupbouquet.py:330
 msgid "Use your provider EPG"
 msgstr "Gberuik uw provider EPG"
 
-#: setupbouquet.py:262 setupbouquet.py:346
+#: setupbouquet.py:254 setupbouquet.py:338
 msgid "Use Rytec UK EPG"
 msgstr "Gebruik de Rytec UK EPG"
 
-#: setupbouquet.py:265 setupbouquet.py:350
+#: setupbouquet.py:257 setupbouquet.py:342
 msgid "Replace UK channel names in bouquets with swap names"
 msgstr "Vervang de UK zendernamen in boeketten door alternatieven"
 
-#: setupbouquet.py:266 setupbouquet.py:354
+#: setupbouquet.py:258 setupbouquet.py:346
 msgid "UK only: Force UK name swap"
 msgstr "Enkel UK: Verplichte UK ruilnaam"
 
-#: setupbouquet.py:269 setupbouquet.py:294 setupbouquet.py:342
+#: setupbouquet.py:261 setupbouquet.py:286 setupbouquet.py:334
 msgid "EPG url"
 msgstr "EPG URL"
 
-#: setupbouquet.py:272 setupbouquet.py:297 setupbouquet.py:360
+#: setupbouquet.py:264 setupbouquet.py:289 setupbouquet.py:352
 msgid "Rebuild XMLTV EPG data"
 msgstr ""
 
-#: setupbouquet.py:280
+#: setupbouquet.py:272
 msgid "Vod categories"
 msgstr "VOD categorieën"
 
-#: setupbouquet.py:285
+#: setupbouquet.py:277
 msgid "Stream type for VOD/Series"
 msgstr "Type stream voor VOD / Series"
 
-#: setupbouquet.py:307
+#: setupbouquet.py:299
 msgid ""
 "\n"
 "Enter name to be shown as a prefix in your bouquets"
@@ -723,7 +820,7 @@ msgstr ""
 "\n"
 "Gebruik de naam die als voorvoegsel in uw boeketten moet worden weergegeven"
 
-#: setupbouquet.py:311
+#: setupbouquet.py:303
 msgid ""
 "\n"
 "Use provider name prefix in your bouquets"
@@ -731,7 +828,7 @@ msgstr ""
 "\n"
 "Gebruik de providernaam als voorvoegsel in uw bouquetten"
 
-#: setupbouquet.py:315
+#: setupbouquet.py:307
 msgid ""
 "\n"
 "Include LIVE categories in your bouquets."
@@ -739,7 +836,7 @@ msgstr ""
 "\n"
 "Neem de Live categorieën op in uw bouquetten."
 
-#: setupbouquet.py:319
+#: setupbouquet.py:311
 msgid ""
 "\n"
 "This setting allows you to choose which player E2 will use for your live "
@@ -751,7 +848,7 @@ msgstr ""
 "streams.\n"
 "Als u live streams niet afspelen probeer dan deze instelling aan te passen."
 
-#: setupbouquet.py:323
+#: setupbouquet.py:315
 msgid ""
 "\n"
 "Include VOD categories in your bouquets."
@@ -759,7 +856,7 @@ msgstr ""
 "\n"
 "Neem de VOD categorieën op in uw bouquetten."
 
-#: setupbouquet.py:327
+#: setupbouquet.py:319
 msgid ""
 "\n"
 "Include SERIES categories in your bouquets. \n"
@@ -770,7 +867,7 @@ msgstr ""
 "** Let op: Het selecteren van Series kan het vullen van de lijsten "
 "beïnvloeden.**"
 
-#: setupbouquet.py:331
+#: setupbouquet.py:323
 msgid ""
 "\n"
 "This setting allows you to choose which player E2 will use for your VOD/"
@@ -782,7 +879,7 @@ msgstr ""
 "streams.\n"
 "Indien uw VOD streams niet afspelen probeer deze instelling aan te passen."
 
-#: setupbouquet.py:335
+#: setupbouquet.py:327
 msgid ""
 "\n"
 "Select the sort order for your VOD Bouquets."
@@ -790,7 +887,7 @@ msgstr ""
 "\n"
 "Bepaal de sorteervolgorde van uw VOD-boeketten."
 
-#: setupbouquet.py:339
+#: setupbouquet.py:331
 msgid ""
 "\n"
 "Make provider xmltv for use in EPG Importer.\n"
@@ -800,13 +897,13 @@ msgstr ""
 "Maak provider xmltv t.b.v. het gebruik in de EPG Import plug-in.\n"
 "De bron van de provider moet worden gekozen in de EPG Import plug-in."
 
-#: setupbouquet.py:343
+#: setupbouquet.py:335
 msgid ""
 "\n"
 "Enter the EPG url for your playlist. If unknown leave as default."
 msgstr ""
 
-#: setupbouquet.py:347
+#: setupbouquet.py:339
 msgid ""
 "\n"
 "Try to match the UK Rytec names in the background to populate UK EPG.\n"
@@ -817,7 +914,7 @@ msgstr ""
 "vullen.\n"
 "Let op: dit zal de oorspronkelijke UK EPG van uw provider overschrijven."
 
-#: setupbouquet.py:351
+#: setupbouquet.py:343
 msgid ""
 "\n"
 "This will amend the UK channels names in channel bouquets to that of the "
@@ -827,7 +924,7 @@ msgstr ""
 "Dit zal de UK zendernamen in kanaalboeketten wijzigen in die van de "
 "berekende ruilnamen."
 
-#: setupbouquet.py:355
+#: setupbouquet.py:347
 msgid ""
 "\n"
 "Use for UK providers that do not specify UK in the category title or channel "
@@ -836,13 +933,13 @@ msgid ""
 "Trying creating bouquets without this option turned off first."
 msgstr ""
 
-#: setupbouquet.py:358
+#: setupbouquet.py:350
 msgid ""
 "\n"
 "Set stream buffer (Experimental)."
 msgstr ""
 
-#: setupbouquet.py:361
+#: setupbouquet.py:353
 msgid ""
 "\n"
 "(Optional) Download and attempt to rebuild XMLTV EPG data to UTF-8 encoding "
@@ -850,13 +947,13 @@ msgid ""
 "Only required if you think you have corrupt external EPG."
 msgstr ""
 
-#: setupbouquet.py:365
+#: setupbouquet.py:357
 msgid ""
 "\n"
 "Offset the displayed catchup times"
 msgstr ""
 
-#: setupbouquet.py:432
+#: setupbouquet.py:424
 msgid ""
 "Bouquet name cannot be blank. Please enter a unique bouquet name. Minimum 2 "
 "characters."
@@ -864,109 +961,112 @@ msgstr ""
 "De boeketnaam mag niet leeg zijn. Voer een unieke boeketnaam in. Minimaal 2 "
 "tekens."
 
-#: setupbouquet.py:487
+#: setupbouquet.py:479
 msgid "Choose Bouquets"
 msgstr "Kies de bouquetten"
 
-#: setupbouquet.py:517
+#: setupbouquet.py:509
 msgid "Create"
 msgstr "Maak"
 
-#: setupbouquet.py:520
+#: setupbouquet.py:512
 msgid "Show Channels"
 msgstr "Toon de zenders"
 
-#: setupbouquet.py:521
+#: setupbouquet.py:513
 msgid ""
 "Select the playlist categories you wish to create bouquets for.\n"
 "Press OK to invert the selection.\n"
 "Press INFO to show the channels in this category."
 msgstr ""
 
-#: setupbouquet.py:571
+#: setupbouquet.py:563
 msgid "Getting selection list"
 msgstr ""
 
-#: update.py:78
+#: update.py:77
 msgid "Updating Bouquets"
 msgstr "Update de bouquetten"
 
-#: update.py:126 update.py:130
+#: update.py:125 update.py:129
 msgid "Starting Update..."
 msgstr "Start de update..."
 
-#: update.py:137
+#: update.py:136
 msgid " Providers IPTV Updated"
 msgstr " De IPTV providers zijn ge-update"
 
-#: update.py:153
+#: update.py:152
 #, python-format
 msgid "Updating Playlist %d of %d"
 msgstr "Update de playlist %d of %d"
 
-#: update.py:154
+#: update.py:153
 #, python-format
 msgid "%s - Reading bouquet data..."
 msgstr ""
 
-#: update.py:192
+#: update.py:191
 #, python-format
 msgid "%s - Checking URL still active..."
 msgstr ""
 
-#: update.py:194
+#: update.py:193
 #, python-format
 msgid "%s - Download M3U Data..."
 msgstr ""
 
-#: update.py:263
+#: update.py:262
 #, python-format
 msgid "%s - Downloading VOD data..."
 msgstr ""
 
-#: update.py:265 update.py:273
+#: update.py:264 update.py:272
 #, python-format
 msgid "%s - Downloading Series data..."
 msgstr ""
 
-#: update.py:267 update.py:275 update.py:280
+#: update.py:266 update.py:274 update.py:279
 #, python-format
 msgid "%s - Getting categories..."
 msgstr ""
 
-#: update.py:284 update.py:294
+#: update.py:283 update.py:293
 #, python-format
 msgid "%s - Get selected categories..."
 msgstr ""
 
-#: update.py:289
+#: update.py:288
 #, python-format
 msgid "%s - Getting selection list"
 msgstr ""
 
-#: update.py:313
+#: update.py:312
 #, python-format
 msgid "%s - Downloading Data..."
 msgstr ""
 
-#: update.py:315 update.py:319
+#: update.py:314 update.py:318
 #, python-format
 msgid "%s - Deleting existing bouquets..."
 msgstr ""
 
-#: update.py:325
+#: update.py:324
 #, python-format
 msgid "%s - Building bouquets..."
 msgstr ""
 
-#: update.py:327
+#: update.py:326
 #, python-format
 msgid "%s - Building M3U bouquets..."
 msgstr ""
 
-#: viewchannel.py:31
+#: viewchannel.py:30
 msgid "Channel List"
 msgstr "Zenderlijst"
+
+#~ msgid "IPTV Bouquets Creator"
+#~ msgstr "IPTV bouquet maker"
 
 #~ msgid "Building Bouquets from M3U File"
 #~ msgstr "Bouquets worden gebouwd vanuit het M3U bestand"

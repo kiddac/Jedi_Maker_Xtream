@@ -7,7 +7,6 @@ from .jediStaticText import StaticText
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-
 from Screens.Screen import Screen
 
 
@@ -32,9 +31,7 @@ class JediMakerXtream_About(Screen):
         self["key_red"] = StaticText(_("Back"))
         self["key_green"] = StaticText(_("OK"))
         self["version"] = StaticText()
-
         self["about"] = Label("")
-
         self.onFirstExecBegin.append(self.createSetup)
         self.onLayoutFinish.append(self.__layoutFinished)
 

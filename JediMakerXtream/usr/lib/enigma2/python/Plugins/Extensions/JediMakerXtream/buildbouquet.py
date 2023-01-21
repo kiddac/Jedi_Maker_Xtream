@@ -6,7 +6,7 @@ from . import _
 from . import buildxml as bx
 from . import downloads
 from . import globalfunctions as jfunc
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 
 from Components.ActionMap import ActionMap
 from Components.Label import Label
@@ -29,8 +29,8 @@ class JediMakerXtream_BuildBouquets(Screen):
 
         Screen.setTitle(self, _('Building Bouquets'))
 
-        self.bouquet = jglob.current_playlist
-        self.categories = jglob.selectedcategories
+        self.bouquet = glob.current_playlist
+        self.categories = glob.selectedcategories
 
         if self.bouquet['playlist_info']['playlisttype'] != 'xtream':
             self.categories = []
@@ -52,16 +52,16 @@ class JediMakerXtream_BuildBouquets(Screen):
         self.progresscurrent = 0
         self.progresscount = int(len(self.categories) + 2)
 
-        if jglob.live:
+        if glob.live:
             self.progresscount += 1
 
-        if jglob.vod:
+        if glob.vod:
             self.progresscount += 1
 
-        if jglob.series:
+        if glob.series:
             self.progresscount += 2
 
-        if jglob.epg_rytec_uk:
+        if glob.epg_rytec_uk:
             self.progresscount += 1
 
         if self.bouquet['playlist_info']['playlisttype'] != 'xtream':
@@ -111,7 +111,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 
         self['progress'].setValue(self.progresscurrent)
 
-        if jglob.epg_rytec_uk:
+        if glob.epg_rytec_uk:
             self.nextjob(_('Downloading Rytec UK EPG data...'), self.downloadrytec)
         else:
             self.nextjob(_('Starting...'), self.startcreate)
@@ -131,27 +131,27 @@ class JediMakerXtream_BuildBouquets(Screen):
             else:
                 self.showError(_('No categories selected.'))
         else:
-            if len(jglob.getm3ustreams) > 0:
+            if len(glob.getm3ustreams) > 0:
                 self.nextjob(_('Deleting Existing Bouquets...'), self.deleteBouquets)
             else:
                 self.showError(_('No valid M3U streams in file.'))
 
     def downloadLive(self):
-        if jglob.live:
+        if glob.live:
             downloads.downloadlivestreams(self.LiveStreamsUrl)
             self.progresscurrent += 1
             self['progress'].setValue(self.progresscurrent)
         self.nextjob(_('Downloading VOD data'), self.downloadVod)
 
     def downloadVod(self):
-        if jglob.vod:
+        if glob.vod:
             downloads.downloadvodstreams(self.VodStreamsUrl)
             self.progresscurrent += 1
             self['progress'].setValue(self.progresscurrent)
         self.nextjob(_('Downloading Series data'), self.downloadSeries)
 
     def downloadSeries(self):
-        if jglob.series:
+        if glob.series:
             downloads.downloadseriesstreams(self.SeriesUrl)
             self.progresscurrent += 1
             self['progress'].setValue(self.progresscurrent)
@@ -191,14 +191,14 @@ class JediMakerXtream_BuildBouquets(Screen):
         if self.category_num < len(self.categories):
             self.process_category()
         else:
-            if jglob.live and jglob.has_epg_importer and jglob.epg_provider and jglob.xmltv_address != '':
-                if jglob.fixepg:
+            if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != '':
+                if glob.fixepg:
                     bx.downloadXMLTV()
                 bx.buildXMLTVChannelFile(self.epg_name_list)
                 bx.buildXMLTVSourceFile()
 
-            jglob.bouquet_id += 10
-            cfg.bouquet_id.value = jglob.bouquet_id
+            glob.bouquet_id += 10
+            cfg.bouquet_id.value = glob.bouquet_id
             cfg.bouquet_id.save()
 
             self.progresscurrent += 1
@@ -242,7 +242,7 @@ class JediMakerXtream_BuildBouquets(Screen):
 
         self.categories = []
 
-        for x in jglob.getm3ustreams:
+        for x in glob.getm3ustreams:
             if [x[0], x[4]] not in self.categories:
                 self.categories.append([x[0], x[4]])
 
@@ -260,7 +260,7 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.m3u_process_category()
 
         else:
-            if jglob.live and jglob.has_epg_importer and jglob.epg_provider and jglob.xmltv_address != '':
+            if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != '':
 
                 bx.buildXMLTVChannelFile(self.epg_name_list)
                 bx.buildXMLTVSourceFile()
@@ -274,7 +274,7 @@ class JediMakerXtream_BuildBouquets(Screen):
     def m3u_process_category(self):
         category_name = self.categories[self.category_num][0]
         category_type = self.categories[self.category_num][1]
-        self.epg_name_list = jfunc.m3u_process_category(category_name, category_type, self.unique_ref, self.epg_name_list, jglob.current_playlist)
+        self.epg_name_list = jfunc.m3u_process_category(category_name, category_type, self.unique_ref, self.epg_name_list, glob.current_playlist)
         self.category_num += 1
         self.nextjob(_('Building M3U Bouquets...'), self.buildM3uBouquets)
         self.buildM3uBouquets()
@@ -285,6 +285,6 @@ class JediMakerXtream_BuildBouquets(Screen):
         self.close()
 
     def done(self, answer=None):
-        jglob.finished = True
+        glob.finished = True
         jfunc.refreshBouquets()
         self.close()

@@ -6,7 +6,7 @@ from .plugin import skin_path, playlist_file, playlists_json, hdr
 from .xStaticText import StaticText
 
 from . import globalfunctions as jfunc
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 
 from Components.ActionMap import ActionMap
 from Components.config import NoSave, ConfigText, ConfigSelection, ConfigNumber, getConfigListEntry, ConfigYesNo, configfile
@@ -67,21 +67,21 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
 
         if self.editmode:
 
-            if "bouquet_info" in jglob.current_playlist:
-                self.alias = jglob.current_playlist["bouquet_info"]["name"]
-                self.xmltv = jglob.current_playlist["bouquet_info"]["xmltv_address"]
+            if "bouquet_info" in glob.current_playlist:
+                self.alias = glob.current_playlist["bouquet_info"]["name"]
+                self.xmltv = glob.current_playlist["bouquet_info"]["xmltv_address"]
 
-            if jglob.current_playlist["playlist_info"]["playlisttype"] == "xtream":
-                self.protocol = jglob.current_playlist["playlist_info"]["protocol"]
-                self.domain = jglob.current_playlist["playlist_info"]["domain"]
-                self.port = str(jglob.current_playlist["playlist_info"]["port"])
-                self.username = jglob.current_playlist["playlist_info"]["username"]
-                self.password = jglob.current_playlist["playlist_info"]["password"]
-                self.type = jglob.current_playlist["playlist_info"]["type"]
-                self.output = jglob.current_playlist["playlist_info"]["output"]
-                self.index = jglob.current_playlist["playlist_info"]["index"]
+            if glob.current_playlist["playlist_info"]["playlisttype"] == "xtream":
+                self.protocol = glob.current_playlist["playlist_info"]["protocol"]
+                self.domain = glob.current_playlist["playlist_info"]["domain"]
+                self.port = str(glob.current_playlist["playlist_info"]["port"])
+                self.username = glob.current_playlist["playlist_info"]["username"]
+                self.password = glob.current_playlist["playlist_info"]["password"]
+                self.type = glob.current_playlist["playlist_info"]["type"]
+                self.output = glob.current_playlist["playlist_info"]["output"]
+                self.index = glob.current_playlist["playlist_info"]["index"]
             else:
-                self.address = jglob.current_playlist["playlist_info"]["address"]
+                self.address = glob.current_playlist["playlist_info"]["address"]
 
         self["actions"] = ActionMap(["SetupActions"], {
             "cancel": self.cancel,
@@ -106,10 +106,10 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
 
     def initConfig(self):
         if self.editmode:
-            if "bouquet_info" in jglob.current_playlist:
+            if "bouquet_info" in glob.current_playlist:
                 self.aliasCfg = NoSave(ConfigText(default=self.alias, fixed_size=False))
                 self.xmltvCfg = NoSave(ConfigText(default=self.xmltv, fixed_size=False))
-            if jglob.current_playlist["playlist_info"]["playlisttype"] == "xtream":
+            if glob.current_playlist["playlist_info"]["playlisttype"] == "xtream":
                 self.protocolCfg = NoSave(ConfigSelection(default=self.protocol, choices=[("http://", _("http://")), ("https://", _("https://"))]))
                 self.playlisttypeCfg = NoSave(ConfigSelection(default="standard", choices=[("standard", _("Standard Playlist")), ("m3u", _("M3U File"))]))
                 self.serverCfg = NoSave(ConfigText(default=self.domain, fixed_size=False))
@@ -147,8 +147,8 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
             else:
                 self.list.append(getConfigListEntry(_("M3U external location"), self.addressCfg))
 
-        elif jglob.current_playlist["playlist_info"]["playlisttype"] == "xtream":
-            if "bouquet_info" in jglob.current_playlist:
+        elif glob.current_playlist["playlist_info"]["playlisttype"] == "xtream":
+            if "bouquet_info" in glob.current_playlist:
                 self.list.append(getConfigListEntry(_("Bouquet Name"), self.aliasCfg))
             self.list.append(getConfigListEntry(_("Protocol"), self.protocolCfg))
             self.list.append(getConfigListEntry(_("Server URL"), self.serverCfg))
@@ -156,7 +156,7 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
             self.list.append(getConfigListEntry(_("Username"), self.usernameCfg))
             self.list.append(getConfigListEntry(_("Password"), self.passwordCfg))
             self.list.append(getConfigListEntry(_("Output Type"), self.outputCfg))
-            if "bouquet_info" in jglob.current_playlist:
+            if "bouquet_info" in glob.current_playlist:
                 self.list.append(getConfigListEntry(_("Epg Url"), self.xmltvCfg))
 
         else:
@@ -273,7 +273,7 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
         if self["config"].isChanged():
             for x in self["config"].list:
                 x[1].save()
-        jglob.firstrun = 0
+        glob.firstrun = 0
 
         if self.playlisttypeCfg.value == "standard":
             if self.serverCfg.value.startswith("http://"):
@@ -345,21 +345,21 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
 
             f.truncate()
 
-        if "bouquet_info" in jglob.current_playlist:
-            jglob.current_playlist["bouquet_info"]["name"] = str(self.aliasCfg)
-            jglob.current_playlist["bouquet_info"]["xmltv_address"] = str(self.xmltvCfg)
+        if "bouquet_info" in glob.current_playlist:
+            glob.current_playlist["bouquet_info"]["name"] = str(self.aliasCfg)
+            glob.current_playlist["bouquet_info"]["xmltv_address"] = str(self.xmltvCfg)
 
-        if jglob.current_playlist["playlist_info"]["playlisttype"] == "xtream":
-            jglob.current_playlist["playlist_info"]["protocol"] = str(self.protocolCfg.value)
-            jglob.current_playlist["playlist_info"]["domain"] = str(self.serverCfg.value)
-            jglob.current_playlist["playlist_info"]["port"] = str(self.portCfg.value)
-            jglob.current_playlist["playlist_info"]["username"] = str(self.usernameCfg.value)
-            jglob.current_playlist["playlist_info"]["password"] = str(self.passwordCfg.value)
-            jglob.current_playlist["playlist_info"]["output"] = str(self.outputCfg.value)
-            jglob.current_playlist["playlist_info"]["address"] = str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + \
+        if glob.current_playlist["playlist_info"]["playlisttype"] == "xtream":
+            glob.current_playlist["playlist_info"]["protocol"] = str(self.protocolCfg.value)
+            glob.current_playlist["playlist_info"]["domain"] = str(self.serverCfg.value)
+            glob.current_playlist["playlist_info"]["port"] = str(self.portCfg.value)
+            glob.current_playlist["playlist_info"]["username"] = str(self.usernameCfg.value)
+            glob.current_playlist["playlist_info"]["password"] = str(self.passwordCfg.value)
+            glob.current_playlist["playlist_info"]["output"] = str(self.outputCfg.value)
+            glob.current_playlist["playlist_info"]["address"] = str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + \
                 "/get.php?username=" + str(self.usernameCfg.value) + "&password=" + str(self.passwordCfg.value) + "&type=" + str(self.type) + "&output=" + str(self.outputCfg.value)
         else:
-            jglob.current_playlist["playlist_info"]["address"] = str(self.addressCfg.value)
+            glob.current_playlist["playlist_info"]["address"] = str(self.addressCfg.value)
 
         self.playlists_all = jfunc.getPlaylistJson()
         if self.playlists_all != []:
@@ -368,8 +368,8 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
 
                 if playlist != {}:
 
-                    if jglob.current_playlist["playlist_info"]["index"] == playlist["playlist_info"]["index"]:
-                        playlist["playlist_info"] = jglob.current_playlist["playlist_info"]
+                    if glob.current_playlist["playlist_info"]["index"] == playlist["playlist_info"]["index"]:
+                        playlist["playlist_info"] = glob.current_playlist["playlist_info"]
                         break
 
         with open(playlists_json, "w") as f:

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 
 from .plugin import cfg, playlists_json
 
@@ -49,60 +49,60 @@ def resetUnique():
 
 
 def getcategories():
-    if jglob.live:
-        for c in range(len(jglob.livecategories)):
-            categoryValues = [str(jglob.livecategories[c]['category_name']), 'Live', int(jglob.livecategories[c]['category_id']), True]
-            jglob.categories.append(categoryValues)
-    if jglob.vod:
-        for c in range(len(jglob.vodcategories)):
-            categoryValues = [str(jglob.vodcategories[c]['category_name']), 'VOD', int(jglob.vodcategories[c]['category_id']), True]
-            jglob.categories.append(categoryValues)
-    if jglob.series:
-        for c in range(len(jglob.seriescategories)):
-            categoryValues = [str(jglob.seriescategories[c]['category_name']), 'Series', int(jglob.seriescategories[c]['category_id']), True]
-            jglob.categories.append(categoryValues)
+    if glob.live:
+        for c in range(len(glob.livecategories)):
+            categoryValues = [str(glob.livecategories[c]['category_name']), 'Live', int(glob.livecategories[c]['category_id']), True]
+            glob.categories.append(categoryValues)
+    if glob.vod:
+        for c in range(len(glob.vodcategories)):
+            categoryValues = [str(glob.vodcategories[c]['category_name']), 'VOD', int(glob.vodcategories[c]['category_id']), True]
+            glob.categories.append(categoryValues)
+    if glob.series:
+        for c in range(len(glob.seriescategories)):
+            categoryValues = [str(glob.seriescategories[c]['category_name']), 'Series', int(glob.seriescategories[c]['category_id']), True]
+            glob.categories.append(categoryValues)
 
 
 def SelectedCategories():
-    for x in jglob.categories:
+    for x in glob.categories:
         # ignore = False
-        if jglob.live:
-            for name in jglob.current_playlist['bouquet_info']['selected_live_categories']:
+        if glob.live:
+            for name in glob.current_playlist['bouquet_info']['selected_live_categories']:
                 if x[0] == name and x[1] == 'Live':
                     x[3] = True
                     break
 
-        if jglob.vod:
-            for name in jglob.current_playlist['bouquet_info']['selected_vod_categories']:
+        if glob.vod:
+            for name in glob.current_playlist['bouquet_info']['selected_vod_categories']:
                 if x[0] == name and x[1] == 'VOD':
                     x[3] = True
                     break
 
-        if jglob.series:
-            for name in jglob.current_playlist['bouquet_info']['selected_series_categories']:
+        if glob.series:
+            for name in glob.current_playlist['bouquet_info']['selected_series_categories']:
                 if x[0] == name and x[1] == 'Series':
                     x[3] = True
 
 
 def IgnoredCategories():
-    for x in jglob.categories:
+    for x in glob.categories:
         ignore = False
-        if jglob.live:
-            for name in jglob.current_playlist['bouquet_info']['ignored_live_categories']:
+        if glob.live:
+            for name in glob.current_playlist['bouquet_info']['ignored_live_categories']:
                 if x[0] == name and x[1] == 'Live':
                     x[3] = False
                     ignore = True
                     break
 
-        if jglob.vod:
-            for name in jglob.current_playlist['bouquet_info']['ignored_vod_categories']:
+        if glob.vod:
+            for name in glob.current_playlist['bouquet_info']['ignored_vod_categories']:
                 if x[0] == name and x[1] == 'VOD':
                     x[3] = False
                     ignore = True
                     break
 
-        if jglob.series:
-            for name in jglob.current_playlist['bouquet_info']['ignored_series_categories']:
+        if glob.series:
+            for name in glob.current_playlist['bouquet_info']['ignored_series_categories']:
                 if x[0] == name and x[1] == 'Series':
                     x[3] = False
                     ignore = True
@@ -112,57 +112,57 @@ def IgnoredCategories():
 
 
 def readbouquetdata():
-    jglob.live = False
-    jglob.vod = False
-    jglob.series = False
+    glob.live = False
+    glob.vod = False
+    glob.series = False
 
-    jglob.bouquet_id = jglob.current_playlist['bouquet_info']['bouquet_id']
-    jglob.name = jglob.current_playlist['bouquet_info']['name']
-    jglob.old_name = jglob.current_playlist['bouquet_info']['oldname']
-    jglob.live_type = jglob.current_playlist['bouquet_info']['live_type']
-    jglob.vod_type = jglob.current_playlist['bouquet_info']['vod_type']
-    jglob.selected_live_categories = jglob.current_playlist['bouquet_info']['selected_live_categories']
-    jglob.selected_vod_categories = jglob.current_playlist['bouquet_info']['selected_vod_categories']
-    jglob.selected_series_categories = jglob.current_playlist['bouquet_info']['selected_series_categories']
+    glob.bouquet_id = glob.current_playlist['bouquet_info']['bouquet_id']
+    glob.name = glob.current_playlist['bouquet_info']['name']
+    glob.old_name = glob.current_playlist['bouquet_info']['oldname']
+    glob.live_type = glob.current_playlist['bouquet_info']['live_type']
+    glob.vod_type = glob.current_playlist['bouquet_info']['vod_type']
+    glob.selected_live_categories = glob.current_playlist['bouquet_info']['selected_live_categories']
+    glob.selected_vod_categories = glob.current_playlist['bouquet_info']['selected_vod_categories']
+    glob.selected_series_categories = glob.current_playlist['bouquet_info']['selected_series_categories']
 
-    jglob.ignored_live_categories = jglob.current_playlist['bouquet_info']['ignored_live_categories']
-    jglob.ignored_vod_categories = jglob.current_playlist['bouquet_info']['ignored_vod_categories']
-    jglob.ignored_series_categories = jglob.current_playlist['bouquet_info']['ignored_series_categories']
+    glob.ignored_live_categories = glob.current_playlist['bouquet_info']['ignored_live_categories']
+    glob.ignored_vod_categories = glob.current_playlist['bouquet_info']['ignored_vod_categories']
+    glob.ignored_series_categories = glob.current_playlist['bouquet_info']['ignored_series_categories']
 
-    jglob.live_update = jglob.current_playlist['bouquet_info']['live_update']
-    jglob.vod_update = jglob.current_playlist['bouquet_info']['vod_update']
-    jglob.series_update = jglob.current_playlist['bouquet_info']['series_update']
-    jglob.xmltv_address = jglob.current_playlist['bouquet_info']['xmltv_address']
-    jglob.vod_order = jglob.current_playlist['bouquet_info']['vod_order']
-    jglob.epg_provider = jglob.current_playlist['bouquet_info']['epg_provider']
-    jglob.epg_rytec_uk = jglob.current_playlist['bouquet_info']['epg_rytec_uk']
-    jglob.epg_swap_names = jglob.current_playlist['bouquet_info']['epg_swap_names']
-    jglob.epg_force_rytec_uk = jglob.current_playlist['bouquet_info']['epg_force_rytec_uk']
-    jglob.prefix_name = jglob.current_playlist['bouquet_info']['prefix_name']
-    jglob.livebuffer = jglob.current_playlist['bouquet_info']['buffer_live']
-    jglob.vodbuffer = jglob.current_playlist['bouquet_info']['buffer_vod']
-    jglob.fixepg = jglob.current_playlist['bouquet_info']['fixepg']
+    glob.live_update = glob.current_playlist['bouquet_info']['live_update']
+    glob.vod_update = glob.current_playlist['bouquet_info']['vod_update']
+    glob.series_update = glob.current_playlist['bouquet_info']['series_update']
+    glob.xmltv_address = glob.current_playlist['bouquet_info']['xmltv_address']
+    glob.vod_order = glob.current_playlist['bouquet_info']['vod_order']
+    glob.epg_provider = glob.current_playlist['bouquet_info']['epg_provider']
+    glob.epg_rytec_uk = glob.current_playlist['bouquet_info']['epg_rytec_uk']
+    glob.epg_swap_names = glob.current_playlist['bouquet_info']['epg_swap_names']
+    glob.epg_force_rytec_uk = glob.current_playlist['bouquet_info']['epg_force_rytec_uk']
+    glob.prefix_name = glob.current_playlist['bouquet_info']['prefix_name']
+    glob.livebuffer = glob.current_playlist['bouquet_info']['buffer_live']
+    glob.vodbuffer = glob.current_playlist['bouquet_info']['buffer_vod']
+    glob.fixepg = glob.current_playlist['bouquet_info']['fixepg']
     try:
-        jglob.catchupshift = jglob.current_playlist['bouquet_info']['catchupshift']
+        glob.catchupshift = glob.current_playlist['bouquet_info']['catchupshift']
     except:
-        jglob.catchupshift = 0
+        glob.catchupshift = 0
 
-    if jglob.selected_live_categories != []:
-        jglob.live = True
+    if glob.selected_live_categories != []:
+        glob.live = True
 
-    if jglob.selected_vod_categories != []:
-        jglob.vod = True
+    if glob.selected_vod_categories != []:
+        glob.vod = True
 
-    if jglob.selected_series_categories != []:
-        jglob.series = True
+    if glob.selected_series_categories != []:
+        glob.series = True
 
 
 def deleteBouquets():
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(jglob.name))
+    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.name))
     cleanName = re.sub(r' ', '_', cleanName)
     cleanName = re.sub(r'_+', '_', cleanName)
 
-    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(jglob.old_name))
+    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.old_name))
     cleanNameOld = re.sub(r' ', '_', cleanNameOld)
     cleanNameOld = re.sub(r'_+', '_', cleanNameOld)
 
@@ -172,30 +172,30 @@ def deleteBouquets():
         lines = f.readlines()
         f.seek(0)
         for line in lines:
-            if (jglob.live and 'jmx_live_' + str(cleanNameOld) + "_" in line) or (jglob.live and 'jmx_live_' + str(cleanName) + "_" in line):
+            if (glob.live and 'jmx_live_' + str(cleanNameOld) + "_" in line) or (glob.live and 'jmx_live_' + str(cleanName) + "_" in line):
                 continue
-            if (jglob.vod and 'jmx_vod_' + str(cleanNameOld) + "_" in line) or (jglob.vod and 'jmx_vod_' + str(cleanName) + "_" in line):
+            if (glob.vod and 'jmx_vod_' + str(cleanNameOld) + "_" in line) or (glob.vod and 'jmx_vod_' + str(cleanName) + "_" in line):
                 continue
-            if (jglob.series and 'jmx_series_' + str(cleanNameOld) + "_" in line) or (jglob.series and 'jmx_series_' + str(cleanName) + "_" in line):
+            if (glob.series and 'jmx_series_' + str(cleanNameOld) + "_" in line) or (glob.series and 'jmx_series_' + str(cleanName) + "_" in line):
                 continue
             if ('jmx_' + str(cleanNameOld) in line) or ('jmx_' + str(cleanName) in line):
                 continue
             f.write(line)
         f.truncate()
 
-    if jglob.live:
+    if glob.live:
         purge('/etc/enigma2', 'jmx_live_' + str(cleanName))
         purge('/etc/enigma2', 'jmx_live_' + str(cleanNameOld))
 
-        if jglob.has_epg_importer:
+        if glob.has_epg_importer:
             purge('/etc/epgimport', 'jmx.' + str(cleanName))
             purge('/etc/epgimport', 'jmx.' + str(cleanNameOld))
 
-    if jglob.vod:
+    if glob.vod:
         purge('/etc/enigma2', 'jmx_vod_' + str(cleanName))
         purge('/etc/enigma2', 'jmx_vod_' + str(cleanNameOld))
 
-    if jglob.series:
+    if glob.series:
         purge('/etc/enigma2', 'jmx_series_' + str(cleanName))
         purge('/etc/enigma2', 'jmx_series_' + str(cleanNameOld))
 
@@ -249,7 +249,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
         password = password.replace(*p)
 
     password = password.replace("%", "%25")
-    bouquetTitle = str(jglob.name) + ' - ' + str(category_name)
+    bouquetTitle = str(glob.name) + ' - ' + str(category_name)
 
     bouquetString = '#NAME ' + str(bouquetTitle) + '\n'
     if bouquet['bouquet_info']['prefix_name'] is False:
@@ -261,7 +261,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
     if category_type == 'Live':
 
         # get all the values for this live category
-        streamvalues = [stream for stream in jglob.livestreams if str(category_id) == str(stream['category_id'])]
+        streamvalues = [stream for stream in glob.livestreams if str(category_id) == str(stream['category_id'])]
         streamvaluesgroup += streamvalues
 
         stream_type = 'live'
@@ -460,19 +460,19 @@ def process_category(category_name, category_type, category_id, domain, port, us
             else:
                 catchup = 0
             calc_remainder = int(stream_id) // 65535
-            bouquet_id_sid = int(jglob.bouquet_id + calc_remainder)
+            bouquet_id_sid = int(glob.bouquet_id + calc_remainder)
             stream_id_sid = int(stream_id) - int(calc_remainder * 65535)
 
-            custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:' + str(jglob.livebuffer) + str(':')
+            custom_sid = ':0:' + str(service_type) + ':' + str(format(bouquet_id_sid, '04x')) + ':' + str(format(stream_id_sid, '04x')) + ':0:0:0:0:' + str(glob.livebuffer) + str(':')
 
             if 'custom_sid' in streamvaluesgroup[i]:
                 if re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
-                    custom_sid = streamvaluesgroup[i]['custom_sid'][:-2] + str(jglob.livebuffer) + str(':')
+                    custom_sid = streamvaluesgroup[i]['custom_sid'][:-2] + str(glob.livebuffer) + str(':')
                 elif re.match(r':\d+:\d+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:[a-zA-Z0-9]+:0:0:', str(streamvaluesgroup[i]['custom_sid'])):
-                    custom_sid = str(streamvaluesgroup[i]['custom_sid']) + str(jglob.livebuffer) + str(':')
+                    custom_sid = str(streamvaluesgroup[i]['custom_sid']) + str(glob.livebuffer) + str(':')
 
             if epgid:
-                custom_sid = serviceref[:-2] + str(jglob.livebuffer) + str(':')
+                custom_sid = serviceref[:-2] + str(glob.livebuffer) + str(':')
 
             source_epg = '1' + str(custom_sid) + 'http%3a//example.m3u8'
 
@@ -486,7 +486,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
             if cfg.catchup.value is True and catchup == 1:
                 name = str(cfg.catchupprefix.value) + str(name)
 
-            bouquetString += '#SERVICE ' + str(jglob.live_type) + str(custom_sid) + str(protocol) + str(domain) + '%3a' + str(port) + '/' \
+            bouquetString += '#SERVICE ' + str(glob.live_type) + str(custom_sid) + str(protocol) + str(domain) + '%3a' + str(port) + '/' \
                 + str(stream_type) + '/' + str(username) + '/' + str(password) + '/' + str(stream_id) + '.' + str(output) + ':' + str(name) + '\n'
 
             bouquetString += '#DESCRIPTION ' + str(name) + '\n'
@@ -497,7 +497,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
     elif category_type == 'VOD':
 
         # get all the values for this VOD category
-        streamvalues = [stream for stream in jglob.vodstreams if str(category_id) == str(stream['category_id'])]
+        streamvalues = [stream for stream in glob.vodstreams if str(category_id) == str(stream['category_id'])]
 
         # sorting
         if bouquet['bouquet_info']['vod_order'] == 'alphabetical':
@@ -509,7 +509,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 
         streamvaluesgroup += streamvalues
         stream_type = 'movie'
-        custom_sid = ':0:1:0:0:0:0:0:0:' + str(jglob.vodbuffer) + str(':')
+        custom_sid = ':0:1:0:0:0:0:0:0:' + str(glob.vodbuffer) + str(':')
 
         for i in range(len(streamvaluesgroup)):
 
@@ -520,7 +520,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
 
             name = streamvaluesgroup[i]['name']
 
-            bouquetString += '#SERVICE ' + str(jglob.vod_type) + str(custom_sid) + str(protocol) + str(domain) + '%3a' + str(port) + \
+            bouquetString += '#SERVICE ' + str(glob.vod_type) + str(custom_sid) + str(protocol) + str(domain) + '%3a' + str(port) + \
                 '/' + str(stream_type) + '/' + str(username) + '/' + str(password) + '/' + str(stream_id) + '.' + str(output) + ':' + str(name) + '\n'
 
             bouquetString += '#DESCRIPTION ' + str(name) + '\n'
@@ -531,17 +531,17 @@ def process_category(category_name, category_type, category_id, domain, port, us
     elif category_type == 'Series':
         # get all the values for this series category
 
-        streamvalues = [stream for stream in jglob.seriesstreams if str(category_id) == str(stream['category_id'])]
+        streamvalues = [stream for stream in glob.seriesstreams if str(category_id) == str(stream['category_id'])]
         streamvalues = sorted(streamvalues, key=lambda s: s['name'])
         streamvaluesgroup += streamvalues
         stream_type = 'series'
-        custom_sid = ':0:1:0:0:0:0:0:0:' + str(jglob.vodbuffer) + str(':')
+        custom_sid = ':0:1:0:0:0:0:0:0:' + str(glob.vodbuffer) + str(':')
 
         for i in range(len(streamvaluesgroup)):
             name = streamvaluesgroup[i]['name']
             if category_name in m3uValues:
                 for channel in m3uValues[category_name]:
-                    source = jglob.vod_type + custom_sid + channel['url'].replace(':', '%3a')
+                    source = glob.vod_type + custom_sid + channel['url'].replace(':', '%3a')
                     bouquetString += '#SERVICE ' + str(source) + ':' + str(channel['name']) + '\n'
                     bouquetString += '#DESCRIPTION ' + str(channel['name']) + '\n'
                 break
@@ -556,7 +556,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
     from . import buildxml as bx
     streamvaluesgroup = []
     streamvalues = []
-    bouquetTitle = str(jglob.name) + ' - ' + str(category_name)
+    bouquetTitle = str(glob.name) + ' - ' + str(category_name)
 
     bouquetString = '#NAME ' + str(bouquetTitle) + '\n'
 
@@ -567,7 +567,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
 
     if category_type == 'live':
 
-        streamvalues = [stream for stream in jglob.getm3ustreams if str(category_name) == str(stream[0]) and str(category_type) == str(stream[4])]
+        streamvalues = [stream for stream in glob.getm3ustreams if str(category_name) == str(stream[0]) and str(category_type) == str(stream[4])]
         streamvaluesgroup += streamvalues
 
         for m3u in streamvaluesgroup:
@@ -582,7 +582,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
             source = m3u[3]
             source = source.replace(':', '%3a')
 
-            custom_sid = ':0:' + str(service_type) + ':' + str(format(333, '04x')) + ':' + str(format(unique_ref, '04x')) + ':0:0:0:0:' + str(jglob.livebuffer) + str(':')
+            custom_sid = ':0:' + str(service_type) + ':' + str(format(333, '04x')) + ':' + str(format(unique_ref, '04x')) + ':0:0:0:0:' + str(glob.livebuffer) + str(':')
 
             unique_ref += 1
             if unique_ref > 65535:
@@ -595,7 +595,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
             if epg_name:
                 epg_name_list.append([epg_name, source_epg])
 
-            bouquetString += '#SERVICE ' + str(jglob.live_type) + str(custom_sid) + str(source) + ':' + str(name) + '\n'
+            bouquetString += '#SERVICE ' + str(glob.live_type) + str(custom_sid) + str(source) + ':' + str(name) + '\n'
             bouquetString += '#DESCRIPTION ' + str(name) + '\n'
 
         bx.categoryBouquetXml('live', bouquetTitle, bouquetString)
@@ -604,9 +604,9 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
     elif category_type == 'vod':
 
         # get all the values for this VOD category
-        streamvalues = [stream for stream in jglob.getm3ustreams if str(category_name) == str(stream[0]) and str(category_type) == str(stream[4])]
+        streamvalues = [stream for stream in glob.getm3ustreams if str(category_name) == str(stream[0]) and str(category_type) == str(stream[4])]
         streamvaluesgroup += streamvalues
-        custom_sid = ':0:1:0:0:0:0:0:0:' + str(jglob.vodbuffer) + str(':')
+        custom_sid = ':0:1:0:0:0:0:0:0:' + str(glob.vodbuffer) + str(':')
 
         for m3u in streamvaluesgroup:
 
@@ -616,7 +616,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
             source = m3u[3]
             source = source.replace(':', '%3a')
 
-            bouquetString += '#SERVICE ' + str(jglob.vod_type) + str(custom_sid) + str(source) + ':' + str(name) + '\n'
+            bouquetString += '#SERVICE ' + str(glob.vod_type) + str(custom_sid) + str(source) + ':' + str(name) + '\n'
             bouquetString += '#DESCRIPTION ' + str(name) + '\n'
 
         bx.categoryBouquetXml('vod', bouquetTitle, bouquetString)

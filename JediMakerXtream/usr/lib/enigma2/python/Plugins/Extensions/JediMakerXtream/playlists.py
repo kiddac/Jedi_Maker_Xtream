@@ -3,8 +3,8 @@
 
 from . import _
 
-from . import server, info, setupbouquet
-from . import jediglobals as jglob
+from . import server, serverinfo, setupbouquet
+from . import jedi_globals as glob
 from . import globalfunctions as jfunc
 
 from .plugin import skin_path, cfg, playlist_file, playlists_json, hdr
@@ -67,7 +67,7 @@ class JediMakerXtream_Playlist(Screen):
         self["playlists"] = List(self.drawList)
         self['lab1'] = Label(_('Loading data... Please wait...'))
 
-        if jglob.playlist_exists is False:
+        if glob.playlist_exists is False:
             self['key_red'] = StaticText(_('Back'))
             self['key_green'] = StaticText(_('Add Playlist'))
             self['key_yellow'] = StaticText('')
@@ -110,7 +110,7 @@ class JediMakerXtream_Playlist(Screen):
 
         self.onLayoutFinish.append(self.__layoutFinished)
 
-        jglob.current_selection = 0
+        glob.current_selection = 0
 
         self.list = []
 
@@ -139,7 +139,7 @@ class JediMakerXtream_Playlist(Screen):
         return (pixmap, str(name), extra)
 
     def loadPlaylist(self):
-        if jglob.firstrun == 0:
+        if glob.firstrun == 0:
             self.playlists_all = jfunc.getPlaylistJson()
             self.getPlaylistUserFile()
         self.createSetup()
@@ -152,7 +152,7 @@ class JediMakerXtream_Playlist(Screen):
             f.truncate()
 
     def checkFile(self):
-        jglob.playlist_exists = False
+        glob.playlist_exists = False
         with open(playlist_file, 'r+') as f:
             lines = f.readlines()
             f.seek(0)
@@ -161,7 +161,7 @@ class JediMakerXtream_Playlist(Screen):
                 if not line.startswith('http://') and not line.startswith('https://') and not line.startswith('#'):
                     line = '# ' + line
                 if line.startswith('http://') or line.startswith('https://'):
-                    jglob.playlist_exists = True
+                    glob.playlist_exists = True
                 f.write(line)
             f.truncate()
 
@@ -315,7 +315,7 @@ class JediMakerXtream_Playlist(Screen):
         # output to file for testing
         with open(playlists_json, 'w') as f:
             json.dump(self.playlists_all, f)
-        jglob.firstrun = 1
+        glob.firstrun = 1
 
     def checkPanel(self, response):
         try:
@@ -455,12 +455,12 @@ class JediMakerXtream_Playlist(Screen):
 
     def getCurrentEntry(self):
         if self.list != []:
-            jglob.current_selection = self['playlists'].getIndex()
-            jglob.current_playlist = self.playlists_all[jglob.current_selection]
+            glob.current_selection = self['playlists'].getIndex()
+            glob.current_playlist = self.playlists_all[glob.current_selection]
 
         else:
-            jglob.current_selection = 0
-            jglob.current_playlist = []
+            glob.current_selection = 0
+            glob.current_playlist = []
 
         if os.path.isfile(playlist_file) and os.stat(playlist_file).st_size > 0:
 
@@ -470,31 +470,31 @@ class JediMakerXtream_Playlist(Screen):
 
             for playlist in self.playlists_all:
                 if 'bouquet_info' in playlist:
-                    if playlist['playlist_info']['address'] == jglob.current_playlist['playlist_info']['address']:
+                    if playlist['playlist_info']['address'] == glob.current_playlist['playlist_info']['address']:
                         self['liveupdate'].setText(_(str('Live: ' + playlist['bouquet_info']['live_update'])))
                         self['vodupdate'].setText(_(str('Vod: ' + playlist['bouquet_info']['vod_update'])))
                         self['seriesupdate'].setText(_(str('Series: ' + playlist['bouquet_info']['series_update'])))
 
     def quit(self):
-        jglob.firstrun = 0
+        glob.firstrun = 0
         self.close()
 
     def openUserInfo(self):
-        if 'user_info' in jglob.current_playlist:
-            if 'auth' in jglob.current_playlist['user_info']:
-                if jglob.current_playlist['user_info']['auth'] == 1:
-                    self.session.open(info.JediMakerXtream_UserInfo)
+        if 'user_info' in glob.current_playlist:
+            if 'auth' in glob.current_playlist['user_info']:
+                if glob.current_playlist['user_info']['auth'] == 1:
+                    self.session.open(serverinfo.JediMakerXtream_UserInfo)
                 else:
                     self.session.open(MessageBox, _('Server down or user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
         else:
-            if jglob.current_playlist['playlist_info']['playlisttype'] == 'xtream' and jglob.current_playlist['playlist_info']['valid'] is False:
+            if glob.current_playlist['playlist_info']['playlisttype'] == 'xtream' and glob.current_playlist['playlist_info']['valid'] is False:
                 self.session.open(MessageBox, _('Url is invalid or playlist/user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
 
-            if jglob.current_playlist['playlist_info']['playlisttype'] == 'external':
-                self.session.open(MessageBox, _('User Info not available for this playlist\n') + jglob.current_playlist['playlist_info']['address'], MessageBox.TYPE_ERROR, timeout=5)
+            if glob.current_playlist['playlist_info']['playlisttype'] == 'external':
+                self.session.open(MessageBox, _('User Info not available for this playlist\n') + glob.current_playlist['playlist_info']['address'], MessageBox.TYPE_ERROR, timeout=5)
 
-            if jglob.current_playlist['playlist_info']['playlisttype'] == 'local':
-                self.session.open(MessageBox, _('User Info not available for this playlist\n') + cfg.m3ulocation.value + jglob.current_playlist['playlist_info']['address'], MessageBox.TYPE_ERROR, timeout=5)
+            if glob.current_playlist['playlist_info']['playlisttype'] == 'local':
+                self.session.open(MessageBox, _('User Info not available for this playlist\n') + cfg.m3ulocation.value + glob.current_playlist['playlist_info']['address'], MessageBox.TYPE_ERROR, timeout=5)
 
     def refresh(self):
         self.playlists_all = jfunc.getPlaylistJson()
@@ -507,13 +507,13 @@ class JediMakerXtream_Playlist(Screen):
         return
 
     def editPlaylist(self):
-        if jglob.current_playlist['playlist_info']['playlisttype'] != 'local':
+        if glob.current_playlist['playlist_info']['playlisttype'] != 'local':
             self.session.openWithCallback(self.refresh, server.JediMakerXtream_AddServer, True)
         else:
             self.session.open(MessageBox, _('Edit unavailable for local M3Us.\nManually Delete/Amend M3U files in folder.\n') + cfg.m3ulocation.value, MessageBox.TYPE_ERROR, timeout=5)
 
     def deletePlaylist(self, answer=None):
-        if jglob.current_playlist['playlist_info']['playlisttype'] != 'local':
+        if glob.current_playlist['playlist_info']['playlisttype'] != 'local':
             if answer is None:
                 self.session.openWithCallback(self.deletePlaylist, MessageBox, _('Permanently delete selected playlist?'))
             elif answer:
@@ -522,7 +522,7 @@ class JediMakerXtream_Playlist(Screen):
                     f.seek(0)
 
                     for line in lines:
-                        if line.startswith(jglob.current_playlist['playlist_info']['address']):
+                        if line.startswith(glob.current_playlist['playlist_info']['address']):
                             continue
                         f.write(line)
                     f.truncate()
@@ -534,7 +534,7 @@ class JediMakerXtream_Playlist(Screen):
                 if self.playlists_all != []:
                     x = 0
                     for playlist in self.playlists_all:
-                        if jglob.current_playlist['playlist_info']['address'] == playlist['playlist_info']['address']:
+                        if glob.current_playlist['playlist_info']['address'] == playlist['playlist_info']['address']:
                             del tempplaylist[x]
                             break
                         x += 1
@@ -545,7 +545,7 @@ class JediMakerXtream_Playlist(Screen):
                         json.dump(self.playlists_all, f)
 
                 self['playlists'].setIndex(0)
-                jglob.current_selection = 0
+                glob.current_selection = 0
                 self.refresh()
 
         else:
@@ -553,21 +553,21 @@ class JediMakerXtream_Playlist(Screen):
         return
 
     def createBouquet(self):
-        jglob.finished = False
-        if 'user_info' in jglob.current_playlist:
-            if 'auth' in jglob.current_playlist['user_info']:
-                if jglob.current_playlist['user_info']['auth'] == 1:
-                    if 'status' in jglob.current_playlist['user_info']:
-                        if jglob.current_playlist['user_info']['status'] == 'Active':
+        glob.finished = False
+        if 'user_info' in glob.current_playlist:
+            if 'auth' in glob.current_playlist['user_info']:
+                if glob.current_playlist['user_info']['auth'] == 1:
+                    if 'status' in glob.current_playlist['user_info']:
+                        if glob.current_playlist['user_info']['status'] == 'Active':
 
                             self.session.openWithCallback(self.refresh, setupbouquet.JediMakerXtream_Bouquets)
                         else:
-                            self.session.open(MessageBox, _('Playlist is ') + str(jglob.current_playlist['user_info']['status']), MessageBox.TYPE_ERROR, timeout=10)
+                            self.session.open(MessageBox, _('Playlist is ') + str(glob.current_playlist['user_info']['status']), MessageBox.TYPE_ERROR, timeout=10)
                 else:
                     self.session.open(MessageBox, _('Server down or user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)
 
-        elif 'playlist_info' in jglob.current_playlist:
-            if jglob.current_playlist['playlist_info']['valid'] is True:
+        elif 'playlist_info' in glob.current_playlist:
+            if glob.current_playlist['playlist_info']['valid'] is True:
                 self.session.openWithCallback(self.refresh, setupbouquet.JediMakerXtream_Bouquets)
             else:
                 self.session.open(MessageBox, _('Url is invalid or playlist/user no longer authorised!'), MessageBox.TYPE_ERROR, timeout=5)

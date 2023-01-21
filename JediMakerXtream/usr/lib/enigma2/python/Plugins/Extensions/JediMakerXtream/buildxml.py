@@ -3,7 +3,7 @@
 
 from . import downloads
 from . import globalfunctions as jfunc
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 
 from .plugin import cfg
 from xml.dom import minidom
@@ -23,7 +23,7 @@ def categoryBouquetXml(streamtype, bouquetTitle, bouquetString):
     filepath = '/etc/enigma2/'
 
     if cfg.groups.value is True:
-        cleanGroup = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', jglob.name)
+        cleanGroup = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', glob.name)
         cleanGroup = re.sub(r' ', '_', cleanGroup)
         cleanGroup = re.sub(r'_+', '_', cleanGroup)
         filepath = '/etc/enigma2/'
@@ -42,7 +42,7 @@ def bouquetsTvXml(streamtype, bouquetTitle):
     cleanTitle = re.sub(r'_+', '_', cleanTitle)
 
     if cfg.groups.value is True:
-        cleanGroup = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', jglob.name)
+        cleanGroup = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', glob.name)
         cleanGroup = re.sub(r' ', '_', cleanGroup)
         cleanGroup = re.sub(r'_+', '_', cleanGroup)
 
@@ -59,7 +59,7 @@ def bouquetsTvXml(streamtype, bouquetTitle):
         filename = '/etc/enigma2/' + str(groupname)
 
         with open(filename, 'a+') as f:
-            nameString = "#NAME " + str(jglob.name) + "\n"
+            nameString = "#NAME " + str(glob.name) + "\n"
             f.write(str(nameString))
 
             filename = 'subbouquet.jmx_' + str(streamtype) + '_' + str(cleanTitle) + '.tv'
@@ -76,11 +76,11 @@ def bouquetsTvXml(streamtype, bouquetTitle):
 
 def buildXMLTVChannelFile(epg_name_list):
 
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(jglob.name))
+    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.name))
     cleanName = re.sub(r' ', '_', cleanName)
     cleanName = re.sub(r'_+', '_', cleanName)
 
-    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', '_', str(jglob.old_name))
+    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', '_', str(glob.old_name))
     cleanNameOld = re.sub(r' ', '_', cleanNameOld)
     cleanNameOld = re.sub(r'_+', '_', cleanNameOld)
 
@@ -134,7 +134,7 @@ def buildXMLTVChannelFile(epg_name_list):
 
 def buildXMLTVSourceFile():
 
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', '_', str(jglob.name))
+    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', '_', str(glob.name))
     cleanName = re.sub(r' ', '_', cleanName)
     cleanName = re.sub(r'_+', '_', cleanName)
 
@@ -151,13 +151,13 @@ def buildXMLTVSourceFile():
         xml_str += '<sourcecat sourcecatname="IPTV ' + str(cleanName) + '">\n'
         xml_str += '<source type="gen_xmltv" nocheck="1" channels="' + channelpath + '">\n'
         xml_str += '<description>' + str(cleanName) + '</description>\n'
-        if jglob.fixepg:
+        if glob.fixepg:
             xml_str += '<url><![CDATA[' + str(filepath + 'jmx.' + str(cleanName) + '.xmltv2.xml') + ']]></url>\n'
         else:
-            if "xmltv.php" in str(jglob.xmltv_address):
-                xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + '&next_days=7]]></url>\n'
+            if "xmltv.php" in str(glob.xmltv_address):
+                xml_str += '<url><![CDATA[' + str(glob.xmltv_address) + '&next_days=7]]></url>\n'
             else:
-                xml_str += '<url><![CDATA[' + str(jglob.xmltv_address) + ']]></url>\n'
+                xml_str += '<url><![CDATA[' + str(glob.xmltv_address) + ']]></url>\n'
 
         xml_str += '</source>\n'
         xml_str += '</sourcecat>\n'
@@ -167,11 +167,11 @@ def buildXMLTVSourceFile():
 
 def downloadXMLTV():
 
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(jglob.name))
+    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.name))
     cleanName = re.sub(r' ', '_', cleanName)
     cleanName = re.sub(r'_+', '_', cleanName)
 
-    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', '_', str(jglob.old_name))
+    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', '_', str(glob.old_name))
     cleanNameOld = re.sub(r' ', '_', cleanNameOld)
     cleanNameOld = re.sub(r'_+', '_', cleanNameOld)
 
@@ -183,7 +183,7 @@ def downloadXMLTV():
     filepath = '/etc/epgimport/'
     epgfilename = 'jmx.' + str(cleanName) + '.xmltv.xml'
     epgpath = filepath + epgfilename
-    response = downloads.checkGZIP(jglob.xmltv_address)
+    response = downloads.checkGZIP(glob.xmltv_address)
 
     if response is not None:
 

@@ -21,14 +21,19 @@
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/v-divider.png" position="1767,1005" size="3,75" alphatest="blend" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/flare.png" position="296,992" size="375,29" alphatest="blend" zPosition="6" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/flare.png" position="1260,992" size="375,29" alphatest="blend" zPosition="6" />
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_red.png" position="509,1028" size="38,38" alphatest="blend" transparent="1" />
-    <widget source="key_red" render="Label" position="554,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_green.png" position="828,1028" size="38,38" alphatest="blend" transparent="1" />
-    <widget source="key_green" render="Label" position="873,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_yellow.png" position="1148,1028" size="38,38" alphatest="blend" transparent="1" />
-    <widget source="key_yellow" render="Label" position="1193,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_blue.png" position="1467,1028" size="38,38" alphatest="blend" transparent="1" />
-    <widget source="key_blue" render="Label" position="1512,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+	
+    <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_red.png" position="509,1028" size="38,38" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="554,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+	
+    <widget source="key_green" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_green.png" position="828,1028" size="38,38" alphatest="blend" transparent="1" />
+    <widget source="key_green" render="Label" position="873,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+	
+    <widget source="key_yellow" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_yellow.png" position="1148,1028" size="38,38" alphatest="blend" transparent="1" />
+    <widget source="key_yellow" render="Label" position="1193,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+	
+    <widget source="key_blue" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_blue.png" position="1467,1028" size="38,38" alphatest="blend" transparent="1" />
+    <widget source="key_blue" render="Label" position="1512,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+	
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_info.png" position="1845,1025" size="38,38" alphatest="blend" />
     <widget name="description" position="527,37" size="1356,196" font="onyxregular;32" foregroundColor="#57c7ff" backgroundColor="#07070a" transparent="1" />
     <widget name="lab1" position="527,321" size="1356,616" font="onyxregular;30" foregroundColor="#ffffff" backgroundColor="#313040" halign="center" valign="center" transparent="1" />

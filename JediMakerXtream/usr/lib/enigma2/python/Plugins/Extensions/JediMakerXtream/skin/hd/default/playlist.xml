@@ -12,24 +12,24 @@
     <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/hd/default/images/key_red.png" position="345,686" size="6,28" zPosition="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_red" render="Label" position="357,686" size="150,28" font="jediregular;20" valign="center" transparent="1" noWrap="1" foregroundColor="#ffffff" backgroundColor="#232323" halign="left" zPosition="1" />
+    <widget source="key_red" render="Label" position="357,686" size="150,28" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
     <widget source="key_green" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/hd/default/images/key_green.png" position="507,686" size="6,28" zPosition="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_green" render="Label" position="519,686" size="150,28" font="jediregular;20" valign="center" transparent="1" noWrap="1" foregroundColor="#ffffff" backgroundColor="#232323" halign="left" zPosition="1" />
+    <widget source="key_green" render="Label" position="519,686" size="150,28" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
     <widget source="key_yellow" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/hd/default/images/key_yellow.png" position="669,686" size="6,28" zPosition="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_yellow" render="Label" position="681,686" size="150,28" font="jediregular;20" valign="center" transparent="1" noWrap="1" foregroundColor="#ffffff" backgroundColor="#232323" halign="left" zPosition="1" />
+    <widget source="key_yellow" render="Label" position="681,686" size="150,28" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
     <widget source="key_blue" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/hd/default/images/key_blue.png" position="831,686" size="6,28" zPosition="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_blue" render="Label" position="843,686" size="150,28" font="jediregular;20" valign="center" transparent="1" noWrap="1" foregroundColor="#ffffff" backgroundColor="#232323" halign="left" zPosition="1" />
+    <widget source="key_blue" render="Label" position="843,686" size="150,28" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
     <widget source="key_info" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/hd/default/images/key_info.png" position="1054,686" size="25,25" alphatest="blend" zPosition="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_info" render="Label" position="1084,686" size="90,25" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" zPosition="2" />
-    <widget name="description" position="358,20" size="902,140" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#000000" halign="left" valign="top" transparent="1" />
+    <widget source="key_info" render="Label" position="1084,686" size="90,25" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="2" zPosition="2" />
+    <widget name="description" position="358,20" size="902,140" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#000000" valign="top" transparent="1" />
     <widget name="lab1" position="346,206" size="914,411" font="jediregular;20" foregroundColor="#ffffff" backgroundColor="#232323" halign="center" valign="center" transparent="1" />
     <widget source="playlists" render="Listbox" position="346,206" size="914,411" foregroundColor="#ffffff" backgroundColor="#232323" foregroundColorSelected="#ffffff" backgroundColorSelected="#0e6382" itemHeight="37" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" zPosition="2">
         <convert type="TemplatedMultiContent">{"template": [
@@ -42,8 +42,8 @@
             "scrollbarMode": "showOnDemand"
         }</convert>
     </widget>
-    <widget name="lastupdate" position="357,637" size="114,36" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" halign="left" valign="center" transparent="1" />
-    <widget name="liveupdate" position="470,637" size="266,36" font="jediregular;18" foregroundColor="#cccccc" backgroundColor="#232323" halign="left" valign="center" transparent="1" />
-    <widget name="vodupdate" position="736,637" size="266,36" font="jediregular;18" foregroundColor="#cccccc" backgroundColor="#232323" halign="left" valign="center" transparent="1" />
-    <widget name="seriesupdate" position="1002,637" size="266,36" font="jediregular;18" foregroundColor="#cccccc" backgroundColor="#232323" halign="left" valign="center" transparent="1" />
+    <widget name="lastupdate" position="357,637" size="114,36" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" />
+    <widget name="liveupdate" position="470,637" size="266,36" font="jediregular;18" foregroundColor="#cccccc" backgroundColor="#232323" valign="center" transparent="1" />
+    <widget name="vodupdate" position="736,637" size="266,36" font="jediregular;18" foregroundColor="#cccccc" backgroundColor="#232323" valign="center" transparent="1" />
+    <widget name="seriesupdate" position="1002,637" size="266,36" font="jediregular;18" foregroundColor="#cccccc" backgroundColor="#232323" valign="center" transparent="1" />
 </screen>

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from . import _
-from .plugin import skin_path, cfg
+from .plugin import skin_path, cfg, autoStartTimer
 
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigYesNo, configfile

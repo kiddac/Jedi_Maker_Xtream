@@ -3,7 +3,7 @@
 
 from . import _
 from . import downloads
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 
 from .plugin import skin_path
 
@@ -51,11 +51,11 @@ class JediMakerXtream_ViewChannels(Screen):
     def getchannels(self):
         self.list = []
 
-        username = jglob.current_playlist['playlist_info']['username']
-        password = jglob.current_playlist['playlist_info']['password']
-        protocol = jglob.current_playlist['playlist_info']['protocol']
-        domain = jglob.current_playlist['playlist_info']['domain']
-        port = str(jglob.current_playlist['playlist_info']['port'])
+        username = glob.current_playlist['playlist_info']['username']
+        password = glob.current_playlist['playlist_info']['password']
+        protocol = glob.current_playlist['playlist_info']['protocol']
+        domain = glob.current_playlist['playlist_info']['domain']
+        port = str(glob.current_playlist['playlist_info']['port'])
         host = str(protocol) + str(domain) + ':' + str(port) + '/'
         player_api = str(host) + 'player_api.php?username=' + str(username) + '&password=' + str(password)
         liveStreamsUrl = player_api + '&action=get_live_streams'

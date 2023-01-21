@@ -12,9 +12,12 @@
              <convert type="ClockToText">Format:%A, %b %d, %H.%M</convert>
     </widget>
 
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_red.png" position="518,1029" size="9,42" zPosition="1" />
-    <widget source="key_red" render="Label" position="536,1029" size="225,42" font="jediregular;30" valign="center" transparent="1" noWrap="1" foregroundColor="#ffffff" backgroundColor="#232323" halign="left" zPosition="1" />
+    <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_red.png" position="518,1029" size="9,42" alphatest="blend" zPosition="2" />
+    <widget source="key_red" render="Label" position="536,1029" size="225,42" font="jediregular;30" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
 
+	<widget source="key_green" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_green.png"  position="761,1029" size="9,42" alphatest="blend" zPosition="2" />
+    <widget source="key_green" render="Label" position="779,1029" size="225,42" font="jediregular;30" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
+	
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_ok.png" position="1852,1031" size="38,38" alphatest="blend" />
 
     <widget name="about" position="519,309" size="1372,672" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" transparent="1" zPosition="2" />

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 from .plugin import cfg, hdr, rytec_url, rytec_file, sat28_file, alias_file
 
 from io import StringIO
@@ -50,7 +50,7 @@ def checkGZIP(url):
 
 
 def downloadlivecategories(url):
-    jglob.livecategories = []
+    glob.livecategories = []
     valid = False
     response = checkGZIP(url)
 
@@ -59,27 +59,27 @@ def downloadlivecategories(url):
         response = checkGZIP(url)
 
     if response is not None and 'category_id' in response:
-        jglob.haslive = True
+        glob.haslive = True
         try:
-            jglob.livecategories = json.loads(response)
+            glob.livecategories = json.loads(response)
             valid = True
 
         except:
             print("\n ***** download live category error *****")
-            jglob.haslive = False
+            glob.haslive = False
             pass
 
         if valid:
-            if jglob.livecategories == [] or 'user_info' in jglob.livecategories or 'category_id' not in jglob.livecategories[0]:
-                jglob.haslive = False
-                jglob.livecategories == []
+            if glob.livecategories == [] or 'user_info' in glob.livecategories or 'category_id' not in glob.livecategories[0]:
+                glob.haslive = False
+                glob.livecategories == []
 
-            if not jglob.haslive or jglob.livecategories == []:
-                jglob.live = False
+            if not glob.haslive or glob.livecategories == []:
+                glob.live = False
 
 
 def downloadvodcategories(url):
-    jglob.vodcategories = []
+    glob.vodcategories = []
     valid = False
     response = checkGZIP(url)
 
@@ -88,27 +88,27 @@ def downloadvodcategories(url):
         response = checkGZIP(url)
 
     if response is not None and 'category_id' in response:
-        jglob.hasvod = True
+        glob.hasvod = True
         try:
-            jglob.vodcategories = json.loads(response)
+            glob.vodcategories = json.loads(response)
             valid = True
 
         except:
             print("\n ***** download vod category error *****")
-            jglob.hasvod = False
+            glob.hasvod = False
             pass
 
         if valid:
-            if jglob.vodcategories == [] or 'user_info' in jglob.vodcategories or 'category_id' not in jglob.vodcategories[0]:
-                jglob.hasvod = False
-                jglob.vodcategories == []
+            if glob.vodcategories == [] or 'user_info' in glob.vodcategories or 'category_id' not in glob.vodcategories[0]:
+                glob.hasvod = False
+                glob.vodcategories == []
 
-            if not jglob.hasvod or jglob.vodcategories == []:
-                jglob.vod = False
+            if not glob.hasvod or glob.vodcategories == []:
+                glob.vod = False
 
 
 def downloadseriescategories(url):
-    jglob.seriescategories = []
+    glob.seriescategories = []
     valid = False
     response = checkGZIP(url)
 
@@ -118,27 +118,27 @@ def downloadseriescategories(url):
 
     if response is not None and 'category_id' in response:
 
-        jglob.hasseries = True
+        glob.hasseries = True
         try:
-            jglob.seriescategories = json.loads(response)
+            glob.seriescategories = json.loads(response)
             valid = True
 
         except:
             print("\n ***** download series category error *****")
-            jglob.hasseries = False
+            glob.hasseries = False
             pass
 
         if valid:
-            if jglob.seriescategories == [] or 'user_info' in jglob.seriescategories or 'category_id' not in jglob.seriescategories[0]:
-                jglob.hasseries = False
-                jglob.seriescategories == []
+            if glob.seriescategories == [] or 'user_info' in glob.seriescategories or 'category_id' not in glob.seriescategories[0]:
+                glob.hasseries = False
+                glob.seriescategories == []
 
-            if not jglob.hasseries or jglob.seriescategories == []:
-                jglob.series = False
+            if not glob.hasseries or glob.seriescategories == []:
+                glob.series = False
 
 
 def downloadlivestreams(url):
-    jglob.livestreams = []
+    glob.livestreams = []
     valid = False
     response = checkGZIP(url)
 
@@ -147,28 +147,28 @@ def downloadlivestreams(url):
         response = checkGZIP(url)
 
     if response is not None and 'category_id' in response:
-        jglob.haslive = True
+        glob.haslive = True
 
         try:
-            jglob.livestreams = json.loads(response)
+            glob.livestreams = json.loads(response)
             valid = True
 
         except:
             print("\n ***** download live streams error *****")
-            jglob.haslive = False
+            glob.haslive = False
             pass
 
     if valid:
-        if jglob.livestreams == [] or 'user_info' in jglob.livestreams or 'category_id' not in jglob.livestreams[0]:
-            jglob.haslive = False
-            jglob.livestreams = []
+        if glob.livestreams == [] or 'user_info' in glob.livestreams or 'category_id' not in glob.livestreams[0]:
+            glob.haslive = False
+            glob.livestreams = []
 
-        if jglob.haslive is False:
-            jglob.live = False
+        if glob.haslive is False:
+            glob.live = False
 
 
 def downloadvodstreams(url):
-    jglob.vodstreams = []
+    glob.vodstreams = []
     valid = False
     response = checkGZIP(url)
 
@@ -177,28 +177,28 @@ def downloadvodstreams(url):
         response = checkGZIP(url)
 
     if response is not None and 'category_id' in response:
-        jglob.hasvod = True
+        glob.hasvod = True
 
         try:
-            jglob.vodstreams = json.loads(response)
+            glob.vodstreams = json.loads(response)
             valid = True
 
         except:
             print("\n ***** download vod streams error *****")
-            jglob.hasvod = False
+            glob.hasvod = False
             pass
 
     if valid:
-        if jglob.vodstreams == [] or 'user_info' in jglob.vodstreams or 'category_id' not in jglob.vodstreams[0]:
-            jglob.hasvod = False
-            jglob.vodstreams = []
+        if glob.vodstreams == [] or 'user_info' in glob.vodstreams or 'category_id' not in glob.vodstreams[0]:
+            glob.hasvod = False
+            glob.vodstreams = []
 
-        if jglob.hasvod is False:
-            jglob.vod = False
+        if glob.hasvod is False:
+            glob.vod = False
 
 
 def downloadseriesstreams(url):
-    jglob.seriesstreams = []
+    glob.seriesstreams = []
     valid = False
     response = checkGZIP(url)
 
@@ -207,38 +207,38 @@ def downloadseriesstreams(url):
         response = checkGZIP(url)
 
     if response is not None and 'category_id' in response:
-        jglob.hasseries = True
+        glob.hasseries = True
 
         try:
-            jglob.seriesstreams = json.loads(response)
+            glob.seriesstreams = json.loads(response)
             valid = True
         except:
             print("\n ***** download series streams error *****")
-            jglob.hasseries = False
+            glob.hasseries = False
             pass
 
     if valid:
-        if jglob.seriesstreams == [] or 'user_info' in jglob.seriesstreams or 'category_id' not in jglob.seriesstreams[0]:
-            jglob.hasseries = False
-            jglob.seriersstreams = []
+        if glob.seriesstreams == [] or 'user_info' in glob.seriesstreams or 'category_id' not in glob.seriesstreams[0]:
+            glob.hasseries = False
+            glob.seriersstreams = []
 
-        if jglob.hasseries is False:
-            jglob.series = False
+        if glob.hasseries is False:
+            glob.series = False
 
 
 def getM3uCategories(live, vod):
     # print("**** getM3uCategories ***")
     lines = []
     channelnum = 0
-    jglob.getm3ustreams = []
+    glob.getm3ustreams = []
     group_title = 'Uncategorised'
     epg_name = ''
     name = ''
     source = ''
 
-    address = jglob.current_playlist['playlist_info']['address']
+    address = glob.current_playlist['playlist_info']['address']
 
-    if jglob.current_playlist['playlist_info']['playlisttype'] == 'external':
+    if glob.current_playlist['playlist_info']['playlisttype'] == 'external':
 
         req = Request(address, headers=hdr)
         try:
@@ -260,13 +260,13 @@ def getM3uCategories(live, vod):
             print("\n ***** getM3uCategories unknown error")
             pass
 
-    elif jglob.current_playlist['playlist_info']['playlisttype'] == 'local':
+    elif glob.current_playlist['playlist_info']['playlisttype'] == 'local':
         with open(cfg.m3ulocation.value + address) as f:
             lines = f.readlines()
 
     for line in lines:
 
-        if pythonVer == 3 and jglob.current_playlist['playlist_info']['playlisttype'] == 'external':
+        if pythonVer == 3 and glob.current_playlist['playlist_info']['playlisttype'] == 'external':
             line = line.decode('utf-8')
 
         if not line.startswith('#EXTINF') and not line.startswith('http'):
@@ -307,17 +307,17 @@ def getM3uCategories(live, vod):
                 if live:
                     if group_title == '':
                         group_title = 'Uncategorised Live'
-                    jglob.getm3ustreams.append([group_title, epg_name, name, source, 'live'])
+                    glob.getm3ustreams.append([group_title, epg_name, name, source, 'live'])
 
             elif stream == "vod":
                 if vod:
                     if group_title == '':
                         group_title = 'Uncategorised VOD'
-                    jglob.getm3ustreams.append([group_title, epg_name, name, source, 'vod'])
+                    glob.getm3ustreams.append([group_title, epg_name, name, source, 'vod'])
             else:
                 if group_title == '':
                     group_title = 'Uncategorised'
-                jglob.getm3ustreams.append([group_title, epg_name, name, source, 'live'])
+                glob.getm3ustreams.append([group_title, epg_name, name, source, 'live'])
 
 
 def downloadrytec():
@@ -368,7 +368,7 @@ def downloadrytec():
             with open(sat28_file, 'w') as outfile:
                 for line in fd:
                     if "<!-- 28.2E -->" in line and "0000FFFF" not in line:
-                        jglob.rytecnames.append(line)
+                        glob.rytecnames.append(line)
                     # get all 28.2e but ignore bad epg importer refs
                     if '28.2E' in line and '1:0:1:C7A7:817:2:11A0000:0:0:0:' not in line and '1:0:1:2EEF:7EF:2:11A0000:0:0:0:' not in line:
                         outfile.write(line)

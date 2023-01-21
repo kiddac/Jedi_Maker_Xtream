@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from . import _
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 
 from Components.ActionMap import HelpableActionMap
 from Components.config import config, ConfigSelection, ConfigNumber, ConfigClock, ConfigDirectory, ConfigSubsection, ConfigYesNo, ConfigSelectionNumber
@@ -77,7 +77,7 @@ cfg.catchupend = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
 cfg.groups = ConfigYesNo(default=False)
 
 skin_path = "%s%s/" % (skin_directory, cfg.skin.value)
-playlists_json = "%splaylist_all" % (dir_etc)
+playlists_json = "%splaylist_all.json" % (dir_etc)
 playlist_file = "%splaylists.txt" % (dir_etc)
 
 if cfg.location.value:
@@ -111,12 +111,12 @@ if not os.path.isfile(playlist_file):
 
 
 if os.path.isdir("/usr/lib/enigma2/python/Plugins/Extensions/EPGImport"):
-    jglob.has_epg_importer = True
+    glob.has_epg_importer = True
     if not os.path.exists("/etc/epgimport"):
         os.makedirs("/etc/epgimport")
 else:
-    jglob.has_epg_importer = False
-    jglob.epg_provider = False
+    glob.has_epg_importer = False
+    glob.epg_provider = False
 
 # remove dodgy versions of my plugin
 if os.path.isdir('/usr/lib/enigma2/python/Plugins/Extensions/XStreamityPro/'):
@@ -325,9 +325,9 @@ def showJediCatchup(self):
         self.session.nav.playService(eServiceReference(current_service))
     service = self.session.nav.getCurrentService()
 
-    jglob.currentref = self.session.nav.getCurrentlyPlayingServiceReference()
-    jglob.currentrefstring = jglob.currentref.toString()
-    jglob.name = ServiceReference(jglob.currentref).getServiceName()
+    glob.currentref = self.session.nav.getCurrentlyPlayingServiceReference()
+    glob.currentrefstring = glob.currentref.toString()
+    glob.name = ServiceReference(glob.currentref).getServiceName()
 
     self.playOriginalChannel()
 
@@ -347,7 +347,7 @@ def showJediCatchup(self):
 
 
 def playOriginalChannel(self):
-    if self.oldrefstring != jglob.currentrefstring:
+    if self.oldrefstring != glob.currentrefstring:
         self.session.nav.playService(eServiceReference(self.oldrefstring))
 
 

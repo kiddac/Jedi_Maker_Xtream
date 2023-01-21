@@ -24,19 +24,19 @@
     <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_red.png" position="509,1028" size="38,38" alphatest="blend" transparent="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_red" render="Label" position="554,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+    <widget source="key_red" render="Label" position="554,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
     <widget source="key_green" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_green.png" position="828,1028" size="38,38" alphatest="blend" transparent="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_green" render="Label" position="873,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+    <widget source="key_green" render="Label" position="873,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
     <widget source="key_yellow" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_yellow.png" position="1148,1028" size="38,38" alphatest="blend" transparent="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_yellow" render="Label" position="1193,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+    <widget source="key_yellow" render="Label" position="1193,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
     <widget source="key_blue" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_blue.png" position="1467,1028" size="38,38" alphatest="blend" transparent="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_blue" render="Label" position="1512,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+    <widget source="key_blue" render="Label" position="1512,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
     <widget source="key_info" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_info.png" position="1845,1025" size="38,38" alphatest="blend">
         <convert type="ConditionalShowHide" />
     </widget>
@@ -52,8 +52,8 @@
             "itemHeight": 72
         }</convert>
     </widget>
-    <widget name="lastupdate" position="540,955" size="171,54" font="onyxregular;24" foregroundColor="#57c7ff" backgroundColor="#313040" halign="left" valign="center" transparent="1" />
-    <widget name="liveupdate" position="710,955" size="399,54" font="onyxregular;24" foregroundColor="#ffffff" backgroundColor="#313040" halign="left" valign="center" transparent="1" />
-    <widget name="vodupdate" position="1110,955" size="399,54" font="onyxregular;24" foregroundColor="#ffffff" backgroundColor="#313040" halign="left" valign="center" transparent="1" />
-    <widget name="seriesupdate" position="1504,955" size="399,54" font="onyxregular;24" foregroundColor="#ffffff" backgroundColor="#313040" halign="left" valign="center" transparent="1" />
+    <widget name="lastupdate" position="540,955" size="171,54" font="onyxregular;24" foregroundColor="#57c7ff" backgroundColor="#313040" valign="center" transparent="1" />
+    <widget name="liveupdate" position="710,955" size="399,54" font="onyxregular;24" foregroundColor="#ffffff" backgroundColor="#313040" valign="center" transparent="1" />
+    <widget name="vodupdate" position="1110,955" size="399,54" font="onyxregular;24" foregroundColor="#ffffff" backgroundColor="#313040" valign="center" transparent="1" />
+    <widget name="seriesupdate" position="1504,955" size="399,54" font="onyxregular;24" foregroundColor="#ffffff" backgroundColor="#313040" valign="center" transparent="1" />
 </screen>

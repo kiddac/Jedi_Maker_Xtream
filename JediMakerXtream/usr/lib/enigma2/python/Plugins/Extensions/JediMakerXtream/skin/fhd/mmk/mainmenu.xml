@@ -5,7 +5,7 @@
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/background.jpg" position="0,0" size="1920,1080" zPosition="-2" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/back.png" position="0,0" size="1920,110" alphatest="blend" transparent="1" zPosition="-1" />
     <eLabel position="50,130" size="720,406" backgroundColor="#ff000000" zPosition="2" />
-    <widget source="Title" render="Label" position="50,30" size="500,100" valign="top" halign="left" font="slykregular;50" zPosition="1" transparent="1" foregroundColor="#00ff0011" backgroundColor="#101010" />
+    <widget source="Title" render="Label" position="50,30" size="500,100" valign="top" font="slykregular;50" zPosition="1" transparent="1" foregroundColor="#00ff0011" backgroundColor="#101010" />
     <widget source="global.CurrentTime" render="Label" position="1470,10" size="400,100" font="slykregular;34" halign="right" valign="center" foregroundColor="#808080" backgroundColor="#101010" transparent="1" zPosition="1">
         <convert type="ClockToText">Format %A %d %B %H:%M:%S</convert>
     </widget>
@@ -23,6 +23,7 @@
     </widget>
     <!-- Buttons -->
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/backb.png" position="0,970" size="1920,110" alphatest="blend" transparent="1" zPosition="-1" />
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/key_red.png" position="50,1005" size="30,30" alphatest="blend" transparent="1" />
-    <widget source="key_red" render="Label" position="90,1000" size="255,38" font="slykregular;33" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#101010" noWrap="1" />
+	
+    <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/mmk/images/key_red.png" position="50,1005" size="30,30" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="90,1000" size="255,38" font="slykregular;33" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#101010" noWrap="1" />
 </screen>

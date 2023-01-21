@@ -3,14 +3,14 @@
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/background.png" position="0,0" size="1920,1080" zPosition="-2" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/logo.png" position="88,520" size="368,180" alphatest="blend" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/logo1.png" alphatest="blend" position="92,54" size="144,78" zPosition="2" />
-    <widget source="global.CurrentTime" render="Label" position="340,80" size="143,40" font="slykregular;33" foregroundColor="#ffffff" backgroundColor="#014890" valign="center" halign="left" transparent="1" zPosition="2">
+    <widget source="global.CurrentTime" render="Label" position="340,80" size="143,40" font="slykregular;33" foregroundColor="#ffffff" backgroundColor="#014890" valign="center" transparent="1" zPosition="2">
         <convert type="ClockToText">Format:%H.%M</convert>
     </widget>
-    <widget source="global.CurrentTime" render="Label" position="341,82" size="143,40" font="slykregular;33" foregroundColor="#000000" backgroundColor="#014890" valign="center" halign="left" transparent="1" zPosition="1">
+    <widget source="global.CurrentTime" render="Label" position="341,82" size="143,40" font="slykregular;33" foregroundColor="#000000" backgroundColor="#014890" valign="center" transparent="1" zPosition="1">
         <convert type="ClockToText">Format:%H.%M</convert>
     </widget>
-    <widget source="Title" render="Label" position="102,400" size="342,100" valign="top" halign="left" font="slykregular;42" zPosition="2" transparent="1" foregroundColor="#ffffff" backgroundColor="#024488" />
-    <widget source="Title" render="Label" position="104,402" size="342,100" valign="top" halign="left" font="slykregular;42" zPosition="1" transparent="1" foregroundColor="#000000" backgroundColor="#024488" />
+    <widget source="Title" render="Label" position="102,400" size="342,100" valign="top" font="slykregular;42" zPosition="2" transparent="1" foregroundColor="#ffffff" backgroundColor="#024488" />
+    <widget source="Title" render="Label" position="104,402" size="342,100" valign="top" font="slykregular;42" zPosition="1" transparent="1" foregroundColor="#000000" backgroundColor="#024488" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/q-left-nav.png" position="23,0" size="40,1080" alphatest="blend" zPosition="4" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/q-right-nav.png" position="482,0" size="40,1080" alphatest="blend" zPosition="4" />
     <widget source="session.VideoPicture" render="Pig" position="39,125" size="486,285" backgroundColor="#ff000000" transparent="1" zPosition="-2" />
@@ -21,19 +21,19 @@
     <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/key_red.png" position="512,1030" size="38,38" alphatest="blend" transparent="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_red" render="Label" position="557,1030" size="255,38" font="slykregular;33" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#1a4273" noWrap="1" />
+    <widget source="key_red" render="Label" position="557,1030" size="255,38" font="slykregular;33" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#1a4273" noWrap="1" />
     <widget source="key_green" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/key_green.png" position="827,1030" size="38,38" alphatest="blend" transparent="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_green" render="Label" position="872,1030" size="255,38" font="slykregular;33" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#1a4273" noWrap="1" />
+    <widget source="key_green" render="Label" position="872,1030" size="255,38" font="slykregular;33" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#1a4273" noWrap="1" />
     <widget source="key_yellow" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/key_yellow.png" position="1142,1030" size="38,38" alphatest="blend" transparent="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_yellow" render="Label" position="1187,1030" size="255,38" font="slykregular;33" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#1a4273" noWrap="1" />
+    <widget source="key_yellow" render="Label" position="1187,1030" size="255,38" font="slykregular;33" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#1a4273" noWrap="1" />
     <widget source="key_blue" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/key_blue.png" position="1457,1030" size="38,38" alphatest="blend" transparent="1">
         <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="key_blue" render="Label" position="1502,1030" size="255,38" font="slykregular;33" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#1a4273" noWrap="1" />
+    <widget source="key_blue" render="Label" position="1502,1030" size="255,38" font="slykregular;33" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#1a4273" noWrap="1" />
     <widget source="key_info" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykQ/images/key_info.png" position="1793,1030" size="38,38" alphatest="blend">
         <convert type="ConditionalShowHide" />
     </widget>
@@ -50,8 +50,8 @@
             "scrollbarMode": "showNever"
             }</convert>
     </widget>
-    <widget name="lastupdate" position="540,955" size="171,54" font="slykregular;24" foregroundColor="#ffffff" backgroundColor="#0152a4" halign="left" valign="center" transparent="1" />
-    <widget name="liveupdate" position="710,955" size="399,54" font="slykregular;24" foregroundColor="#ffffff" backgroundColor="#0152a4" halign="left" valign="center" transparent="1" />
-    <widget name="vodupdate" position="1110,955" size="399,54" font="slykregular;24" foregroundColor="#ffffff" backgroundColor="#0152a4" halign="left" valign="center" transparent="1" />
-    <widget name="seriesupdate" position="1504,955" size="399,54" font="slykregular;24" foregroundColor="#ffffff" backgroundColor="#0152a4" halign="left" valign="center" transparent="1" />
+    <widget name="lastupdate" position="540,955" size="171,54" font="slykregular;24" foregroundColor="#ffffff" backgroundColor="#0152a4" valign="center" transparent="1" />
+    <widget name="liveupdate" position="710,955" size="399,54" font="slykregular;24" foregroundColor="#ffffff" backgroundColor="#0152a4" valign="center" transparent="1" />
+    <widget name="vodupdate" position="1110,955" size="399,54" font="slykregular;24" foregroundColor="#ffffff" backgroundColor="#0152a4" valign="center" transparent="1" />
+    <widget name="seriesupdate" position="1504,955" size="399,54" font="slykregular;24" foregroundColor="#ffffff" backgroundColor="#0152a4" valign="center" transparent="1" />
 </screen>

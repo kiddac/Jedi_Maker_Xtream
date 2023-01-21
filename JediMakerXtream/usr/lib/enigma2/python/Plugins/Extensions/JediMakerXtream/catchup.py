@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from . import _
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 
 from .plugin import skin_path, cfg, hdr, screenwidth
 from Components.ActionMap import ActionMap
@@ -36,21 +36,21 @@ else:
 def downloadSimpleData():
     refurl = ""
     refstream = ""
-    jglob.refstreamnum = ""
-    jglob.username = ""
-    jglob.password = ""
-    jglob.domain = ""
+    glob.refstreamnum = ""
+    glob.username = ""
+    glob.password = ""
+    glob.domain = ""
     error_message = ""
     isCatchupChannel = False
 
-    refurl = jglob.currentref.getPath()
+    refurl = glob.currentref.getPath()
     # http://domain.xyx:0000/live/user/pass/12345.ts
 
     if refurl != "":
         refstream = refurl.split('/')[-1]
         # 12345.ts
 
-        jglob.refstreamnum = int(''.join(filter(str.isdigit, refstream)))
+        glob.refstreamnum = int(''.join(filter(str.isdigit, refstream)))
         # 12345
 
         # get domain, username, password from path
@@ -63,17 +63,17 @@ def downloadSimpleData():
             match2 = True
 
         if match1:
-            jglob.username = re.search(r'[^\/]+(?=\/[^\/]+\/\d+\.)', refurl).group()
-            jglob.password = re.search(r'[^\/]+(?=\/\d+\.)', refurl).group()
-            jglob.domain = re.search(r'(https|http):\/\/[^\/]+', refurl).group()
+            glob.username = re.search(r'[^\/]+(?=\/[^\/]+\/\d+\.)', refurl).group()
+            glob.password = re.search(r'[^\/]+(?=\/\d+\.)', refurl).group()
+            glob.domain = re.search(r'(https|http):\/\/[^\/]+', refurl).group()
 
         elif match2:
-            jglob.username = re.search(r'[^\/]+(?=\/[^\/]+\/[^\/]+$)', refurl).group()
-            jglob.password = re.search(r'[^\/]+(?=\/[^\/]+$)', refurl).group()
-            jglob.domain = re.search(r'(https|http):\/\/[^\/]+', refurl).group()
+            glob.username = re.search(r'[^\/]+(?=\/[^\/]+\/[^\/]+$)', refurl).group()
+            glob.password = re.search(r'[^\/]+(?=\/[^\/]+$)', refurl).group()
+            glob.domain = re.search(r'(https|http):\/\/[^\/]+', refurl).group()
 
-        simpleurl = "%s/player_api.php?username=%s&password=%s&action=get_simple_data_table&stream_id=%s" % (jglob.domain, jglob.username, jglob.password, jglob.refstreamnum)
-        getLiveStreams = "%s/player_api.php?username=%s&password=%s&action=get_live_streams" % (jglob.domain, jglob.username, jglob.password)
+        simpleurl = "%s/player_api.php?username=%s&password=%s&action=get_simple_data_table&stream_id=%s" % (glob.domain, glob.username, glob.password, glob.refstreamnum)
+        getLiveStreams = "%s/player_api.php?username=%s&password=%s&action=get_live_streams" % (glob.domain, glob.username, glob.password)
 
         response = ''
 
@@ -99,7 +99,7 @@ def downloadSimpleData():
 
             isCatchupChannel = False
             for channel in liveStreams:
-                if channel['stream_id'] == jglob.refstreamnum:
+                if channel['stream_id'] == glob.refstreamnum:
                     if int(channel['tv_archive']) == 1:
                         isCatchupChannel = True
                         break
@@ -127,43 +127,43 @@ def downloadSimpleData():
             if response != "":
                 simple_data_table = json.load(response)
 
-                jglob.archive = []
+                glob.archive = []
                 hasarchive = False
                 if 'epg_listings' in simple_data_table:
                     for listing in simple_data_table['epg_listings']:
                         if 'has_archive' in listing:
                             if listing['has_archive'] == 1:
                                 hasarchive = True
-                                jglob.archive.append(listing)
+                                glob.archive.append(listing)
 
                 if hasarchive:
-                    jglob.dates = []
-                    for listing in jglob.archive:
+                    glob.dates = []
+                    for listing in glob.archive:
                         date = datetime.strptime(listing['start'], '%Y-%m-%d %H:%M:%S')
                         day = calendar.day_abbr[date.weekday()]
                         start = ["%s\t%s" % (day, date.strftime("%d/%m/%Y")), date.strftime("%Y-%m-%d")]
 
-                        if start not in jglob.dates:
-                            jglob.dates.append(start)
+                        if start not in glob.dates:
+                            glob.dates.append(start)
 
-                    dates_count = len(jglob.dates)
+                    dates_count = len(glob.dates)
 
-                    jglob.dates.append([(_("All %s days")) % dates_count, "0000-00-00"])
+                    glob.dates.append([(_("All %s days")) % dates_count, "0000-00-00"])
 
                     return error_message, True
                 else:
-                    jglob.archive = []
+                    glob.archive = []
 
                     numberofdays = 7
                     currentDate = datetime.combine(datetime.date.today(), datetime.min.time())
 
                     manualArchiveStartDate = currentDate + datetime.timedelta(days=-numberofdays)
-                    jglob.dates = []
+                    glob.dates = []
 
                     for x in range(0, numberofdays):
                         manualDay = calendar.day_abbr[manualArchiveStartDate.weekday()]
                         manualStart = ["%s\t%s" % (manualDay, manualArchiveStartDate.strftime("%d/%m/%Y")), manualArchiveStartDate.strftime("%Y-%m-%d")]
-                        jglob.dates.append(manualStart)
+                        glob.dates.append(manualStart)
                         aStart = manualArchiveStartDate
 
                         for y in range(0, 24):
@@ -173,12 +173,12 @@ def downloadSimpleData():
                             aStart_timestamp = aStart.strftime("%s")
                             aStop_timestamp = aEnd.strftime("%s")
                             listing = {"start": aStartString, "end": aEndString, "start_timestamp": aStart_timestamp, "stop_timestamp": aStop_timestamp, "title": "UHJvZ3JhbSBEYXRhIE5vdCBBdmFpbGFibGU=", "description": "UHJvZ3JhbSBEYXRhIE5vdCBBdmFpbGFibGU="}
-                            jglob.archive.append(listing)
+                            glob.archive.append(listing)
                             aStart = (aStart + + datetime.timedelta(hours=1))
 
                         manualArchiveStartDate = manualArchiveStartDate + datetime.timedelta(days=1)
 
-                    jglob.dates.append([(_("Program Data Not Available")), "9999-99-99"])
+                    glob.dates.append([(_("Program Data Not Available")), "9999-99-99"])
                     return error_message, True
 
             else:
@@ -265,8 +265,8 @@ class JediMakerXtream_Catchup(Screen):
     def createSetup(self):
         self.list = []
 
-        self.setup_title = '%s' % jglob.name.lstrip(cfg.catchupprefix.value)
-        for date in jglob.dates:
+        self.setup_title = '%s' % glob.name.lstrip(cfg.catchupprefix.value)
+        for date in glob.dates:
             self.list.append((str(date[0]), str(date[1])))
 
         # self['newlist'].list = self.list.reverse()
@@ -279,9 +279,9 @@ class JediMakerXtream_Catchup(Screen):
         if self.returnValue == "9999-99-99":
             return
         if self.returnValue == "0000-00-00":
-            selectedArchive = jglob.archive
+            selectedArchive = glob.archive
         else:
-            for listing in jglob.archive:
+            for listing in glob.archive:
                 if 'start' in listing:
                     if listing['start'].startswith(str(self.returnValue)):
                         selectedArchive.append(listing)
@@ -300,7 +300,7 @@ class JediMakerXtream_Catchup_Listings(Screen):
             self.skin = f.read()
 
         self.archive = archive
-        self.setup_title = _('TV Archive: %s' % jglob.name.lstrip(cfg.catchupprefix.value))
+        self.setup_title = _('TV Archive: %s' % glob.name.lstrip(cfg.catchupprefix.value))
 
         self.list = []
         self.catchup_all = []
@@ -361,7 +361,7 @@ class JediMakerXtream_Catchup_Listings(Screen):
             if 'description' in listing:
                 epg_description = base64.b64decode(listing['description']).decode('utf-8')
 
-            shift = int(jglob.catchupshift)
+            shift = int(glob.catchupshift)
 
             if 'start' in listing:
                 start = listing['start']
@@ -414,7 +414,7 @@ class JediMakerXtream_Catchup_Listings(Screen):
             self['list'].onSelectionChanged.append(self.getCurrentEntry)
 
     def play(self):
-        playurl = "%s/streaming/timeshift.php?username=%s&password=%s&stream=%s&start=%s&duration=%s" % (jglob.domain, jglob.username, jglob.password, jglob.refstreamnum, self.catchup_all[self.currentSelection][5], self.catchup_all[self.currentSelection][6])
+        playurl = "%s/streaming/timeshift.php?username=%s&password=%s&stream=%s&start=%s&duration=%s" % (glob.domain, glob.username, glob.password, glob.refstreamnum, self.catchup_all[self.currentSelection][5], self.catchup_all[self.currentSelection][6])
         streamtype = 4097
         sref = eServiceReference(streamtype, 0, playurl)
         sref.setName(self.catchup_all[self.currentSelection][3])

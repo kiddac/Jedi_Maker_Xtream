@@ -21,8 +21,10 @@
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/v-divider.png" position="1767,1005" size="3,75" alphatest="blend" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/flare.png" position="296,992" size="375,29" alphatest="blend" zPosition="6" />
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/flare.png" position="1260,992" size="375,29" alphatest="blend" zPosition="6" />
-    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_red.png" position="509,1028" size="38,38" alphatest="blend" transparent="1" />
-    <widget source="key_red" render="Label" position="554,1025" size="270,38" font="onyxregular;30" valign="center" halign="left" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+	
+    <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_red.png" position="509,1028" size="38,38" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="554,1025" size="270,38" font="onyxregular;30" valign="center" transparent="1" foregroundColor="#ffffff" backgroundColor="#0f1017" noWrap="1" />
+	
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/key_ok.png" position="1845,1025" size="38,38" alphatest="blend" />
     <widget source="menu" render="Listbox" position="527,321" size="954, 645" foregroundColor="#ffffff" backgroundColor="#313040" foregroundColorSelected="#ffffff" backgroundColorSelected="#1e1f2b" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/select-636-48.png" backgroundPixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/blank.png" enableWrapAround="1" scrollbarMode="showNever" transparent="1">
         <convert type="TemplatedMultiContent">{"template":[

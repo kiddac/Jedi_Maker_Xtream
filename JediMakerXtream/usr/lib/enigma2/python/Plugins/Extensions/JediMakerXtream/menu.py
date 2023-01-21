@@ -3,7 +3,7 @@
 
 from . import _
 from . import globalfunctions as jfunc
-from . import jediglobals as jglob
+from . import jedi_globals as glob
 
 from .plugin import skin_path, playlists_json
 from Components.ActionMap import ActionMap
@@ -78,13 +78,13 @@ class JediMakerXtream_Menu(Screen):
         self.list.append((_('Settings'), 'm_settings'))
 
         self.playlists_all = jfunc.getPlaylistJson()
-        jglob.bouquets_exist = False
+        glob.bouquets_exist = False
         for playlist in self.playlists_all:
             if 'bouquet_info' in playlist:
-                jglob.bouquets_exist = True
+                glob.bouquets_exist = True
                 break
 
-        if jglob.bouquets_exist:
+        if glob.bouquets_exist:
             self.list.append((_('Update Bouquets'), 'm_update'))
             self.list.append((_('Delete Individual Bouquets'), 'm_delete_set'))
             self.list.append((_('Delete All Jedi IPTV Bouquets'), 'm_delete_all'))
@@ -125,7 +125,7 @@ class JediMakerXtream_Menu(Screen):
             return
 
     def quit(self):
-        jglob.firstrun = 0
+        glob.firstrun = 0
         self.close(False)
 
     def deleteBouquets(self, answer=None):
@@ -142,16 +142,16 @@ class JediMakerXtream_Menu(Screen):
 
             jfunc.purge('/etc/enigma2', 'jmx')
 
-            if jglob.has_epg_importer:
+            if glob.has_epg_importer:
                 jfunc.purge('/etc/epgimport', 'jmx')
 
             self.playlists_all = jfunc.getPlaylistJson()
 
-            jglob.bouquets_exist = False
+            glob.bouquets_exist = False
             jfunc.resetUnique()
-            jglob.firstrun = 0
-            jglob.current_selection = 0
-            jglob.current_playlist = []
+            glob.firstrun = 0
+            glob.current_selection = 0
+            glob.current_playlist = []
 
             # delete leftover empty dicts
             self.playlists_all = [_f for _f in self.playlists_all if _f]

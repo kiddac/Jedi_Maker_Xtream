@@ -41,7 +41,7 @@ class JediMakerXtream_About(Screen):
         self.credit += '*Playing streams via the plugin is currently unavailable.\n'
         self.credit += 'Play your files via your TV bouquets.\n\n'
         self.credit += 'Credits:\n'
-        self.credit += 'AutoBouquetMaker, EpgImporter, AutoBackup (used as code reference).\n'
+        self.credit += 'AutoBouquetsMaker, EpgImporter, AutoBackup (used as code reference).\n'
         self.credit += 'Lululla for all the hard work done on XCPlugin and assistance with the project.\n'
         self.credit += 'Massive thanks to Seagen for his endless multi image testing.\n'
         self.credit += 'And thanks to all the other testers and those who helped in the development of this project.\n\n'

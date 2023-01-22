@@ -239,7 +239,6 @@ class JediMakerXtream_Catchup(Screen):
         self["actions"] = ActionMap(["JediMakerXtreamActions"], {
             "ok": self.openSelected,
             "cancel": self.quit,
-            "menu": self.quit,
         }, -2)
 
         self.setup_title = ""

@@ -337,7 +337,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             return
 
         if entry == _("Use Rytec UK EPG"):
-            self["information"].setText(_("\nTry to match the UK Rytec names in the background to populate UK EPG.\nNote this will override your provider"s UK EPG."))
+            self["information"].setText(_("\nTry to match the UK Rytec names in the background to populate UK EPG.\nNote this will override your provider's UK EPG."))
             return
 
         if entry == _("Replace UK channel names in bouquets with swap names"):
@@ -499,11 +499,9 @@ class JediMakerXtream_ChooseBouquets(Screen):
             "green": self.keyGreen,
             "yellow": self.toggleAllSelection,
             "blue": self.clearAllSelection,
-            "save": self.keyGreen,
             "cancel": self.keyCancel,
             "ok": self.toggleSelection,
             "info": self.viewChannels,
-            "showEPGList": self.viewChannels
         }, -2)
 
         self["key_red"] = StaticText(_("Cancel"))

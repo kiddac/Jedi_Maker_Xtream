@@ -52,7 +52,7 @@ def bouquetsTvXml(streamtype, bouquetTitle):
             content = f.read()
 
         with open("/etc/enigma2/bouquets.tv", "a+") as f:
-            bouquetTvString = "#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "" + str(groupname) + "" ORDER BY bouquet\n"
+            bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) + '" ORDER BY bouquet\n'
             if str(bouquetTvString) not in content:
                 f.write(str(bouquetTvString))
 
@@ -63,14 +63,14 @@ def bouquetsTvXml(streamtype, bouquetTitle):
             f.write(str(nameString))
 
             filename = "subbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
-            bouquetTvString = "#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "" + str(filename) + "" ORDER BY bouquet\n"
+            bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) + '" ORDER BY bouquet\n'
             f.write(str(bouquetTvString))
 
     else:
         filename = "userbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
 
         with open("/etc/enigma2/bouquets.tv", "a+") as f:
-            bouquetTvString = "#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "" + str(filename) + "" ORDER BY bouquet\n"
+            bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
             f.write(str(bouquetTvString))
 
 
@@ -145,23 +145,23 @@ def buildXMLTVSourceFile():
     filename = "jmx." + str(cleanName) + ".sources.xml"
     sourcepath = filepath + filename
 
-    with open(sourcepath, "w") as f:
-        xml_str = "<?xml version="1.0" encoding="utf-8"?>\n"
-        xml_str += "<sources>\n"
-        xml_str += "<sourcecat sourcecatname="IPTV " + str(cleanName) + "">\n"
-        xml_str += "<source type="gen_xmltv" nocheck="1" channels="" + channelpath + "">\n"
-        xml_str += "<description>" + str(cleanName) + "</description>\n"
+    with open(sourcepath, 'w') as f:
+        xml_str = '<?xml version="1.0" encoding="utf-8"?>\n'
+        xml_str += '<sources>\n'
+        xml_str += '<sourcecat sourcecatname="IPTV ' + str(cleanName) + '">\n'
+        xml_str += '<source type="gen_xmltv" nocheck="1" channels="' + channelpath + '">\n'
+        xml_str += '<description>' + str(cleanName) + '</description>\n'
         if glob.fixepg:
-            xml_str += "<url><![CDATA[" + str(filepath + "jmx." + str(cleanName) + ".xmltv2.xml") + "]]></url>\n"
+            xml_str += '<url><![CDATA[' + str(filepath + 'jmx.' + str(cleanName) + '.xmltv2.xml') + ']]></url>\n'
         else:
             if "xmltv.php" in str(glob.xmltv_address):
-                xml_str += "<url><![CDATA[" + str(glob.xmltv_address) + "&next_days=7]]></url>\n"
+                xml_str += '<url><![CDATA[' + str(glob.xmltv_address) + '&next_days=7]]></url>\n'
             else:
-                xml_str += "<url><![CDATA[" + str(glob.xmltv_address) + "]]></url>\n"
+                xml_str += '<url><![CDATA[' + str(glob.xmltv_address) + ']]></url>\n'
 
-        xml_str += "</source>\n"
-        xml_str += "</sourcecat>\n"
-        xml_str += "</sources>\n"
+        xml_str += '</source>\n'
+        xml_str += '</sourcecat>\n'
+        xml_str += '</sources>\n'
         f.write(xml_str)
 
 

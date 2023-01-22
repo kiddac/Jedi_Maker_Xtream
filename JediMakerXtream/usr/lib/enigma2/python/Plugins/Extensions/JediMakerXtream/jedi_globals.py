@@ -66,9 +66,9 @@ livebuffer = "0"
 vodbuffer = "0"
 
 # catchup globals
+currentPlayingServiceRef = None
+currentPlayingServiceRefString = ""
 
-currentref = None
-currentrefstring = ""
 name = ""
 archive = []
 dates = []

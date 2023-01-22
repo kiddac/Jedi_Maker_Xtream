@@ -23,30 +23,32 @@ class JediMakerXtream_BuildBouquets(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'progress.xml'
-        with open(skin, 'r') as f:
+        skin = skin_path + "progress.xml"
+        with open(skin, "r") as f:
             self.skin = f.read()
 
-        Screen.setTitle(self, _('Building Bouquets'))
+        Screen.setTitle(self, _("Building Bouquets"))
 
         self.bouquet = glob.current_playlist
         self.categories = glob.selectedcategories
 
-        if self.bouquet['playlist_info']['playlisttype'] != 'xtream':
+        if self.bouquet["playlist_info"]["playlisttype"] != "xtream":
             self.categories = []
 
-        self['action'] = Label(_('Building Bouquets...'))
-        self['status'] = Label('')
-        self['progress'] = ProgressBar()
-        self['actions'] = ActionMap(['SetupActions'], {'cancel': self.keyCancel}, -2)
+        self["action"] = Label(_("Building Bouquets..."))
+        self["status"] = Label("")
+        self["progress"] = ProgressBar()
+        self["actions"] = ActionMap(["JediMakerXtreamActions"], {
+            "cancel": self.keyCancel,
+        }, -2)
 
         self.pause = 5
         self.index = 0
 
         self.category_num = 0
         self.job_current = 0
-        self.job_type = ''
-        self.job_category_name = ''
+        self.job_type = ""
+        self.job_category_name = ""
         self.job_total = len(self.categories)
 
         self.progresscurrent = 0
@@ -64,12 +66,12 @@ class JediMakerXtream_BuildBouquets(Screen):
         if glob.epg_rytec_uk:
             self.progresscount += 1
 
-        if self.bouquet['playlist_info']['playlisttype'] != 'xtream':
+        if self.bouquet["playlist_info"]["playlisttype"] != "xtream":
             # 1 delete bouquets, 2 bouquetType, 3 build m3u bouquet file, 4 refresh bouquets
             self.progresscount = 4
 
-        self['progress'].setRange((0, self.progresscount))
-        self['progress'].setValue(self.progresscurrent)
+        self["progress"].setRange((0, self.progresscount))
+        self["progress"].setValue(self.progresscurrent)
 
         self.m3uValues = []
 
@@ -85,7 +87,7 @@ class JediMakerXtream_BuildBouquets(Screen):
         self.close()
 
     def nextjob(self, actiontext, function):
-        self['action'].setText(actiontext)
+        self["action"].setText(actiontext)
         self.timer = eTimer()
         self.timer.start(self.pause, 1)
         try:
@@ -94,94 +96,94 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.timer.callback.append(function)
 
     def start(self):
-        if self.bouquet['playlist_info']['playlisttype'] == 'xtream':
+        if self.bouquet["playlist_info"]["playlisttype"] == "xtream":
 
-            self.protocol = self.bouquet['playlist_info']['protocol']
-            self.domain = self.bouquet['playlist_info']['domain']
-            self.port = self.bouquet['playlist_info']['port']
-            self.username = self.bouquet['playlist_info']['username']
-            self.password = self.bouquet['playlist_info']['password']
-            self.output = self.bouquet['playlist_info']['output']
-            self.host = str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'
-            self.get_api = str(self.host) + 'get.php?username=' + str(self.username) + '&password=' + str(self.password) + '&type=m3u_plus&output=' + str(self.output)
-            self.player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
-            self.LiveStreamsUrl = self.player_api + '&action=get_live_streams'
-            self.VodStreamsUrl = self.player_api + '&action=get_vod_streams'
-            self.SeriesUrl = self.player_api + '&action=get_series'
+            self.protocol = self.bouquet["playlist_info"]["protocol"]
+            self.domain = self.bouquet["playlist_info"]["domain"]
+            self.port = self.bouquet["playlist_info"]["port"]
+            self.username = self.bouquet["playlist_info"]["username"]
+            self.password = self.bouquet["playlist_info"]["password"]
+            self.output = self.bouquet["playlist_info"]["output"]
+            self.host = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/"
+            self.get_api = str(self.host) + "get.php?username=" + str(self.username) + "&password=" + str(self.password) + "&type=m3u_plus&output=" + str(self.output)
+            self.player_api = str(self.host) + "player_api.php?username=" + str(self.username) + "&password=" + str(self.password)
+            self.LiveStreamsUrl = self.player_api + "&action=get_live_streams"
+            self.VodStreamsUrl = self.player_api + "&action=get_vod_streams"
+            self.SeriesUrl = self.player_api + "&action=get_series"
 
-        self['progress'].setValue(self.progresscurrent)
+        self["progress"].setValue(self.progresscurrent)
 
         if glob.epg_rytec_uk:
-            self.nextjob(_('Downloading Rytec UK EPG data...'), self.downloadrytec)
+            self.nextjob(_("Downloading Rytec UK EPG data..."), self.downloadrytec)
         else:
-            self.nextjob(_('Starting...'), self.startcreate)
+            self.nextjob(_("Starting..."), self.startcreate)
 
     def downloadrytec(self):
         self.rytec_ref, self.epg_alias_names = downloads.downloadrytec()
 
         self.progresscurrent += 1
-        self['progress'].setValue(self.progresscurrent)
-        self.nextjob(_('Starting...'), self.startcreate)
+        self["progress"].setValue(self.progresscurrent)
+        self.nextjob(_("Starting..."), self.startcreate)
 
     def startcreate(self):
-        if self.bouquet['playlist_info']['playlisttype'] == 'xtream':
+        if self.bouquet["playlist_info"]["playlisttype"] == "xtream":
 
             if len(self.categories) > 0:
-                self.nextjob(_('Downloading Live data...'), self.downloadLive)
+                self.nextjob(_("Downloading Live data..."), self.downloadLive)
             else:
-                self.showError(_('No categories selected.'))
+                self.showError(_("No categories selected."))
         else:
             if len(glob.getm3ustreams) > 0:
-                self.nextjob(_('Deleting Existing Bouquets...'), self.deleteBouquets)
+                self.nextjob(_("Deleting Existing Bouquets..."), self.deleteBouquets)
             else:
-                self.showError(_('No valid M3U streams in file.'))
+                self.showError(_("No valid M3U streams in file."))
 
     def downloadLive(self):
         if glob.live:
             downloads.downloadlivestreams(self.LiveStreamsUrl)
             self.progresscurrent += 1
-            self['progress'].setValue(self.progresscurrent)
-        self.nextjob(_('Downloading VOD data'), self.downloadVod)
+            self["progress"].setValue(self.progresscurrent)
+        self.nextjob(_("Downloading VOD data"), self.downloadVod)
 
     def downloadVod(self):
         if glob.vod:
             downloads.downloadvodstreams(self.VodStreamsUrl)
             self.progresscurrent += 1
-            self['progress'].setValue(self.progresscurrent)
-        self.nextjob(_('Downloading Series data'), self.downloadSeries)
+            self["progress"].setValue(self.progresscurrent)
+        self.nextjob(_("Downloading Series data"), self.downloadSeries)
 
     def downloadSeries(self):
         if glob.series:
             downloads.downloadseriesstreams(self.SeriesUrl)
             self.progresscurrent += 1
-            self['progress'].setValue(self.progresscurrent)
-            self.nextjob(_('Downloading get.php file for series stream data'), self.downloadgetfile)
+            self["progress"].setValue(self.progresscurrent)
+            self.nextjob(_("Downloading get.php file for series stream data"), self.downloadgetfile)
         else:
-            self.nextjob(_('Deleting Existing Bouquets...'), self.deleteBouquets)
+            self.nextjob(_("Deleting Existing Bouquets..."), self.deleteBouquets)
 
     def downloadgetfile(self):
         self.m3uValues = downloads.downloadgetfile(self.get_api)
         self.progresscurrent += 1
-        self['progress'].setValue(self.progresscurrent)
-        self.nextjob(_('Deleting Existing Bouquets...'), self.deleteBouquets)
+        self["progress"].setValue(self.progresscurrent)
+        self.nextjob(_("Deleting Existing Bouquets..."), self.deleteBouquets)
 
     def deleteBouquets(self):
         jfunc.deleteBouquets()
         self.progresscurrent += 1
-        self['progress'].setValue(self.progresscurrent)
-        self.nextjob(_('Saving Bouquet Data File...'), self.bouquetType)
+        self["progress"].setValue(self.progresscurrent)
+        self.nextjob(_("Saving Bouquet Data File..."), self.bouquetType)
 
     def bouquetType(self):
-        if self.bouquet['playlist_info']['playlisttype'] == 'xtream':
-            self.nextjob(_('Building Bouquets...'), self.buildBouquets)
+        if self.bouquet["playlist_info"]["playlisttype"] == "xtream":
+            self.nextjob(_("Building Bouquets..."), self.buildBouquets)
         else:
-            self.nextjob(_('Building M3U Bouquets...'), self.buildM3uBouquets)
+            self.nextjob(_("Building M3U Bouquets..."), self.buildM3uBouquets)
 
     def buildBouquets(self):
-        self['progress'].setRange((0, self.progresscount))
-        self['progress'].setValue(self.progresscurrent)
-        self['action'].setText(_('Building Categories %d of %d') % (self.job_current, self.job_total))
-        self['status'].setText('%s: %s' % (self.job_type, self.job_category_name))
+        self["progress"].setRange((0, self.progresscount))
+        self["progress"].setValue(self.progresscurrent)
+        self["action"].setText(_("Building Categories %d of %d") % (self.job_current, self.job_total))
+        self["status"].setText("%s: %s" % (self.job_type, self.job_category_name))
 
         if self.firstrun is True:
             self.epg_name_list = []
@@ -191,7 +193,7 @@ class JediMakerXtream_BuildBouquets(Screen):
         if self.category_num < len(self.categories):
             self.process_category()
         else:
-            if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != '':
+            if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != "":
                 if glob.fixepg:
                     bx.downloadXMLTV()
                 bx.buildXMLTVChannelFile(self.epg_name_list)
@@ -202,17 +204,17 @@ class JediMakerXtream_BuildBouquets(Screen):
             cfg.bouquet_id.save()
 
             self.progresscurrent += 1
-            self['progress'].setValue(self.progresscurrent)
+            self["progress"].setValue(self.progresscurrent)
 
-            # self.nextjob(_('Refreshing Bouquets...'), jfunc.refreshBouquets)
+            # self.nextjob(_("Refreshing Bouquets..."), jfunc.refreshBouquets)
 
-            self.session.openWithCallback(self.done, MessageBox, str(len(self.categories)) + _(' IPTV Bouquets Created'), MessageBox.TYPE_INFO, timeout=30)
+            self.session.openWithCallback(self.done, MessageBox, str(len(self.categories)) + _(" IPTV Bouquets Created"), MessageBox.TYPE_INFO, timeout=30)
 
     def process_category(self):
         category_name = self.categories[self.category_num][0]
         category_type = self.categories[self.category_num][1]
         category_id = self.categories[self.category_num][2]
-        self.protocol = self.protocol.replace(':', '%3a')
+        self.protocol = self.protocol.replace(":", "%3a")
 
         self.epg_name_list = jfunc.process_category(category_name, category_type, category_id, self.domain, self.port, self.username, self.password, self.protocol, self.output, self.bouquet, self.epg_alias_names, self.epg_name_list, self.rytec_ref, self.m3uValues)
 
@@ -221,24 +223,24 @@ class JediMakerXtream_BuildBouquets(Screen):
         self.job_category_name = category_name
 
         self.progresscurrent += 1
-        self['progress'].setRange((0, self.progresscount))
-        self['progress'].setValue(self.progresscurrent)
+        self["progress"].setRange((0, self.progresscount))
+        self["progress"].setValue(self.progresscurrent)
         self.category_num += 1
 
         if self.category_num % 5 == 1:
-            self.nextjob(_('Building Categories') + str(self.job_current) + _('of') + str(self.job_total), self.buildBouquets)
+            self.nextjob(_("Building Categories") + str(self.job_current) + _("of") + str(self.job_total), self.buildBouquets)
         else:
             self.buildBouquets()
 
     def buildM3uBouquets(self):
 
-        self['progress'].setValue(self.progresscurrent)
-        self['action'].setText(_('Building Categories') + str(self.job_current) + _('of') + str(self.job_total))
+        self["progress"].setValue(self.progresscurrent)
+        self["action"].setText(_("Building Categories") + str(self.job_current) + _("of") + str(self.job_total))
 
         if len(self.categories) <= 1:
-            self['status'].setText(_("Building General Bouquet"))
+            self["status"].setText(_("Building General Bouquet"))
         else:
-            self['status'].setText(_('Building Categories'))
+            self["status"].setText(_("Building Categories"))
 
         self.categories = []
 
@@ -260,28 +262,28 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.m3u_process_category()
 
         else:
-            if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != '':
+            if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != "":
 
                 bx.buildXMLTVChannelFile(self.epg_name_list)
                 bx.buildXMLTVSourceFile()
 
             self.progresscurrent += 1
-            self['progress'].setValue(self.progresscurrent)
+            self["progress"].setValue(self.progresscurrent)
 
-            # self.nextjob(_('Refreshing Bouquets...'), jfunc.refreshBouquets)
-            self.session.openWithCallback(self.done, MessageBox, str(len(self.categories)) + ' IPTV Bouquets Created', MessageBox.TYPE_INFO, timeout=30)
+            # self.nextjob(_("Refreshing Bouquets..."), jfunc.refreshBouquets)
+            self.session.openWithCallback(self.done, MessageBox, str(len(self.categories)) + " IPTV Bouquets Created", MessageBox.TYPE_INFO, timeout=30)
 
     def m3u_process_category(self):
         category_name = self.categories[self.category_num][0]
         category_type = self.categories[self.category_num][1]
         self.epg_name_list = jfunc.m3u_process_category(category_name, category_type, self.unique_ref, self.epg_name_list, glob.current_playlist)
         self.category_num += 1
-        self.nextjob(_('Building M3U Bouquets...'), self.buildM3uBouquets)
+        self.nextjob(_("Building M3U Bouquets..."), self.buildM3uBouquets)
         self.buildM3uBouquets()
 
     def showError(self, message):
         question = self.session.open(MessageBox, message, MessageBox.TYPE_ERROR)
-        question.setTitle(_('Create Bouquets'))
+        question.setTitle(_("Create Bouquets"))
         self.close()
 
     def done(self, answer=None):

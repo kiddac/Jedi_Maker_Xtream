@@ -44,16 +44,16 @@ class JediMakerXtream_Update(Screen):
         self.session = session
         self.runtype = runtype
 
-        if os.path.isdir('/usr/lib/enigma2/python/Plugins/Extensions/EPGImport'):
+        if os.path.isdir("/usr/lib/enigma2/python/Plugins/Extensions/EPGImport"):
             glob.has_epg_importer = True
-            if not os.path.exists('/etc/epgimport'):
-                os.makedirs('/etc/epgimport')
+            if not os.path.exists("/etc/epgimport"):
+                os.makedirs("/etc/epgimport")
         else:
             glob.has_epg_importer = False
 
-        if self.runtype == 'manual':
-            skin = skin_path + 'progress.xml'
-            with open(skin, 'r') as f:
+        if self.runtype == "manual":
+            skin = skin_path + "progress.xml"
+            with open(skin, "r") as f:
                 self.skin = f.read()
 
         else:
@@ -74,15 +74,18 @@ class JediMakerXtream_Update(Screen):
 
             self.skin = skin
 
-        Screen.setTitle(self, _('Updating Bouquets'))
+        Screen.setTitle(self, _("Updating Bouquets"))
 
-        self['action'] = Label('')
-        self['status'] = Label('')
-        self['progress'] = ProgressBar()
-        self['actions'] = ActionMap(['SetupActions'], {'cancel': self.keyCancel}, -2)
+        self["action"] = Label("")
+        self["status"] = Label("")
+        self["progress"] = ProgressBar()
+        self["actions"] = ActionMap(["JediMakerXtreamActions"], {
+            "cancel": self.keyCancel,
+            "red": self.keyCancel
+        }, -2)
 
         self.pause = 20
-        self.job_bouquet_name = ''
+        self.job_bouquet_name = ""
 
         self.x = 0
 
@@ -90,13 +93,13 @@ class JediMakerXtream_Update(Screen):
         self.playlists_all = jfunc.getPlaylistJson()
 
         for playlist in self.playlists_all:
-            if 'bouquet_info' in playlist:
+            if "bouquet_info" in playlist:
                 self.playlists_bouquets.append(playlist)
 
         self.progresscount = len(self.playlists_bouquets)
         self.progresscurrent = 0
-        self['progress'].setRange((0, self.progresscount))
-        self['progress'].setValue(self.progresscurrent)
+        self["progress"].setRange((0, self.progresscount))
+        self["progress"].setValue(self.progresscurrent)
 
         self.rytec_ref = {}
         self.epg_alias_names = []
@@ -110,7 +113,7 @@ class JediMakerXtream_Update(Screen):
         self.close()
 
     def nextjob(self, actiontext, function):
-        self['action'].setText(actiontext)
+        self["action"].setText(actiontext)
         self.timer = eTimer()
         self.timer.start(self.pause, 1)
         try:
@@ -120,20 +123,20 @@ class JediMakerXtream_Update(Screen):
 
     def start(self):
         if glob.epg_rytec_uk:
-            self.nextjob(_('Downloading Rytec UK EPG data...'), self.downloadrytec)
+            self.nextjob(_("Downloading Rytec UK EPG data..."), self.downloadrytec)
         else:
-            self.nextjob(_('Starting Update...'), self.loopPlaylists)
+            self.nextjob(_("Starting Update..."), self.loopPlaylists)
 
     def downloadrytec(self):
         self.rytec_ref, self.epg_alias_names = downloads.downloadrytec()
-        self.nextjob(_('Starting Update...'), self.loopPlaylists)
+        self.nextjob(_("Starting Update..."), self.loopPlaylists)
 
     def loopPlaylists(self):
         if self.x < len(self.playlists_bouquets):
             self.catloop()
         else:
-            if self.runtype == 'manual':
-                self.session.openWithCallback(self.done, MessageBox, str(len(self.playlists_bouquets)) + _(' Providers IPTV Updated'), MessageBox.TYPE_INFO, timeout=5)
+            if self.runtype == "manual":
+                self.session.openWithCallback(self.done, MessageBox, str(len(self.playlists_bouquets)) + _(" Providers IPTV Updated"), MessageBox.TYPE_INFO, timeout=5)
             else:
                 self.done()
 
@@ -145,52 +148,52 @@ class JediMakerXtream_Update(Screen):
         self.valid = False
         glob.current_playlist = self.playlists_bouquets[self.x]
 
-        self['progress'].setRange((0, self.progresscount))
-        self['progress'].setValue(self.progresscurrent)
+        self["progress"].setRange((0, self.progresscount))
+        self["progress"].setValue(self.progresscurrent)
         self.progresscurrent += 1
 
-        self['status'].setText(_('Updating Playlist %d of %d') % (self.progresscurrent, self.progresscount))
-        self.nextjob(_('%s - Reading bouquet data...') % str(glob.name), self.readbouquetdata)
+        self["status"].setText(_("Updating Playlist %d of %d") % (self.progresscurrent, self.progresscount))
+        self.nextjob(_("%s - Reading bouquet data...") % str(glob.name), self.readbouquetdata)
 
         self.x += 1
 
     def readbouquetdata(self):
         jfunc.readbouquetdata()
 
-        self.address = glob.current_playlist['playlist_info']['address']
-        self.playlisttype = glob.current_playlist['playlist_info']['playlisttype']
+        self.address = glob.current_playlist["playlist_info"]["address"]
+        self.playlisttype = glob.current_playlist["playlist_info"]["playlisttype"]
 
-        if self.playlisttype != 'local':
-            self.protocol = glob.current_playlist['playlist_info']['protocol']
+        if self.playlisttype != "local":
+            self.protocol = glob.current_playlist["playlist_info"]["protocol"]
             self.xmltvprotocol = self.protocol
-            self.domain = glob.current_playlist['playlist_info']['domain']
-            self.port = str(glob.current_playlist['playlist_info']['port'])
-            self.host = str(self.protocol) + str(self.domain) + ':' + str(self.port) + '/'
-            self.xmltvhost = str(self.xmltvprotocol) + str(self.domain) + ':' + str(self.port) + '/'
+            self.domain = glob.current_playlist["playlist_info"]["domain"]
+            self.port = str(glob.current_playlist["playlist_info"]["port"])
+            self.host = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/"
+            self.xmltvhost = str(self.xmltvprotocol) + str(self.domain) + ":" + str(self.port) + "/"
 
-        if self.playlisttype == 'xtream':
-            self.username = glob.current_playlist['playlist_info']['username']
-            self.password = glob.current_playlist['playlist_info']['password']
-            self.type = glob.current_playlist['playlist_info']['type']
-            self.output = glob.current_playlist['playlist_info']['output']
+        if self.playlisttype == "xtream":
+            self.username = glob.current_playlist["playlist_info"]["username"]
+            self.password = glob.current_playlist["playlist_info"]["password"]
+            self.type = glob.current_playlist["playlist_info"]["type"]
+            self.output = glob.current_playlist["playlist_info"]["output"]
 
-            self.player_api = str(self.host) + 'player_api.php?username=' + str(self.username) + '&password=' + str(self.password)
-            self.get_api = str(self.host) + 'get.php?username=' + str(self.username) + '&password=' + str(self.password) + '&type=m3u_plus&output=' + str(self.output)
+            self.player_api = str(self.host) + "player_api.php?username=" + str(self.username) + "&password=" + str(self.password)
+            self.get_api = str(self.host) + "get.php?username=" + str(self.username) + "&password=" + str(self.password) + "&type=m3u_plus&output=" + str(self.output)
 
-            glob.xmltv_address = str(self.xmltvhost) + 'xmltv.php?username=' + str(self.username) + '&password=' + str(self.password)
+            glob.xmltv_address = str(self.xmltvhost) + "xmltv.php?username=" + str(self.username) + "&password=" + str(self.password)
 
-            self.LiveCategoriesUrl = self.player_api + '&action=get_live_categories'
-            self.VodCategoriesUrl = self.player_api + '&action=get_vod_categories'
-            self.SeriesCategoriesUrl = self.player_api + '&action=get_series_categories'
+            self.LiveCategoriesUrl = self.player_api + "&action=get_live_categories"
+            self.VodCategoriesUrl = self.player_api + "&action=get_vod_categories"
+            self.SeriesCategoriesUrl = self.player_api + "&action=get_series_categories"
 
-            self.LiveStreamsUrl = self.player_api + '&action=get_live_streams'
-            self.VodStreamsUrl = self.player_api + '&action=get_vod_streams'
-            self.SeriesUrl = self.player_api + '&action=get_series'
+            self.LiveStreamsUrl = self.player_api + "&action=get_live_streams"
+            self.VodStreamsUrl = self.player_api + "&action=get_vod_streams"
+            self.SeriesUrl = self.player_api + "&action=get_series"
 
-        if self.playlisttype == 'xtream':
-            self.nextjob(_('%s - Checking URL still active...') % str(glob.name), self.checkactive)
+        if self.playlisttype == "xtream":
+            self.nextjob(_("%s - Checking URL still active...") % str(glob.name), self.checkactive)
         else:
-            self.nextjob(_('%s - Download M3U Data...') % str(glob.name), self.getM3uCategories)
+            self.nextjob(_("%s - Download M3U Data...") % str(glob.name), self.getM3uCategories)
 
     def checkactive(self):
         response = None
@@ -212,8 +215,8 @@ class JediMakerXtream_Update(Screen):
         if self.valid:
             try:
                 self.active = json.load(response)
-                if 'user_info' in self.active:
-                    if self.active['user_info']['auth'] == 1:
+                if "user_info" in self.active:
+                    if self.active["user_info"]["auth"] == 1:
                         self.valid = True
                     else:
                         self.valid = False
@@ -223,7 +226,7 @@ class JediMakerXtream_Update(Screen):
 
         if self.valid:
             if glob.live:
-                self['action'].setText('Downloading Live data')
+                self["action"].setText("Downloading Live data")
 
                 self.timer1 = eTimer()
                 self.timer1.start(self.pause, 1)
@@ -234,7 +237,7 @@ class JediMakerXtream_Update(Screen):
                     self.timer1.callback.append(self.downloadLive)
 
             elif glob.vod:
-                self['action'].setText('Downloading VOD data')
+                self["action"].setText("Downloading VOD data")
 
                 self.timer2 = eTimer()
                 self.timer2.start(self.pause, 1)
@@ -244,7 +247,7 @@ class JediMakerXtream_Update(Screen):
                     self.timer2.callback.append(self.downloadVod)
 
             elif glob.series:
-                self['action'].setText('Downloading Series data')
+                self["action"].setText("Downloading Series data")
 
                 self.timer3 = eTimer()
                 self.timer3.start(self.pause, 1)
@@ -253,47 +256,47 @@ class JediMakerXtream_Update(Screen):
                 except:
                     self.timer3.callback.append(self.downloadSeries)
         else:
-            self.nextjob((''), self.loopPlaylists)
+            self.nextjob((""), self.loopPlaylists)
 
     def downloadLive(self):
         downloads.downloadlivecategories(self.LiveCategoriesUrl)
         downloads.downloadlivestreams(self.LiveStreamsUrl)
         if glob.vod:
-            self.nextjob(_('%s - Downloading VOD data...') % str(glob.name), self.downloadVod)
+            self.nextjob(_("%s - Downloading VOD data...") % str(glob.name), self.downloadVod)
         elif glob.series:
-            self.nextjob(_('%s - Downloading Series data...') % str(glob.name), self.downloadSeries)
+            self.nextjob(_("%s - Downloading Series data...") % str(glob.name), self.downloadSeries)
         else:
-            self.nextjob(_('%s - Getting categories...') % str(glob.name), self.getcategories)
+            self.nextjob(_("%s - Getting categories...") % str(glob.name), self.getcategories)
 
     def downloadVod(self):
         downloads.downloadvodcategories(self.VodCategoriesUrl)
         downloads.downloadvodstreams(self.VodStreamsUrl)
         if glob.series:
-            self.nextjob(_('%s - Downloading Series data...') % str(glob.name), self.downloadSeries)
+            self.nextjob(_("%s - Downloading Series data...") % str(glob.name), self.downloadSeries)
         else:
-            self.nextjob(_('%s - Getting categories...') % str(glob.name), self.getcategories)
+            self.nextjob(_("%s - Getting categories...") % str(glob.name), self.getcategories)
 
     def downloadSeries(self):
         downloads.downloadseriescategories(self.SeriesCategoriesUrl)
         downloads.downloadseriesstreams(self.SeriesUrl)
-        self.nextjob(_('%s - Getting categories...') % str(glob.name), self.getcategories)
+        self.nextjob(_("%s - Getting categories...") % str(glob.name), self.getcategories)
 
     def getM3uCategories(self):
         downloads.getM3uCategories(glob.live, glob.vod)
-        self.nextjob(_('%s - Get selected categories...') % str(glob.name), self.getSelected)
+        self.nextjob(_("%s - Get selected categories...") % str(glob.name), self.getSelected)
 
     def getcategories(self):
         glob.categories = []
         jfunc.getcategories()
-        self.nextjob(_('%s - Getting selection list') % str(glob.name), self.ignoredcategories)
+        self.nextjob(_("%s - Getting selection list") % str(glob.name), self.ignoredcategories)
 
     def ignoredcategories(self):
-        if 'bouquet_info' in glob.current_playlist and glob.current_playlist['bouquet_info'] != {}:
+        if "bouquet_info" in glob.current_playlist and glob.current_playlist["bouquet_info"] != {}:
             jfunc.IgnoredCategories()
-        self.nextjob(_('%s - Get selected categories...') % str(glob.name), self.getSelected)
+        self.nextjob(_("%s - Get selected categories...") % str(glob.name), self.getSelected)
 
     def getSelected(self):
-        if self.playlisttype == 'xtream':
+        if self.playlisttype == "xtream":
             glob.selectedcategories = []
             glob.ignoredcategories = []
 
@@ -305,25 +308,25 @@ class JediMakerXtream_Update(Screen):
 
             self.categories = glob.selectedcategories
 
-        if glob.current_playlist['playlist_info']['playlisttype'] != 'xtream':
+        if glob.current_playlist["playlist_info"]["playlisttype"] != "xtream":
             self.categories = []
 
-        if self.playlisttype == 'xtream' and glob.series:
-            self.nextjob(_('%s - Downloading Data...') % str(glob.name), self.downloadgetfile)
+        if self.playlisttype == "xtream" and glob.series:
+            self.nextjob(_("%s - Downloading Data...") % str(glob.name), self.downloadgetfile)
         else:
-            self.nextjob(_('%s - Deleting existing bouquets...') % str(glob.name), self.deleteBouquets)
+            self.nextjob(_("%s - Deleting existing bouquets...") % str(glob.name), self.deleteBouquets)
 
     def downloadgetfile(self):
         self.m3uValues = downloads.downloadgetfile(self.get_api)
-        self.nextjob(_('%s - Deleting existing bouquets...') % str(glob.name), self.deleteBouquets)
+        self.nextjob(_("%s - Deleting existing bouquets...") % str(glob.name), self.deleteBouquets)
 
     def deleteBouquets(self):
         jfunc.deleteBouquets()
 
-        if self.playlisttype == 'xtream':
-            self.nextjob(_('%s - Building bouquets...') % str(glob.name), self.buildBouquets)
+        if self.playlisttype == "xtream":
+            self.nextjob(_("%s - Building bouquets...") % str(glob.name), self.buildBouquets)
         else:
-            self.nextjob(_('%s - Building M3U bouquets...') % str(glob.name), self.buildM3uBouquets)
+            self.nextjob(_("%s - Building M3U bouquets...") % str(glob.name), self.buildM3uBouquets)
 
     def buildBouquets(self):
         self.epg_name_list = []
@@ -335,12 +338,12 @@ class JediMakerXtream_Update(Screen):
             category_name = self.categories[self.category_num][0]
             category_type = self.categories[self.category_num][1]
             category_id = self.categories[self.category_num][2]
-            self.protocol = self.protocol.replace(':', '%3a')
+            self.protocol = self.protocol.replace(":", "%3a")
 
             self.epg_name_list = jfunc.process_category(category_name, category_type, category_id, self.domain, self.port, self.username, self.password, self.protocol, self.output, glob.current_playlist, self.epg_alias_names, self.epg_name_list, self.rytec_ref, self.m3uValues)
             self.category_num += 1
 
-        if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != '':
+        if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != "":
             if glob.fixepg:
                 bx.downloadXMLTV()
             bx.buildXMLTVChannelFile(self.epg_name_list)
@@ -348,13 +351,13 @@ class JediMakerXtream_Update(Screen):
             self.updateBouquetJsonFile()
             # jfunc.refreshBouquets()
 
-        self.nextjob((''), self.loopPlaylists)
+        self.nextjob((""), self.loopPlaylists)
 
     def buildM3uBouquets(self):
         self.categories = []
 
         for x in glob.getm3ustreams:
-            if x[0] != '':
+            if x[0] != "":
                 if [x[0], x[4]] not in self.categories:
                     self.categories.append([x[0], x[4]])
 
@@ -369,13 +372,13 @@ class JediMakerXtream_Update(Screen):
             self.m3u_process_category()
 
         else:
-            if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != '':
+            if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != "":
                 bx.buildXMLTVChannelFile(self.epg_name_list)
                 bx.buildXMLTVSourceFile()
                 self.updateBouquetJsonFile()
                 # jfunc.refreshBouquets()
 
-            self.nextjob((''), self.loopPlaylists)
+            self.nextjob((""), self.loopPlaylists)
 
     def m3u_process_category(self):
         category_name = self.categories[self.category_num][0]
@@ -386,21 +389,21 @@ class JediMakerXtream_Update(Screen):
 
     def updateBouquetJsonFile(self):
         if glob.live:
-            glob.current_playlist['bouquet_info']['live_update'] = datetime.now().strftime('%x  %X')
+            glob.current_playlist["bouquet_info"]["live_update"] = datetime.now().strftime("%x  %X")
 
         if glob.vod:
-            glob.current_playlist['bouquet_info']['vod_update'] = datetime.now().strftime('%x  %X')
+            glob.current_playlist["bouquet_info"]["vod_update"] = datetime.now().strftime("%x  %X")
 
         if glob.series:
-            glob.current_playlist['bouquet_info']['series_update'] = datetime.now().strftime('%x  %X')
+            glob.current_playlist["bouquet_info"]["series_update"] = datetime.now().strftime("%x  %X")
 
         # replace only amended bouquet
         for playlist in self.playlists_all:
-            if glob.current_playlist['playlist_info']['address'] == playlist['playlist_info']['address']:
+            if glob.current_playlist["playlist_info"]["address"] == playlist["playlist_info"]["address"]:
                 playlist = glob.current_playlist
 
         # output to file
-        with open(playlists_json, 'w') as f:
+        with open(playlists_json, "w") as f:
             json.dump(self.playlists_all, f)
 
     def done(self, answer=None):

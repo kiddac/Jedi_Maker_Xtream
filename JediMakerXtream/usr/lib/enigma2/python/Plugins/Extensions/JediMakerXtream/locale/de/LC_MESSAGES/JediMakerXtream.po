@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-01-21 21:45+0000\n"
-"PO-Revision-Date: 2023-01-21 21:45+0000\n"
+"PO-Revision-Date: 2023-01-22 18:40+0000\n"
 "Last-Translator: Masta2002\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -29,11 +29,11 @@ msgstr "Zurück"
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:32
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:60
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:42
 msgid "JediMakerXtream "
-msgstr ""
+msgstr "JediMakerXtream "
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:43
 msgid ""
@@ -41,6 +41,9 @@ msgid ""
 "support.com\n"
 "\n"
 msgstr ""
+"Support für dieses Plugin und die neuesten Versionen finden Sie unter "
+"https://linuxsat-support.com\n"
+"\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:44
 msgid ""
@@ -49,24 +52,31 @@ msgid ""
 "Play your files via your TV bouquets.\n"
 "\n"
 msgstr ""
+"Das Plugin ermöglicht die einfache Bouquet-Erstellung von Standard-Xtream-"
+"Codes/XUI One, externen und lokalen m3u8-Wiedergabelisten.\n"
+"Spielen Sie Ihre Dateien über Ihre TV-Bouquets ab.\n"
+"\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:45
 msgid "Credits:\n"
-msgstr ""
+msgstr "Credits:\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:46
 msgid "AutoBouquetMaker, EpgImporter, AutoBackup (used as code reference).\n"
 msgstr ""
+"AutoBouquetMaker, EpgImporter, AutoBackup (als Codereferenz verwendet).\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:47
 msgid ""
 "Lululla for all the hard work done on XCPlugin and assistance with the "
 "project.\n"
 msgstr ""
+"Lululla für all die harte Arbeit, die an XCPlugin geleistet wurde, und die "
+"Unterstützung bei dem Projekt.\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:48
 msgid "Massive thanks to Seagen for his endless multi image testing.\n"
-msgstr ""
+msgstr "Vielen Dank an Seagen für seine endlosen Multi-Image-Tests.\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:49
 msgid ""
@@ -74,15 +84,20 @@ msgid ""
 "development of this project.\n"
 "\n"
 msgstr ""
+"Und danke an alle anderen Programmierer und Linuxsat-Tester, die bei der "
+"Entwicklung dieses Projekts geholfen haben.\n"
+"\n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:50
 msgid ""
 "If you would like to buy me a beer or a coffee: https://paypal.me/kiddac \n"
 msgstr ""
+"Wenn Sie mir ein Bier oder einen Kaffee kaufen möchten: https://paypal.me/"
+"kiddac \n"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/about.py:51
 msgid "Cheers - all donations are very much appreciated."
-msgstr ""
+msgstr "Prost - alle Spenden sind sehr willkommen."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:30
 msgid "Building Bouquets"
@@ -160,11 +175,11 @@ msgstr "Erstelle Kategorien"
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:229
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:236
 msgid "of"
-msgstr ""
+msgstr "von"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:239
 msgid "Building General Bouquet"
-msgstr ""
+msgstr "Erstelle 'Allgemein' Bouquet"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/buildbouquet.py:284
 msgid "Create Bouquets"
@@ -383,7 +398,7 @@ msgstr "Catchup nur für IPTV-Streams verfügbar."
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:365
 msgid "IPTV Bouquets Creator by KiddaC"
-msgstr ""
+msgstr "IPTV Bouquets Creator von KiddaC"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/plugin.py:366
 msgid "JediMakerXtream"
@@ -582,43 +597,43 @@ msgstr "Benutzerinformation"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:42
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:43
 msgid "Is Trial:"
-msgstr ""
+msgstr "Ist Trial:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:44
 msgid "Active Connections:"
-msgstr ""
+msgstr "Aktive Verbindungen:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:45
 msgid "Max Connections:"
-msgstr ""
+msgstr "Max Verbindungen:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:46
 msgid "Created At:"
-msgstr ""
+msgstr "Hergestellt in:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:47
 msgid "Expiry Date:"
-msgstr ""
+msgstr "Ablaufdatum:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:48
 msgid "Allowed Output Formats:"
-msgstr ""
+msgstr "Erlaubte Ausgabeformate:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:49
 msgid "Real URL:"
-msgstr ""
+msgstr "Echte URL:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:50
 msgid "Timezone:"
-msgstr ""
+msgstr "Zeitzone:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/serverinfo.py:51
 msgid "Server Offset:"
-msgstr ""
+msgstr "Server-Offset:"
 
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:72
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/settings.py:121
@@ -1189,9 +1204,3 @@ msgstr "%s - erstelle M3U Bouquets..."
 #: usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/viewchannel.py:30
 msgid "Channel List"
 msgstr "Kanalliste"
-
-#~ msgid "IPTV Bouquets Creator"
-#~ msgstr "IPTV Bouquets Ersteller"
-
-#~ msgid "Building 'General' Bouquet"
-#~ msgstr "Erstelle 'Allgemein' Bouquet"

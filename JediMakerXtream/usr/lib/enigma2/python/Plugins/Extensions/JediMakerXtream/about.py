@@ -43,7 +43,7 @@ class JediMakerXtream_About(Screen):
         self.credit += _("Support for this plugin and latest versions can be found on https://linuxsat-support.com\n\n")
         self.credit += _("Plugin enables the simple bouquet creation of standard Xtream codes/XUI One, external and local m3u8 playlists. \nPlay your files via your TV bouquets.\n\n")
         self.credit += _("Credits:\n")
-        self.credit += _("AutoBouquetMaker, EpgImporter, AutoBackup (used as code reference).\n")
+        self.credit += _("AutoBouquetsMaker, EpgImporter, AutoBackup (used as code reference).\n")
         self.credit += _("Lululla for all the hard work done on XCPlugin and assistance with the project.\n")
         self.credit += _("Massive thanks to Seagen for his endless multi image testing.\n")
         self.credit += _("And thanks to all the other coders and Linuxsat testers who helped in the development of this project.\n\n")

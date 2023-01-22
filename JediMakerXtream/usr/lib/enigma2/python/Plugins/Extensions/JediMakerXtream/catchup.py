@@ -8,7 +8,7 @@ from .plugin import skin_path, cfg, hdr, screenwidth
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
-from Components.Sources.StaticText import StaticText
+from .jediStaticText import StaticText
 from enigma import eServiceReference
 from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
@@ -43,39 +43,39 @@ def downloadSimpleData():
     error_message = ""
     isCatchupChannel = False
 
-    refurl = glob.currentref.getPath()
+    refurl = glob.currentPlayingServiceRef.getPath()
     # http://domain.xyx:0000/live/user/pass/12345.ts
 
     if refurl != "":
-        refstream = refurl.split('/')[-1]
+        refstream = refurl.split("/")[-1]
         # 12345.ts
 
-        glob.refstreamnum = int(''.join(filter(str.isdigit, refstream)))
+        glob.refstreamnum = int("".join(filter(str.isdigit, refstream)))
         # 12345
 
         # get domain, username, password from path
         match1 = False
-        if re.search(r'(https|http):\/\/[^\/]+\/(live|movie|series)\/[^\/]+\/[^\/]+\/\d+(\.m3u8|\.ts|$)', refurl) is not None:
+        if re.search(r"(https|http):\/\/[^\/]+\/(live|movie|series)\/[^\/]+\/[^\/]+\/\d+(\.m3u8|\.ts|$)", refurl) is not None:
             match1 = True
 
         match2 = False
-        if re.search(r'(https|http):\/\/[^\/]+\/[^\/]+\/[^\/]+\/\d+(\.m3u8|\.ts|$)', refurl) is not None:
+        if re.search(r"(https|http):\/\/[^\/]+\/[^\/]+\/[^\/]+\/\d+(\.m3u8|\.ts|$)", refurl) is not None:
             match2 = True
 
         if match1:
-            glob.username = re.search(r'[^\/]+(?=\/[^\/]+\/\d+\.)', refurl).group()
-            glob.password = re.search(r'[^\/]+(?=\/\d+\.)', refurl).group()
-            glob.domain = re.search(r'(https|http):\/\/[^\/]+', refurl).group()
+            glob.username = re.search(r"[^\/]+(?=\/[^\/]+\/\d+\.)", refurl).group()
+            glob.password = re.search(r"[^\/]+(?=\/\d+\.)", refurl).group()
+            glob.domain = re.search(r"(https|http):\/\/[^\/]+", refurl).group()
 
         elif match2:
-            glob.username = re.search(r'[^\/]+(?=\/[^\/]+\/[^\/]+$)', refurl).group()
-            glob.password = re.search(r'[^\/]+(?=\/[^\/]+$)', refurl).group()
-            glob.domain = re.search(r'(https|http):\/\/[^\/]+', refurl).group()
+            glob.username = re.search(r"[^\/]+(?=\/[^\/]+\/[^\/]+$)", refurl).group()
+            glob.password = re.search(r"[^\/]+(?=\/[^\/]+$)", refurl).group()
+            glob.domain = re.search(r"(https|http):\/\/[^\/]+", refurl).group()
 
         simpleurl = "%s/player_api.php?username=%s&password=%s&action=get_simple_data_table&stream_id=%s" % (glob.domain, glob.username, glob.password, glob.refstreamnum)
         getLiveStreams = "%s/player_api.php?username=%s&password=%s&action=get_live_streams" % (glob.domain, glob.username, glob.password)
 
-        response = ''
+        response = ""
 
         req = Request(getLiveStreams, headers=hdr)
 
@@ -99,14 +99,14 @@ def downloadSimpleData():
 
             isCatchupChannel = False
             for channel in liveStreams:
-                if channel['stream_id'] == glob.refstreamnum:
-                    if int(channel['tv_archive']) == 1:
+                if channel["stream_id"] == glob.refstreamnum:
+                    if int(channel["tv_archive"]) == 1:
                         isCatchupChannel = True
                         break
 
         if isCatchupChannel:
 
-            response = ''
+            response = ""
             req = Request(simpleurl, headers=hdr)
 
             try:
@@ -129,17 +129,17 @@ def downloadSimpleData():
 
                 glob.archive = []
                 hasarchive = False
-                if 'epg_listings' in simple_data_table:
-                    for listing in simple_data_table['epg_listings']:
-                        if 'has_archive' in listing:
-                            if listing['has_archive'] == 1:
+                if "epg_listings" in simple_data_table:
+                    for listing in simple_data_table["epg_listings"]:
+                        if "has_archive" in listing:
+                            if listing["has_archive"] == 1:
                                 hasarchive = True
                                 glob.archive.append(listing)
 
                 if hasarchive:
                     glob.dates = []
                     for listing in glob.archive:
-                        date = datetime.strptime(listing['start'], '%Y-%m-%d %H:%M:%S')
+                        date = datetime.strptime(listing["start"], "%Y-%m-%d %H:%M:%S")
                         day = calendar.day_abbr[date.weekday()]
                         start = ["%s\t%s" % (day, date.strftime("%d/%m/%Y")), date.strftime("%Y-%m-%d")]
 
@@ -236,28 +236,28 @@ class JediMakerXtream_Catchup(Screen):
 
         self["newlist"] = List(self.list)
 
-        self['setupActions'] = ActionMap(['SetupActions'], {
-            'ok': self.openSelected,
-            'cancel': self.quit,
-            'menu': self.quit,
+        self["actions"] = ActionMap(["JediMakerXtreamActions"], {
+            "ok": self.openSelected,
+            "cancel": self.quit,
+            "menu": self.quit,
         }, -2)
 
         self.setup_title = ""
         self.createSetup()
-        self['newlist'].onSelectionChanged.append(self.getCurrentEntry)
+        self["newlist"].onSelectionChanged.append(self.getCurrentEntry)
         self.onLayoutFinish.append(self.__layoutFinished)
 
     def __layoutFinished(self):
         self.setTitle(self.setup_title)
 
     def getCurrentEntry(self):
-        self.currentSelection = self['newlist'].getIndex()
+        self.currentSelection = self["newlist"].getIndex()
 
     def quit(self):
         self.close()
 
     def openSelected(self):
-        self.returnValue = self['newlist'].getCurrent()[1]
+        self.returnValue = self["newlist"].getCurrent()[1]
         if self.returnValue is not None:
             self.getSelectedDateData()
         return
@@ -265,13 +265,13 @@ class JediMakerXtream_Catchup(Screen):
     def createSetup(self):
         self.list = []
 
-        self.setup_title = '%s' % glob.name.lstrip(cfg.catchupprefix.value)
+        self.setup_title = "%s" % glob.name.lstrip(cfg.catchupprefixsymbol.value)
         for date in glob.dates:
             self.list.append((str(date[0]), str(date[1])))
 
-        # self['newlist'].list = self.list.reverse()
+        # self["newlist"].list = self.list.reverse()
         self.list.reverse()
-        self['newlist'].setList(self.list)
+        self["newlist"].setList(self.list)
 
     def getSelectedDateData(self):
         selectedArchive = []
@@ -282,8 +282,8 @@ class JediMakerXtream_Catchup(Screen):
             selectedArchive = glob.archive
         else:
             for listing in glob.archive:
-                if 'start' in listing:
-                    if listing['start'].startswith(str(self.returnValue)):
+                if "start" in listing:
+                    if listing["start"].startswith(str(self.returnValue)):
                         selectedArchive.append(listing)
 
         self.session.open(JediMakerXtream_Catchup_Listings, selectedArchive)
@@ -295,25 +295,24 @@ class JediMakerXtream_Catchup_Listings(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + 'catchup.xml'
-        with open(skin, 'r') as f:
+        skin = skin_path + "catchup.xml"
+        with open(skin, "r") as f:
             self.skin = f.read()
 
         self.archive = archive
-        self.setup_title = _('TV Archive: %s' % glob.name.lstrip(cfg.catchupprefix.value))
+        self.setup_title = _("TV Archive: %s" % glob.name.lstrip(cfg.catchupprefixsymbol.value))
 
         self.list = []
         self.catchup_all = []
-        self['list'] = List(self.list)
-        self['description'] = Label('')
-        self['actions'] = ActionMap(['SetupActions'], {
+        self["list"] = List(self.list)
+        self["description"] = Label("")
+        self["actions"] = ActionMap(["SetupActions"], {
 
-            'ok': self.play,
-            'cancel': self.quit,
-            'menu': self.quit,
+            "ok": self.play,
+            "cancel": self.quit,
         }, -2)
 
-        self['key_red'] = StaticText(_('Close'))
+        self["key_red"] = StaticText(_("Close"))
         self.getlistings()
         self.onLayoutFinish.append(self.__layoutFinished)
 
@@ -355,28 +354,28 @@ class JediMakerXtream_Catchup_Listings(Screen):
         self.index = 0
         for listing in self.archive:
 
-            if 'title' in listing:
-                epg_title = base64.b64decode(listing['title']).decode('utf-8')
+            if "title" in listing:
+                epg_title = base64.b64decode(listing["title"]).decode("utf-8")
 
-            if 'description' in listing:
-                epg_description = base64.b64decode(listing['description']).decode('utf-8')
+            if "description" in listing:
+                epg_description = base64.b64decode(listing["description"]).decode("utf-8")
 
             shift = int(glob.catchupshift)
 
-            if 'start' in listing:
-                start = listing['start']
+            if "start" in listing:
+                start = listing["start"]
                 start_timestamp_o = int(time.mktime(time.strptime(start, "%Y-%m-%d %H:%M:%S")))
 
-            if 'end' in listing:
-                end = listing['end']
+            if "end" in listing:
+                end = listing["end"]
                 stop_timestamp_o = int(time.mktime(time.strptime(end, "%Y-%m-%d %H:%M:%S")))
 
-            if 'start_timestamp' in listing:
-                start_timestamp = int(listing['start_timestamp'])
+            if "start_timestamp" in listing:
+                start_timestamp = int(listing["start_timestamp"])
                 start_timestamp_datestamp = datetime.fromtimestamp(start_timestamp)
 
-            if 'stop_timestamp' in listing:
-                stop_timestamp = int(listing['stop_timestamp'])
+            if "stop_timestamp" in listing:
+                stop_timestamp = int(listing["stop_timestamp"])
                 stop_timestamp_datestamp = datetime.fromtimestamp(stop_timestamp)
 
             epg_date_all = "%s %s" % (start_timestamp_datestamp.strftime("%a"), start_timestamp_datestamp.strftime("%d/%m"))
@@ -408,10 +407,10 @@ class JediMakerXtream_Catchup_Listings(Screen):
         for listing in self.catchup_all:
             self.list.append((str(listing[0]), str(listing[1]), str(listing[2]), str(listing[3]), str(listing[4]), str(listing[5]), str(listing[6])))
 
-        self['list'].setList(self.list)
+        self["list"].setList(self.list)
 
         if self.list != []:
-            self['list'].onSelectionChanged.append(self.getCurrentEntry)
+            self["list"].onSelectionChanged.append(self.getCurrentEntry)
 
     def play(self):
         playurl = "%s/streaming/timeshift.php?username=%s&password=%s&stream=%s&start=%s&duration=%s" % (glob.domain, glob.username, glob.password, glob.refstreamnum, self.catchup_all[self.currentSelection][5], self.catchup_all[self.currentSelection][6])
@@ -421,5 +420,5 @@ class JediMakerXtream_Catchup_Listings(Screen):
         self.session.open(MoviePlayer, sref)
 
     def getCurrentEntry(self):
-        self.currentSelection = self['list'].getIndex()
-        self['description'].setText(self.catchup_all[self.currentSelection][4])
+        self.currentSelection = self["list"].getIndex()
+        self["description"].setText(self.catchup_all[self.currentSelection][4])

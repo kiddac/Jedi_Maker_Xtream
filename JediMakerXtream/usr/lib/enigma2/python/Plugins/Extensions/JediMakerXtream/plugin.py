@@ -46,22 +46,33 @@ with open("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/version.tx
 screenwidth = getDesktop(0).size()
 
 dir_plugins = "/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/"
-dir_etc = "/etc/enigma2/jediplaylists/"
 
+skin_directory = ""
 if screenwidth.width() > 1280:
     skin_directory = "%sskin/fhd/" % (dir_plugins)
 else:
     skin_directory = "%sskin/hd/" % (dir_plugins)
 
-
 folders = os.listdir(skin_directory)
+streamtype_choices = [("1", "DVB(1)"), ("4097", "IPTV(4097)")]
+
+if os.path.exists("/usr/bin/gstplayer"):
+    streamtype_choices.append(("5001", "GStreamer(5001)"))
+
+if os.path.exists("/usr/bin/exteplayer3"):
+    streamtype_choices.append(("5002", "ExtePlayer(5002)"))
+
+if os.path.exists("/usr/bin/apt-get"):
+    streamtype_choices.append(("8193", "GStreamer(8193)"))
 
 config.plugins.JediMakerXtream = ConfigSubsection()
-
 cfg = config.plugins.JediMakerXtream
-cfg.extensions = ConfigYesNo(default=False)
-cfg.location = ConfigDirectory(default="/etc/enigma2/jediplaylists/")
-cfg.m3ulocation = ConfigDirectory(default="/etc/enigma2/jediplaylists/")
+cfg.livetype = ConfigSelection(default="4097", choices=streamtype_choices)
+# cfg.vodtype = ConfigSelection(default="4097", choices=streamtype_choices)
+# cfg.voddefaultorder = ConfigSelection(default="alphabetical", choices=[("original", _("Original Order")), ("alphabetical", _("A-Z")), ("date", _("Newest First"))])
+
+cfg.location = ConfigDirectory(default="/etc/enigma2/jedimakerxtream/")
+cfg.m3ulocation = ConfigDirectory(default="/etc/enigma2/jedimakerxtream/")
 cfg.main = ConfigYesNo(default=True)
 cfg.unique = ConfigNumber()
 cfg.usershow = ConfigSelection(default="domain", choices=[("domain", _("Domain")), ("domainconn", _("Domain | Connections"))])
@@ -69,26 +80,56 @@ cfg.enabled = ConfigYesNo(default=False)
 cfg.wakeup = ConfigClock(default=((7 * 60) + 9) * 60)  # 7:00
 cfg.skin = ConfigSelection(default="default", choices=folders)
 cfg.bouquet_id = ConfigNumber()
-cfg.timeout = ConfigNumber(default=3)
-cfg.catchup = ConfigYesNo(default=False)
-cfg.catchupprefix = ConfigSelection(default="~", choices=[("~", "~"), ("!", "!"), ("#", "#"), ("-", "-"), ("<", "<"), ("^", "^")])
+cfg.timeout = ConfigSelectionNumber(1, 20, 1, default=10, wraparound=True)
+cfg.catchupprefix = ConfigYesNo(default=False)
+cfg.catchupprefixsymbol = ConfigSelection(default="~", choices=[("~", "~"), ("!", "!"), ("#", "#"), ("-", "-"), ("<", "<"), ("^", "^")])
 cfg.catchupstart = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
 cfg.catchupend = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
 cfg.groups = ConfigYesNo(default=False)
 
 skin_path = "%s%s/" % (skin_directory, cfg.skin.value)
+
+dir_etc = "/etc/enigma2/jedimakerxtream/"
+# create folder for working files
+if not os.path.exists(dir_etc):
+    os.makedirs(dir_etc)
+
+# move old location
+origin = "/etc/enigma2/jediplaylists/"
+target = "/etc/enigma2/jedimakerxtream/"
+
+
+# Fetching the list of all the files
+if os.path.isdir(origin):
+    files = os.listdir(origin)
+
+    for file_name in files:
+        shutil.copy(origin + file_name, target + file_name)
+
+    # remove old folder
+    try:
+        shutil.rmtree(origin)
+    except Exception as e:
+        print(e)
+
 playlists_json = "%splaylist_all.json" % (dir_etc)
 playlist_file = "%splaylists.txt" % (dir_etc)
 
 if cfg.location.value:
     playlist_file = "%s/playlists.txt" % (cfg.location.value)
 
-rytec_file = "/etc/enigma2/jediplaylists/rytec.channels.xml.xz"
-rytec_url = "http://www.xmltvepg.nl/rytec.channels.xml.xz"
-alias_file = "/etc/enigma2/jediplaylists/alias.txt"
-sat28_file = "/etc/enigma2/jediplaylists/28.2e.txt"
+# check if playlists.txt file exists in specified location
+if not os.path.isfile(playlist_file):
+    open(playlist_file, "a").close()
 
-font_folder = "%sfonts/" % (dir_plugins)
+# check if playlists.json file exists in specified location
+if not os.path.isfile(playlists_json):
+    open(playlists_json, "a").close()
+
+rytec_url = "http://www.xmltvepg.nl/rytec.channels.xml.xz"
+rytec_file = "%srytec.channels.xml.xz" % (dir_etc)
+alias_file = "%salias.txt" % (dir_etc)
+sat28_file = "%s28.2e.txt" % (dir_etc)
 
 """
 hdr = {
@@ -101,15 +142,6 @@ hdr = {
 
 hdr = {"User-Agent": "Enigma2 - JediMakerXtream Plugin"}
 
-# create folder for working files
-if not os.path.exists(dir_etc):
-    os.makedirs(dir_etc)
-
-# check if playlists.txt file exists in specified location
-if not os.path.isfile(playlist_file):
-    open(playlist_file, "a").close()
-
-
 if os.path.isdir("/usr/lib/enigma2/python/Plugins/Extensions/EPGImport"):
     glob.has_epg_importer = True
     if not os.path.exists("/etc/epgimport"):
@@ -118,24 +150,24 @@ else:
     glob.has_epg_importer = False
     glob.epg_provider = False
 
-# remove dodgy versions of my plugin
-if os.path.isdir('/usr/lib/enigma2/python/Plugins/Extensions/XStreamityPro/'):
-    try:
-        shutil.rmtree('/usr/lib/enigma2/python/Plugins/Extensions/XStreamityPro/')
-    except:
-        pass
-
 # try and override epgimport settings
 try:
     config.plugins.epgimport.import_onlybouquet.value = False
     config.plugins.epgimport.import_onlybouquet.save()
-except:
-    pass
+except Exception as e:
+    print(e)
+
+# remove dodgy versions of my plugin
+if os.path.isdir("/usr/lib/enigma2/python/Plugins/Extensions/XStreamityPro/"):
+    try:
+        shutil.rmtree("/usr/lib/enigma2/python/Plugins/Extensions/XStreamityPro/")
+    except Exception as e:
+        print(e)
 
 
 def main(session, **kwargs):
-    from . import menu
-    session.open(menu.JediMakerXtream_Menu)
+    from . import mainmenu
+    session.open(mainmenu.JediMakerXtream_MainMenu)
     return
 
 
@@ -147,18 +179,17 @@ def mainmenu(menu_id, **kwargs):
 
 
 def extensionsmenu(session, **kwargs):
-    from . import playlists
-    session.open(playlists.JediMakerXtream_Playlist)
+    from . import mainmenu
+    session.open(mainmenu.JediMakerXtream_MainMenu)
     return
 
 
 vixEPG = False
-
 try:
     from Screens.EpgSelectionGrid import EPGSelectionGrid
     vixEPG = True
-except:
-    pass
+except Exception as e:
+    print(e)
 
 
 autoStartTimer = None
@@ -237,7 +268,6 @@ def autostart(reason, session=None, **kwargs):
                 EPGSelectionGrid.playOriginalChannel = playOriginalChannel
             except AttributeError:
                 print("******** VIX check failed *****")
-                pass
         else:
             try:
                 check = EPGSelection.setPiPService
@@ -325,9 +355,9 @@ def showJediCatchup(self):
         self.session.nav.playService(eServiceReference(current_service))
     service = self.session.nav.getCurrentService()
 
-    glob.currentref = self.session.nav.getCurrentlyPlayingServiceReference()
-    glob.currentrefstring = glob.currentref.toString()
-    glob.name = ServiceReference(glob.currentref).getServiceName()
+    glob.currentPlayingServiceRef = self.session.nav.getCurrentlyPlayingServiceReference()
+    glob.currentPlayingServiceRefString = glob.currentPlayingServiceRef.toString()
+    glob.name = ServiceReference(glob.currentPlayingServiceRef).getServiceName()
 
     self.playOriginalChannel()
 
@@ -335,8 +365,8 @@ def showJediCatchup(self):
         from . import catchup
         try:
             error_message, hascatchup = catchup.downloadSimpleData()
-        except:
-            pass
+        except Exception as e:
+            print(e)
 
         if error_message != "":
             self.session.open(MessageBox, "%s" % error_message, MessageBox.TYPE_ERROR, timeout=5)
@@ -347,23 +377,26 @@ def showJediCatchup(self):
 
 
 def playOriginalChannel(self):
-    if self.oldrefstring != glob.currentrefstring:
+    if self.oldrefstring != glob.currentPlayingServiceRefString:
         self.session.nav.playService(eServiceReference(self.oldrefstring))
 
 
 def Plugins(**kwargs):
+    font_folder = "%sfonts/" % (dir_plugins)
     addFont(font_folder + "SourceSansPro-Regular.ttf", "jediregular", 100, 0)
     addFont(font_folder + "slyk-regular.ttf", "slykregular", 100, 0)
     addFont(font_folder + "slyk-medium.ttf", "slykbold", 100, 0)
     addFont(font_folder + "MavenPro-Regular.ttf", "onyxregular", 100, 0)
     addFont(font_folder + "MavenPro-Medium.ttf", "onyxbold", 100, 0)
     addFont(font_folder + "VSkin-Light.ttf", "vskinregular", 100, 0)
+    addFont(font_folder + "m-plus-rounded-1c-regular.ttf", "mplusregular", 100, 0)
+    addFont(font_folder + "m-plus-rounded-1c-medium.ttf", "mplusbold", 100, 0)
 
     iconFile = "icons/JediMakerXtream.png"
     if screenwidth.width() > 1280:
         iconFile = "icons/JediMakerXtreamFHD.png"
-    description = (_("IPTV Bouquets Creator by KiddaC"))
-    pluginname = (_("JediMakerXtream"))
+    description = _("IPTV Bouquets Creator by KiddaC")
+    pluginname = _("JediMakerXtream")
 
     main_menu = PluginDescriptor(name=pluginname, description=description, where=PluginDescriptor.WHERE_MENU, fnc=mainmenu, needsRestart=True)
 

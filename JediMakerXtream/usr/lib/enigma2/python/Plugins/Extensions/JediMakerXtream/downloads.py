@@ -32,16 +32,16 @@ def checkGZIP(url):
     try:
         response = urlopen(request, timeout=20)
 
-        if response.info().get('Content-Encoding') == 'gzip':
+        if response.info().get("Content-Encoding") == "gzip":
             buffer = StringIO(response.read())
             deflatedContent = gzip.GzipFile(fileobj=buffer)
             if pythonVer == 3:
-                return deflatedContent.read().decode('utf-8')
+                return deflatedContent.read().decode("utf-8")
             else:
                 return deflatedContent.read()
         else:
             if pythonVer == 3:
-                return response.read().decode('utf-8')
+                return response.read().decode("utf-8")
             else:
                 return response.read()
     except Exception as e:
@@ -58,7 +58,7 @@ def downloadlivecategories(url):
     if response is None:
         response = checkGZIP(url)
 
-    if response is not None and 'category_id' in response:
+    if response is not None and "category_id" in response:
         glob.haslive = True
         try:
             glob.livecategories = json.loads(response)
@@ -70,7 +70,7 @@ def downloadlivecategories(url):
             pass
 
         if valid:
-            if glob.livecategories == [] or 'user_info' in glob.livecategories or 'category_id' not in glob.livecategories[0]:
+            if glob.livecategories == [] or "user_info" in glob.livecategories or "category_id" not in glob.livecategories[0]:
                 glob.haslive = False
                 glob.livecategories == []
 
@@ -87,7 +87,7 @@ def downloadvodcategories(url):
     if response is None:
         response = checkGZIP(url)
 
-    if response is not None and 'category_id' in response:
+    if response is not None and "category_id" in response:
         glob.hasvod = True
         try:
             glob.vodcategories = json.loads(response)
@@ -99,7 +99,7 @@ def downloadvodcategories(url):
             pass
 
         if valid:
-            if glob.vodcategories == [] or 'user_info' in glob.vodcategories or 'category_id' not in glob.vodcategories[0]:
+            if glob.vodcategories == [] or "user_info" in glob.vodcategories or "category_id" not in glob.vodcategories[0]:
                 glob.hasvod = False
                 glob.vodcategories == []
 
@@ -116,7 +116,7 @@ def downloadseriescategories(url):
     if response is None:
         response = checkGZIP(url)
 
-    if response is not None and 'category_id' in response:
+    if response is not None and "category_id" in response:
 
         glob.hasseries = True
         try:
@@ -129,7 +129,7 @@ def downloadseriescategories(url):
             pass
 
         if valid:
-            if glob.seriescategories == [] or 'user_info' in glob.seriescategories or 'category_id' not in glob.seriescategories[0]:
+            if glob.seriescategories == [] or "user_info" in glob.seriescategories or "category_id" not in glob.seriescategories[0]:
                 glob.hasseries = False
                 glob.seriescategories == []
 
@@ -146,7 +146,7 @@ def downloadlivestreams(url):
     if response is None:
         response = checkGZIP(url)
 
-    if response is not None and 'category_id' in response:
+    if response is not None and "category_id" in response:
         glob.haslive = True
 
         try:
@@ -159,7 +159,7 @@ def downloadlivestreams(url):
             pass
 
     if valid:
-        if glob.livestreams == [] or 'user_info' in glob.livestreams or 'category_id' not in glob.livestreams[0]:
+        if glob.livestreams == [] or "user_info" in glob.livestreams or "category_id" not in glob.livestreams[0]:
             glob.haslive = False
             glob.livestreams = []
 
@@ -176,7 +176,7 @@ def downloadvodstreams(url):
     if response is None:
         response = checkGZIP(url)
 
-    if response is not None and 'category_id' in response:
+    if response is not None and "category_id" in response:
         glob.hasvod = True
 
         try:
@@ -189,7 +189,7 @@ def downloadvodstreams(url):
             pass
 
     if valid:
-        if glob.vodstreams == [] or 'user_info' in glob.vodstreams or 'category_id' not in glob.vodstreams[0]:
+        if glob.vodstreams == [] or "user_info" in glob.vodstreams or "category_id" not in glob.vodstreams[0]:
             glob.hasvod = False
             glob.vodstreams = []
 
@@ -206,7 +206,7 @@ def downloadseriesstreams(url):
     if response is None:
         response = checkGZIP(url)
 
-    if response is not None and 'category_id' in response:
+    if response is not None and "category_id" in response:
         glob.hasseries = True
 
         try:
@@ -218,7 +218,7 @@ def downloadseriesstreams(url):
             pass
 
     if valid:
-        if glob.seriesstreams == [] or 'user_info' in glob.seriesstreams or 'category_id' not in glob.seriesstreams[0]:
+        if glob.seriesstreams == [] or "user_info" in glob.seriesstreams or "category_id" not in glob.seriesstreams[0]:
             glob.hasseries = False
             glob.seriersstreams = []
 
@@ -231,14 +231,14 @@ def getM3uCategories(live, vod):
     lines = []
     channelnum = 0
     glob.getm3ustreams = []
-    group_title = 'Uncategorised'
-    epg_name = ''
-    name = ''
-    source = ''
+    group_title = "Uncategorised"
+    epg_name = ""
+    name = ""
+    source = ""
 
-    address = glob.current_playlist['playlist_info']['address']
+    address = glob.current_playlist["playlist_info"]["address"]
 
-    if glob.current_playlist['playlist_info']['playlisttype'] == 'external':
+    if glob.current_playlist["playlist_info"]["playlisttype"] == "external":
 
         req = Request(address, headers=hdr)
         try:
@@ -260,71 +260,71 @@ def getM3uCategories(live, vod):
             print("\n ***** getM3uCategories unknown error")
             pass
 
-    elif glob.current_playlist['playlist_info']['playlisttype'] == 'local':
+    elif glob.current_playlist["playlist_info"]["playlisttype"] == "local":
         with open(cfg.m3ulocation.value + address) as f:
             lines = f.readlines()
 
     for line in lines:
 
-        if pythonVer == 3 and glob.current_playlist['playlist_info']['playlisttype'] == 'external':
-            line = line.decode('utf-8')
+        if pythonVer == 3 and glob.current_playlist["playlist_info"]["playlisttype"] == "external":
+            line = line.decode("utf-8")
 
-        if not line.startswith('#EXTINF') and not line.startswith('http'):
+        if not line.startswith("#EXTINF") and not line.startswith("http"):
             continue
 
-        if line.startswith('#EXTINF'):
+        if line.startswith("#EXTINF"):
 
-            if re.search('group-title=\"(.*?)\"', line) is not None:
-                group_title = re.search('group-title=\"(.*?)\"', line).group(1)
+            if re.search("group-title=\"(.*?)\"", line) is not None:
+                group_title = re.search("group-title=\"(.*?)\"", line).group(1)
             else:
-                group_title = ''
+                group_title = ""
 
-            if re.search('(?<=,).*$', line) is not None:
-                name = re.search('(?<=,).*$', line).group().strip()
+            if re.search("(?<=,).*$", line) is not None:
+                name = re.search("(?<=,).*$", line).group().strip()
 
-            elif re.search('tvg-name=\"(.*?)\"', line) is not None:
-                name = re.search('tvg-name=\"(.*?)\"', line).group(1).strip()
+            elif re.search("tvg-name=\"(.*?)\"", line) is not None:
+                name = re.search("tvg-name=\"(.*?)\"", line).group(1).strip()
 
             else:
-                name = ''
+                name = ""
 
-            if name == '':
+            if name == "":
                 channelnum += 1
-                name = 'Channel ' + str(channelnum)
+                name = "Channel " + str(channelnum)
 
-        elif line.startswith('http'):
+        elif line.startswith("http"):
             source = line.strip()
 
             stream = "unknown"
 
-            if source.endswith('.ts') or source.endswith('.m3u8') or '/live' in source or '/m3u8' in source or 'deviceUser' in source or 'deviceMac' in source or (source[-1].isdigit()):
+            if source.endswith(".ts") or source.endswith(".m3u8") or "/live" in source or "/m3u8" in source or "deviceUser" in source or "deviceMac" in source or (source[-1].isdigit()):
                 stream = "live"
 
-            if source.endswith('.mp4') or source.endswith('.mp3') or source.endswith('.mkv'):
+            if source.endswith(".mp4") or source.endswith(".mp3") or source.endswith(".mkv"):
                 stream = "vod"
 
             if stream == "live":
                 if live:
-                    if group_title == '':
-                        group_title = 'Uncategorised Live'
-                    glob.getm3ustreams.append([group_title, epg_name, name, source, 'live'])
+                    if group_title == "":
+                        group_title = "Uncategorised Live"
+                    glob.getm3ustreams.append([group_title, epg_name, name, source, "live"])
 
             elif stream == "vod":
                 if vod:
-                    if group_title == '':
-                        group_title = 'Uncategorised VOD'
-                    glob.getm3ustreams.append([group_title, epg_name, name, source, 'vod'])
+                    if group_title == "":
+                        group_title = "Uncategorised VOD"
+                    glob.getm3ustreams.append([group_title, epg_name, name, source, "vod"])
             else:
-                if group_title == '':
-                    group_title = 'Uncategorised'
-                glob.getm3ustreams.append([group_title, epg_name, name, source, 'live'])
+                if group_title == "":
+                    group_title = "Uncategorised"
+                glob.getm3ustreams.append([group_title, epg_name, name, source, "live"])
 
 
 def downloadrytec():
     haslzma = False
     try:
         import lzma
-        print('\nlzma success')
+        print("\nlzma success")
         haslzma = True
 
     except ImportError:
@@ -344,7 +344,7 @@ def downloadrytec():
     req = Request(rytec_url, headers=hdr)
     try:
         response = urlopen(req)
-        with open(rytec_file, 'wb') as output:
+        with open(rytec_file, "wb") as output:
             output.write(response.read())
 
     except URLError as e:
@@ -364,36 +364,36 @@ def downloadrytec():
         pass
 
     if os.path.isfile(rytec_file) and os.stat(rytec_file).st_size > 0 and haslzma:
-        with lzma.open(rytec_file, 'rt', encoding="UTF-8") as fd:
-            with open(sat28_file, 'w') as outfile:
+        with lzma.open(rytec_file, "rt", encoding="UTF-8") as fd:
+            with open(sat28_file, "w") as outfile:
                 for line in fd:
                     if "<!-- 28.2E -->" in line and "0000FFFF" not in line:
                         glob.rytecnames.append(line)
                     # get all 28.2e but ignore bad epg importer refs
-                    if '28.2E' in line and '1:0:1:C7A7:817:2:11A0000:0:0:0:' not in line and '1:0:1:2EEF:7EF:2:11A0000:0:0:0:' not in line:
+                    if "28.2E" in line and "1:0:1:C7A7:817:2:11A0000:0:0:0:" not in line and "1:0:1:2EEF:7EF:2:11A0000:0:0:0:" not in line:
                         outfile.write(line)
 
         ###################################################################################################
         # read rytec 28.2e file
 
-        with open(sat28_file, 'r') as outfile:
+        with open(sat28_file, "r") as outfile:
             rytec_sat28 = outfile.readlines()
         rytec_ref = {}
 
         for line in rytec_sat28:
 
-            serviceref = ''
-            epg_channel_id = ''
-            channelname = ''
+            serviceref = ""
+            epg_channel_id = ""
+            channelname = ""
 
-            if re.search(r'(?<=<\/channel><!-- ).*(?= --)', line) is not None:
-                channelname = re.search(r'(?<=<\/channel><!-- ).*(?= --)', line).group()
+            if re.search(r"(?<=<\/channel><!-- ).*(?= --)", line) is not None:
+                channelname = re.search(r"(?<=<\/channel><!-- ).*(?= --)", line).group()
 
-            if re.search(r'(?<=\">1).*(?=<\/)', line) is not None:
-                serviceref = re.search(r'(?<=\">1).*(?=<\/)', line).group()
+            if re.search(r"(?<=\">1).*(?=<\/)", line) is not None:
+                serviceref = re.search(r"(?<=\">1).*(?=<\/)", line).group()
 
-            if re.search(r'(?<=id=\")[a-zA-Z0-9\.]+', line) is not None:
-                epg_channel_id = re.search(r'(?<=id=\")[a-zA-Z0-9\.]+', line).group()
+            if re.search(r"(?<=id=\")[a-zA-Z0-9\.]+", line) is not None:
+                epg_channel_id = re.search(r"(?<=id=\")[a-zA-Z0-9\.]+", line).group()
 
             rytec_ref[channelname.lower()] = [serviceref, epg_channel_id, channelname]
 
@@ -408,7 +408,7 @@ def downloadrytec():
                     epg_alias_names = json.load(f)
                 except ValueError as e:
                     print(("%s\n******** broken alias.txt file ***********" % e))
-                    print('\n******** check alias.txt file with https://jsonlint.com ********')
+                    print("\n******** check alias.txt file with https://jsonlint.com ********")
 
         ###################################################################################################
 
@@ -422,43 +422,43 @@ def downloadgetfile(url):
 
     channelnum = 0
     m3uValues = {}
-    series_group_title = 'Uncategorised'
-    series_name = ''
+    series_group_title = "Uncategorised"
+    series_name = ""
 
     if response is not None:
         for line in response.splitlines():
 
-            if not line.startswith('#EXTINF') and not line.startswith('http'):
+            if not line.startswith("#EXTINF") and not line.startswith("http"):
                 continue
 
-            if line.startswith('#EXTINF'):
+            if line.startswith("#EXTINF"):
 
-                if re.search('group-title=\"(.*?)\"', line) is not None:
-                    series_group_title = re.search('group-title=\"(.*?)\"', line).group(1)
+                if re.search("group-title=\"(.*?)\"", line) is not None:
+                    series_group_title = re.search("group-title=\"(.*?)\"", line).group(1)
                 else:
-                    series_group_title = 'Uncategorised'
+                    series_group_title = "Uncategorised"
 
-                if re.search('tvg-name=\"(.*?)\"', line) is not None:
-                    series_name = re.search('tvg-name=\"(.*?)\"', line).group(1).strip()
+                if re.search("tvg-name=\"(.*?)\"", line) is not None:
+                    series_name = re.search("tvg-name=\"(.*?)\"", line).group(1).strip()
 
-                elif re.search('(?<=",).*$', line) is not None:
-                    series_name = re.search('(?<=",).*$', line).group().strip()
+                elif re.search("(?<=",).*$", line) is not None:
+                    series_name = re.search("(?<=",).*$", line).group().strip()
 
                 else:
-                    series_name = ''
+                    series_name = ""
 
-                if series_name == '':
+                if series_name == "":
                     channelnum += 1
-                    series_name = 'Channel ' + str(channelnum)
+                    series_name = "Channel " + str(channelnum)
 
-            elif line.startswith('http'):
+            elif line.startswith("http"):
                 series_url = line.strip()
 
-                if '/series/' in series_url:
+                if "/series/" in series_url:
                     if series_group_title not in m3uValues:
-                        m3uValues[series_group_title] = [{'name': series_name, 'url': series_url}]
+                        m3uValues[series_group_title] = [{"name": series_name, "url": series_url}]
                     else:
-                        m3uValues[series_group_title].append({'name': series_name, 'url': series_url})
+                        m3uValues[series_group_title].append({"name": series_name, "url": series_url})
 
                 else:
                     continue

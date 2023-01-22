@@ -10,7 +10,7 @@ from .plugin import skin_path, playlists_json
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
-from Components.Sources.StaticText import StaticText
+from .jediStaticText import StaticText
 from Screens.Screen import Screen
 from Tools.LoadPixmap import LoadPixmap
 
@@ -23,36 +23,35 @@ class JediMakerXtream_DeleteBouquets(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.session = session
-        skin = skin_path + 'bouquets.xml'
-        with open(skin, 'r') as f:
+        skin = skin_path + "bouquets.xml"
+        with open(skin, "r") as f:
             self.skin = f.read()
-        self.setup_title = _('Delete Bouquets')
+        self.setup_title = _("Delete Bouquets")
 
         # new list code
         self.startList = []
         self.drawList = []
-        self['list'] = List(self.drawList)
+        self["list"] = List(self.drawList)
 
-        self['key_red'] = StaticText(_('Cancel'))
-        self['key_green'] = StaticText(_('Delete'))
-        self['key_yellow'] = StaticText(_('Invert'))
-        self['key_blue'] = StaticText(_('Clear All'))
-        self['key_info'] = StaticText('')
-        self['description'] = Label(_('Select all the iptv bouquets you wish to delete. \nPress OK to invert the selection'))
-        self['lab1'] = Label('')
+        self["key_red"] = StaticText(_("Cancel"))
+        self["key_green"] = StaticText(_("Delete"))
+        self["key_yellow"] = StaticText(_("Invert"))
+        self["key_blue"] = StaticText(_("Clear All"))
+        self["key_info"] = StaticText("")
+        self["description"] = Label(_("Select all the iptv bouquets you wish to delete. \nPress OK to invert the selection"))
+        self["lab1"] = Label("")
 
         self.playlists_all = jfunc.getPlaylistJson()
 
         self.onLayoutFinish.append(self.__layoutFinished)
 
-        self['setupActions'] = ActionMap(['SetupActions', 'ColorActions'], {
-            'red': self.keyCancel,
-            'green': self.deleteBouquets,
-            'yellow': self.toggleAllSelection,
-            'blue': self.clearAllSelection,
-            'save': self.deleteBouquets,
-            'cancel': self.keyCancel,
-            'ok': self.toggleSelection
+        self["actions"] = ActionMap(["JediMakerXtreamActions"], {
+            "red": self.keyCancel,
+            "green": self.deleteBouquets,
+            "yellow": self.toggleAllSelection,
+            "blue": self.clearAllSelection,
+            "cancel": self.keyCancel,
+            "ok": self.toggleSelection
         }, -2)
 
         self.getStartList()
@@ -70,25 +69,25 @@ class JediMakerXtream_DeleteBouquets(Screen):
 
     def getStartList(self):
         for playlist in self.playlists_all:
-            if 'bouquet_info' in playlist and 'oldname' in playlist['bouquet_info']:
-                self.startList.append([str(playlist['bouquet_info']['oldname']), playlist['playlist_info']['index'], False])
+            if "bouquet_info" in playlist and "oldname" in playlist["bouquet_info"]:
+                self.startList.append([str(playlist["bouquet_info"]["oldname"]), playlist["playlist_info"]["index"], False])
 
         self.drawList = [self.buildListEntry(x[0], x[1], x[2]) for x in self.startList]
-        self['list'].setList(self.drawList)
+        self["list"].setList(self.drawList)
 
     def refresh(self):
         self.drawList = []
         self.drawList = [self.buildListEntry(x[0], x[1], x[2]) for x in self.startList]
-        self['list'].updateList(self.drawList)
+        self["list"].updateList(self.drawList)
 
     def toggleSelection(self):
-        if len(self['list'].list) > 0:
-            idx = self['list'].getIndex()
+        if len(self["list"].list) > 0:
+            idx = self["list"].getIndex()
             self.startList[idx][2] = not self.startList[idx][2]
             self.refresh()
 
     def toggleAllSelection(self):
-        for idx, item in enumerate(self['list'].list):
+        for idx, item in enumerate(self["list"].list):
             self.startList[idx][2] = not self.startList[idx][2]
         self.refresh()
 
@@ -96,7 +95,7 @@ class JediMakerXtream_DeleteBouquets(Screen):
         return [item[0] for item in self.startList if item[2]]
 
     def clearAllSelection(self):
-        for idx, item in enumerate(self['list'].list):
+        for idx, item in enumerate(self["list"].list):
             self.startList[idx][2] = False
         self.refresh()
 
@@ -109,27 +108,27 @@ class JediMakerXtream_DeleteBouquets(Screen):
         for x in selectedBouquetList:
             bouquet_name = x
 
-            cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(bouquet_name))
-            cleanName = re.sub(r' ', '_', cleanName)
-            cleanName = re.sub(r'_+', '_', cleanName)
+            cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(bouquet_name))
+            cleanName = re.sub(r" ", "_", cleanName)
+            cleanName = re.sub(r"_+", "_", cleanName)
 
-            with open('/etc/enigma2/bouquets.tv', 'r+') as f:
+            with open("/etc/enigma2/bouquets.tv", "r+") as f:
                 lines = f.readlines()
                 f.seek(0)
                 for line in lines:
-                    if 'jmx_live_' + str(cleanName) + "_" in line or 'jmx_vod_' + str(cleanName) + "_" in line or 'jmx_series_' + str(cleanName) + "_" in line or 'jmx_' + str(cleanName) in line:
+                    if "jmx_live_" + str(cleanName) + "_" in line or "jmx_vod_" + str(cleanName) + "_" in line or "jmx_series_" + str(cleanName) + "_" in line or "jmx_" + str(cleanName) in line:
                         continue
                     f.write(line)
                 f.truncate()
 
-            jfunc.purge('/etc/enigma2', 'jmx_live_' + str(cleanName) + "_")
-            jfunc.purge('/etc/enigma2', 'jmx_vod_' + str(cleanName) + "_")
-            jfunc.purge('/etc/enigma2', 'jmx_series_' + str(cleanName) + "_")
-            jfunc.purge('/etc/enigma2', str(cleanName) + str('.tv'))
+            jfunc.purge("/etc/enigma2", "jmx_live_" + str(cleanName) + "_")
+            jfunc.purge("/etc/enigma2", "jmx_vod_" + str(cleanName) + "_")
+            jfunc.purge("/etc/enigma2", "jmx_series_" + str(cleanName) + "_")
+            jfunc.purge("/etc/enigma2", str(cleanName) + str(".tv"))
 
             if glob.has_epg_importer:
-                jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.channels.xml')
-                jfunc.purge('/etc/epgimport', 'jmx.' + str(cleanName) + '.sources.xml')
+                jfunc.purge("/etc/epgimport", "jmx." + str(cleanName) + ".channels.xml")
+                jfunc.purge("/etc/epgimport", "jmx." + str(cleanName) + ".sources.xml")
 
             self.deleteBouquetFile(bouquet_name)
             glob.firstrun = 0
@@ -140,13 +139,13 @@ class JediMakerXtream_DeleteBouquets(Screen):
 
     def deleteBouquetFile(self, bouquet_name):
         for playlist in self.playlists_all:
-            if 'bouquet_info' in playlist and 'name' in playlist['bouquet_info']:
-                if playlist['bouquet_info']['name'] == bouquet_name:
-                    del playlist['bouquet_info']
+            if "bouquet_info" in playlist and "name" in playlist["bouquet_info"]:
+                if playlist["bouquet_info"]["name"] == bouquet_name:
+                    del playlist["bouquet_info"]
 
         glob.bouquets_exist = False
         for playlist in self.playlists_all:
-            if 'bouquet_info' in playlist:
+            if "bouquet_info" in playlist:
                 glob.bouquets_exist = True
                 break
 
@@ -156,5 +155,5 @@ class JediMakerXtream_DeleteBouquets(Screen):
         # delete leftover empty dicts
         self.playlists_all = [_f for _f in self.playlists_all if _f]
 
-        with open(playlists_json, 'w') as f:
+        with open(playlists_json, "w") as f:
             json.dump(self.playlists_all, f)

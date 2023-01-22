@@ -54,7 +54,7 @@ class JediMakerXtream_UserInfo(Screen):
             "ok": self.quit,
             "cancel": self.quit,
             "red": self.quit,
-            "menu": self.quit}, -2)
+        }, -2)
 
         self["key_red"] = StaticText(_("Back"))
         self["key_green"] = StaticText(_("OK"))

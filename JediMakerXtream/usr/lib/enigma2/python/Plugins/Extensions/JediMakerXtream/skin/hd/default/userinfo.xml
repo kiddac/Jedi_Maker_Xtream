@@ -20,26 +20,26 @@
 
     <!-- <widget name="userinfo" position="346,206" size="914,448" font="jediregular;16" foregroundColor="#ffffff" backgroundColor="#232323" transparent="1" zPosition="2" /> -->
 	
-	<eLabel text="Status:" position="590,330" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Is Trial:" position="590,390" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Active Connections:" position="590,450" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Max Connections:" position="590,510" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Created At:" position="590,570" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Expiry Date:" position="590,630" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Allowed Output Formats:" position="590,690" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Real URL:" position="590,750" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Timezone:" position="590,810" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
-	<eLabel text="Server Offset:" position="590,870" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Status:" position="393,220" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Is Trial:" position="393,260" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Active Connections:" position="393,300" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Max Connections:" position="393,340" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Created At:" position="393,380" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Expiry Date:" position="393,420" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Allowed Output Formats:" position="393,460" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Real URL:" position="393,500" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Timezone:" position="393,540" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Server Offset:" position="393,580" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
 
-	<widget name="status" position="959,330" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="trial" position="959,390" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="activeconn" position="959,450" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="maxconn" position="959,510" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="created" position="959,570" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="expiry" position="959,630" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="formats" position="959,690" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="realurl" position="732,750" size="596,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="timezone" position="959,810" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
-	<widget name="serveroffset" position="959,870" size="369,60" font="jediregular;27" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="status" position="639,220" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="trial" position="639,260" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="activeconn" position="639,300" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="maxconn" position="639,340" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="created" position="639,380" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="expiry" position="639,420" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="formats" position="639,460" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="realurl" position="488,500" size="397,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="timezone" position="639,540" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="serveroffset" position="639,580" size="246,40" font="jediregular;18" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
 	
 </screen>

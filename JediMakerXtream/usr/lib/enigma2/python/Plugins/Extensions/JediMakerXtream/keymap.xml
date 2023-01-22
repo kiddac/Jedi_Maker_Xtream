@@ -55,5 +55,17 @@
         <key id="KEY_PAGEDOWN" mapto="pageDown" flags="mr" />
         <key id="KEY_DELETE" mapto="deleteForward" flags="mr" />
         <key id="KEY_BACKSPACE" mapto="deleteBackward" flags="mr" />
+		<key id="KEY_POWER" mapto="power_long" flags="l" />
+		<key id="KEY_POWER" mapto="power_down" flags="m" />
+		<key id="KEY_POWER" mapto="power_up" flags="b" />
     </map>
+	
+	<map context="JediCatchupActions">
+		<key id="KEY_STOP" mapto="catchup" flags="m" />
+		<key id="KEY_LIST" mapto="catchup" flags="b"/>
+		<key id="KEY_PVR" mapto="catchup" flags="b"/>
+		<key id="KEY_VIDEO" mapto="catchup" flags="m"/>
+		<key id="KEY_FILE" mapto="catchup" flags="b"/>
+		<key id="KEY_FAVORITES" mapto="catchup" flags="b"/>	
+	</map>
 </keymap>

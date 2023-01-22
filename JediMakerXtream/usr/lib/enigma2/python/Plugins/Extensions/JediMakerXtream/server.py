@@ -83,9 +83,10 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
             else:
                 self.address = glob.current_playlist["playlist_info"]["address"]
 
-        self["actions"] = ActionMap(["SetupActions"], {
+        self["actions"] = ActionMap(["JediMakerXtreamActions"], {
             "cancel": self.cancel,
-            "save": self.save,
+            "red": self.cancel,
+            "green": self.save,
             "ok": self.void,
         }, -2)
 

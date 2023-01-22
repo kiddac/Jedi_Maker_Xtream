@@ -118,11 +118,11 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         entry = str(self.getCurrentEntry())
 
         if entry == _("playlists.txt location"):
-            self["information"].setText(_("Select the location of your playlists.txt file. i.e. /media/hdd/playlists. Press "OK" to change location.\n\nDefault location is /etc/enigma2/jediplaylists"))
+            self["information"].setText(_("Select the location of your playlists.txt file. i.e. /media/hdd/playlists. Press 'OK' to change location.\n\nDefault location is /etc/enigma2/jediplaylists"))
             return
 
         if entry == _("Local M3U File location"):
-            self["information"].setText(_("Select the location of your local m3u files. i.e. /media/hdd/playlists. Press "OK" to change location.\n\nDefault location is /etc/enigma2/jediplaylists"))
+            self["information"].setText(_("Select the location of your local m3u files. i.e. /media/hdd/playlists. Press 'OK' to change location.\n\nDefault location is /etc/enigma2/jediplaylists"))
             return
 
         if entry == _("Automatic live bouquet update"):

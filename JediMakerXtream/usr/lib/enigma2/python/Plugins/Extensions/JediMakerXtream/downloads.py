@@ -277,10 +277,10 @@ def getM3uCategories(live, vod):
             if re.search('group-title=\"(.*?)\"', line) is not None:
                 group_title = re.search('group-title=\"(.*?)\"', line).group(1)
             else:
-                group_title = ''
+                group_title = ""
 
-            if re.search('(?<=,).*$', line) is not None:
-                name = re.search('(?<=,).*$', line).group().strip()
+            if re.search("(?<=,).*$", line) is not None:
+                name = re.search("(?<=,).*$", line).group().strip()
 
             elif re.search('tvg-name=\"(.*?)\"', line) is not None:
                 name = re.search('tvg-name=\"(.*?)\"', line).group(1).strip()
@@ -386,8 +386,8 @@ def downloadrytec():
             epg_channel_id = ""
             channelname = ""
 
-            if re.search(r'(?<=<\/channel><!-- ).*(?= --)', line) is not None:
-                channelname = re.search(r'(?<=<\/channel><!-- ).*(?= --)', line).group()
+            if re.search(r"(?<=<\/channel><!-- ).*(?= --)", line) is not None:
+                channelname = re.search(r"(?<=<\/channel><!-- ).*(?= --)", line).group()
 
             if re.search(r'(?<=\">1).*(?=<\/)', line) is not None:
                 serviceref = re.search(r'(?<=\">1).*(?=<\/)', line).group()

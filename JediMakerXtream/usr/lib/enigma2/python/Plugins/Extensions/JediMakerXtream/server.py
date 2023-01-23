@@ -3,7 +3,7 @@
 
 from . import _
 from .plugin import skin_path, playlist_file, playlists_json, hdr
-from .xStaticText import StaticText
+from .jediStaticText import StaticText
 
 from . import globalfunctions as jfunc
 from . import jedi_globals as glob

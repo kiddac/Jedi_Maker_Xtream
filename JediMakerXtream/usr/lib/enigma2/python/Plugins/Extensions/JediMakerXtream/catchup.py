@@ -5,10 +5,11 @@ from . import _
 from . import jedi_globals as glob
 
 from .plugin import skin_path, cfg, hdr, screenwidth
+from .jediStaticText import StaticText
+
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Sources.List import List
-from .jediStaticText import StaticText
 from enigma import eServiceReference
 from Screens.InfoBar import MoviePlayer
 from Screens.Screen import Screen
@@ -43,7 +44,7 @@ def downloadSimpleData():
     error_message = ""
     isCatchupChannel = False
 
-    refurl = glob.currentPlayingServiceRef.getPath()
+    refurl = glob.currentref.getPath()
     # http://domain.xyx:0000/live/user/pass/12345.ts
 
     if refurl != "":
@@ -264,7 +265,7 @@ class JediMakerXtream_Catchup(Screen):
     def createSetup(self):
         self.list = []
 
-        self.setup_title = "%s" % glob.name.lstrip(cfg.catchupprefixsymbol.value)
+        self.setup_title = "%s" % glob.name.lstrip(cfg.catchupprefix.value)
         for date in glob.dates:
             self.list.append((str(date[0]), str(date[1])))
 
@@ -299,16 +300,16 @@ class JediMakerXtream_Catchup_Listings(Screen):
             self.skin = f.read()
 
         self.archive = archive
-        self.setup_title = _("TV Archive: %s" % glob.name.lstrip(cfg.catchupprefixsymbol.value))
+        self.setup_title = _("TV Archive: %s" % glob.name.lstrip(cfg.catchupprefix.value))
 
         self.list = []
         self.catchup_all = []
         self["list"] = List(self.list)
         self["description"] = Label("")
-        self["actions"] = ActionMap(["SetupActions"], {
-
+        self["actions"] = ActionMap(["JediMakerXtreamActions"], {
             "ok": self.play,
             "cancel": self.quit,
+            "red": self.quit,
         }, -2)
 
         self["key_red"] = StaticText(_("Close"))

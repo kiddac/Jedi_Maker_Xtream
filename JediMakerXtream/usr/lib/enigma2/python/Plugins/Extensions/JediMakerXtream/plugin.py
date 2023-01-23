@@ -47,7 +47,6 @@ screenwidth = getDesktop(0).size()
 
 dir_plugins = "/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/"
 
-skin_directory = ""
 if screenwidth.width() > 1280:
     skin_directory = "%sskin/fhd/" % (dir_plugins)
 else:
@@ -71,8 +70,8 @@ cfg.livetype = ConfigSelection(default="4097", choices=streamtype_choices)
 # cfg.vodtype = ConfigSelection(default="4097", choices=streamtype_choices)
 # cfg.voddefaultorder = ConfigSelection(default="alphabetical", choices=[("original", _("Original Order")), ("alphabetical", _("A-Z")), ("date", _("Newest First"))])
 
-cfg.location = ConfigDirectory(default="/etc/enigma2/jedimakerxtream/")
-cfg.m3ulocation = ConfigDirectory(default="/etc/enigma2/jedimakerxtream/")
+cfg.location = ConfigDirectory(default="/etc/enigma2/jediplaylists/")
+cfg.m3ulocation = ConfigDirectory(default="/etc/enigma2/jediplaylists/")
 cfg.main = ConfigYesNo(default=True)
 cfg.unique = ConfigNumber()
 cfg.usershow = ConfigSelection(default="domain", choices=[("domain", _("Domain")), ("domainconn", _("Domain | Connections"))])
@@ -81,23 +80,22 @@ cfg.wakeup = ConfigClock(default=((7 * 60) + 9) * 60)  # 7:00
 cfg.skin = ConfigSelection(default="default", choices=folders)
 cfg.bouquet_id = ConfigNumber()
 cfg.timeout = ConfigSelectionNumber(1, 20, 1, default=10, wraparound=True)
-cfg.catchupprefix = ConfigYesNo(default=False)
-cfg.catchupprefixsymbol = ConfigSelection(default="~", choices=[("~", "~"), ("!", "!"), ("#", "#"), ("-", "-"), ("<", "<"), ("^", "^")])
+cfg.catchup = ConfigYesNo(default=False)
+cfg.catchupprefix = ConfigSelection(default="~", choices=[("~", "~"), ("!", "!"), ("#", "#"), ("-", "-"), ("<", "<"), ("^", "^")])
 cfg.catchupstart = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
 cfg.catchupend = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
 cfg.groups = ConfigYesNo(default=False)
 
 skin_path = "%s%s/" % (skin_directory, cfg.skin.value)
-
-dir_etc = "/etc/enigma2/jedimakerxtream/"
+dir_etc = "/etc/enigma2/jediplaylists/"
 # create folder for working files
 if not os.path.exists(dir_etc):
     os.makedirs(dir_etc)
 
 # move old location
+"""
 origin = "/etc/enigma2/jediplaylists/"
 target = "/etc/enigma2/jedimakerxtream/"
-
 
 # Fetching the list of all the files
 if os.path.isdir(origin):
@@ -111,6 +109,7 @@ if os.path.isdir(origin):
         shutil.rmtree(origin)
     except Exception as e:
         print(e)
+        """
 
 playlists_json = "%splaylist_all.json" % (dir_etc)
 playlist_file = "%splaylists.txt" % (dir_etc)
@@ -127,9 +126,11 @@ if not os.path.isfile(playlists_json):
     open(playlists_json, "a").close()
 
 rytec_url = "http://www.xmltvepg.nl/rytec.channels.xml.xz"
-rytec_file = "%srytec.channels.xml.xz" % (dir_etc)
-alias_file = "%salias.txt" % (dir_etc)
-sat28_file = "%s28.2e.txt" % (dir_etc)
+rytec_file = "/etc/enigma2/jediplaylists/rytec.channels.xml.xz"
+alias_file = "/etc/enigma2/jediplaylists/alias.txt"
+sat28_file = "/etc/enigma2/jediplaylists/28.2e.txt"
+
+font_folder = "%sfonts/" % (dir_plugins)
 
 """
 hdr = {
@@ -355,9 +356,9 @@ def showJediCatchup(self):
         self.session.nav.playService(eServiceReference(current_service))
     service = self.session.nav.getCurrentService()
 
-    glob.currentPlayingServiceRef = self.session.nav.getCurrentlyPlayingServiceReference()
-    glob.currentPlayingServiceRefString = glob.currentPlayingServiceRef.toString()
-    glob.name = ServiceReference(glob.currentPlayingServiceRef).getServiceName()
+    glob.currentref = self.session.nav.getCurrentlyPlayingServiceReference()
+    glob.currentrefstring = glob.currentref.toString()
+    glob.name = ServiceReference(glob.currentref).getServiceName()
 
     self.playOriginalChannel()
 
@@ -377,12 +378,11 @@ def showJediCatchup(self):
 
 
 def playOriginalChannel(self):
-    if self.oldrefstring != glob.currentPlayingServiceRefString:
+    if self.oldrefstring != glob.currentrefstring:
         self.session.nav.playService(eServiceReference(self.oldrefstring))
 
 
 def Plugins(**kwargs):
-    font_folder = "%sfonts/" % (dir_plugins)
     addFont(font_folder + "SourceSansPro-Regular.ttf", "jediregular", 100, 0)
     addFont(font_folder + "slyk-regular.ttf", "slykregular", 100, 0)
     addFont(font_folder + "slyk-medium.ttf", "slykbold", 100, 0)

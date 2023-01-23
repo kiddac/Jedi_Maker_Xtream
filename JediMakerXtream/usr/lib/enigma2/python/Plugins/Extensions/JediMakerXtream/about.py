@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from . import _
+
 from .plugin import skin_path, version
 from .jediStaticText import StaticText
 

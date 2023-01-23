@@ -3,13 +3,13 @@
 
 from . import _
 from .plugin import skin_path, cfg, autoStartTimer
+from .jediStaticText import StaticText
 
 from Components.ActionMap import ActionMap
 from Components.config import config, getConfigListEntry, ConfigText, ConfigSelection, ConfigNumber, ConfigYesNo, configfile
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from .jediStaticText import StaticText
 
 from Screens.LocationBox import LocationBox
 from Screens.Screen import Screen
@@ -78,8 +78,8 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self.cfg_skin = getConfigListEntry(_("Select skin"), cfg.skin)
         self.cfg_timeout = getConfigListEntry(_("Server timeout (seconds)"), cfg.timeout)
 
-        self.cfg_catchupprefix = getConfigListEntry(_("Prefix Catchup channels"), cfg.catchupprefix)
-        self.cfg_catchupprefixsymbol = getConfigListEntry(_("Select Catchup prefix symbol"), cfg.catchupprefixsymbol)
+        self.cfg_catchup = getConfigListEntry(_("Prefix Catchup channels"), cfg.catchup)
+        self.cfg_catchupprefix = getConfigListEntry(_("Select Catchup prefix symbol"), cfg.catchupprefix)
         self.cfg_catchupstart = getConfigListEntry(_("Margin before catchup (mins)"), cfg.catchupstart)
         self.cfg_catchupend = getConfigListEntry(_("Margin after catchup (mins)"), cfg.catchupend)
 
@@ -95,9 +95,9 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
             self.list.append(self.cfg_wakeup)
 
         self.list.append(self.cfg_groups)
-        self.list.append(self.cfg_catchupprefix)
-        if cfg.catchupprefix.value is True:
-            self.list.append(self.cfg_catchupprefixsymbol)
+        self.list.append(self.cfg_catchup)
+        if cfg.catchup.value is True:
+            self.list.append(self.cfg_catchupprefix)
 
         self.list.append(self.cfg_catchupstart)
         self.list.append(self.cfg_catchupend)

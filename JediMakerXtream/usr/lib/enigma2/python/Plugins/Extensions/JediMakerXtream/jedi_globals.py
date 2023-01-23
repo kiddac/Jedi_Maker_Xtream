@@ -66,6 +66,10 @@ livebuffer = "0"
 vodbuffer = "0"
 
 # catchup globals
+
+currentref = None
+currentrefstring = ""
+
 currentPlayingServiceRef = None
 currentPlayingServiceRefString = ""
 

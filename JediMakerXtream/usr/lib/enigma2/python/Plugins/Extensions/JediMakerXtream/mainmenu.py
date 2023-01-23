@@ -6,9 +6,10 @@ from . import globalfunctions as jfunc
 from . import jedi_globals as glob
 
 from .plugin import skin_path, playlists_json
+from .jediStaticText import StaticText
+
 from Components.ActionMap import ActionMap
 from Components.Sources.List import List
-from .jediStaticText import StaticText
 
 from Screens.Console import Console
 from Screens.MessageBox import MessageBox

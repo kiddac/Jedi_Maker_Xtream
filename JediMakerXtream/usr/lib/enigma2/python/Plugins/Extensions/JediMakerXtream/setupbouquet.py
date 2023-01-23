@@ -8,7 +8,7 @@ from . import globalfunctions as jfunc
 from . import jedi_globals as glob
 
 from .plugin import skin_path, cfg, playlists_json
-
+from .jediStaticText import StaticText
 
 from collections import OrderedDict
 from Components.ActionMap import ActionMap
@@ -17,7 +17,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.List import List
-from .jediStaticText import StaticText
+
 from datetime import datetime
 from enigma import eTimer
 

@@ -158,13 +158,13 @@ def readbouquetdata():
 
 
 def deleteBouquets():
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(glob.name))
-    cleanName = re.sub(r" ", "_", cleanName)
-    cleanName = re.sub(r"_+", "_", cleanName)
+    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.name))
+    cleanName = re.sub(r' ', '_', cleanName)
+    cleanName = re.sub(r'_+', '_', cleanName)
 
-    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(glob.old_name))
-    cleanNameOld = re.sub(r" ", "_", cleanNameOld)
-    cleanNameOld = re.sub(r"_+", "_", cleanNameOld)
+    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.old_name))
+    cleanNameOld = re.sub(r' ', '_', cleanNameOld)
+    cleanNameOld = re.sub(r'_+', '_', cleanNameOld)
 
     # delete old bouquet files
 
@@ -276,10 +276,10 @@ def process_category(category_name, category_type, category_id, domain, port, us
 
                 if bouquet["bouquet_info"]["epg_rytec_uk"] is True:
                     swapname = str(streamvaluesgroup[i]["name"]).strip().lower()  # make lowercase
-                    swapname = re.sub(r"\|.+?\||\[.+?\]", "", swapname)  # replace words in pipes and square brackets
+                    swapname = re.sub(r'\|.+?\||\[.+?\]', '', swapname)  # replace words in pipes and square brackets
 
                     if all(s not in swapname for s in ("(english)", "(w)", "(e)", "(ireland)", "(aberdeen)", "(dundee/tay)")):
-                        swapname = re.sub(r"\(.+?\)", "", swapname)
+                        swapname = re.sub(r'\(.+?\)', '', swapname)
 
                     swapname = swapname.strip()
 
@@ -407,7 +407,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
                     ):
                         swapname = swapname.replace(*r)
 
-                    swapname = re.sub(r"\'$", "", swapname)
+                    swapname = re.sub(r"\"$", "", swapname)
                     swapname = re.sub(r"^uk[^A-Za-z0-9]+", "", swapname)
                     swapname = re.sub(r"^uki[^A-Za-z0-9]+", "", swapname)
                     swapname = re.sub(r"^ir[^A-Za-z0-9]+", "", swapname)
@@ -415,7 +415,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
                     swapname = re.sub(r"^ie[^A-Za-z0-9]+", "", swapname)
                     swapname = re.sub(r"^epl[^A-Za-z0-9]+", "", swapname)
                     swapname = re.sub(r'[^a-zA-Z0-9\u00C0-\u00FF \+\(\)\&\'\*\:\.\!\/]', '', swapname)  # replace characters not in the list with blank
-                    swapname = re.sub(r'\b(hd)( \1\b)+', r'\1', swapname)  # remove duplicate hd
+                    swapname = re.sub(r"\b(hd)( \1\b)+", r"\1", swapname)  # remove duplicate hd
 
                     swapname = swapname.replace("hd/hd", "hd")
                     swapname = swapname.replace("()", "")
@@ -451,8 +451,8 @@ def process_category(category_name, category_type, category_id, domain, port, us
                     if bouquet["bouquet_info"]["epg_swap_names"] is True:
                         streamvaluesgroup[i]["name"] = str(swapname).upper()
 
-            streamvaluesgroup[i]['name'] = streamvaluesgroup[i]['name'].replace(":", "")
-            streamvaluesgroup[i]['name'] = streamvaluesgroup[i]['name'].replace('"', "")
+            streamvaluesgroup[i]["name"] = streamvaluesgroup[i]["name"].replace(":", "")
+            streamvaluesgroup[i]["name"] = streamvaluesgroup[i]["name"].replace('"', "")
 
             stream_id = streamvaluesgroup[i]["stream_id"]
             if "tv_archive" in streamvaluesgroup[i]:
@@ -483,8 +483,8 @@ def process_category(category_name, category_type, category_id, domain, port, us
 
             name = streamvaluesgroup[i]["name"]
 
-            if cfg.catchupprefix.value is True and catchup == 1:
-                name = str(cfg.catchupprefixsymbol.value) + str(name)
+            if cfg.catchup.value is True and catchup == 1:
+                name = str(cfg.catchupprefix.value) + str(name)
 
             bouquetString += "#SERVICE " + str(glob.live_type) + str(custom_sid) + str(protocol) + str(domain) + "%3a" + str(port) + "/" \
                 + str(stream_type) + "/" + str(username) + "/" + str(password) + "/" + str(stream_id) + "." + str(output) + ":" + str(name) + "\n"
@@ -577,7 +577,7 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
 
             name = m3u[2]
             name = name.replace(":", "")
-            name = name.replace("'", "")
+            name = name.replace('"', "")
 
             source = m3u[3]
             source = source.replace(":", "%3a")

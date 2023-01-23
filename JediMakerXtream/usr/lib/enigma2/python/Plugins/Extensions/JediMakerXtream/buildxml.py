@@ -63,7 +63,7 @@ def bouquetsTvXml(streamtype, bouquetTitle):
             f.write(str(nameString))
 
             filename = "subbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
-            bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(groupname) + '" ORDER BY bouquet\n'
+            bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
             f.write(str(bouquetTvString))
 
     else:
@@ -97,7 +97,7 @@ def buildXMLTVChannelFile(epg_name_list):
 
     root = ET.Element("channels")
 
-    # if xmltv file doesn"t already exist, create file and build.
+    # if xmltv file doesn't already exist, create file and build.
     if not os.path.isfile(channelpath):
         open(channelpath, "a").close()
 
@@ -145,7 +145,7 @@ def buildXMLTVSourceFile():
     filename = "jmx." + str(cleanName) + ".sources.xml"
     sourcepath = filepath + filename
 
-    with open(sourcepath, 'w') as f:
+    with open(sourcepath, "w") as f:
         xml_str = '<?xml version="1.0" encoding="utf-8"?>\n'
         xml_str += '<sources>\n'
         xml_str += '<sourcecat sourcecatname="IPTV ' + str(cleanName) + '">\n'

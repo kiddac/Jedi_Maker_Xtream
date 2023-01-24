@@ -23,10 +23,9 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "settings.xml"
-
+        skin = os.path.join(skin_path, "settings.xml")
         if os.path.exists("/var/lib/dpkg/status"):
-            skin = skin_path + "DreamOS/settings.xml"
+            skin = os.path.join(skin_path, "DreamOS/settings.xml")
 
         with open(skin, "r") as f:
             self.skin = f.read()

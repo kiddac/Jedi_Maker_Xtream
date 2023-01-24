@@ -242,7 +242,7 @@ def getM3uCategories(live, vod):
 
         req = Request(address, headers=hdr)
         try:
-            response = urlopen(req, timeout=cfg.timeout.value)
+            response = urlopen(req, timeout=int(cfg.timeout.value))
             lines = response.read().splitlines(True)
         except URLError as e:
             print(e)

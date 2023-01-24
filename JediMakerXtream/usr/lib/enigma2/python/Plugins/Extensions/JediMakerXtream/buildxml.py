@@ -26,12 +26,11 @@ def categoryBouquetXml(streamtype, bouquetTitle, bouquetString):
         cleanGroup = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", glob.name)
         cleanGroup = re.sub(r" ", "_", cleanGroup)
         cleanGroup = re.sub(r"_+", "_", cleanGroup)
-        filepath = "/etc/enigma2/"
         filename = "subbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
-        fullpath = filepath + filename
     else:
         filename = "userbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
-        fullpath = filepath + filename
+    fullpath = os.path.join(filepath, filename)
+
     with open(fullpath, "w+") as f:
         f.write(bouquetString)
 
@@ -93,7 +92,7 @@ def buildXMLTVChannelFile(epg_name_list):
 
     filepath = "/etc/epgimport/"
     epgfilename = "jmx." + str(cleanName) + ".channels.xml"
-    channelpath = filepath + epgfilename
+    channelpath = os.path.join(filepath, epgfilename)
 
     root = ET.Element("channels")
 
@@ -140,10 +139,10 @@ def buildXMLTVSourceFile():
 
     filepath = "/etc/epgimport/"
     epgfilename = "jmx." + str(cleanName) + ".channels.xml"
-    channelpath = filepath + epgfilename
+    channelpath = os.path.join(filepath, epgfilename)
 
     filename = "jmx." + str(cleanName) + ".sources.xml"
-    sourcepath = filepath + filename
+    sourcepath = os.path.join(filepath, filename)
 
     with open(sourcepath, "w") as f:
         xml_str = '<?xml version="1.0" encoding="utf-8"?>\n'
@@ -182,7 +181,7 @@ def downloadXMLTV():
 
     filepath = "/etc/epgimport/"
     epgfilename = "jmx." + str(cleanName) + ".xmltv.xml"
-    epgpath = filepath + epgfilename
+    epgpath = os.path.join(filepath, epgfilename)
     response = downloads.checkGZIP(glob.xmltv_address)
 
     if response is not None:

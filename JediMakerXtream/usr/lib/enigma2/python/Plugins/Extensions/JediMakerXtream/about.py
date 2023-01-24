@@ -10,6 +10,8 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Screens.Screen import Screen
 
+import os
+
 
 class JediMakerXtream_About(Screen):
 
@@ -17,7 +19,7 @@ class JediMakerXtream_About(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "about.xml"
+        skin = os.path.join(skin_path, "about.xml")
         with open(skin, "r") as f:
             self.skin = f.read()
 

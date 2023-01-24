@@ -16,14 +16,15 @@ from .plugin import skin_path, cfg
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 
+import os
+
 
 class JediMakerXtream_BuildBouquets(Screen):
 
     def __init__(self, session):
         Screen.__init__(self, session)
         self.session = session
-
-        skin = skin_path + "progress.xml"
+        skin = os.path.join(skin_path, "progress.xml")
         with open(skin, "r") as f:
             self.skin = f.read()
 
@@ -97,7 +98,6 @@ class JediMakerXtream_BuildBouquets(Screen):
 
     def start(self):
         if self.bouquet["playlist_info"]["playlisttype"] == "xtream":
-
             self.protocol = self.bouquet["playlist_info"]["protocol"]
             self.domain = self.bouquet["playlist_info"]["domain"]
             self.port = self.bouquet["playlist_info"]["port"]
@@ -228,14 +228,14 @@ class JediMakerXtream_BuildBouquets(Screen):
         self.category_num += 1
 
         if self.category_num % 5 == 1:
-            self.nextjob(_("Building Categories") + str(self.job_current) + _("of") + str(self.job_total), self.buildBouquets)
+            self.nextjob(_("Building Categories") + " " + str(self.job_current) + " " + _("of") + " " + str(self.job_total), self.buildBouquets)
         else:
             self.buildBouquets()
 
     def buildM3uBouquets(self):
 
         self["progress"].setValue(self.progresscurrent)
-        self["action"].setText(_("Building Categories") + str(self.job_current) + _("of") + str(self.job_total))
+        self["action"].setText(_("Building Categories") + " " + str(self.job_current) + " " + _("of") + " " + + str(self.job_total))
 
         if len(self.categories) <= 1:
             self["status"].setText(_("Building General Bouquet"))
@@ -263,7 +263,6 @@ class JediMakerXtream_BuildBouquets(Screen):
 
         else:
             if glob.live and glob.has_epg_importer and glob.epg_provider and glob.xmltv_address != "":
-
                 bx.buildXMLTVChannelFile(self.epg_name_list)
                 bx.buildXMLTVSourceFile()
 

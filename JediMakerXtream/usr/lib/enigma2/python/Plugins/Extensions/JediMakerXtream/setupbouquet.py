@@ -35,10 +35,9 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "settings.xml"
-
+        skin = os.path.join(skin_path, "settings.xml")
         if os.path.exists("/var/lib/dpkg/status"):
-            skin = skin_path + "DreamOS/settings.xml"
+            skin = os.path.join(skin_path, "DreamOS/settings.xml")
 
         with open(skin, "r") as f:
             self.skin = f.read()
@@ -473,7 +472,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "bouquets.xml"
+        skin = os.path.join(skin_path, "bouquets.xml")
         with open(skin, "r") as f:
             self.skin = f.read()
 
@@ -575,9 +574,9 @@ class JediMakerXtream_ChooseBouquets(Screen):
 
     def buildListEntry(self, name, streamtype, index, enabled):
         if enabled:
-            pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_on.png")
+            pixmap = LoadPixmap(cached=True, path=os.path.join(skin_path, "images/lock_on.png"))
         else:
-            pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_off.png")
+            pixmap = LoadPixmap(cached=True, path=os.path.join(skin_path, "images/lock_off.png"))
 
         return (pixmap, str(name), str(streamtype), index, enabled)
 

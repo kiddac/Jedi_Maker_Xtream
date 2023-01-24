@@ -19,6 +19,7 @@ import base64
 import calendar
 import json
 import re
+import os
 import socket
 import sys
 import time
@@ -85,15 +86,12 @@ def downloadSimpleData():
 
         except URLError as e:
             print(e)
-            pass
 
         except socket.timeout as e:
             print(e)
-            pass
 
         except:
             print("\n ***** download Live Streams unknown error")
-            pass
 
         if response != "":
             liveStreams = json.load(response)
@@ -295,7 +293,7 @@ class JediMakerXtream_Catchup_Listings(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "catchup.xml"
+        skin = os.path.join(skin_path, "catchup.xml")
         with open(skin, "r") as f:
             self.skin = f.read()
 

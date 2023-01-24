@@ -45,12 +45,13 @@ with open("/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/version.tx
 
 screenwidth = getDesktop(0).size()
 
+dir_etc = "/etc/enigma2/jediplaylists/"
 dir_plugins = "/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/"
 
 if screenwidth.width() > 1280:
-    skin_directory = "%sskin/fhd/" % (dir_plugins)
+    skin_directory = os.path.join(dir_plugins, "skin/fhd/")
 else:
-    skin_directory = "%sskin/hd/" % (dir_plugins)
+    skin_directory = os.path.join(dir_plugins, "skin/hd/")
 
 folders = os.listdir(skin_directory)
 streamtype_choices = [("1", "DVB(1)"), ("4097", "IPTV(4097)")]
@@ -70,8 +71,8 @@ cfg.livetype = ConfigSelection(default="4097", choices=streamtype_choices)
 # cfg.vodtype = ConfigSelection(default="4097", choices=streamtype_choices)
 # cfg.voddefaultorder = ConfigSelection(default="alphabetical", choices=[("original", _("Original Order")), ("alphabetical", _("A-Z")), ("date", _("Newest First"))])
 
-cfg.location = ConfigDirectory(default="/etc/enigma2/jediplaylists/")
-cfg.m3ulocation = ConfigDirectory(default="/etc/enigma2/jediplaylists/")
+cfg.location = ConfigDirectory(default=dir_etc)
+cfg.m3ulocation = ConfigDirectory(default=dir_etc)
 cfg.main = ConfigYesNo(default=True)
 cfg.unique = ConfigNumber()
 cfg.usershow = ConfigSelection(default="domain", choices=[("domain", _("Domain")), ("domainconn", _("Domain | Connections"))])
@@ -86,8 +87,8 @@ cfg.catchupstart = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
 cfg.catchupend = ConfigSelectionNumber(0, 30, 1, default=0, wraparound=True)
 cfg.groups = ConfigYesNo(default=False)
 
-skin_path = "%s%s/" % (skin_directory, cfg.skin.value)
-dir_etc = "/etc/enigma2/jediplaylists/"
+skin_path = os.path.join(skin_directory, cfg.skin.value)
+
 # create folder for working files
 if not os.path.exists(dir_etc):
     os.makedirs(dir_etc)
@@ -111,11 +112,16 @@ if os.path.isdir(origin):
         print(e)
         """
 
-playlists_json = "%splaylist_all.json" % (dir_etc)
-playlist_file = "%splaylists.txt" % (dir_etc)
+playlists_json = os.path.join(dir_etc, "playlist_all.json")
+playlist_file = os.path.join(dir_etc, "playlists.txt")
+
+print("*** playlist_file ***", playlist_file)
 
 if cfg.location.value:
-    playlist_file = "%s/playlists.txt" % (cfg.location.value)
+    print("*** location true ***")
+    playlist_file = os.path.join(cfg.location.value, "playlists.txt")
+
+print("*** playlist_file ***", playlist_file)
 
 # check if playlists.txt file exists in specified location
 if not os.path.isfile(playlist_file):
@@ -126,11 +132,11 @@ if not os.path.isfile(playlists_json):
     open(playlists_json, "a").close()
 
 rytec_url = "http://www.xmltvepg.nl/rytec.channels.xml.xz"
-rytec_file = "/etc/enigma2/jediplaylists/rytec.channels.xml.xz"
-alias_file = "/etc/enigma2/jediplaylists/alias.txt"
-sat28_file = "/etc/enigma2/jediplaylists/28.2e.txt"
+rytec_file = os.path.join(dir_etc, "rytec.channels.xml.xz")
+alias_file = os.path.join(dir_etc, "alias.txt")
+sat28_file = os.path.join(dir_etc, "28.2e.txt")
 
-font_folder = "%sfonts/" % (dir_plugins)
+font_folder = os.path.join(dir_plugins, "fonts/")
 
 """
 hdr = {
@@ -383,14 +389,14 @@ def playOriginalChannel(self):
 
 
 def Plugins(**kwargs):
-    addFont(font_folder + "SourceSansPro-Regular.ttf", "jediregular", 100, 0)
-    addFont(font_folder + "slyk-regular.ttf", "slykregular", 100, 0)
-    addFont(font_folder + "slyk-medium.ttf", "slykbold", 100, 0)
-    addFont(font_folder + "MavenPro-Regular.ttf", "onyxregular", 100, 0)
-    addFont(font_folder + "MavenPro-Medium.ttf", "onyxbold", 100, 0)
-    addFont(font_folder + "VSkin-Light.ttf", "vskinregular", 100, 0)
-    addFont(font_folder + "m-plus-rounded-1c-regular.ttf", "mplusregular", 100, 0)
-    addFont(font_folder + "m-plus-rounded-1c-medium.ttf", "mplusbold", 100, 0)
+    addFont(os.path.join(font_folder, "SourceSansPro-Regular.ttf"), "jediregular", 100, 0)
+    addFont(os.path.join(font_folder, "slyk-regular.ttf"), "slykregular", 100, 0)
+    addFont(os.path.join(font_folder, "slyk-medium.ttf"), "slykbold", 100, 0)
+    addFont(os.path.join(font_folder, "MavenPro-Regular.ttf"), "onyxregular", 100, 0)
+    addFont(os.path.join(font_folder, "MavenPro-Medium.ttf"), "onyxbold", 100, 0)
+    addFont(os.path.join(font_folder, "VSkin-Light.ttf"), "vskinregular", 100, 0)
+    addFont(os.path.join(font_folder, "m-plus-rounded-1c-regular.ttf"), "mplusregular", 100, 0)
+    addFont(os.path.join(font_folder, "m-plus-rounded-1c-medium.ttf"), "mplusbold", 100, 0)
 
     iconFile = "icons/JediMakerXtream.png"
     if screenwidth.width() > 1280:

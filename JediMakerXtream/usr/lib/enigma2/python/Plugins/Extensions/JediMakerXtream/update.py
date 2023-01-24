@@ -52,7 +52,7 @@ class JediMakerXtream_Update(Screen):
             glob.has_epg_importer = False
 
         if self.runtype == "manual":
-            skin = skin_path + "progress.xml"
+            skin = os.path.join(skin_path, "progress.xml")
             with open(skin, "r") as f:
                 self.skin = f.read()
 

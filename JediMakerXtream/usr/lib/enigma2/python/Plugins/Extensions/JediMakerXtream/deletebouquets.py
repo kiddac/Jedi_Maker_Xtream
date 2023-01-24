@@ -16,6 +16,7 @@ from Screens.Screen import Screen
 from Tools.LoadPixmap import LoadPixmap
 
 import json
+import os
 import re
 
 
@@ -24,7 +25,7 @@ class JediMakerXtream_DeleteBouquets(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.session = session
-        skin = skin_path + "bouquets.xml"
+        skin = os.path.join(skin_path, "bouquets.xml")
         with open(skin, "r") as f:
             self.skin = f.read()
         self.setup_title = _("Delete Bouquets")
@@ -63,9 +64,9 @@ class JediMakerXtream_DeleteBouquets(Screen):
 
     def buildListEntry(self, name, index, enabled):
         if enabled:
-            pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_on.png")
+            pixmap = LoadPixmap(cached=True, path=os.path.join(skin_path, "images/lock_on.png"))
         else:
-            pixmap = LoadPixmap(cached=True, path=skin_path + "images/lock_off.png")
+            pixmap = LoadPixmap(cached=True, path=os.path.join(skin_path, "images/lock_off.png"))
         return (pixmap, str(name), index, enabled)
 
     def getStartList(self):

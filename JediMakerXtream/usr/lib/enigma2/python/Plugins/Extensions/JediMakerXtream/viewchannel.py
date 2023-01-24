@@ -19,8 +19,8 @@ class JediMakerXtream_ViewChannels(Screen):
     def __init__(self, session, current):
         Screen.__init__(self, session)
         self.session = session
+        skin = os.path.join(skin_path, "channels.xml")
 
-        skin = skin_path + "channels.xml"
         with open(skin, "r") as f:
             self.skin = f.read()
 

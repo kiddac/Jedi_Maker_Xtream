@@ -48,7 +48,7 @@ class JediMakerXtream_Playlist(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "playlist.xml"
+        skin = os.path.join(skin_path, "playlist.xml")
         with open(skin, "r") as f:
             self.skin = f.read()
 
@@ -241,7 +241,7 @@ class JediMakerXtream_Playlist(Screen):
                 # check if iptv playlist
                 if "get.php" in line and self.domain != "" and self.username != "" and self.password != "":
                     try:
-                        response = urlopen(player_req, timeout=cfg.timeout.value + 2)
+                        response = urlopen(player_req, timeout=int(cfg.timeout.value) + 2)
                         player = True
                         valid = self.checkPanel(response)
 
@@ -255,7 +255,7 @@ class JediMakerXtream_Playlist(Screen):
                     if not valid or response == "":
                         try:
                             req = Request(line, headers=hdr)
-                            response = urlopen(req, None, cfg.timeout.value + 5)
+                            response = urlopen(req, None, int(cfg.timeout.value) + 5)
                             if "EXTINF" in response.read():
                                 valid = True
 
@@ -271,7 +271,7 @@ class JediMakerXtream_Playlist(Screen):
                         try:
                             req = Request(line, headers=hdr)
 
-                            response = urlopen(req, None, cfg.timeout.value + 5)
+                            response = urlopen(req, None, int(cfg.timeout.value) + 5)
                             if pythonVer == 3:
                                 if "EXTINF" in response.read().decode("utf-8"):
                                     valid = True

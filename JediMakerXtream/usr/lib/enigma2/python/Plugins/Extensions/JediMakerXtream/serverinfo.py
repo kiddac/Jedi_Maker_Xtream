@@ -12,6 +12,7 @@ from datetime import datetime
 from Screens.Screen import Screen
 
 import json
+import os
 
 
 class JediMakerXtream_UserInfo(Screen):
@@ -20,7 +21,7 @@ class JediMakerXtream_UserInfo(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "userinfo.xml"
+        skin = os.path.join(skin_path, "userinfo.xml")
         with open(skin, "r") as f:
             self.skin = f.read()
 

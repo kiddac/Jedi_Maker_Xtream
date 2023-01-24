@@ -31,7 +31,7 @@ class JediMakerXtream_MainMenu(Screen):
         Screen.__init__(self, session)
         self.session = session
 
-        skin = skin_path + "mainmenu.xml"
+        skin = os.path.join(skin_path, "mainmenu.xml")
         with open(skin, "r") as f:
             self.skin = f.read()
 
@@ -42,6 +42,7 @@ class JediMakerXtream_MainMenu(Screen):
 
         self["actions"] = ActionMap(["JediMakerXtreamActions"], {
             "ok": self.openSelected,
+            "green": self.openSelected,
             "cancel": self.quit,
             "red": self.quit,
         }, -2)

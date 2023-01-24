@@ -127,13 +127,13 @@ class JediMakerXtream_Playlist(Screen):
     def buildListEntry(self, index, status, name, extra):
 
         if status == "Active":
-            pixmap = LoadPixmap(cached=True, path=skin_path + "images/active.png")
+            pixmap = LoadPixmap(cached=True, path=os.path.join(skin_path, "images/active.png"))
         if status == "Invalid":
-            pixmap = LoadPixmap(cached=True, path=skin_path + "images/invalid.png")
+            pixmap = LoadPixmap(cached=True, path=os.path.join(skin_path, "images/invalid.png"))
         if status == "ValidExternal":
-            pixmap = LoadPixmap(cached=True, path=skin_path + "images/external.png")
+            pixmap = LoadPixmap(cached=True, path=os.path.join(skin_path, "images/external.png"))
         if status == "Unknown":
-            pixmap = LoadPixmap(cached=True, path=skin_path + "images/blank.png")
+            pixmap = LoadPixmap(cached=True, path=os.path.join(skin_path, "images/blank.png"))
         return (pixmap, str(name), extra)
 
     def loadPlaylist(self):

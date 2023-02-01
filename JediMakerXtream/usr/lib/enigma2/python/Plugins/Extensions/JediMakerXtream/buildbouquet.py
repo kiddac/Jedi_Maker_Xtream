@@ -235,7 +235,7 @@ class JediMakerXtream_BuildBouquets(Screen):
     def buildM3uBouquets(self):
 
         self["progress"].setValue(self.progresscurrent)
-        self["action"].setText(_("Building Categories") + " " + str(self.job_current) + " " + _("of") + " " + + str(self.job_total))
+        self["action"].setText(_("Building Categories") + " " + str(self.job_current) + " " + _("of") + " " + str(self.job_total))
 
         if len(self.categories) <= 1:
             self["status"].setText(_("Building General Bouquet"))

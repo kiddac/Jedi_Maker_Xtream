@@ -173,7 +173,7 @@ def downloadSimpleData():
                             aStop_timestamp = aEnd.strftime("%s")
                             listing = {"start": aStartString, "end": aEndString, "start_timestamp": aStart_timestamp, "stop_timestamp": aStop_timestamp, "title": "UHJvZ3JhbSBEYXRhIE5vdCBBdmFpbGFibGU=", "description": "UHJvZ3JhbSBEYXRhIE5vdCBBdmFpbGFibGU="}
                             glob.archive.append(listing)
-                            aStart = (aStart + + datetime.timedelta(hours=1))
+                            aStart = (aStart + datetime.timedelta(hours=1))
 
                         manualArchiveStartDate = manualArchiveStartDate + datetime.timedelta(days=1)
 

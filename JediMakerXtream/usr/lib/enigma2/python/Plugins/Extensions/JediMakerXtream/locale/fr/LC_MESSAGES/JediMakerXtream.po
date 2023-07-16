@@ -1,0 +1,1062 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-02 19:00+0200\n"
+"PO-Revision-Date: 2023-07-02 19:04+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+"X-Poedit-Basepath: ../../../../../../../../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ../setupbouquet.py:353
+msgid ""
+"\n"
+"(Optional) Download and attempt to rebuild XMLTV EPG data to UTF-8 encoding (Slower).\n"
+"Only required if you think you have corrupt external EPG."
+msgstr ""
+"\n"
+"(Optionnel) Télécharger et essayer de reconstruire les données de l'EPG XMLTV en encodage UTF-8 (plus lent).\n"
+"Nécessaire uniquement si vous pensez avoir un EPG externe corrompu."
+
+#: ../server.py:210
+msgid ""
+"\n"
+"Enter EPG Url."
+msgstr ""
+"\n"
+"Enter l'URL de l'EPG."
+
+#: ../server.py:202
+msgid ""
+"\n"
+"Enter M3U list url including protocol. \n"
+"eg. http://www.domain.xyz"
+msgstr ""
+"\n"
+"Entrer l'url de la liste M3U incluant le protocole.\n"
+"p.e. http://www.domain.xyz"
+
+#: ../server.py:186
+msgid ""
+"\n"
+"Enter Port Number without colon : \n"
+"e.g. 25461"
+msgstr ""
+"\n"
+"Entrer le numéro du port sans deux points:\n"
+"p.e. 25461"
+
+#: ../setupbouquet.py:299
+msgid ""
+"\n"
+"Enter name to be shown as a prefix in your bouquets"
+msgstr ""
+"\n"
+"Entrer le nom à afficher comme préfixe dans vos bouquets."
+
+#: ../server.py:194
+msgid ""
+"\n"
+"Enter password."
+msgstr ""
+"\n"
+"Entrer le mot de passe."
+
+#: ../server.py:182
+msgid ""
+"\n"
+"Enter playlist url without protocol http:// \n"
+"e.g. domain.xyz"
+msgstr ""
+"\n"
+"Entrer l'url de la playlist sans le protocole http://\n"
+"p.e. domain.xyz"
+
+#: ../server.py:198
+msgid ""
+"\n"
+"Enter stream output type."
+msgstr ""
+"\n"
+"Entrer le type de stream en sortie."
+
+#: ../setupbouquet.py:335
+msgid ""
+"\n"
+"Enter the EPG url for your playlist. If unknown leave as default."
+msgstr ""
+"\n"
+"Entrer l'URL de l'EPG de votre playlist. Si inconnu laissez-le par défaut."
+
+#: ../server.py:206
+msgid ""
+"\n"
+"Enter the name to be displayed in bouquets."
+msgstr ""
+"\n"
+"Entrer le nom à afficher dans les bouquets."
+
+#: ../server.py:190
+msgid ""
+"\n"
+"Enter username."
+msgstr ""
+"\n"
+"Entrer le nom de l'utilisateur."
+
+#: ../setupbouquet.py:307
+msgid ""
+"\n"
+"Include LIVE categories in your bouquets."
+msgstr ""
+"\n"
+"Inclure les catégories LIVE dans vos bouquets."
+
+#: ../setupbouquet.py:319
+msgid ""
+"\n"
+"Include SERIES categories in your bouquets. \n"
+"** Note: Selecting Series can be slow to populate the lists.**"
+msgstr ""
+"\n"
+"inclure la catégorie SERIES dans vos bouquets. \n"
+"** Note: choisir les SERIES ralentir la génération des listes.**"
+
+#: ../setupbouquet.py:315
+msgid ""
+"\n"
+"Include VOD categories in your bouquets."
+msgstr ""
+"\n"
+"Inclure la catégorie VOD dans vos bouquets."
+
+#: ../setupbouquet.py:331
+msgid ""
+"\n"
+"Make provider xmltv for use in EPG Importer.\n"
+"Provider source needs to be selected in EPG Importer plugin."
+msgstr ""
+"\n"
+"Créer le fournisseur xmltv pour l'utiliser dans EPG Import.\n"
+"La source du fournisseur doit être sélectionnée dans le plugin EPG Import."
+
+#: ../setupbouquet.py:357
+msgid ""
+"\n"
+"Offset the displayed catchup times"
+msgstr ""
+"\n"
+"Décaler les temps de rattrapage affichés"
+
+#: ../server.py:178
+msgid ""
+"\n"
+"Select the protocol for your playlists url."
+msgstr ""
+"\n"
+"Sélectionner le protocole pour les url de vos playlists."
+
+#: ../setupbouquet.py:327
+msgid ""
+"\n"
+"Select the sort order for your VOD Bouquets."
+msgstr ""
+"\n"
+"Sélectionner l'ordre de tri de vos bouquets VOD."
+
+#: ../server.py:174
+msgid ""
+"\n"
+"Select the type of playlist to add. Standard playlist or external M3U file.\n"
+"Try M3U File for non standard playlists that use custom urls."
+msgstr ""
+"\n"
+"Sélectionner le type de playlist à ajouter. Playlist standard ou fichier M3U externe.\n"
+"Essayez le fichier M3U pour les listes de lecture non standard qui utilisent des URL personnalisées."
+
+#: ../setupbouquet.py:350
+msgid ""
+"\n"
+"Set stream buffer (Experimental)."
+msgstr ""
+"\n"
+"Définir le tampon de flux (expérimental)."
+
+#: ../setupbouquet.py:323
+msgid ""
+"\n"
+"This setting allows you to choose which player E2 will use for your VOD/Series streams.\n"
+"If your VOD streams do not play try changing this setting."
+msgstr ""
+"\n"
+"Ce paramètre vous permet de choisir le lecteur que E2 utilisera pour vos flux VOD/Séries.\n"
+"Si vos flux VOD ne sont pas lus, essayez de modifier ce paramètre."
+
+#: ../setupbouquet.py:311
+msgid ""
+"\n"
+"This setting allows you to choose which player E2 will use for your live streams.\n"
+"If your live streams do not play try changing this setting."
+msgstr ""
+"\n"
+"Ce paramètre vous permet de choisir le lecteur que E2 utilisera pour vos flux en direct.\n"
+"Si vos flux en direct ne sont pas diffusés, essayez de modifier ce paramètre."
+
+#: ../setupbouquet.py:343
+msgid ""
+"\n"
+"This will amend the UK channels names in channel bouquets to that of the computed swap names."
+msgstr ""
+"\n"
+"Cela modifiera les noms des chaînes britanniques dans les bouquets de chaînes pour qu'ils correspondent aux noms des échanges calculés."
+
+#: ../setupbouquet.py:339
+msgid ""
+"\n"
+"Try to match the UK Rytec names in the background to populate UK EPG.\n"
+"Note this will override your provider's UK EPG."
+msgstr ""
+"\n"
+"Essayez de faire correspondre les noms Rytec du Royaume-Uni en arrière-plan pour remplir l'EPG du Royaume-Uni.\n"
+"Notez que cela remplacera l'EPG britannique de votre fournisseur."
+
+#: ../setupbouquet.py:347
+msgid ""
+"\n"
+"Use for UK providers that do not specify UK in the category title or channel title.\n"
+"May cause non UK channels to have the wrong epg.\n"
+"Trying creating bouquets without this option turned off first."
+msgstr ""
+"\n"
+"A utiliser pour les fournisseurs britanniques qui ne spécifient pas le Royaume-Uni dans le titre de la catégorie ou de la chaîne.\n"
+"Les chaînes non britanniques risquent d'avoir un epg erroné.\n"
+"Essayez d'abord de créer des bouquets sans désactiver cette option."
+
+#: ../setupbouquet.py:303
+msgid ""
+"\n"
+"Use provider name prefix in your bouquets"
+msgstr ""
+"\n"
+"Utiliser le nom du préfixe dans vos bouquets"
+
+#: ../playlists.py:429
+msgid "  Max: "
+msgstr "  Max: "
+
+#: ../buildbouquet.py:211
+msgid " IPTV Bouquets Created"
+msgstr "Bouquets IPTV créés"
+
+#: ../update.py:139
+msgid " Providers IPTV Updated"
+msgstr " Fournisseur IPTV mis-à-jour"
+
+#: ../update.py:329
+#, python-format
+msgid "%s - Building M3U bouquets..."
+msgstr "%s - Construction des bouquets M3U..."
+
+#: ../update.py:327
+#, python-format
+msgid "%s - Building bouquets..."
+msgstr "%s - Construction des bouquets..."
+
+#: ../update.py:194
+#, python-format
+msgid "%s - Checking URL still active..."
+msgstr "%s - Vérification que l'URL est toujours..."
+
+#: ../update.py:317 ../update.py:321
+#, python-format
+msgid "%s - Deleting existing bouquets..."
+msgstr "%s - Effacement des bouquets existants..."
+
+#: ../update.py:196
+#, python-format
+msgid "%s - Download M3U Data..."
+msgstr "%s - Téléchargement des données M3U..."
+
+#: ../update.py:315
+#, python-format
+msgid "%s - Downloading Data..."
+msgstr "%s - Téléchargement des données..."
+
+#: ../update.py:267 ../update.py:275
+#, python-format
+msgid "%s - Downloading Series data..."
+msgstr "%s - Téléchargement des donnes des Séries ..."
+
+#: ../update.py:265
+#, python-format
+msgid "%s - Downloading VOD data..."
+msgstr "%s - Téléchargement des donnes VOD ..."
+
+#: ../update.py:286 ../update.py:296
+#, python-format
+msgid "%s - Get selected categories..."
+msgstr "%s - Obtention des catégories sélectionnées..."
+
+#: ../update.py:269 ../update.py:277 ../update.py:282
+#, python-format
+msgid "%s - Getting categories..."
+msgstr "%s - Obtention des catégories..."
+
+#: ../update.py:291
+#, python-format
+msgid "%s - Getting selection list"
+msgstr "%s - Obtention de la liste des sélections"
+
+#: ../update.py:156
+#, python-format
+msgid "%s - Reading bouquet data..."
+msgstr "%s - Lecture des données du bouquet..."
+
+#: ../setupbouquet.py:185
+msgid "A-Z"
+msgstr "A-Z"
+
+#: ../mainmenu.py:94 ../about.py:26
+msgid "About"
+msgstr "À propos"
+
+#: ../serverinfo.py:45
+msgid "Active Connections:"
+msgstr "Connections actives:"
+
+#: ../playlists.py:429
+msgid "Active: "
+msgstr "Active: "
+
+#: ../server.py:37 ../playlists.py:72 ../playlists.py:99
+msgid "Add Playlist"
+msgstr "Ajouter playlist"
+
+#: ../catchup.py:150
+#, python-format
+msgid "All %s days"
+msgstr "Tous les %s jours"
+
+#: ../serverinfo.py:49
+msgid "Allowed Output Formats:"
+msgstr "Autoriser les formats de sorties:"
+
+#: ../settings.py:148
+msgid ""
+"Amend the timeout on server calls.\n"
+"\n"
+"Can be increased for very large playlists, slow servers, or slow proxies."
+msgstr ""
+"Modifier le délai d'attente pour les appels au serveur.\n"
+"\n"
+"Peut être augmenté pour les très grandes listes de lecture, les serveurs lents ou les proxies lents."
+
+#: ../about.py:52
+msgid ""
+"And thanks to all the other coders and Linuxsat testers who helped in the development of this project.\n"
+"\n"
+msgstr ""
+"Et merci à tous les autres codeurs et testeurs de Linuxsat qui ont contribué au développement de ce projet.\n"
+"\n"
+
+#: ../about.py:49
+msgid "AutoBouquetsMaker, EpgImporter, AutoBackup (used as code reference).\n"
+msgstr "AutoBouquetMaker, EpgImporter, AutoBackup (utilisé comme code de référence).\n"
+
+#: ../settings.py:74 ../settings.py:127
+msgid "Automatic live bouquet update"
+msgstr "Mise à jour automatique des bouquets en direct"
+
+#: ../settings.py:75 ../settings.py:131
+msgid "Automatic live update start time"
+msgstr "Heure de début de la mise à jour automatique des directs"
+
+#: ../serverinfo.py:60 ../about.py:34 ../playlists.py:71 ../playlists.py:98
+msgid "Back"
+msgstr "Retour"
+
+#: ../playlists.py:431
+msgid "Banned"
+msgstr "Banni"
+
+#: ../server.py:152 ../server.py:205
+msgid "Bouquet Name"
+msgstr "Nom du bouquet"
+
+#: ../setupbouquet.py:220 ../setupbouquet.py:298
+msgid "Bouquet name"
+msgstr "Nom du bouquet"
+
+#: ../setupbouquet.py:424
+msgid "Bouquet name cannot be blank. Please enter a unique bouquet name. Minimum 2 characters."
+msgstr "Le nom du bouquet ne peut pas être blanc. Entrer un nom de bouquet unique. Minimum 2 caractères."
+
+#: ../setupbouquet.py:45
+msgid "Bouquets Settings"
+msgstr "Paramètres des bouquets"
+
+#: ../setupbouquet.py:245 ../setupbouquet.py:280 ../setupbouquet.py:349
+msgid "Buffer streams"
+msgstr "Tampons des flux"
+
+#: ../setupbouquet.py:213
+msgid "Buffering Enabled(1)"
+msgstr "Mise en tampon activée(1)"
+
+#: ../buildbouquet.py:31
+msgid "Building Bouquets"
+msgstr "Création des bouquets"
+
+#: ../buildbouquet.py:39 ../buildbouquet.py:178
+msgid "Building Bouquets..."
+msgstr "Création des bouquets..."
+
+#: ../buildbouquet.py:231 ../buildbouquet.py:238 ../buildbouquet.py:243
+msgid "Building Categories"
+msgstr "Création des catégories"
+
+#: ../buildbouquet.py:185
+#, python-format
+msgid "Building Categories %d of %d"
+msgstr "Création des catégories %d de %d"
+
+#: ../buildbouquet.py:241
+msgid "Building General Bouquet"
+msgstr "Création du bouquet général"
+
+#: ../buildbouquet.py:180 ../buildbouquet.py:280
+msgid "Building M3U Bouquets..."
+msgstr "Création des bouquets M3U..."
+
+#: ../setupbouquet.py:56 ../setupbouquet.py:506 ../server.py:48
+#: ../deletebouquets.py:38 ../settings.py:40
+msgid "Cancel"
+msgstr "Annuler"
+
+#: ../setupbouquet.py:248 ../setupbouquet.py:356
+msgid "Catchup Timeshift"
+msgstr "Décalage du rattrapage"
+
+#: ../plugin.py:383
+msgid "Catchup only available on IPTV Streams."
+msgstr "Rattrapage uniquement disponibles pour les flux IPTV."
+
+#: ../viewchannel.py:30
+msgid "Channel List"
+msgstr "Liste des chaînes"
+
+#: ../catchup.py:188
+msgid "Channel has no TV Archive."
+msgstr "La chaîne n'a pas d'archive TV."
+
+#: ../about.py:54
+msgid "Cheers - all donations are very much appreciated."
+msgstr "À votre santé! - tous les dons sont très appréciés."
+
+#: ../setupbouquet.py:479
+msgid "Choose Bouquets"
+msgstr "Choisir les bouquets"
+
+#: ../settings.py:262
+msgid "Choose Directory:"
+msgstr "Chosir le répetoire:"
+
+#: ../settings.py:263
+msgid "Choose directory"
+msgstr "Choisir le répertoire"
+
+#: ../setupbouquet.py:509 ../deletebouquets.py:41
+msgid "Clear All"
+msgstr "Tout effacer"
+
+#: ../mainmenu.py:50 ../viewchannel.py:40 ../catchup.py:313
+msgid "Close"
+msgstr "Fermer"
+
+#: ../setupbouquet.py:57
+msgid "Continue"
+msgstr "Continuer"
+
+#: ../setupbouquet.py:507
+msgid "Create"
+msgstr "Créer"
+
+#: ../buildbouquet.py:285
+msgid "Create Bouquets"
+msgstr "Créer des bouquets"
+
+#: ../settings.py:160
+msgid ""
+"Create a group bouquet for each playlist.\n"
+" *Experimental* "
+msgstr ""
+"Créer un groupe de bouquet pour chaque playlist.\n"
+"*Expérimental*"
+
+#: ../serverinfo.py:47
+msgid "Created At:"
+msgstr "Créé à:"
+
+#: ../about.py:48
+msgid "Credits:\n"
+msgstr "Crédits:\n"
+
+#: ../deletebouquets.py:39
+msgid "Delete"
+msgstr "Supprimer"
+
+#: ../mainmenu.py:92
+msgid "Delete All Jedi IPTV Bouquets"
+msgstr "Effacer tous les bouquets IPTV Jedi"
+
+#: ../deletebouquets.py:31
+msgid "Delete Bouquets"
+msgstr "Effacer les bouquets"
+
+#: ../mainmenu.py:91
+msgid "Delete Individual Bouquets"
+msgstr "Supprimer des bouquets individuels"
+
+#: ../playlists.py:101
+msgid "Delete Playlist"
+msgstr "Effacer la playlist"
+
+#: ../playlists.py:550
+msgid ""
+"Delete unavailable for local M3Us.\n"
+"Manually Delete/Amend M3U files in folder.\n"
+msgstr ""
+"Effacement impossible pour les fichiers M3Us locaux.\n"
+"Supprimer/modifier manuellement les fichiers M3U dans le dossier.\n"
+"\n"
+
+#: ../buildbouquet.py:137 ../buildbouquet.py:162 ../buildbouquet.py:168
+msgid "Deleting Existing Bouquets..."
+msgstr "Effacer les bouquets existants..."
+
+#: ../playlists.py:433
+msgid "Disabled"
+msgstr "Désactivé"
+
+#: ../settings.py:136
+msgid ""
+"Display JediMakerXtream in Main Menu.\n"
+"*Restart GUI required."
+msgstr ""
+"Afficher JediMakerXtream dans le menu principal.\n"
+"* Redémarrage de l'IGU requis."
+
+#: ../plugin.py:78
+msgid "Domain"
+msgstr "Domaine"
+
+#: ../plugin.py:78
+msgid "Domain | Connections"
+msgstr "Domaine|Connexions"
+
+#: ../buildbouquet.py:132
+msgid "Downloading Live data..."
+msgstr "Télécharger donnée Live..."
+
+#: ../update.py:126 ../buildbouquet.py:117
+msgid "Downloading Rytec UK EPG data..."
+msgstr "Téléchargement des données de Rytec UK EPG..."
+
+#: ../buildbouquet.py:153
+msgid "Downloading Series data"
+msgstr "Télechargement des données des Séries"
+
+#: ../buildbouquet.py:146
+msgid "Downloading VOD data"
+msgstr "Téléchargement des données VOD"
+
+#: ../buildbouquet.py:160
+msgid "Downloading get.php file for series stream data"
+msgstr "Téléchargement du fichier get.php pour les données du flux des séries"
+
+#: ../setupbouquet.py:261 ../setupbouquet.py:286 ../setupbouquet.py:334
+msgid "EPG url"
+msgstr "EPG url"
+
+#: ../server.py:41 ../playlists.py:100
+msgid "Edit Playlist"
+msgstr "Éditer la liste de lecture"
+
+#: ../playlists.py:511
+msgid ""
+"Edit unavailable for local M3Us.\n"
+"Manually Delete/Amend M3U files in folder.\n"
+msgstr ""
+"Édition non disponible pour les M3Us locaux.\n"
+"Supprimer/modifier manuellement les fichiers M3U dans le dossier.\n"
+
+#: ../server.py:160 ../server.py:209
+msgid "Epg Url"
+msgstr "Epg Url"
+
+#: ../catchup.py:184
+msgid "Error: Downloading data error."
+msgstr "Erreur: pendant le téléchargement des données."
+
+#: ../playlists.py:435
+msgid "Expired"
+msgstr "Expiré"
+
+#: ../serverinfo.py:48
+msgid "Expiry Date:"
+msgstr "Date d'expiration:"
+
+#: ../setupbouquet.py:561
+msgid "Getting selection list"
+msgstr "Obtenir la liste de sélection"
+
+#: ../settings.py:85 ../settings.py:159
+msgid "Group bouquets into its own folder"
+msgstr "Regrouper les bouquets dans son propre dossier"
+
+#: ../plugin.py:404
+msgid "IPTV Bouquets Creator by KiddaC"
+msgstr "Créateur de bouquets IPTV par KiddaC"
+
+#: ../about.py:53
+msgid "If you would like to buy me a beer or a coffee: https://paypal.me/kiddac \n"
+msgstr "Si vous voulez m'offrir une bière ou un café: https://paypal.me/kiddac \n"
+
+#: ../setupbouquet.py:508 ../deletebouquets.py:40
+msgid "Invert"
+msgstr "Inverser"
+
+#: ../serverinfo.py:44
+msgid "Is Trial:"
+msgstr "Est un essai:"
+
+#: ../plugin.py:183
+msgid "Jedi Maker Xtream"
+msgstr "Jedi Maker Xtream"
+
+#: ../plugin.py:405
+msgid "JediMakerXtream"
+msgstr "JediMakerXtream"
+
+#: ../about.py:45
+msgid "JediMakerXtream "
+msgstr "JediMakerXtream "
+
+#: ../playlists.py:104
+msgid "Last Update:"
+msgstr "Dernière mise à jour:"
+
+#: ../setupbouquet.py:227 ../setupbouquet.py:267 ../setupbouquet.py:306
+msgid "Live categories"
+msgstr "Catégories Live"
+
+#: ../setupbouquet.py:64 ../setupbouquet.py:494 ../playlists.py:68
+msgid "Loading data... Please wait..."
+msgstr "Chargement des données... Merci de patienter..."
+
+#: ../settings.py:73 ../settings.py:123
+msgid "Local M3U File location"
+msgstr "Localisation du fichier M3U local"
+
+#: ../about.py:50
+msgid "Lululla for all the hard work done on XCPlugin and assistance with the project.\n"
+msgstr "Lululla pour tout le travail acharné effectué sur XCPlugin et son aide au projet.\n"
+
+#: ../server.py:114 ../server.py:121 ../server.py:124
+msgid "M3U File"
+msgstr "Fichier M3U"
+
+#: ../server.py:148 ../server.py:163 ../server.py:201
+msgid "M3U external location"
+msgstr "Localisation externe M3U"
+
+#: ../mainmenu.py:41
+msgid "Main Menu"
+msgstr "Menu principal"
+
+#: ../settings.py:83
+msgid "Margin after catchup (mins)"
+msgstr "Marge après rattrapage (min)"
+
+#: ../settings.py:82
+msgid "Margin before catchup (mins)"
+msgstr "Marge avant rattrapage (min)"
+
+#: ../settings.py:152
+msgid "Mark channels that have catchup with a prefix in your bouquets."
+msgstr "Marquer les chaînes qui ont un rattrapage avec un préfix dans vos bouquets."
+
+#: ../about.py:51
+msgid "Massive thanks to Seagen for his endless multi image testing.\n"
+msgstr "Un grand merci à Seagen pour ses tests multi-images sans fin.\n"
+
+#: ../serverinfo.py:46
+msgid "Max Connections:"
+msgstr "Connexions Max:"
+
+#: ../setupbouquet.py:185
+msgid "Newest First"
+msgstr "Plus récent en premier"
+
+#: ../setupbouquet.py:213
+msgid "No Buffering(0)"
+msgstr "Pas de tamporisation(0)"
+
+#: ../buildbouquet.py:134
+msgid "No categories selected."
+msgstr "Pas de catégories sélectionnées."
+
+#: ../buildbouquet.py:139
+msgid "No valid M3U streams in file."
+msgstr "Pas un fichier M3U de flux valide."
+
+#: ../serverinfo.py:61 ../about.py:35
+msgid "OK"
+msgstr "Ok"
+
+#: ../setupbouquet.py:185
+msgid "Oldest First"
+msgstr "Plus ancien en premier"
+
+#: ../setupbouquet.py:185
+msgid "Original Order"
+msgstr "Ordre original"
+
+#: ../server.py:146 ../server.py:158 ../server.py:197
+msgid "Output Type"
+msgstr "Type de sortie"
+
+#: ../server.py:145 ../server.py:157 ../server.py:193
+msgid "Password"
+msgstr "Mot de passe"
+
+#: ../mainmenu.py:135
+msgid "Permanently delete all Jedi created bouquets?"
+msgstr "Effacer définitivement tous les bouquets créés par Jedi?"
+
+#: ../playlists.py:516
+msgid "Permanently delete selected playlist?"
+msgstr "Effacer définitivement toutes les playlists?"
+
+#: ../playlists.py:563
+msgid "Playlist is "
+msgstr "Playlist est "
+
+#: ../mainmenu.py:79 ../playlists.py:55
+msgid "Playlists"
+msgstr "Playlists"
+
+#: ../about.py:47
+msgid ""
+"Plugin enables the simple bouquet creation of standard Xtream codes/XUI One, external and local m3u8 playlists. \n"
+"Play your files via your TV bouquets.\n"
+"\n"
+msgstr ""
+"Le plugin permet la création simple de bouquets à partir de codes Xtream/XUI One standard, de listes de lecture m3u8 externes et locales.\n"
+"Jouez vos fichiers via vos bouquets TV.\n"
+"\n"
+
+#: ../server.py:143 ../server.py:155 ../server.py:185
+msgid "Port"
+msgstr "Port"
+
+#: ../settings.py:80 ../settings.py:151
+msgid "Prefix Catchup channels"
+msgstr "Préfixe des chaînes de rattrapage"
+
+#: ../playlists.py:103
+msgid ""
+"Press OK to create bouquets. \n"
+"View your bouquets by exiting the Jedi plugin and then press the TV button. \n"
+"Go into EPG Importer plugin settings, select your playlist in sources... Save... Manually download sources."
+msgstr ""
+"Appuyez sur OK pour créer des bouquets.\n"
+"Visualisez vos bouquets en quittant le plugin Jedi et en appuyant sur le bouton TV.\n"
+"Allez dans les paramètres du plugin EPG Importer, sélectionnez votre liste de lecture dans sources... Sauvegarder... Télécharger manuellement les sources."
+
+#: ../catchup.py:180
+msgid "Program Data Not Available"
+msgstr "Données du programme non disponibles"
+
+#: ../setupbouquet.py:213
+msgid "Progressive Buffering(3)"
+msgstr "Tamporisation progressive(3)"
+
+#: ../server.py:141 ../server.py:153 ../server.py:177
+msgid "Protocol"
+msgstr "Protocole"
+
+#: ../settings.py:140
+msgid ""
+"Quick start JediMakerXtream playlists from extensions menu.\n"
+"*Restart GUI required."
+msgstr ""
+"Démarrage rapide des playlists JediMakerXtream depuis le menu des extensions.\n"
+"* Redémarrage de l'IGU requis"
+
+#: ../serverinfo.py:50
+msgid "Real URL:"
+msgstr "URL réelle:"
+
+#: ../server.py:305 ../settings.py:236
+msgid "Really close without saving settings?"
+msgstr "Voulez-vous vraiment quitter sans sauver les paramètres?"
+
+#: ../setupbouquet.py:264 ../setupbouquet.py:289 ../setupbouquet.py:352
+msgid "Rebuild XMLTV EPG data"
+msgstr "Reconstruire les données XMLTV EPG"
+
+#: ../setupbouquet.py:257 ../setupbouquet.py:342
+msgid "Replace UK channel names in bouquets with swap names"
+msgstr "Remplacer les noms de chaînes britanniques dans les bouquets par des noms d'échange"
+
+#: ../server.py:49 ../settings.py:41
+msgid "Save"
+msgstr "Enregistrer"
+
+#: ../buildbouquet.py:174
+msgid "Saving Bouquet Data File..."
+msgstr "Enregistrement du fichier de données de bouquet..."
+
+#: ../settings.py:81 ../settings.py:155
+msgid "Select Catchup prefix symbol"
+msgstr "Sélectionnez le symbole de préfixe de rattrapage"
+
+#: ../deletebouquets.py:43
+msgid ""
+"Select all the iptv bouquets you wish to delete. \n"
+"Press OK to invert the selection"
+msgstr ""
+"Sélectionnez tous les bouquets iptv que vous souhaitez supprimer.\n"
+"Appuyez sur OK pour inverser la sélection"
+
+#: ../settings.py:144
+msgid ""
+"Select from the available skins.\n"
+"*Restart GUI required."
+msgstr ""
+"Choisissez parmi les skins disponibles.\n"
+"*Redémarrage de l'IGU requis."
+
+#: ../server.py:138 ../server.py:173
+msgid "Select playlist type"
+msgstr "Choisir le type de playlist"
+
+#: ../settings.py:77 ../settings.py:143
+msgid "Select skin"
+msgstr "Choisir le thème"
+
+#: ../settings.py:124
+msgid ""
+"Select the location of your local m3u files. i.e. /media/hdd/playlists. Press 'OK' to change location.\n"
+"\n"
+"Default location is /etc/enigma2/jediplaylists"
+msgstr ""
+"Sélectionnez l'emplacement de vos fichiers m3u locaux. p.e. /media/hdd/playlists. Appuyez sur 'OK' pour changer d'emplacement.\n"
+"\n"
+"L'emplacement par défaut est /etc/enigma2/jediplaylists"
+
+#: ../settings.py:120
+msgid ""
+"Select the location of your playlists.txt file. i.e. /media/hdd/playlists. Press 'OK' to change location.\n"
+"\n"
+"Default location is /etc/enigma2/jediplaylists"
+msgstr ""
+"Sélectionnez l'emplacement de votre fichier playlists.txt. p.e. /media/hdd/playlists. Appuyez sur 'OK' pour changer d'emplacement.\n"
+"\n"
+"L'emplacement par défaut est /etc/enigma2/jediplaylists"
+
+#: ../setupbouquet.py:511
+msgid ""
+"Select the playlist categories you wish to create bouquets for.\n"
+"Press OK to invert the selection.\n"
+"Press INFO to show the channels in this category."
+msgstr ""
+"Sélectionnez les catégories de listes de lecture pour lesquelles vous souhaitez créer des bouquets.\n"
+"Appuyez sur OK pour inverser la sélection.\n"
+"Appuyez sur INFO pour afficher les chaînes de cette catégorie."
+
+#: ../settings.py:156
+msgid "Select the symbol to prefix your catchup channels with."
+msgstr "Sélectionnez le symbole pour préfixer vos chaînes de rattrapage."
+
+#: ../settings.py:132
+msgid "Select the time of the automatic update."
+msgstr "Sélectionnez l'heure de la mise à jour automatique."
+
+#: ../setupbouquet.py:236 ../setupbouquet.py:274 ../setupbouquet.py:318
+msgid "Series categories"
+msgstr "Catégorie des séries"
+
+#: ../serverinfo.py:52
+msgid "Server Offset:"
+msgstr "Décalage du serveur:"
+
+#: ../server.py:142 ../server.py:154 ../server.py:181
+msgid "Server URL"
+msgstr "URL du serveur"
+
+#: ../playlists.py:486 ../playlists.py:565
+msgid "Server down or user no longer authorised!"
+msgstr "Serveur en panne ou utilisateur plus autorisé !"
+
+#: ../settings.py:78 ../settings.py:147
+msgid "Server timeout (seconds)"
+msgstr "Délai d'attente du serveur (secondes)"
+
+#: ../mainmenu.py:80 ../settings.py:33
+msgid "Settings"
+msgstr "Paramètres"
+
+#: ../setupbouquet.py:510
+msgid "Show Channels"
+msgstr "Afficher les chaînes"
+
+#: ../settings.py:139
+msgid "Show in extensions"
+msgstr "Afficher dans les extensions"
+
+#: ../settings.py:76 ../settings.py:135
+msgid "Show in main menu"
+msgstr "Afficher dans le menu principal"
+
+#: ../server.py:114 ../server.py:121 ../server.py:124
+msgid "Standard Playlist"
+msgstr "Playlist standard"
+
+#: ../update.py:128 ../update.py:132
+msgid "Starting Update..."
+msgstr "Démarrage de la mise à jour..."
+
+#: ../buildbouquet.py:119 ../buildbouquet.py:126
+msgid "Starting..."
+msgstr "Démarrage..."
+
+#: ../serverinfo.py:43
+msgid "Status:"
+msgstr "Statut:"
+
+#: ../setupbouquet.py:230 ../setupbouquet.py:270 ../setupbouquet.py:310
+msgid "Stream type for Live"
+msgstr "Type de flux pour Live"
+
+#: ../setupbouquet.py:239 ../setupbouquet.py:322
+msgid "Stream type for VOD/SERIES"
+msgstr "Type de flux pour VOD/SÉRIES"
+
+#: ../setupbouquet.py:277
+msgid "Stream type for VOD/Series"
+msgstr "Type de flux pour VOD/Séries"
+
+#: ../about.py:46
+msgid ""
+"Support for this plugin and latest versions can be found on https://linuxsat-support.com\n"
+"\n"
+msgstr ""
+"La prise en charge de ce plugin et des dernières versions est disponible sur https://linuxsat-support.com\n"
+"\n"
+
+#: ../catchup.py:301
+#, python-format
+msgid "TV Archive: %s"
+msgstr "Archive TV: %s"
+
+#: ../serverinfo.py:51
+msgid "Timezone:"
+msgstr "Fuseau horaire"
+
+#: ../setupbouquet.py:258 ../setupbouquet.py:346
+msgid "UK only: Force UK name swap"
+msgstr "Royaume-Uni uniquement : forcer l'échange de noms au Royaume-Uni"
+
+#: ../mainmenu.py:90
+msgid "Update Bouquets"
+msgstr "Mise à jour des bouquets"
+
+#: ../settings.py:128
+msgid "Update your live bouquets automatically."
+msgstr "Mettre à jour vos bouquets live automatiquement."
+
+#: ../update.py:77
+msgid "Updating Bouquets"
+msgstr "Mise à jour des bouquets"
+
+#: ../update.py:155
+#, python-format
+msgid "Updating Playlist %d of %d"
+msgstr "Mise à jour playlist %d of %d"
+
+#: ../playlists.py:489 ../playlists.py:571
+msgid "Url is invalid or playlist/user no longer authorised!"
+msgstr "L'URL n'est pas valide ou la liste de lecture/l'utilisateur n'est plus autorisé !"
+
+#: ../setupbouquet.py:254 ../setupbouquet.py:338
+msgid "Use Rytec UK EPG"
+msgstr "Utiliser Rytec UK EPG"
+
+#: ../setupbouquet.py:222 ../setupbouquet.py:302
+msgid "Use name as bouquet prefix"
+msgstr "Utiliser le nom comme préfixe de bouquet"
+
+#: ../setupbouquet.py:251 ../setupbouquet.py:283 ../setupbouquet.py:330
+msgid "Use your provider EPG"
+msgstr "Utiliser l'EPG de votre fournisseur"
+
+#: ../playlists.py:102
+msgid "User Info"
+msgstr "Info utilisateur"
+
+#: ../playlists.py:492 ../playlists.py:495
+msgid "User Info not available for this playlist\n"
+msgstr "Informations utilisateur non disponibles pour cette playlist\n"
+
+#: ../serverinfo.py:28
+msgid "User Information"
+msgstr "Information Utilisateur"
+
+#: ../server.py:144 ../server.py:156 ../server.py:189
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: ../setupbouquet.py:242 ../setupbouquet.py:326
+msgid "VOD bouquet order"
+msgstr "Ordre du bouquet VOD"
+
+#: ../setupbouquet.py:233 ../setupbouquet.py:314
+msgid "VOD categories"
+msgstr "Catégories VOD"
+
+#: ../setupbouquet.py:272
+msgid "Vod categories"
+msgstr "catégories Vod"
+
+#: ../server.py:113 ../server.py:125
+msgid "http://"
+msgstr "http://"
+
+#: ../server.py:113 ../server.py:125
+msgid "https://"
+msgstr "https://"
+
+#: ../buildbouquet.py:231 ../buildbouquet.py:238
+msgid "of"
+msgstr "de"
+
+#: ../server.py:129
+msgid "password"
+msgstr "mot de passe"
+
+#: ../settings.py:72 ../settings.py:119
+msgid "playlists.txt location"
+msgstr "localisation de playlists.txt"
+
+#: ../server.py:128
+msgid "username"
+msgstr "nom d'utilisateur"

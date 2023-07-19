@@ -138,14 +138,14 @@ class JediMakerXtream_MainMenu(Screen):
                 lines = f.readlines()
                 f.seek(0)
                 for line in lines:
-                    if "jmx" not in line:
+                    if "jedimakerxtream" not in line:
                         f.write(line)
                 f.truncate()
 
-            jfunc.purge("/etc/enigma2", "jmx")
+            jfunc.purge("/etc/enigma2", "jedimakerxtream")
 
             if glob.has_epg_importer:
-                jfunc.purge("/etc/epgimport", "jmx")
+                jfunc.purge("/etc/epgimport", "jedimakerxtream")
 
             self.playlists_all = jfunc.getPlaylistJson()
 

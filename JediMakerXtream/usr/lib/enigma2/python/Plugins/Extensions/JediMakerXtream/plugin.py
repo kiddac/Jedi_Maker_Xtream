@@ -112,7 +112,7 @@ if os.path.isdir(origin):
         print(e)
         """
 
-playlists_json = os.path.join(dir_etc, "playlist_all.json")
+playlists_json = os.path.join(dir_etc, "playlist_all_new.json")
 playlist_file = os.path.join(dir_etc, "playlists.txt")
 
 print("*** playlist_file ***", playlist_file)

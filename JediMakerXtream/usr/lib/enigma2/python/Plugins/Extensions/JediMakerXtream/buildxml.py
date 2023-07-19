@@ -26,9 +26,9 @@ def categoryBouquetXml(streamtype, bouquetTitle, bouquetString):
         cleanGroup = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", glob.name)
         cleanGroup = re.sub(r" ", "_", cleanGroup)
         cleanGroup = re.sub(r"_+", "_", cleanGroup)
-        filename = "subbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
+        filename = "subbouquet.jedimakerxtream_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
     else:
-        filename = "userbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
+        filename = "userbouquet.jedimakerxtream_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
     fullpath = os.path.join(filepath, filename)
 
     with open(fullpath, "w+") as f:
@@ -45,7 +45,7 @@ def bouquetsTvXml(streamtype, bouquetTitle):
         cleanGroup = re.sub(r" ", "_", cleanGroup)
         cleanGroup = re.sub(r"_+", "_", cleanGroup)
 
-        groupname = "userbouquet.jmx_" + str(cleanGroup) + ".tv"
+        groupname = "userbouquet.jedimakerxtream_" + str(cleanGroup) + ".tv"
 
         with open("/etc/enigma2/bouquets.tv", "r") as f:
             content = f.read()
@@ -61,126 +61,134 @@ def bouquetsTvXml(streamtype, bouquetTitle):
             nameString = "#NAME " + str(glob.name) + "\n"
             f.write(str(nameString))
 
-            filename = "subbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
+            filename = "subbouquet.jedimakerxtream_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
             f.write(str(bouquetTvString))
 
     else:
-        filename = "userbouquet.jmx_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
+        filename = "userbouquet.jedimakerxtream_" + str(streamtype) + "_" + str(cleanTitle) + ".tv"
 
         with open("/etc/enigma2/bouquets.tv", "a+") as f:
             bouquetTvString = '#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + str(filename) + '" ORDER BY bouquet\n'
             f.write(str(bouquetTvString))
 
 
-def buildXMLTVChannelFile(epg_name_list):
-
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(glob.name))
-    cleanName = re.sub(r" ", "_", cleanName)
-    cleanName = re.sub(r"_+", "_", cleanName)
-
-    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', "_", str(glob.old_name))
-    cleanNameOld = re.sub(r" ", "_", cleanNameOld)
-    cleanNameOld = re.sub(r"_+", "_", cleanNameOld)
-
-    # remove old files
-    jfunc.purge("/etc/epgimport", "jmx." + str(cleanName) + ".channels.xml")
-    jfunc.purge("/etc/epgimport", "jmx." + str(cleanNameOld) + ".channels.xml")
-
-    jfunc.purge("/etc/epgimport", "jmx." + str(cleanName) + ".sources.xml")
-    jfunc.purge("/etc/epgimport", "jmx." + str(cleanNameOld) + ".sources.xml")
+def buildXMLTVSourceFile():
+    safeName = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', "_", str(glob.name))
+    safeName = re.sub(r" ", "_", safeName)
+    safeName = re.sub(r"_+", "_", safeName)
 
     filepath = "/etc/epgimport/"
-    epgfilename = "jmx." + str(cleanName) + ".channels.xml"
+    epgfilename = "jedimakerxtream." + str(safeName) + ".channels.xml"
     channelpath = os.path.join(filepath, epgfilename)
 
-    root = ET.Element("channels")
+    # buildXMLTVSourceFile
+
+    sourcefile = "/etc/epgimport/jedimakerxtream.sources.xml"
+    if not os.path.isfile(sourcefile) or os.stat(sourcefile).st_size == 0:
+        with open(sourcefile, "w") as f:
+            xml_str = '<?xml version="1.0" encoding="utf-8"?>\n'
+            xml_str += '<sources>\n'
+            xml_str += '<sourcecat sourcecatname="JediMakerXtream EPG">\n'
+            xml_str += '</sourcecat>\n'
+            xml_str += '</sources>\n'
+            f.write(xml_str)
+
+    import xml.etree.ElementTree as ET
+
+    tree = ET.parse(sourcefile)
+    root = tree.getroot()
+    sourcecat = root.find("sourcecat")
+
+    exists = False
+
+    for sourceitem in sourcecat:
+        if channelpath in sourceitem.attrib["channels"]:
+            exists = True
+            break
+
+    if exists is False:
+        source = ET.SubElement(sourcecat, "source", type="gen_xmltv", nocheck="1", channels=channelpath)
+        description = ET.SubElement(source, "description")
+        description.text = str(safeName)
+
+        url = ET.SubElement(source, "url")
+        url.text = str(glob.xmltv_address)
+
+        tree.write(sourcefile)
+
+    with open(sourcefile, "r+") as f:
+        xml_str = f.read()
+        f.seek(0)
+        doc = minidom.parseString(xml_str)
+        xml_output = doc.toprettyxml(encoding="utf-8", indent="\t")
+        try:
+            xml_output = os.linesep.join([s for s in xml_output.splitlines() if s.strip()])
+        except:
+            xml_output = os.linesep.join([s for s in xml_output.decode().splitlines() if s.strip()])
+        f.write(xml_output)
+
+
+def buildXMLTVChannelFile(epg_name_list):
+    safeName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(glob.name))
+    safeName = re.sub(r" ", "_", safeName)
+    safeName = re.sub(r"_+", "_", safeName)
+
+    safeNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', "_", str(glob.old_name))
+    safeNameOld = re.sub(r" ", "_", safeNameOld)
+    safeNameOld = re.sub(r"_+", "_", safeNameOld)
+
+    # remove old files
+    jfunc.purge("/etc/epgimport", "jedimakerxtream." + str(safeName) + ".channels.xml")
+    jfunc.purge("/etc/epgimport", "jedimakerxtream." + str(safeNameOld) + ".channels.xml")
+
+    filepath = "/etc/epgimport/"
+    epgfilename = "jedimakerxtream." + str(safeName) + ".channels.xml"
+    channelpath = os.path.join(filepath, epgfilename)
 
     # if xmltv file doesn't already exist, create file and build.
     if not os.path.isfile(channelpath):
         open(channelpath, "a").close()
 
-        for i in range(len(epg_name_list)):
-            newchannel = ET.SubElement(root, "channel")
-            newchannel.set("id", epg_name_list[i][0])
-            newchannel.text = epg_name_list[i][1]
+    # buildXMLTVChannelFile
 
-        xml_str = ET.tostring(root).decode("utf-8")
-        doc = minidom.parseString(xml_str)
-        xml_output = doc.toprettyxml(indent="")
-        xml_output = os.linesep.join([s for s in xml_output.splitlines() if s.strip()])
-        with open(channelpath, "w") as f:
-            f.write(xml_output)
-    else:
-        tree = ET.parse(channelpath)
-        root = tree.getroot()
-
-        for channel in root.findall("channel"):
-            root.remove(channel)
-
-        for i in range(len(epg_name_list)):
-            newchannel = ET.SubElement(root, "channel")
-            newchannel.set("id", epg_name_list[i][0])
-            newchannel.text = epg_name_list[i][1]
-
-        xml_str = str(ET.tostring(root, "utf-8"))
-        doc = minidom.parseString(xml_str)
-        xml_output = doc.toprettyxml(encoding="utf-8", indent="")
-        xml_output = os.linesep.join([s for s in xml_output.splitlines() if s.strip()])
-        with open(channelpath, "w") as f:
-            f.write(xml_output)
-
-
-def buildXMLTVSourceFile():
-
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', "_", str(glob.name))
-    cleanName = re.sub(r" ", "_", cleanName)
-    cleanName = re.sub(r"_+", "_", cleanName)
-
-    filepath = "/etc/epgimport/"
-    epgfilename = "jmx." + str(cleanName) + ".channels.xml"
-    channelpath = os.path.join(filepath, epgfilename)
-
-    filename = "jmx." + str(cleanName) + ".sources.xml"
-    sourcepath = os.path.join(filepath, filename)
-
-    with open(sourcepath, "w") as f:
+    with open(channelpath, "w") as f:
         xml_str = '<?xml version="1.0" encoding="utf-8"?>\n'
-        xml_str += '<sources>\n'
-        xml_str += '<sourcecat sourcecatname="IPTV ' + str(cleanName) + '">\n'
-        xml_str += '<source type="gen_xmltv" nocheck="1" channels="' + channelpath + '">\n'
-        xml_str += '<description>' + str(cleanName) + '</description>\n'
-        if glob.fixepg:
-            xml_str += '<url><![CDATA[' + str(filepath + 'jmx.' + str(cleanName) + '.xmltv2.xml') + ']]></url>\n'
-        else:
-            if "xmltv.php" in str(glob.xmltv_address):
-                xml_str += '<url><![CDATA[' + str(glob.xmltv_address) + '&next_days=7]]></url>\n'
-            else:
-                xml_str += '<url><![CDATA[' + str(glob.xmltv_address) + ']]></url>\n'
+        xml_str += '<channels>\n'
 
-        xml_str += '</source>\n'
-        xml_str += '</sourcecat>\n'
-        xml_str += '</sources>\n'
+        for i in range(len(epg_name_list)):
+            channelid = epg_name_list[i][0]
+            if channelid and "&" in channelid:
+                channelid = channelid.replace("&", "&amp;")
+
+            serviceref = epg_name_list[i][1]
+            name = epg_name_list[i][2]
+
+            if channelid and channelid != "None":
+                xml_str += '\t<channel id="' + str(channelid) + '">' + str(serviceref) + '</channel><!-- ' + str(name) + ' -->\n'
+
+        xml_str += '</channels>\n'
+
         f.write(xml_str)
 
 
 def downloadXMLTV():
 
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(glob.name))
-    cleanName = re.sub(r" ", "_", cleanName)
-    cleanName = re.sub(r"_+", "_", cleanName)
+    safeName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(glob.name))
+    safeName = re.sub(r" ", "_", safeName)
+    safeName = re.sub(r"_+", "_", safeName)
 
-    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', "_", str(glob.old_name))
-    cleanNameOld = re.sub(r" ", "_", cleanNameOld)
-    cleanNameOld = re.sub(r"_+", "_", cleanNameOld)
+    safeNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\* ]', "_", str(glob.old_name))
+    safeNameOld = re.sub(r" ", "_", safeNameOld)
+    safeNameOld = re.sub(r"_+", "_", safeNameOld)
 
-    jfunc.purge("/etc/epgimport", "jmx." + str(cleanName) + ".xmltv.xml")
-    jfunc.purge("/etc/epgimport", "jmx." + str(cleanNameOld) + ".xmltv.xml")
-    jfunc.purge("/etc/epgimport", "jmx." + str(cleanName) + ".xmltv2.xml")
-    jfunc.purge("/etc/epgimport", "jmx." + str(cleanNameOld) + ".xmltv2.xml")
+    jfunc.purge("/etc/epgimport", "jedimakerxtream." + str(safeName) + ".xmltv.xml")
+    jfunc.purge("/etc/epgimport", "jedimakerxtream." + str(safeNameOld) + ".xmltv.xml")
+    jfunc.purge("/etc/epgimport", "jedimakerxtream." + str(safeName) + ".xmltv2.xml")
+    jfunc.purge("/etc/epgimport", "jedimakerxtream." + str(safeNameOld) + ".xmltv2.xml")
 
     filepath = "/etc/epgimport/"
-    epgfilename = "jmx." + str(cleanName) + ".xmltv.xml"
+    epgfilename = "jedimakerxtream." + str(safeName) + ".xmltv.xml"
     epgpath = os.path.join(filepath, epgfilename)
     response = downloads.checkGZIP(glob.xmltv_address)
 
@@ -193,4 +201,4 @@ def downloadXMLTV():
             # tree = ET.parse(f)
             tree = ET.parse(f, parser=ET.XMLParser(encoding="utf-8"))
 
-        tree.write("/etc/epgimport/" + "jmx." + str(cleanName) + ".xmltv2.xml", encoding="utf-8", xml_declaration=True)
+        tree.write("/etc/epgimport/" + "jedimakerxtream." + str(safeName) + ".xmltv2.xml", encoding="utf-8", xml_declaration=True)

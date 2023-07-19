@@ -158,13 +158,13 @@ def readbouquetdata():
 
 
 def deleteBouquets():
-    cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.name))
-    cleanName = re.sub(r' ', '_', cleanName)
-    cleanName = re.sub(r'_+', '_', cleanName)
+    safeName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.name))
+    safeName = re.sub(r' ', '_', safeName)
+    safeName = re.sub(r'_+', '_', safeName)
 
-    cleanNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.old_name))
-    cleanNameOld = re.sub(r' ', '_', cleanNameOld)
-    cleanNameOld = re.sub(r'_+', '_', cleanNameOld)
+    safeNameOld = re.sub(r'[\<\>\:\"\/\\\|\?\*]', '_', str(glob.old_name))
+    safeNameOld = re.sub(r' ', '_', safeNameOld)
+    safeNameOld = re.sub(r'_+', '_', safeNameOld)
 
     # delete old bouquet files
 
@@ -172,35 +172,35 @@ def deleteBouquets():
         lines = f.readlines()
         f.seek(0)
         for line in lines:
-            if (glob.live and "jmx_live_" + str(cleanNameOld) + "_" in line) or (glob.live and "jmx_live_" + str(cleanName) + "_" in line):
+            if (glob.live and "jedimakerxtream_live_" + str(safeNameOld) + "_" in line) or (glob.live and "jedimakerxtream_live_" + str(safeName) + "_" in line):
                 continue
-            if (glob.vod and "jmx_vod_" + str(cleanNameOld) + "_" in line) or (glob.vod and "jmx_vod_" + str(cleanName) + "_" in line):
+            if (glob.vod and "jedimakerxtream_vod_" + str(safeNameOld) + "_" in line) or (glob.vod and "jedimakerxtream_vod_" + str(safeName) + "_" in line):
                 continue
-            if (glob.series and "jmx_series_" + str(cleanNameOld) + "_" in line) or (glob.series and "jmx_series_" + str(cleanName) + "_" in line):
+            if (glob.series and "jedimakerxtream_series_" + str(safeNameOld) + "_" in line) or (glob.series and "jedimakerxtream_series_" + str(safeName) + "_" in line):
                 continue
-            if ("jmx_" + str(cleanNameOld) in line) or ("jmx_" + str(cleanName) in line):
+            if ("jedimakerxtream_" + str(safeNameOld) in line) or ("jedimakerxtream_" + str(safeName) in line):
                 continue
             f.write(line)
         f.truncate()
 
     if glob.live:
-        purge("/etc/enigma2", "jmx_live_" + str(cleanName))
-        purge("/etc/enigma2", "jmx_live_" + str(cleanNameOld))
+        purge("/etc/enigma2", "jedimakerxtream_live_" + str(safeName))
+        purge("/etc/enigma2", "jedimakerxtream_live_" + str(safeNameOld))
 
         if glob.has_epg_importer:
-            purge("/etc/epgimport", "jmx." + str(cleanName))
-            purge("/etc/epgimport", "jmx." + str(cleanNameOld))
+            purge("/etc/epgimport", "jedimakerxtream." + str(safeName))
+            purge("/etc/epgimport", "jedimakerxtream." + str(safeNameOld))
 
     if glob.vod:
-        purge("/etc/enigma2", "jmx_vod_" + str(cleanName))
-        purge("/etc/enigma2", "jmx_vod_" + str(cleanNameOld))
+        purge("/etc/enigma2", "jedimakerxtream_vod_" + str(safeName))
+        purge("/etc/enigma2", "jedimakerxtream_vod_" + str(safeNameOld))
 
     if glob.series:
-        purge("/etc/enigma2", "jmx_series_" + str(cleanName))
-        purge("/etc/enigma2", "jmx_series_" + str(cleanNameOld))
+        purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeName))
+        purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeNameOld))
 
-    purge("/etc/enigma2", str(cleanName) + str(".tv"))
-    purge("/etc/enigma2", str(cleanNameOld) + str(".tv"))
+    purge("/etc/enigma2", str(safeName) + str(".tv"))
+    purge("/etc/enigma2", str(safeNameOld) + str(".tv"))
 
     refreshBouquets()
 
@@ -479,7 +479,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
             if epgid:
                 epg_name_list.append([str(epg_channel_id), source_epg])
             elif streamvaluesgroup[i]["epg_channel_id"]:
-                epg_name_list.append([str(streamvaluesgroup[i]["epg_channel_id"]), source_epg])
+                epg_name_list.append([str(streamvaluesgroup[i]["epg_channel_id"]), source_epg, str(streamvaluesgroup[i]["name"])])
 
             name = streamvaluesgroup[i]["name"]
 

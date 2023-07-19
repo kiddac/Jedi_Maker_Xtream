@@ -110,27 +110,48 @@ class JediMakerXtream_DeleteBouquets(Screen):
         for x in selectedBouquetList:
             bouquet_name = x
 
-            cleanName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(bouquet_name))
-            cleanName = re.sub(r" ", "_", cleanName)
-            cleanName = re.sub(r"_+", "_", cleanName)
+            safeName = re.sub(r'[\<\>\:\"\/\\\|\?\*]', "_", str(bouquet_name))
+            safeName = re.sub(r" ", "_", safeName)
+            safeName = re.sub(r"_+", "_", safeName)
 
             with open("/etc/enigma2/bouquets.tv", "r+") as f:
                 lines = f.readlines()
                 f.seek(0)
                 for line in lines:
-                    if "jmx_live_" + str(cleanName) + "_" in line or "jmx_vod_" + str(cleanName) + "_" in line or "jmx_series_" + str(cleanName) + "_" in line or "jmx_" + str(cleanName) in line:
+                    if "jedimakerxtream_live_" + str(safeName) + "_" in line or "jedimakerxtream_vod_" + str(safeName) + "_" in line or "jedimakerxtream_series_" + str(safeName) + "_" in line or "jedimakerxtream_" + str(safeName) in line:
                         continue
                     f.write(line)
                 f.truncate()
 
-            jfunc.purge("/etc/enigma2", "jmx_live_" + str(cleanName) + "_")
-            jfunc.purge("/etc/enigma2", "jmx_vod_" + str(cleanName) + "_")
-            jfunc.purge("/etc/enigma2", "jmx_series_" + str(cleanName) + "_")
-            jfunc.purge("/etc/enigma2", str(cleanName) + str(".tv"))
+            jfunc.purge("/etc/enigma2", "jedimakerxtream_live_" + str(safeName) + "_")
+            jfunc.purge("/etc/enigma2", "jedimakerxtream_vod_" + str(safeName) + "_")
+            jfunc.purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeName) + "_")
+            jfunc.purge("/etc/enigma2", str(safeName) + str(".tv"))
 
             if glob.has_epg_importer:
-                jfunc.purge("/etc/epgimport", "jmx." + str(cleanName) + ".channels.xml")
-                jfunc.purge("/etc/epgimport", "jmx." + str(cleanName) + ".sources.xml")
+                jfunc.purge("/etc/epgimport", "jedimakerxtream." + str(safeName) + ".channels.xml")
+
+                # remove sources from source file
+                sourcefile = "/etc/epgimport/jedimakerxtream.sources.xml"
+
+                if os.path.isfile(sourcefile):
+
+                    import xml.etree.ElementTree as ET
+                    tree = ET.parse(sourcefile)
+                    root = tree.getroot()
+
+                    for elem in root.iter():
+                        for child in list(elem):
+                            description = ""
+                            if child.tag == "source":
+                                try:
+                                    description = child.find("description").text
+                                    if safeName in description:
+                                        elem.remove(child)
+                                except:
+                                    pass
+
+                    tree.write(sourcefile)
 
             self.deleteBouquetFile(bouquet_name)
             glob.firstrun = 0

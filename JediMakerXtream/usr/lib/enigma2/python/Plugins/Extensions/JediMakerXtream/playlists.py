@@ -188,7 +188,7 @@ class JediMakerXtream_Playlist(Screen):
         for line in lines:
             self.protocol = "http://"
             self.domain = ""
-            self.port = 80
+            self.port = ""
             self.username = ""
             self.password = ""
             self.type = "m3u"
@@ -219,7 +219,10 @@ class JediMakerXtream_Playlist(Screen):
                 if parsed_uri.port:
                     self.port = parsed_uri.port
 
-                self.host = "%s%s:%s" % (self.protocol, self.domain, self.port)
+                if self.port:
+                    self.host = "%s%s:%s" % (self.protocol, self.domain, self.port)
+                else:
+                    self.host = "%s%s" % (self.protocol, self.domain)
 
                 query = parse_qs(parsed_uri.query, keep_blank_values=True)
 
@@ -321,7 +324,7 @@ class JediMakerXtream_Playlist(Screen):
 
             if "username" in self.playlist_data["user_info"] and "password" in self.playlist_data["user_info"] and "auth" in self.playlist_data["user_info"] and \
                 "status" in self.playlist_data["user_info"] and "active_cons" in self.playlist_data["user_info"] and "max_connections" in self.playlist_data["user_info"] and \
-                    "allowed_output_formats" in self.playlist_data["user_info"] and "url" in self.playlist_data["server_info"] and "port" in self.playlist_data["server_info"] and \
+                    "allowed_output_formats" in self.playlist_data["user_info"] and "url" in self.playlist_data["server_info"] and \
                     "server_protocol" in self.playlist_data["server_info"]:
                 return True
             else:

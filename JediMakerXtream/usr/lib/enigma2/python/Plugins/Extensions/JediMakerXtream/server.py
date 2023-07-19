@@ -124,7 +124,7 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
             self.playlisttypeCfg = NoSave(ConfigSelection(default="standard", choices=[("standard", _("Standard Playlist")), ("m3u", _("M3U File"))]))
             self.protocolCfg = NoSave(ConfigSelection(default="http://", choices=[("http://", _("http://")), ("https://", _("https://"))]))
             self.serverCfg = NoSave(ConfigText(default="domain.xyz", fixed_size=False))
-            self.portCfg = NoSave(ConfigNumber(default=80))
+            self.portCfg = NoSave(ConfigNumber(default=""))
             self.usernameCfg = NoSave(ConfigText(default=_("username"), fixed_size=False))
             self.passwordCfg = NoSave(ConfigText(default=_("password"), fixed_size=False))
             self.outputCfg = NoSave(ConfigSelection(default=self.output, choices=[("ts", "ts"), ("m3u8", "m3u8")]))

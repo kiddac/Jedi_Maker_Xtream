@@ -477,7 +477,7 @@ def process_category(category_name, category_type, category_id, domain, port, us
             source_epg = "1" + str(custom_sid) + "http%3a//example.m3u8"
 
             if epgid:
-                epg_name_list.append([str(epg_channel_id), source_epg])
+                epg_name_list.append([str(epg_channel_id), source_epg, str(streamvaluesgroup[i]["name"])])
             elif streamvaluesgroup[i]["epg_channel_id"]:
                 epg_name_list.append([str(streamvaluesgroup[i]["epg_channel_id"]), source_epg, str(streamvaluesgroup[i]["name"])])
 

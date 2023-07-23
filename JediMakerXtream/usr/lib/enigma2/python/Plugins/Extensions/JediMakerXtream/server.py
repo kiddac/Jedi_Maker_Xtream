@@ -314,7 +314,7 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
     def createNewEntry(self):
         if self.playlisttypeCfg.value == "standard":
 
-            if self.portCfg.value.isdigit():
+            if str(self.portCfg.value).isdigit():
                 self.newEntry = "\n" + str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + "/get.php?username=" + str(self.usernameCfg.value) + \
                     "&password=" + str(self.passwordCfg.value) + "&type=" + self.type + "&output=" + str(self.outputCfg.value) + "\n"
             else:
@@ -329,7 +329,7 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
     def editEntry(self):
         if self.playlisttypeCfg.value == "standard":
 
-            if self.port.isdigit():
+            if str(self.port).isdigit():
                 oldEntry = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/get.php?username=" + str(self.username) + "&password=" + str(self.password) + "&type=" + str(self.type) + \
                     "&output=" + str(self.output)
 
@@ -367,7 +367,7 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
             glob.current_playlist["playlist_info"]["username"] = str(self.usernameCfg.value)
             glob.current_playlist["playlist_info"]["password"] = str(self.passwordCfg.value)
             glob.current_playlist["playlist_info"]["output"] = str(self.outputCfg.value)
-            if self.portCfg.value.isdigit():
+            if str(self.portCfg.value).isdigit():
                 glob.current_playlist["playlist_info"]["address"] = str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + \
                     "/get.php?username=" + str(self.usernameCfg.value) + "&password=" + str(self.passwordCfg.value) + "&type=" + str(self.type) + "&output=" + str(self.outputCfg.value)
             else:

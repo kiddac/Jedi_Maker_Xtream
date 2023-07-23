@@ -168,7 +168,7 @@ class JediMakerXtream_Update(Screen):
             self.xmltvprotocol = self.protocol
             self.domain = glob.current_playlist["playlist_info"]["domain"]
             self.port = str(glob.current_playlist["playlist_info"]["port"])
-            if self.port.isdigit():
+            if str(self.port).isdigit():
                 self.host = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/"
                 self.xmltvhost = str(self.xmltvprotocol) + str(self.domain) + ":" + str(self.port) + "/"
             else:

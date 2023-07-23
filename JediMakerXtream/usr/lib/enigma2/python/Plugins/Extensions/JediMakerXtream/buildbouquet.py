@@ -105,7 +105,7 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.password = self.bouquet["playlist_info"]["password"]
             self.output = self.bouquet["playlist_info"]["output"]
 
-            if self.port.isdigit():
+            if str(self.port).isdigit():
                 self.host = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/"
             else:
                 self.host = str(self.protocol) + str(self.domain) + "/"

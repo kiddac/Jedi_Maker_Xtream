@@ -57,7 +57,7 @@ class JediMakerXtream_ViewChannels(Screen):
         protocol = glob.current_playlist["playlist_info"]["protocol"]
         domain = glob.current_playlist["playlist_info"]["domain"]
         port = str(glob.current_playlist["playlist_info"]["port"])
-        if port.isdigit():
+        if str(port).isdigit():
             host = str(protocol) + str(domain) + ":" + str(port) + "/"
         else:
             host = str(protocol) + str(domain) + "/"

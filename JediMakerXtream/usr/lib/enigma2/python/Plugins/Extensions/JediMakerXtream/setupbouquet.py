@@ -87,7 +87,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             xmltvprotocol = protocol
             domain = glob.current_playlist["playlist_info"]["domain"]
             port = str(glob.current_playlist["playlist_info"]["port"])
-            if port.isdigit():
+            if str(port).isdigit():
                 host = str(protocol) + str(domain) + ":" + str(port) + "/"
                 xmltvhost = str(xmltvprotocol) + str(domain) + ":" + str(port) + "/"
             else:
@@ -524,7 +524,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
             protocol = glob.current_playlist["playlist_info"]["protocol"]
             domain = glob.current_playlist["playlist_info"]["domain"]
             port = str(glob.current_playlist["playlist_info"]["port"])
-            if port.isdigit():
+            if str(port).isdigit():
                 host = str(protocol) + str(domain) + ":" + str(port) + "/"
             else:
                 host = str(protocol) + str(domain) + "/"

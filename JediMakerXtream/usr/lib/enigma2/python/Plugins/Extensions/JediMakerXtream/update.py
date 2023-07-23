@@ -168,8 +168,12 @@ class JediMakerXtream_Update(Screen):
             self.xmltvprotocol = self.protocol
             self.domain = glob.current_playlist["playlist_info"]["domain"]
             self.port = str(glob.current_playlist["playlist_info"]["port"])
-            self.host = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/"
-            self.xmltvhost = str(self.xmltvprotocol) + str(self.domain) + ":" + str(self.port) + "/"
+            if self.port.isdigit():
+                self.host = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/"
+                self.xmltvhost = str(self.xmltvprotocol) + str(self.domain) + ":" + str(self.port) + "/"
+            else:
+                self.host = str(self.protocol) + str(self.domain) + "/"
+                self.xmltvhost = str(self.xmltvprotocol) + str(self.domain) + "/"
 
         if self.playlisttype == "xtream":
             self.username = glob.current_playlist["playlist_info"]["username"]

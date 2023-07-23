@@ -104,7 +104,12 @@ class JediMakerXtream_BuildBouquets(Screen):
             self.username = self.bouquet["playlist_info"]["username"]
             self.password = self.bouquet["playlist_info"]["password"]
             self.output = self.bouquet["playlist_info"]["output"]
-            self.host = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/"
+
+            if self.port.isdigit():
+                self.host = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/"
+            else:
+                self.host = str(self.protocol) + str(self.domain) + "/"
+
             self.get_api = str(self.host) + "get.php?username=" + str(self.username) + "&password=" + str(self.password) + "&type=m3u_plus&output=" + str(self.output)
             self.player_api = str(self.host) + "player_api.php?username=" + str(self.username) + "&password=" + str(self.password)
             self.LiveStreamsUrl = self.player_api + "&action=get_live_streams"

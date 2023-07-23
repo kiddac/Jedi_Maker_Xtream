@@ -118,7 +118,10 @@ class JediMakerXtream_DeleteBouquets(Screen):
                 lines = f.readlines()
                 f.seek(0)
                 for line in lines:
-                    if "jedimakerxtream_live_" + str(safeName) + "_" in line or "jedimakerxtream_vod_" + str(safeName) + "_" in line or "jedimakerxtream_series_" + str(safeName) + "_" in line or "jedimakerxtream_" + str(safeName) in line:
+                    if "jedimakerxtream_live_" + str(safeName) + "_" in line or \
+                        "jedimakerxtream_vod_" + str(safeName) + "_" in line or \
+                        "jedimakerxtream_series_" + str(safeName) + "_" in line or \
+                        "jedimakerxtream_" + str(safeName) in line:
                         continue
                     f.write(line)
                 f.truncate()

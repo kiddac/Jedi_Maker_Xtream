@@ -12,6 +12,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.List import List
 from Screens.Screen import Screen
 import json
+import os
 
 
 class JediMakerXtream_ViewChannels(Screen):
@@ -56,7 +57,10 @@ class JediMakerXtream_ViewChannels(Screen):
         protocol = glob.current_playlist["playlist_info"]["protocol"]
         domain = glob.current_playlist["playlist_info"]["domain"]
         port = str(glob.current_playlist["playlist_info"]["port"])
-        host = str(protocol) + str(domain) + ":" + str(port) + "/"
+        if port.isdigit():
+            host = str(protocol) + str(domain) + ":" + str(port) + "/"
+        else:
+            host = str(protocol) + str(domain) + "/"
         player_api = str(host) + "player_api.php?username=" + str(username) + "&password=" + str(password)
         liveStreamsUrl = player_api + "&action=get_live_streams"
         vodStreamsUrl = player_api + "&action=get_vod_streams"

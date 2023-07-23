@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from . import _
-from .plugin import skin_path, playlist_file, playlists_json, hdr
+from .plugin import skin_path, playlist_file, playlists_json
 from .jediStaticText import StaticText
 
 from . import globalfunctions as jfunc
@@ -19,7 +19,6 @@ from Screens.Screen import Screen
 
 import os
 import json
-import shutil
 
 
 class JediMakerXtream_AddServer(ConfigListScreen, Screen):
@@ -113,7 +112,7 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
                 self.protocolCfg = NoSave(ConfigSelection(default=self.protocol, choices=[("http://", _("http://")), ("https://", _("https://"))]))
                 self.playlisttypeCfg = NoSave(ConfigSelection(default="standard", choices=[("standard", _("Standard Playlist")), ("m3u", _("M3U File"))]))
                 self.serverCfg = NoSave(ConfigText(default=self.domain, fixed_size=False))
-                self.portCfg = NoSave(ConfigNumber(default=int(self.port)))
+                self.portCfg = NoSave(ConfigText(fixed_size=False))
                 self.usernameCfg = NoSave(ConfigText(default=self.username, fixed_size=False))
                 self.passwordCfg = NoSave(ConfigText(default=self.password, fixed_size=False))
                 self.outputCfg = NoSave(ConfigSelection(default=self.output, choices=[("ts", "ts"), ("m3u8", "m3u8")]))
@@ -123,10 +122,10 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
         else:
             self.playlisttypeCfg = NoSave(ConfigSelection(default="standard", choices=[("standard", _("Standard Playlist")), ("m3u", _("M3U File"))]))
             self.protocolCfg = NoSave(ConfigSelection(default="http://", choices=[("http://", _("http://")), ("https://", _("https://"))]))
-            self.serverCfg = NoSave(ConfigText(default="domain.xyz", fixed_size=False))
-            self.portCfg = NoSave(ConfigNumber(default=""))
-            self.usernameCfg = NoSave(ConfigText(default=_("username"), fixed_size=False))
-            self.passwordCfg = NoSave(ConfigText(default=_("password"), fixed_size=False))
+            self.serverCfg = NoSave(ConfigText(fixed_size=False))
+            self.portCfg = NoSave(ConfigText(fixed_size=False))
+            self.usernameCfg = NoSave(ConfigText(fixed_size=False))
+            self.passwordCfg = NoSave(ConfigText(fixed_size=False))
             self.outputCfg = NoSave(ConfigSelection(default=self.output, choices=[("ts", "ts"), ("m3u8", "m3u8")]))
             self.addressCfg = NoSave(ConfigText(default=self.address, fixed_size=False))
 
@@ -314,8 +313,13 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
 
     def createNewEntry(self):
         if self.playlisttypeCfg.value == "standard":
-            self.newEntry = "\n" + str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + "/get.php?username=" + str(self.usernameCfg.value) + \
-                "&password=" + str(self.passwordCfg.value) + "&type=" + self.type + "&output=" + str(self.outputCfg.value) + "\n"
+
+            if self.portCfg.value.isdigit():
+                self.newEntry = "\n" + str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + "/get.php?username=" + str(self.usernameCfg.value) + \
+                    "&password=" + str(self.passwordCfg.value) + "&type=" + self.type + "&output=" + str(self.outputCfg.value) + "\n"
+            else:
+                self.newEntry = "\n" + str(self.protocolCfg.value) + str(self.serverCfg.value) + "/get.php?username=" + str(self.usernameCfg.value) + \
+                    "&password=" + str(self.passwordCfg.value) + "&type=" + self.type + "&output=" + str(self.outputCfg.value) + "\n"
         else:
             self.newEntry = "\n" + str(self.addressCfg.value)
         with open(playlist_file, "a") as f:
@@ -325,11 +329,18 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
     def editEntry(self):
         if self.playlisttypeCfg.value == "standard":
 
-            oldEntry = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/get.php?username=" + str(self.username) + "&password=" + str(self.password) + "&type=" + str(self.type) + \
-                "&output=" + str(self.output)
+            if self.port.isdigit():
+                oldEntry = str(self.protocol) + str(self.domain) + ":" + str(self.port) + "/get.php?username=" + str(self.username) + "&password=" + str(self.password) + "&type=" + str(self.type) + \
+                    "&output=" + str(self.output)
 
-            editEntry = "\n" + str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + "/get.php?username=" + str(self.usernameCfg.value) + \
-                "&password=" + str(self.passwordCfg.value) + "&type=" + str(self.type) + "&output=" + str(self.outputCfg.value) + "\r\n"
+                editEntry = "\n" + str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + "/get.php?username=" + str(self.usernameCfg.value) + \
+                    "&password=" + str(self.passwordCfg.value) + "&type=" + str(self.type) + "&output=" + str(self.outputCfg.value) + "\r\n"
+            else:
+                oldEntry = str(self.protocol) + str(self.domain) + "/get.php?username=" + str(self.username) + "&password=" + str(self.password) + "&type=" + str(self.type) + \
+                    "&output=" + str(self.output)
+
+                editEntry = "\n" + str(self.protocolCfg.value) + str(self.serverCfg.value) + "/get.php?username=" + str(self.usernameCfg.value) + \
+                    "&password=" + str(self.passwordCfg.value) + "&type=" + str(self.type) + "&output=" + str(self.outputCfg.value) + "\r\n"
 
         else:
             oldEntry = self.address
@@ -356,8 +367,13 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
             glob.current_playlist["playlist_info"]["username"] = str(self.usernameCfg.value)
             glob.current_playlist["playlist_info"]["password"] = str(self.passwordCfg.value)
             glob.current_playlist["playlist_info"]["output"] = str(self.outputCfg.value)
-            glob.current_playlist["playlist_info"]["address"] = str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + \
-                "/get.php?username=" + str(self.usernameCfg.value) + "&password=" + str(self.passwordCfg.value) + "&type=" + str(self.type) + "&output=" + str(self.outputCfg.value)
+            if self.portCfg.value.isdigit():
+                glob.current_playlist["playlist_info"]["address"] = str(self.protocolCfg.value) + str(self.serverCfg.value) + ":" + str(self.portCfg.value) + \
+                    "/get.php?username=" + str(self.usernameCfg.value) + "&password=" + str(self.passwordCfg.value) + "&type=" + str(self.type) + "&output=" + str(self.outputCfg.value)
+            else:
+                glob.current_playlist["playlist_info"]["address"] = str(self.protocolCfg.value) + str(self.serverCfg.value) + \
+                    "/get.php?username=" + str(self.usernameCfg.value) + "&password=" + str(self.passwordCfg.value) + "&type=" + str(self.type) + "&output=" + str(self.outputCfg.value)
+
         else:
             glob.current_playlist["playlist_info"]["address"] = str(self.addressCfg.value)
 

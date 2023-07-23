@@ -87,8 +87,12 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             xmltvprotocol = protocol
             domain = glob.current_playlist["playlist_info"]["domain"]
             port = str(glob.current_playlist["playlist_info"]["port"])
-            host = str(protocol) + str(domain) + ":" + str(port) + "/"
-            xmltvhost = str(xmltvprotocol) + str(domain) + ":" + str(port) + "/"
+            if port.isdigit():
+                host = str(protocol) + str(domain) + ":" + str(port) + "/"
+                xmltvhost = str(xmltvprotocol) + str(domain) + ":" + str(port) + "/"
+            else:
+                host = str(protocol) + str(domain) + "/"
+                xmltvhost = str(xmltvprotocol) + str(domain) + "/"
 
             glob.name = glob.current_playlist["playlist_info"]["name"]
         else:
@@ -520,7 +524,10 @@ class JediMakerXtream_ChooseBouquets(Screen):
             protocol = glob.current_playlist["playlist_info"]["protocol"]
             domain = glob.current_playlist["playlist_info"]["domain"]
             port = str(glob.current_playlist["playlist_info"]["port"])
-            host = str(protocol) + str(domain) + ":" + str(port) + "/"
+            if port.isdigit():
+                host = str(protocol) + str(domain) + ":" + str(port) + "/"
+            else:
+                host = str(protocol) + str(domain) + "/"
             username = glob.current_playlist["playlist_info"]["username"]
             password = glob.current_playlist["playlist_info"]["password"]
             player_api = str(host) + "player_api.php?username=" + str(username) + "&password=" + str(password)

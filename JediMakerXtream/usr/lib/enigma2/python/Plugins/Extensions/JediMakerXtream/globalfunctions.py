@@ -486,8 +486,12 @@ def process_category(category_name, category_type, category_id, domain, port, us
             if cfg.catchup.value is True and catchup == 1:
                 name = str(cfg.catchupprefix.value) + str(name)
 
-            bouquetString += "#SERVICE " + str(glob.live_type) + str(custom_sid) + str(protocol) + str(domain) + "%3a" + str(port) + "/" \
-                + str(stream_type) + "/" + str(username) + "/" + str(password) + "/" + str(stream_id) + "." + str(output) + ":" + str(name) + "\n"
+            if port:
+                bouquetString += "#SERVICE " + str(glob.live_type) + str(custom_sid) + str(protocol) + str(domain) + "%3a" + str(port) + "/" \
+                    + str(stream_type) + "/" + str(username) + "/" + str(password) + "/" + str(stream_id) + "." + str(output) + ":" + str(name) + "\n"
+            else:
+                bouquetString += "#SERVICE " + str(glob.live_type) + str(custom_sid) + str(protocol) + str(domain) + "/" \
+                    + str(stream_type) + "/" + str(username) + "/" + str(password) + "/" + str(stream_id) + "." + str(output) + ":" + str(name) + "\n"
 
             bouquetString += "#DESCRIPTION " + str(name) + "\n"
 
@@ -520,8 +524,12 @@ def process_category(category_name, category_type, category_id, domain, port, us
 
             name = streamvaluesgroup[i]["name"]
 
-            bouquetString += "#SERVICE " + str(glob.vod_type) + str(custom_sid) + str(protocol) + str(domain) + "%3a" + str(port) + \
-                "/" + str(stream_type) + "/" + str(username) + "/" + str(password) + "/" + str(stream_id) + "." + str(output) + ":" + str(name) + "\n"
+            if port:
+                bouquetString += "#SERVICE " + str(glob.vod_type) + str(custom_sid) + str(protocol) + str(domain) + "%3a" + str(port) + \
+                    "/" + str(stream_type) + "/" + str(username) + "/" + str(password) + "/" + str(stream_id) + "." + str(output) + ":" + str(name) + "\n"
+            else:
+                bouquetString += "#SERVICE " + str(glob.vod_type) + str(custom_sid) + str(protocol) + str(domain) + \
+                    "/" + str(stream_type) + "/" + str(username) + "/" + str(password) + "/" + str(stream_id) + "." + str(output) + ":" + str(name) + "\n"
 
             bouquetString += "#DESCRIPTION " + str(name) + "\n"
 

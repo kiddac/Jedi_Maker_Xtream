@@ -172,13 +172,22 @@ def deleteBouquets():
         lines = f.readlines()
         f.seek(0)
         for line in lines:
-            if (glob.live and "jedimakerxtream_live_" + str(safeNameOld) + "_" in line) or (glob.live and "jedimakerxtream_live_" + str(safeName) + "_" in line):
-                continue
-            if (glob.vod and "jedimakerxtream_vod_" + str(safeNameOld) + "_" in line) or (glob.vod and "jedimakerxtream_vod_" + str(safeName) + "_" in line):
-                continue
-            if (glob.series and "jedimakerxtream_series_" + str(safeNameOld) + "_" in line) or (glob.series and "jedimakerxtream_series_" + str(safeName) + "_" in line):
-                continue
-            if ("jedimakerxtream_" + str(safeNameOld) in line) or ("jedimakerxtream_" + str(safeName) in line):
+            if ("jedimakerxtream_live_" + str(safeNameOld) + "_" in line) \
+                    or ("jedimakerxtream_live_" + str(safeName) + "_" in line) \
+                    or ("jedimakerxtream_vod_" + str(safeNameOld) + "_" in line) \
+                    or ("jedimakerxtream_vod_" + str(safeName) + "_" in line) \
+                    or ("jedimakerxtream_series_" + str(safeNameOld) + "_" in line) \
+                    or ("jedimakerxtream_series_" + str(safeName) + "_" in line) \
+                    or ("jedimakerxtream_" + str(safeNameOld) in line) \
+                    or ("jedimakerxtream_" + str(safeName) in line) \
+                    or ("jmx_live_" + str(safeNameOld) + "_" in line) \
+                    or ("jmx_live_" + str(safeName) + "_" in line) \
+                    or ("jmx_vod_" + str(safeNameOld) + "_" in line) \
+                    or ("jmx_vod_" + str(safeName) + "_" in line) \
+                    or ("jmx_series_" + str(safeNameOld) + "_" in line) \
+                    or ("jmx_series_" + str(safeName) + "_" in line) \
+                    or ("jmx_" + str(safeNameOld) in line) \
+                    or ("jmx_" + str(safeName) in line):
                 continue
             f.write(line)
         f.truncate()

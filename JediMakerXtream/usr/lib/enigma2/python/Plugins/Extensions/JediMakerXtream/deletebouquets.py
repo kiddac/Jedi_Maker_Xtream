@@ -121,7 +121,11 @@ class JediMakerXtream_DeleteBouquets(Screen):
                     if "jedimakerxtream_live_" + str(safeName) + "_" in line or \
                             "jedimakerxtream_vod_" + str(safeName) + "_" in line or \
                             "jedimakerxtream_series_" + str(safeName) + "_" in line or \
-                            "jedimakerxtream_" + str(safeName) in line:
+                            "jedimakerxtream_" + str(safeName) in line or \
+                            "jmx_live_" + str(safeName) + "_" in line or \
+                            "jmx_vod_" + str(safeName) + "_" in line or \
+                            "jmx_series_" + str(safeName) + "_" in line or \
+                            "jmx_" + str(safeName) in line:
                         continue
                     f.write(line)
                 f.truncate()
@@ -129,6 +133,9 @@ class JediMakerXtream_DeleteBouquets(Screen):
             jfunc.purge("/etc/enigma2", "jedimakerxtream_live_" + str(safeName) + "_")
             jfunc.purge("/etc/enigma2", "jedimakerxtream_vod_" + str(safeName) + "_")
             jfunc.purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeName) + "_")
+            jfunc.purge("/etc/enigma2", "jmx_live_" + str(safeName) + "_")
+            jfunc.purge("/etc/enigma2", "jmx_vod_" + str(safeName) + "_")
+            jfunc.purge("/etc/enigma2", "jmx_series_" + str(safeName) + "_")
             jfunc.purge("/etc/enigma2", str(safeName) + str(".tv"))
 
             if glob.has_epg_importer:

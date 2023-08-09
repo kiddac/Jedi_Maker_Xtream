@@ -168,6 +168,19 @@ def deleteBouquets():
 
     # delete old bouquet files
 
+    purge("/etc/enigma2", "jedimakerxtream_live_" + str(safeName))
+    purge("/etc/enigma2", "jedimakerxtream_live_" + str(safeNameOld))
+    purge("/etc/enigma2", "jedimakerxtream_vod_" + str(safeName))
+    purge("/etc/enigma2", "jedimakerxtream_vod_" + str(safeNameOld))
+    purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeName))
+    purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeNameOld))
+    purge("/etc/enigma2", str(safeName) + str(".tv"))
+    purge("/etc/enigma2", str(safeNameOld) + str(".tv"))
+    purge("/etc/epgimport", "jedimakerxtream." + str(safeName))
+    purge("/etc/epgimport", "jedimakerxtream." + str(safeNameOld))
+    purge("/etc/epgimport", "jmx." + str(safeName))
+    purge("/etc/epgimport", "jmx." + str(safeNameOld))
+    
     with open("/etc/enigma2/bouquets.tv", "r+") as f:
         lines = f.readlines()
         f.seek(0)
@@ -191,26 +204,7 @@ def deleteBouquets():
                 continue
             f.write(line)
         f.truncate()
-
-    if glob.live:
-        purge("/etc/enigma2", "jedimakerxtream_live_" + str(safeName))
-        purge("/etc/enigma2", "jedimakerxtream_live_" + str(safeNameOld))
-
-        if glob.has_epg_importer:
-            purge("/etc/epgimport", "jedimakerxtream." + str(safeName))
-            purge("/etc/epgimport", "jedimakerxtream." + str(safeNameOld))
-
-    if glob.vod:
-        purge("/etc/enigma2", "jedimakerxtream_vod_" + str(safeName))
-        purge("/etc/enigma2", "jedimakerxtream_vod_" + str(safeNameOld))
-
-    if glob.series:
-        purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeName))
-        purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeNameOld))
-
-    purge("/etc/enigma2", str(safeName) + str(".tv"))
-    purge("/etc/enigma2", str(safeNameOld) + str(".tv"))
-
+        
     refreshBouquets()
 
 

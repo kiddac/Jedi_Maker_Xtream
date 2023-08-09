@@ -140,6 +140,7 @@ class JediMakerXtream_DeleteBouquets(Screen):
 
             if glob.has_epg_importer:
                 jfunc.purge("/etc/epgimport", "jedimakerxtream." + str(safeName) + ".channels.xml")
+                jfunc.purge("/etc/epgimport", "jmx." + str(safeName) + ".channels.xml")
 
                 # remove sources from source file
                 sourcefile = "/etc/epgimport/jedimakerxtream.sources.xml"

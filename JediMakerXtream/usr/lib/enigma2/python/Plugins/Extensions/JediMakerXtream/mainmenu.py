@@ -134,16 +134,17 @@ class JediMakerXtream_MainMenu(Screen):
         if answer is None:
             self.session.openWithCallback(self.deleteBouquets, MessageBox, _("Permanently delete all Jedi created bouquets?"))
         elif answer:
+        
+            jfunc.purge("/etc/enigma2", "jedimakerxtream")
+            jfunc.purge("/etc/enigma2", "jmx")
+            
             with open("/etc/enigma2/bouquets.tv", "r+") as f:
                 lines = f.readlines()
                 f.seek(0)
                 for line in lines:
-                    if "jedimakerxtream" or "jmx" not in line:
+                    if "jedimakerxtream" not in line and "jmx" not in line:
                         f.write(line)
                 f.truncate()
-
-            jfunc.purge("/etc/enigma2", "jedimakerxtream")
-            jfunc.purge("/etc/enigma2", "jmx")
 
             if glob.has_epg_importer:
                 jfunc.purge("/etc/epgimport", "jedimakerxtream")
@@ -161,7 +162,7 @@ class JediMakerXtream_MainMenu(Screen):
             self.playlists_all = [_f for _f in self.playlists_all if _f]
 
             os.remove(playlists_json)
-            # jfunc.refreshBouquets()
+            jfunc.refreshBouquets()
 
             self.createSetup()
         return

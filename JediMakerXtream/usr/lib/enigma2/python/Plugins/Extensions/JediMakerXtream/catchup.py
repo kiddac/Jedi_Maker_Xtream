@@ -52,7 +52,7 @@ def downloadSimpleData():
         refstream = refurl.split("/")[-1]
         # 12345.ts
 
-        glob.refstreamnum = int("".join(filter(str.isdigit(), refstream)))
+        glob.refstreamnum = int("".join(filter(str.isdigit, refstream)))
         # 12345
 
         # get domain, username, password from path

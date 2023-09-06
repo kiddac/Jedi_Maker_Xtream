@@ -5,7 +5,6 @@ echo "Checking Dependencies"
 echo ""
 echo "updating feeds"
 if [ -d /etc/opkg ]; then
-
     opkg update
     echo ""
     if [[ $pyv =~ "Python 3" ]]; then

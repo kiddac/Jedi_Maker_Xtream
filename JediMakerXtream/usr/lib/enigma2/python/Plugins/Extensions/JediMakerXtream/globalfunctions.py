@@ -176,11 +176,13 @@ def deleteBouquets():
     purge("/etc/enigma2", "jedimakerxtream_series_" + str(safeNameOld))
     purge("/etc/enigma2", str(safeName) + str(".tv"))
     purge("/etc/enigma2", str(safeNameOld) + str(".tv"))
-    purge("/etc/epgimport", "jedimakerxtream." + str(safeName))
-    purge("/etc/epgimport", "jedimakerxtream." + str(safeNameOld))
-    purge("/etc/epgimport", "jmx." + str(safeName))
-    purge("/etc/epgimport", "jmx." + str(safeNameOld))
-    
+
+    if glob.has_epg_importer:
+        purge("/etc/epgimport", "jedimakerxtream." + str(safeName))
+        purge("/etc/epgimport", "jedimakerxtream." + str(safeNameOld))
+        purge("/etc/epgimport", "jmx." + str(safeName))
+        purge("/etc/epgimport", "jmx." + str(safeNameOld))
+
     with open("/etc/enigma2/bouquets.tv", "r+") as f:
         lines = f.readlines()
         f.seek(0)
@@ -204,7 +206,7 @@ def deleteBouquets():
                 continue
             f.write(line)
         f.truncate()
-        
+
     refreshBouquets()
 
 

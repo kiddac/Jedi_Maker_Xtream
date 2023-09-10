@@ -219,7 +219,7 @@ class JediMakerXtream_Playlist(Screen):
 
                 if parsed_uri.port:
                     if (self.protocol == 'http://' and parsed_uri.port != 80) or (self.protocol == 'https://' and parsed_uri.port != 443):
-                    self.port = parsed_uri.port
+                        self.port = parsed_uri.port
 
                 if self.port:
                     self.host = "%s%s:%s" % (self.protocol, self.domain, self.port)

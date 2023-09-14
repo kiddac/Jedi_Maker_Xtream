@@ -12,7 +12,9 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 
 from Screens.LocationBox import LocationBox
+from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Screens import Standby
 
 import os
 
@@ -41,7 +43,6 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self["key_green"] = StaticText(_("Save"))
         self["information"] = Label("")
 
-        # self["VirtualKB"].setEnabled(False)
         self["VKeyIcon"] = Pixmap()
         self["VKeyIcon"].hide()
         self["HelpWindow"] = Pixmap()
@@ -83,6 +84,10 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
         self.cfg_catchupend = getConfigListEntry(_("Margin after catchup (mins)"), cfg.catchupend)
 
         self.cfg_groups = getConfigListEntry(_("Group bouquets into its own folder"), cfg.groups)
+
+        self.org_main = cfg.main.getValue()
+        self.org_wakeup = cfg.wakeup.getValue()
+        self.org_skin = cfg.skin.getValue()
 
     def createSetup(self):
         self.list = []
@@ -227,7 +232,21 @@ class JediMakerXtream_Settings(ConfigListScreen, Screen):
 
         if autoStartTimer is not None:
             autoStartTimer.update()
-        self.close(True)
+
+            if self.org_main != cfg.main.getValue() or self.org_wakeup != cfg.wakeup.getValue() or self.org_skin != cfg.skin.getValue():
+                self.changedFinished()
+
+        self.close()
+
+    def changedFinished(self):
+        self.session.openWithCallback(self.ExecuteRestart, MessageBox, _("You need to restart the GUI") + "\n" + _("Do you want to restart now?"), MessageBox.TYPE_YESNO)
+        self.close()
+
+    def ExecuteRestart(self, result):
+        if result:
+            Standby.quitMainloop(3)
+        else:
+            self.close()
 
     def cancel(self, answer=None):
         from Screens.MessageBox import MessageBox

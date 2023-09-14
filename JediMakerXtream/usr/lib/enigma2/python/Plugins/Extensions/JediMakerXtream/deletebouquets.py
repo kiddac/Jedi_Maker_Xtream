@@ -30,7 +30,6 @@ class JediMakerXtream_DeleteBouquets(Screen):
             self.skin = f.read()
         self.setup_title = _("Delete Bouquets")
 
-        # new list code
         self.startList = []
         self.drawList = []
         self["list"] = List(self.drawList)

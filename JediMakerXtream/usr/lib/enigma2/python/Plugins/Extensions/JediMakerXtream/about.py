@@ -50,7 +50,7 @@ class JediMakerXtream_About(Screen):
         self.credit += _("Lululla for all the hard work done on XCPlugin and assistance with the project.\n")
         self.credit += _("Massive thanks to Seagen for his endless multi image testing.\n")
         self.credit += _("And thanks to all the other coders and Linuxsat testers who helped in the development of this project.\n\n")
-        self.credit += _("If you would like to buy me a beer or a coffee: https://paypal.me/kiddac \n")
+        self.credit += _("If you would like to buy me a beer or a coffee: https://paypal.me/kiddac or https://ko-fi.com/kiddac \n")
         self.credit += _("Cheers - all donations are very much appreciated.")
         self["about"].setText(self.credit)
 

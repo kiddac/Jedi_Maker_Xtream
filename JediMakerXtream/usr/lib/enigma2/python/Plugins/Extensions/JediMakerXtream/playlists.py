@@ -114,7 +114,7 @@ class JediMakerXtream_Playlist(Screen):
 
         self.timer = eTimer()
         self.timer.start(100, 1)
-        try:  # DreamOS fix
+        try:
             self.timer_conn = self.timer.timeout.connect(self.loadPlaylist)
         except:
             self.timer.callback.append(self.loadPlaylist)

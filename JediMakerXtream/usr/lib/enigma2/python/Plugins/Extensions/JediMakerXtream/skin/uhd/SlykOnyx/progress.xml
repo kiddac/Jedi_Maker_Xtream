@@ -1,0 +1,11 @@
+
+<screen name="jmxProgress" position="0,0" size="2560,1440" backgroundColor="#ff000000" flags="wfNoBorder">
+    <eLabel position="0,1014" size="2560,452" backgroundColor="#4d000000" transparent="0" zPosition="-2" />
+    <ePixmap position="0,966" size="2560,500" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/SlykOnyx/images/infobar-blank.png" alphatest="blend" zPosition="-1" />
+    <widget source="global.CurrentTime" render="Label" position="24,1327" size="528,56" font="onyxregular;44" foregroundColor="#8d8d8b" backgroundColor="#4d000000" valign="top" halign="right" transparent="1">
+        <convert type="ClockToText">Format:%A, %H.%M</convert>
+    </widget>
+    <widget name="action" position="center,1074" size="2560,96" font="onyxregular;44" foregroundColor="#ffffff" backgroundColor="#4d000000" valign="center" halign="center" noWrap="1" transparent="1" />
+    <widget name="status" position="center,1143" size="2560,96" font="onyxregular;44" foregroundColor="#ffffff" backgroundColor="#4d000000" valign="center" halign="center" noWrap="1" transparent="1" />
+    <widget name="progress" position="411,1266" size="1740,12" borderWidth="2" borderColor="#555555" foregroundColor="#44c1fb" backgroundColor="#000000" zPosition="3" />
+</screen>

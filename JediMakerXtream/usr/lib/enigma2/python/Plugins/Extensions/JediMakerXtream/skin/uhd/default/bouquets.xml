@@ -1,0 +1,47 @@
+
+<screen name="jmxBouquets" position="0,0" size="2560,1440" backgroundColor="#232323" flags="wfNoBorder">
+    <eLabel position="0,0" size="640,1707" backgroundColor="#161616" transparent="0" zPosition="-1" />
+    <eLabel position="0,358" size="2560,3" backgroundColor="#0e6382" transparent="0" zPosition="3" />
+    <eLabel position="0,1358" size="2560,3" backgroundColor="#0e6382" transparent="0" zPosition="-1" />
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/logo.png" position="75,694" size="491,240" alphatest="blend" />
+
+    <widget source="session.VideoPicture" render="Pig" position="0,0"  size="640,360" backgroundColor="#ff000000" zPosition="2" />
+    <widget source="Title" render="Label" position="0,987" size="640,75"  valign="center" halign="center" font="jediregular;47"  transparent="1" foregroundColor="#ffffff" backgroundColor="#161616" />
+
+    <widget source="global.CurrentTime" render="Label" position="0,1372" size="640,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#161616" valign="center" halign="center" transparent="1" >
+        <convert type="ClockToText">Format:%A, %b %d, %H.%M</convert>
+    </widget>
+
+    <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_red.png" position="691,1372" size="12,56" zPosition="2" />
+    <widget source="key_red" render="Label" position="715,1372" size="300,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
+
+	<widget source="key_green" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_green.png"  position="1015,1372" size="12,56" zPosition="2" />
+    <widget source="key_green" render="Label" position="1039,1372" size="300,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
+
+    <widget source="key_yellow" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_yellow.png" position="1339,1372" size="12,56" zPosition="2" />
+    <widget source="key_yellow" render="Label" position="1363,1372" size="300,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
+
+    <widget source="key_blue" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_blue.png" position="1663,1372" size="12,56" zPosition="2" />
+    <widget source="key_blue" render="Label" position="1687,1372" size="300,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
+
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_info.png" position="2107,1375" size="51,51" alphatest="blend" zPosition="1" />
+    <widget source="key_info" render="Label" position="2167,1375" size="360,51" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="2" zPosition="2" />
+
+    <widget name="description" position="715,40" size="1806,280" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="top" transparent="1" />
+
+     <widget name="lab1" position="692,412" size="1830,896" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" halign="center" valign="center" transparent="1" />
+
+    <widget source="list" render="Listbox" position="692,412" size="1830,896" foregroundColor="#ffffff" backgroundColor="#232323"
+    foregroundColorSelected="#ffffff" backgroundColorSelected="#0e6382" enableWrapAround="1"  scrollbarMode="showOnDemand" transparent="1" zPosition="2" >
+        <convert type="TemplatedMultiContent">{"template": [
+            MultiContentEntryPixmapAlphaBlend(pos = (20, 12), size = (51, 48), png = 0),
+            MultiContentEntryText(pos = (92, 7), size = (1718, 60), font=0, color = 0x00ffffff, color_sel = 0x00ffffff, backcolor_sel = None, flags = RT_HALIGN_LEFT, text = 1),
+            ],
+            "fonts": [gFont("jediregular", 48)],
+            "itemHeight": 75,
+            "scrollbarMode": "showOnDemand"
+        }</convert>
+    </widget>
+
+</screen>
+

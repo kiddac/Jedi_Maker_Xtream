@@ -193,23 +193,41 @@ class JediMakerXtream_Catchup(Screen):
 
     def __init__(self, session):
 
-        skin = """
-            <screen name="JediCatchup" position="center,center" size="600,600" >
+        if screenwidth.width() == 2560:
+            skin = """
+                <screen name="JediCatchup" position="center,center" size="900,900" >
 
-                <widget source="newlist" render="Listbox" position="0,0" size="600,504" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1">
-                    <convert type="TemplatedMultiContent">
-                        {"template": [
-                            MultiContentEntryText(pos = (15, 0), size = (570, 45), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-                        ],
-                    "fonts": [gFont("jediregular", 36)],
-                    "itemHeight": 54
-                    }
-                    </convert>
-                </widget>
+                    <widget source="newlist" render="Listbox" position="0,0" size="900,756" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1">
+                        <convert type="TemplatedMultiContent">
+                            {"template": [
+                                MultiContentEntryText(pos = (23, 0), size = (855, 68), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+                            ],
+                        "fonts": [gFont("jediregular", 81)],
+                        "itemHeight": 81
+                        }
+                        </convert>
+                    </widget>
 
-            </screen>"""
+                </screen>"""
 
-        if screenwidth.width() <= 1280:
+        elif screenwidth.width() > 1280:
+            skin = """
+                <screen name="JediCatchup" position="center,center" size="600,600" >
+
+                    <widget source="newlist" render="Listbox" position="0,0" size="600,504" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1">
+                        <convert type="TemplatedMultiContent">
+                            {"template": [
+                                MultiContentEntryText(pos = (15, 0), size = (570, 45), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+                            ],
+                        "fonts": [gFont("jediregular", 36)],
+                        "itemHeight": 54
+                        }
+                        </convert>
+                    </widget>
+
+                </screen>"""
+
+        else:
             skin = """
                 <screen name="JediCatchup" position="center,center" size="400,400" >
                     <widget source="newlist" render="Listbox" position="0,0" size="400,336" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1">

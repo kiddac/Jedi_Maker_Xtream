@@ -584,8 +584,6 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
         streamvaluesgroup += streamvalues
 
         for m3u in streamvaluesgroup:
-
-            # group_title = m3u[0]
             epg_name = m3u[1]
 
             name = m3u[2]
@@ -622,8 +620,6 @@ def m3u_process_category(category_name, category_type, unique_ref, epg_name_list
         custom_sid = ":0:1:0:0:0:0:0:0:" + str(glob.vodbuffer) + str(":")
 
         for m3u in streamvaluesgroup:
-
-            # group_title = m3u[0]
             epg_name = m3u[1]
             name = m3u[2]
             source = m3u[3]

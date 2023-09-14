@@ -134,10 +134,10 @@ class JediMakerXtream_MainMenu(Screen):
         if answer is None:
             self.session.openWithCallback(self.deleteBouquets, MessageBox, _("Permanently delete all Jedi created bouquets?"))
         elif answer:
-        
+
             jfunc.purge("/etc/enigma2", "jedimakerxtream")
             jfunc.purge("/etc/enigma2", "jmx")
-            
+
             with open("/etc/enigma2/bouquets.tv", "r+") as f:
                 lines = f.readlines()
                 f.seek(0)

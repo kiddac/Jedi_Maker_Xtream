@@ -56,7 +56,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         self["key_red"] = StaticText(_("Cancel"))
         self["key_green"] = StaticText(_("Continue"))
 
-        # self["VirtualKB"].setEnabled(False)
         self["VKeyIcon"] = Pixmap()
         self["VKeyIcon"].hide()
         self["HelpWindow"] = Pixmap()
@@ -102,7 +101,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             username = glob.current_playlist["playlist_info"]["username"]
             password = glob.current_playlist["playlist_info"]["password"]
             player_api = str(host) + "player_api.php?username=" + str(username) + "&password=" + str(password)
-            glob.xmltv_address = str(xmltvhost) + "xmltv.php?username=" + str(username) + "&password=" + str(password)
+            glob.xmltv_address = str(xmltvhost) + "xmltv.php?username=" + str(username) + "&password=" + str(password) + "&next_days=7"
 
             self.LiveCategoriesUrl = player_api + "&action=get_live_categories"
             self.VodCategoriesUrl = player_api + "&action=get_vod_categories"
@@ -123,7 +122,6 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         if "bouquet_info" in glob.current_playlist and glob.current_playlist["bouquet_info"] != {}:
             jfunc.readbouquetdata()
         else:
-            # reset globals
             glob.live_type = "4097"
             glob.vod_type = "4097"
             glob.vod_order = "original"

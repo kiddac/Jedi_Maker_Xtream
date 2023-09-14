@@ -48,7 +48,9 @@ screenwidth = getDesktop(0).size()
 dir_etc = "/etc/enigma2/jediplaylists/"
 dir_plugins = "/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/"
 
-if screenwidth.width() > 1280:
+if screenwidth.width() == 2560:
+    skin_directory = os.path.join(dir_plugins, "skin/uhd/")
+elif screenwidth.width() > 1280:
     skin_directory = os.path.join(dir_plugins, "skin/fhd/")
 else:
     skin_directory = os.path.join(dir_plugins, "skin/hd/")
@@ -68,9 +70,6 @@ if os.path.exists("/usr/bin/apt-get"):
 config.plugins.JediMakerXtream = ConfigSubsection()
 cfg = config.plugins.JediMakerXtream
 cfg.livetype = ConfigSelection(default="4097", choices=streamtype_choices)
-# cfg.vodtype = ConfigSelection(default="4097", choices=streamtype_choices)
-# cfg.voddefaultorder = ConfigSelection(default="alphabetical", choices=[("original", _("Original Order")), ("alphabetical", _("A-Z")), ("date", _("Newest First"))])
-
 cfg.location = ConfigDirectory(default=dir_etc)
 cfg.m3ulocation = ConfigDirectory(default=dir_etc)
 cfg.main = ConfigYesNo(default=True)
@@ -92,25 +91,6 @@ skin_path = os.path.join(skin_directory, cfg.skin.value)
 # create folder for working files
 if not os.path.exists(dir_etc):
     os.makedirs(dir_etc)
-
-# move old location
-"""
-origin = "/etc/enigma2/jediplaylists/"
-target = "/etc/enigma2/jedimakerxtream/"
-
-# Fetching the list of all the files
-if os.path.isdir(origin):
-    files = os.listdir(origin)
-
-    for file_name in files:
-        shutil.copy(origin + file_name, target + file_name)
-
-    # remove old folder
-    try:
-        shutil.rmtree(origin)
-    except Exception as e:
-        print(e)
-        """
 
 playlists_json = os.path.join(dir_etc, "playlist_all_new.json")
 playlist_file = os.path.join(dir_etc, "playlists.txt")

@@ -48,7 +48,6 @@ class JediMakerXtream_AddServer(ConfigListScreen, Screen):
         self["key_green"] = StaticText(_("Save"))
         self["information"] = Label("")
 
-        # self["VirtualKB"].setEnabled(False)
         self["VKeyIcon"] = Pixmap()
         self["VKeyIcon"].hide()
         self["HelpWindow"] = Pixmap()

@@ -1,0 +1,48 @@
+
+<screen name="jmxUserInfo" position="0,0" size="2560,1440" backgroundColor="#232323" flags="wfNoBorder">
+    <eLabel position="0,0" size="640,1707" backgroundColor="#161616" transparent="0" zPosition="-1" />
+    <eLabel position="0,358" size="2560,3" backgroundColor="#0e6382" transparent="0" zPosition="3" />
+    <eLabel position="0,1358" size="2560,3" backgroundColor="#0e6382" transparent="0" zPosition="-1" />
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/logo.png" position="75,694" size="491,240" alphatest="blend" />
+
+    <widget source="session.VideoPicture" render="Pig" position="0,0"  size="640,360" backgroundColor="#ff000000" zPosition="2" />
+    <widget source="Title" render="Label" position="0,987" size="640,75"  valign="center" halign="center" font="jediregular;47"  transparent="1" foregroundColor="#ffffff" backgroundColor="#161616" />
+
+    <widget source="global.CurrentTime" render="Label" position="0,1372" size="640,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#161616" valign="center" halign="center" transparent="1" >
+        <convert type="ClockToText">Format:%A, %b %d, %H.%M</convert>
+    </widget>
+
+    <widget source="key_red" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_red.png" position="691,1372" size="12,56" zPosition="2" />
+    <widget source="key_red" render="Label" position="715,1372" size="300,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
+
+	<widget source="key_green" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_green.png"  position="1015,1372" size="12,56" zPosition="2" />
+    <widget source="key_green" render="Label" position="1039,1372" size="300,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" transparent="1" noWrap="1" zPosition="2" />
+	
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/JediMakerXtream/skin/fhd/default/images/key_ok.png" position="2470,1375" size="51,51" alphatest="blend" />
+
+    <!-- <widget name="userinfo" position="692,412" size="1830,896" font="jediregular;32" foregroundColor="#ffffff" backgroundColor="#232323" transparent="1" zPosition="2" /> -->
+	
+    <eLabel text="Status:" position="787,440" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Is Trial:" position="787,520" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Active Connections:" position="787,600" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Max Connections:" position="787,680" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Created At:" position="787,760" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Expiry Date:" position="787,840" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Allowed Output Formats:" position="787,920" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Real URL:" position="787,1000" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Timezone:" position="787,1080" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+	<eLabel text="Server Offset:" position="787,1160" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="left" transparent="1" noWrap="1" zPosition="2" />
+
+	<widget name="status" position="1279,440" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="trial" position="1279,520" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="activeconn" position="1279,600" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="maxconn" position="1279,680" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="created" position="1279,760" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="expiry" position="1279,840" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="formats" position="1279,920" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="realurl" position="976,1000" size="795,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="timezone" position="1279,1080" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	<widget name="serveroffset" position="1279,1160" size="492,80" font="jediregular;36" foregroundColor="#ffffff" backgroundColor="#232323" valign="center" halign="right" transparent="1" noWrap="1" zPosition="2" />
+	
+  </screen>
+

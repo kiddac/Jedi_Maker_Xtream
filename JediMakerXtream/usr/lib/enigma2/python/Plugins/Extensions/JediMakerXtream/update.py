@@ -72,8 +72,6 @@ class JediMakerXtream_Update(Screen):
                         <widget name="status" position="140,20" size="200,32" font="Regular;16" foregroundColor="#ffffff" backgroundColor="#000000" valign="center" noWrap="1" transparent="1" zPosition="5" />
                     </screen>"""
 
-            self.skin = skin
-
         Screen.setTitle(self, _("Updating Bouquets"))
 
         self["action"] = Label("")
@@ -184,7 +182,7 @@ class JediMakerXtream_Update(Screen):
             self.player_api = str(self.host) + "player_api.php?username=" + str(self.username) + "&password=" + str(self.password)
             self.get_api = str(self.host) + "get.php?username=" + str(self.username) + "&password=" + str(self.password) + "&type=m3u_plus&output=" + str(self.output)
 
-            glob.xmltv_address = str(self.xmltvhost) + "xmltv.php?username=" + str(self.username) + "&password=" + str(self.password)
+            glob.xmltv_address = str(self.xmltvhost) + "xmltv.php?username=" + str(self.username) + "&password=" + str(self.password) + "&next_days=7"
 
             self.LiveCategoriesUrl = self.player_api + "&action=get_live_categories"
             self.VodCategoriesUrl = self.player_api + "&action=get_vod_categories"

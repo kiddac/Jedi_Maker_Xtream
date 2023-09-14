@@ -1,0 +1,17 @@
+
+<screen name="jmxProgress" position="0,0" size="2560,1440" backgroundColor="#ff000000" flags="wfNoBorder">
+    <eLabel position="0,976" size="2560,3" backgroundColor="#0e6382" transparent="0" zPosition="3" />
+    <eLabel position="0,1358" size="2560,3" backgroundColor="#0e6382" transparent="0" zPosition="3" />
+
+    <eLabel position="0,976" size="2560,464" backgroundColor="#10232323" transparent="0" zPosition="-1" />
+
+    <widget source="global.CurrentTime" render="Label" position="0,1372" size="640,56" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#000000" valign="center" halign="center" transparent="1" >
+             <convert type="ClockToText">Format:%A, %b %d, %H.%M</convert>
+    </widget>
+
+    <widget name="action" position="center,1036" size="2560,60" font="jediregular;47" foregroundColor="#ffffff" backgroundColor="#232323" halign="center" noWrap="1" transparent="1" />
+    <widget name="status" position="center,1260" size="2560,60" font="jediregular;47" foregroundColor="#ffffff" backgroundColor="#232323" halign="center" noWrap="1" transparent="1" />
+    <widget name="progress" position="411,1219" size="1740,12" borderWidth="2" borderColor="#555555" foregroundColor="#0d84a4" backgroundColor="#000000" zPosition="3" />
+
+</screen>
+

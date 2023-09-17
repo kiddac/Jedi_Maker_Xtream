@@ -12,6 +12,10 @@ from Screens.EpgSelection import EPGSelection
 from Screens.MessageBox import MessageBox
 from ServiceReference import ServiceReference
 
+import os
+import shutil
+import sys
+
 import twisted.python.runtime
 
 try:
@@ -28,10 +32,6 @@ try:
         hasConcurrent = False
 except:
     hasConcurrent = False
-
-import os
-import shutil
-import sys
 
 pythonFull = float(str(sys.version_info.major) + "." + str(sys.version_info.minor))
 pythonVer = sys.version_info.major
@@ -101,7 +101,7 @@ if cfg.location.value:
     print("*** location true ***")
     playlist_file = os.path.join(cfg.location.value, "playlists.txt")
 
-print("*** playlist_file ***", playlist_file)
+# print("*** playlist_file ***", playlist_file)
 
 # check if playlists.txt file exists in specified location
 if not os.path.isfile(playlist_file):

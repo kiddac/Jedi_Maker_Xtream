@@ -72,6 +72,8 @@ class JediMakerXtream_Update(Screen):
                         <widget name="status" position="140,20" size="200,32" font="Regular;16" foregroundColor="#ffffff" backgroundColor="#000000" valign="center" noWrap="1" transparent="1" zPosition="5" />
                     </screen>"""
 
+            self.skin = skin
+
         Screen.setTitle(self, _("Updating Bouquets"))
 
         self["action"] = Label("")

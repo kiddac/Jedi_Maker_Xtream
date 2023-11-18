@@ -154,7 +154,8 @@ def buildXMLTVChannelFile(epg_name_list):
 
     # if xmltv file doesn't already exist, create file and build.
     if not os.path.isfile(channelpath):
-        open(channelpath, "a").close()
+        with open(channelpath, "a") as f:
+            f.close()
 
     # buildXMLTVChannelFile
 

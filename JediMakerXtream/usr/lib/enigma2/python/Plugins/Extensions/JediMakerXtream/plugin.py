@@ -95,21 +95,23 @@ if not os.path.exists(dir_etc):
 playlists_json = os.path.join(dir_etc, "playlist_all_new.json")
 playlist_file = os.path.join(dir_etc, "playlists.txt")
 
-print("*** playlist_file ***", playlist_file)
+# print("*** playlist_file ***", playlist_file)
 
 if cfg.location.value:
-    print("*** location true ***")
+    # print("*** location true ***")
     playlist_file = os.path.join(cfg.location.value, "playlists.txt")
 
 # print("*** playlist_file ***", playlist_file)
 
 # check if playlists.txt file exists in specified location
 if not os.path.isfile(playlist_file):
-    open(playlist_file, "a").close()
+    with open(playlist_file, "a") as f:
+        f.close()
 
 # check if playlists.json file exists in specified location
 if not os.path.isfile(playlists_json):
-    open(playlists_json, "a").close()
+    with open(playlists_json, "a") as f:
+        f.close()
 
 rytec_url = "http://www.xmltvepg.nl/rytec.channels.xml.xz"
 rytec_file = os.path.join(dir_etc, "rytec.channels.xml.xz")

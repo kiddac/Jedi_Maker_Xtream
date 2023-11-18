@@ -62,7 +62,8 @@ class JediMakerXtream_Playlist(Screen):
             self.removeBlanks()
             self.checkFile()
         else:
-            open(playlist_file, "a").close()
+            with open(playlist_file, "a") as f:
+                f.close()
 
         self["playlists"] = List(self.drawList)
         self["lab1"] = Label(_("Loading data... Please wait..."))

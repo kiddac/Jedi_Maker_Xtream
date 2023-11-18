@@ -101,7 +101,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
             username = glob.current_playlist["playlist_info"]["username"]
             password = glob.current_playlist["playlist_info"]["password"]
             player_api = str(host) + "player_api.php?username=" + str(username) + "&password=" + str(password)
-            glob.xmltv_address = str(xmltvhost) + "xmltv.php?username=" + str(username) + "&password=" + str(password) + "&next_days=7"
+            glob.xmltv_address = str(xmltvhost) + "xmltv.php?username=" + str(username) + "&password=" + str(password)
 
             self.LiveCategoriesUrl = player_api + "&action=get_live_categories"
             self.VodCategoriesUrl = player_api + "&action=get_vod_categories"

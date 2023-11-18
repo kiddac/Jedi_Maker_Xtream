@@ -20,7 +20,7 @@
 
     <widget name="lab1" position="692,412" size="1830,896" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" halign="center" valign="center" transparent="1" />
 
-    <widget name="config" textOffset="24,0" position="692,412" size="1830,896" font="jediregular;44" secondfont="jediregular;54" foregroundColor="#ffffff" backgroundColor="#232323"
+    <widget name="config" textOffset="24,0" position="692,412" size="1830,896" font="jediregular;44" secondfont="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323"
     foregroundColorSelected="#ffffff" backgroundColorSelected="#0e6382" itemHeight="75" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" zPosition="2" />
 
     <widget name="information" position="715,40" size="1806,280" font="jediregular;40" foregroundColor="#ffffff" backgroundColor="#232323" valign="top" transparent="1" />

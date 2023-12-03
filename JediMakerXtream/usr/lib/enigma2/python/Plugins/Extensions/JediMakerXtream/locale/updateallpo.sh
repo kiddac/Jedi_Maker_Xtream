@@ -28,7 +28,7 @@ IFS=" "
 for lang in "${languages[@]}" ; do
 	if [ -f $lang$FilePath$Plugin.po ]; then 
 		printf "Updating existing translation file %s.po\n" $lang
-		msgmerge --backup=none --no-wrap -s -U $lang$FilePath$Plugin.po $Plugin.pot && touch $lang$FilePath$Plugin.po
+		msgmerge --backup=none --no-wrap -s -U $lang$FilePath$Plugin.po $Plugin-py.pot && touch $lang$FilePath$Plugin.po
 		msgattrib --no-wrap --no-obsolete $lang$FilePath$Plugin.po -o $lang$FilePath$Plugin.po
 		msgfmt -o $lang$FilePath$Plugin.mo $lang$FilePath$Plugin.po
 	else
@@ -36,7 +36,7 @@ for lang in "${languages[@]}" ; do
 			mkdir $lang$FilePath
 		fi
 		printf "New file created: %s, please add it to github before commit\n" $lang$FilePath$Plugin.po
-		msginit -l $lang$FilePath$Plugin.po -o $lang$FilePath$Plugin.po -i $Plugin.pot --no-translator
+		msginit -l $lang$FilePath$Plugin.po -o $lang$FilePath$Plugin.po -i $Plugin-py.pot --no-translator
 		msgfmt -o $lang$FilePath$Plugin.mo $lang$FilePath$Plugin.po
 	fi
 done

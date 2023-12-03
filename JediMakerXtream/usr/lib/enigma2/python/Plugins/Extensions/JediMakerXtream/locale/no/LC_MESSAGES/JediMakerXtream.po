@@ -613,7 +613,7 @@ msgstr ""
 
 #: ../about.py:53
 msgid "If you would like to buy me a beer or a coffee: https://paypal.me/kiddac or https://ko-fi.com/kiddac \n"
-msgstr ""
+msgstr "Als je mij wilt trakteren op een biertje of een kop koffie: https://paypal.me/kiddac or https://ko-fi.com/kiddac \n"
 
 #: ../deletebouquets.py:39 ../setupbouquet.py:510
 msgid "Invert"

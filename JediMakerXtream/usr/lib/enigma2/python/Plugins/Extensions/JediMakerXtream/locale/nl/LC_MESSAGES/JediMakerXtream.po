@@ -629,7 +629,6 @@ msgid "IPTV Bouquets Creator by KiddaC"
 msgstr "IPTV Boeketten Maker door KiddaC"
 
 #: ../about.py:53
-#, fuzzy
 msgid "If you would like to buy me a beer or a coffee: https://paypal.me/kiddac or https://ko-fi.com/kiddac \n"
 msgstr "Als je mij wilt trakteren op een biertje of een kop koffie: https://paypal.me/kiddac or https://ko-fi.com/kiddac \n"
 

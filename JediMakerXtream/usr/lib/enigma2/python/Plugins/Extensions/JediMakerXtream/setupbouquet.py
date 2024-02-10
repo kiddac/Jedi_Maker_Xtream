@@ -143,7 +143,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
 
         if self.playlisttype == "xtream":
             self.timer = eTimer()
-            self.timer.start(self.pause, 1)
+            self.timer.start(self.pause, True)
             try:
                 self.timer_conn = self.timer.timeout.connect(self.downloadEnigma2Data)
             except:
@@ -445,7 +445,7 @@ class JediMakerXtream_Bouquets(ConfigListScreen, Screen):
         glob.epg_rytec_uk = self.EpgRytecUKCfg.value
         glob.epg_swap_names = self.EpgSwapNamesCfg.value
         glob.epg_force_rytec_uk = self.ForceRytecUKCfg.value
-        glob.catchupshift = self.catchupShiftCfg.value
+        glob.catchupshift = int(self.catchupShiftCfg.value)
 
         if self.LiveTypeCfg.value != "1":
             glob.livebuffer = self.BufferCfg.value
@@ -554,7 +554,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
     def nextjob(self, actiontext, function):
         self["lab1"].setText(actiontext)
         self.timer = eTimer()
-        self.timer.start(self.pause, 1)
+        self.timer.start(self.pause, True)
         try:
             self.timer_conn = self.timer.timeout.connect(function)
         except:
@@ -571,7 +571,7 @@ class JediMakerXtream_ChooseBouquets(Screen):
             jfunc.IgnoredCategories()
 
         self.timer = eTimer()
-        self.timer.start(self.pause, 1)
+        self.timer.start(self.pause, True)
         try:
             self.timer_conn = self.timer.timeout.connect(self.getStartList)
         except:

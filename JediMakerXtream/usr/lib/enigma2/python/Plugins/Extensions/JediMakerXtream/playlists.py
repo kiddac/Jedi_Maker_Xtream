@@ -114,7 +114,7 @@ class JediMakerXtream_Playlist(Screen):
         self.list = []
 
         self.timer = eTimer()
-        self.timer.start(100, 1)
+        self.timer.start(100, True)
         try:
             self.timer_conn = self.timer.timeout.connect(self.loadPlaylist)
         except:

@@ -43,7 +43,7 @@ class JediMakerXtream_BuildBouquets(Screen):
             "cancel": self.keyCancel,
         }, -2)
 
-        self.pause = 5
+        self.pause = 10
         self.index = 0
 
         self.category_num = 0
@@ -90,7 +90,7 @@ class JediMakerXtream_BuildBouquets(Screen):
     def nextjob(self, actiontext, function):
         self["action"].setText(actiontext)
         self.timer = eTimer()
-        self.timer.start(self.pause, 1)
+        self.timer.start(self.pause, True)
         try:
             self.timer_conn = self.timer.timeout.connect(function)
         except:

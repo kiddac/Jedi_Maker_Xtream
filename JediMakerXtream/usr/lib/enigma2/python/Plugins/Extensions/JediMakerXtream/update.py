@@ -115,7 +115,7 @@ class JediMakerXtream_Update(Screen):
     def nextjob(self, actiontext, function):
         self["action"].setText(actiontext)
         self.timer = eTimer()
-        self.timer.start(self.pause, 1)
+        self.timer.start(self.pause, True)
         try:
             self.timer_conn = self.timer.timeout.connect(function)
         except:
@@ -233,7 +233,7 @@ class JediMakerXtream_Update(Screen):
                 self["action"].setText("Downloading Live data")
 
                 self.timer1 = eTimer()
-                self.timer1.start(self.pause, 1)
+                self.timer1.start(self.pause, True)
                 try:
                     self.timer1_conn = self.timer1.timeout.connect(self.downloadLive)
 
@@ -244,7 +244,7 @@ class JediMakerXtream_Update(Screen):
                 self["action"].setText("Downloading VOD data")
 
                 self.timer2 = eTimer()
-                self.timer2.start(self.pause, 1)
+                self.timer2.start(self.pause, True)
                 try:
                     self.timer2_conn = self.timer2.timeout.connect(self.downloadVod)
                 except:
@@ -254,7 +254,7 @@ class JediMakerXtream_Update(Screen):
                 self["action"].setText("Downloading Series data")
 
                 self.timer3 = eTimer()
-                self.timer3.start(self.pause, 1)
+                self.timer3.start(self.pause, True)
                 try:
                     self.timer3_conn = self.timer3.timeout.connect(self.downloadSeries)
                 except:

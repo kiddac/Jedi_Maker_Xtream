@@ -111,7 +111,24 @@ def buildXMLTVSourceFile():
             break
 
     if exists is False:
-        source = ET.SubElement(sourcecat, "source", type="gen_xmltv", nocheck="1", channels=channelpath)
+        import datetime
+        offset = 0
+        if sys.version_info.major == 3:
+            if 'user_info' in glob.current_playlist and 'timezone' in glob.current_playlist['user_info']:
+                import zoneinfo
+                offset = int(datetime.datetime.now(zoneinfo.ZoneInfo(glob.current_playlist['user_info']['timezone'])).strftime('%z')) * -1
+        else:
+            if 'server_info' in glob.current_playlist and 'time_now' in glob.current_playlist['server_info']:
+                import time
+                server_datestamp = datetime.datetime.strptime(str(glob.current_playlist['server_info']['time_now']), "%Y-%m-%d %H:%M:%S")
+                utc_datestamp = datetime.datetime.utcfromtimestamp(time.time())
+                offset = utc_datestamp - server_datestamp
+                if offset.days == -1:
+                    offset = (86400 - offset.seconds) // -3600
+                else:
+                    offset = offset.seconds // 3600
+        offset = '%+05d' % (offset * 100)
+        source = ET.SubElement(sourcecat, "source", type="gen_xmltv", nocheck="1", offset=offset, channels=channelpath)
         description = ET.SubElement(source, "description")
         description.text = str(safeName)
 

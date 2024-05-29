@@ -145,23 +145,25 @@ class JediMakerXtream_DeleteBouquets(Screen):
                 sourcefile = "/etc/epgimport/jedimakerxtream.sources.xml"
 
                 if os.path.isfile(sourcefile):
+                    try:
+                        import xml.etree.ElementTree as ET
+                        tree = ET.parse(sourcefile, parser=ET.XMLParser(encoding="utf-8"))
+                        root = tree.getroot()
 
-                    import xml.etree.ElementTree as ET
-                    tree = ET.parse(sourcefile)
-                    root = tree.getroot()
+                        for elem in root.iter():
+                            for child in list(elem):
+                                description = ""
+                                if child.tag == "source":
+                                    try:
+                                        description = child.find("description").text
+                                        if safeName in description:
+                                            elem.remove(child)
+                                    except:
+                                        pass
 
-                    for elem in root.iter():
-                        for child in list(elem):
-                            description = ""
-                            if child.tag == "source":
-                                try:
-                                    description = child.find("description").text
-                                    if safeName in description:
-                                        elem.remove(child)
-                                except:
-                                    pass
-
-                    tree.write(sourcefile)
+                        tree.write(sourcefile)
+                    except Exception as e:
+                        print(e)
 
             self.deleteBouquetFile(bouquet_name)
             glob.firstrun = 0

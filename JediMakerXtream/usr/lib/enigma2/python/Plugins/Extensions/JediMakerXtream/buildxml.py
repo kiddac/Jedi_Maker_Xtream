@@ -97,30 +97,30 @@ def buildXMLTVSourceFile():
             xml_str += '</sources>\n'
             f.write(xml_str)
 
-    import xml.etree.ElementTree as ET
-
-    tree = ET.parse(sourcefile)
-    root = tree.getroot()
-    sourcecat = root.find("sourcecat")
-
-    exists = False
-
-    for sourceitem in sourcecat:
-        if channelpath in sourceitem.attrib["channels"]:
-            exists = True
-            break
-
-    if exists is False:
-        source = ET.SubElement(sourcecat, "source", type="gen_xmltv", nocheck="1", channels=channelpath)
-        description = ET.SubElement(source, "description")
-        description.text = str(safeName)
-
-        url = ET.SubElement(source, "url")
-        url.text = str(glob.xmltv_address)
-
-        tree.write(sourcefile)
-
     try:
+        import xml.etree.ElementTree as ET
+
+        tree = ET.parse(sourcefile, parser=ET.XMLParser(encoding="utf-8"))
+        root = tree.getroot()
+        sourcecat = root.find("sourcecat")
+
+        exists = False
+
+        for sourceitem in sourcecat:
+            if channelpath in sourceitem.attrib["channels"]:
+                exists = True
+                break
+
+        if exists is False:
+            source = ET.SubElement(sourcecat, "source", type="gen_xmltv", nocheck="1", channels=channelpath)
+            description = ET.SubElement(source, "description")
+            description.text = str(safeName)
+
+            url = ET.SubElement(source, "url")
+            url.text = str(glob.xmltv_address)
+
+            tree.write(sourcefile)
+
         with open(sourcefile, "r+") as f:
             xml_str = f.read()
             f.seek(0)
@@ -204,8 +204,10 @@ def downloadXMLTV():
         with open(epgpath, "w") as f:
             f.write(response)
 
-        with open(epgpath, "r") as f:
-            # tree = ET.parse(f)
-            tree = ET.parse(f, parser=ET.XMLParser(encoding="utf-8"))
-
-        tree.write("/etc/epgimport/" + "jedimakerxtream." + str(safeName) + ".xmltv2.xml", encoding="utf-8", xml_declaration=True)
+        try:
+            with open(epgpath, "r") as f:
+                # tree = ET.parse(f)
+                tree = ET.parse(f, parser=ET.XMLParser(encoding="utf-8"))
+                tree.write("/etc/epgimport/" + "jedimakerxtream." + str(safeName) + ".xmltv2.xml", encoding="utf-8", xml_declaration=True)
+        except Exception as e:
+            print(e)

@@ -56,20 +56,9 @@ else:
     skin_directory = os.path.join(dir_plugins, "skin/hd/")
 
 folders = os.listdir(skin_directory)
-streamtype_choices = [("1", "DVB(1)"), ("4097", "IPTV(4097)")]
-
-if os.path.exists("/usr/bin/gstplayer"):
-    streamtype_choices.append(("5001", "GStreamer(5001)"))
-
-if os.path.exists("/usr/bin/exteplayer3"):
-    streamtype_choices.append(("5002", "ExtePlayer(5002)"))
-
-if os.path.exists("/usr/bin/apt-get"):
-    streamtype_choices.append(("8193", "GStreamer(8193)"))
 
 config.plugins.JediMakerXtream = ConfigSubsection()
 cfg = config.plugins.JediMakerXtream
-cfg.livetype = ConfigSelection(default="4097", choices=streamtype_choices)
 cfg.location = ConfigDirectory(default=dir_etc)
 cfg.m3ulocation = ConfigDirectory(default=dir_etc)
 cfg.main = ConfigYesNo(default=True)

@@ -464,9 +464,10 @@ def process_category(category_name, category_type, category_id, domain, port, us
                 catchup = int(streamvaluesgroup[i]["tv_archive"])
             else:
                 catchup = 0
-                
-            bouquet_id_sid = int(stream_id) // 65535
-            stream_id_sid = int(stream_id) - int(bouquet_id1 * 65535)
+
+            calc_remainder = int(stream_id) // 65535
+            bouquet_id_sid = int(glob.bouquet_id + calc_remainder)
+            stream_id_sid = int(stream_id) - int(calc_remainder * 65535)
 
             custom_sid = ":0:" + str(service_type) + ":" + str(format(bouquet_id_sid, "04x")) + ":" + str(format(stream_id_sid, "04x")) + ":0:0:0:0:" + str(glob.livebuffer) + str(":")
 
